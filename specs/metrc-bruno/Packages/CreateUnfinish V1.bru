@@ -1,0 +1,42 @@
+meta {
+  name: CreateUnfinish V1
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/packages/v1/unfinish
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Label": "ABCDEF012345670000010041"
+  },
+  {
+    "Label": "ABCDEF012345670000010042"
+  }
+]
+}
+
+docs {
+  
+
+  Permissions Required:
+  - View Packages
+  - Manage Packages Inventory
+
+  Example Response:
+  No response
+}

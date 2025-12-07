@@ -1,0 +1,68 @@
+meta {
+  name: GetWastePlant V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/plants/v2/waste/{id}/plant
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  pageNumberoptional: 
+  pageSizeoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of plants records linked to the specified plantWasteId for a given facility.
+
+  Permissions Required:
+  - View Plants Waste
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "PlantWasteId": 1,
+        "PlantId": 100,
+        "Label": "ABCDEF000000010000010373",
+        "StateName": "Tracked",
+        "GrowthPhase": 0,
+        "LocationId": 1,
+        "LocationName": "Flower Location A",
+        "SublocationId": 0,
+        "SublocationName": null,
+        "WasteAmount": 12.0,
+        "WasteUnitOfMeasureAbbreviation": "g"
+      },
+      {
+        "PlantWasteId": 2,
+        "PlantId": 200,
+        "Label": "ABCDEF000000010000010374",
+        "StateName": "Harvested",
+        "GrowthPhase": 0,
+        "LocationId": 2,
+        "LocationName": "Flower Location B",
+        "SublocationId": 0,
+        "SublocationName": null,
+        "WasteAmount": 22.0,
+        "WasteUnitOfMeasureAbbreviation": "g"
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

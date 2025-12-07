@@ -1,0 +1,41 @@
+meta {
+  name: GetTemplatesDeliveryTransporters V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/transfers/v1/templates/deliveries/{id}/transporters
+  body: json
+  auth: basic
+}
+
+params:query {
+  No: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Please note: The {id} parameter above represents a Transfer Template Delivery ID, not a Manifest Number.
+
+  Permissions Required:
+  - Transfer Templates
+
+  Example Response:
+  [
+    {
+      "TransporterFacilityLicenseNumber": "4a-X0001",
+      "TransporterFacilityName": "Standard Cultivation Shipper",
+      "TransporterDirection": "Undesignated"
+    },
+    {
+      "TransporterFacilityLicenseNumber": "3a-X0001",
+      "TransporterFacilityName": "Bulk Cultivation Shipper",
+      "TransporterDirection": "Undesignated"
+    }
+  ]
+}

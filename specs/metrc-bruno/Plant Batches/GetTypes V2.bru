@@ -1,0 +1,53 @@
+meta {
+  name: GetTypes V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/plantbatches/v2/types
+  body: json
+  auth: basic
+}
+
+params:query {
+  pageNumberoptional: 
+  pageSizeoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of plant batch types.
+
+  Permissions Required:
+  - None
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 1,
+        "Name": "Seed",
+        "CanBeCloned": true,
+        "LastModified": "2021-11-19T00:00:00+00:00"
+      },
+      {
+        "Id": 2,
+        "Name": "Clone",
+        "CanBeCloned": false,
+        "LastModified": "2021-11-19T00:00:00+00:00"
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

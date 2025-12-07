@@ -1,0 +1,50 @@
+meta {
+  name: UpdateTag V2
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/plantbatches/v2/tag
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": null,
+    "Group": "Plant Batch 1",
+    "TagId": null,
+    "NewTag": "ABCDEF012345670000000002",
+    "ReplaceDate": "2015-12-15"
+  },
+  {
+    "Id": 2,
+    "Group": null,
+    "TagId": 3,
+    "NewTag": null,
+    "ReplaceDate": "2015-12-15"
+  }
+]
+}
+
+docs {
+  Replaces tags for plant batches at a specified Facility.
+
+  Permissions Required:
+  - View Veg/Flower Plants
+  - Manage Veg/Flower Plants Inventory
+
+  Example Response:
+  No response
+}

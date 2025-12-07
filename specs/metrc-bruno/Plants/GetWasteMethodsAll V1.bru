@@ -1,0 +1,49 @@
+meta {
+  name: GetWasteMethodsAll V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/plants/v1/waste/methods/all
+  body: json
+  auth: basic
+}
+
+params:query {
+  No: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - None
+
+  Example Response:
+  [
+    {
+      "Name": "Grinder",
+      "ForPlants": true,
+      "ForProductDestruction": false,
+      "LastModified": "0001-01-01T00:00:00+00:00"
+    },
+    {
+      "Name": "Compost",
+      "ForPlants": true,
+      "ForProductDestruction": false,
+      "LastModified": "0001-01-01T00:00:00+00:00"
+    },
+    {
+      "Name": "Incinerator",
+      "ForPlants": false,
+      "ForProductDestruction": true,
+      "LastModified": "0001-01-01T00:00:00+00:00"
+    }
+  ]
+}

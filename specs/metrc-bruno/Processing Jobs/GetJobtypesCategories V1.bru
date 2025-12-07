@@ -1,0 +1,30 @@
+meta {
+  name: GetJobtypesCategories V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/processing/v1/jobtypes/categories
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - Manage Processing Job
+
+  Example Response:
+  No response
+}

@@ -1,0 +1,288 @@
+version: '3'
+
+dotenv: ['.env', '../.env', '../../.env']
+
+tasks:
+  default:
+    cmds:
+      - task: run
+
+  # ============================================================================
+  # MAIN AUTOMATION
+  # ============================================================================
+  run:
+    desc: Run the main automation client
+    dir: automation
+    vars:
+      DRY_RUN: '{{.DRY_RUN | default "true"}}'
+      STEP: '{{.STEP | default "false"}}'
+    cmds:
+      - go run . -dry-run={{.DRY_RUN}} -step={{.STEP}}
+
+  setup-sandbox:
+    desc: Setup a new Integrator Sandbox User (requires METRC_VENDOR_API_KEY)
+    dir: automation
+    vars:
+        # Default to empty if not provided; API will create new user if empty
+        USER_KEY: '{{.USER_KEY | default ""}}' 
+    cmds:
+      - |
+        echo "Setting up Sandbox User..."
+        if [ -z "$METRC_VENDOR_API_KEY" ]; then
+          echo "Error: METRC_VENDOR_API_KEY is not set. Please set it in your .env file."
+          exit 1
+        fi
+        
+        URL="${METRC_BASE_URL:-https://sandbox.metrc.com}/sandbox/v2/integrator/setup"
+        if [ ! -z "{{.USER_KEY}}" ]; then
+             URL="$URL?userKey={{.USER_KEY}}"
+             echo "Validating User Key: {{.USER_KEY}}"
+        else
+             echo "Requesting new Integrator Sandbox setup..."
+        fi
+
+        curl -s -X POST "$URL" \
+          -H "x-metrc-key: $METRC_VENDOR_API_KEY" \
+          -H "Content-Type: application/json" \
+          -v
+
+  # ============================================================================
+  # CODE GENERATION
+  # ============================================================================
+  gen:all:
+    desc: Run all generation tasks (specs, client, models, sdks)
+    cmds:
+      - task: gen:spec
+      - task: gen:models
+      - task: gen:internal-client
+      - task: gen:sdks
+
+  gen:spec:
+    desc: Generate Bruno API specifications from Metrc documentation
+    dir: automation
+    cmds:
+      - go run ./cmd/specgen
+
+  gen:models:
+    desc: Generate Go models from Bruno specifications
+    dir: automation
+    cmds:
+      - go run ./cmd/modelgen
+
+  gen:internal-client:
+    desc: Generate the internal Go client from Bruno specifications
+    dir: automation
+    cmds:
+      - go run ./cmd/clientgen
+
+  gen:sdks:
+    desc: Generate SDKs for all sub-languages (C#, TS, Go, Java, Py, Kt, Rs)
+    dir: automation
+    cmds:
+      - go run ./cmd/sdkgen
+
+  # ============================================================================
+  # TESTING
+  # ============================================================================
+  test:all:
+    desc: Run integration tests for all SDKs
+    deps: [test:csharp, test:go, test:typescript, test:python, test:java, test:kotlin, test:rust]
+
+  test:csharp:
+    desc: Run C# tests
+    cmds:
+      - echo "--- Testing C# SDK ---"
+      - dotnet test sdks/csharp/ThunkMetrc.Test/ThunkMetrc.Test.csproj
+
+  test:go:
+    desc: Run Go tests
+    cmds:
+      - echo "--- Testing Go SDK ---"
+      - cmd: cd sdks/go/client && go test ./... || echo "No tests found or failed"
+      - cmd: cd sdks/go/wrapper && go test ./... || echo "No tests found or failed"
+      - cmd: cd sdks/go/thunkmetrc && go test ./... || echo "No tests found or failed"
+
+  test:typescript:
+    desc: Run TypeScript tests
+    cmds:
+      - echo "--- Testing TypeScript SDK ---"
+      - echo "No tests implemented yet"
+
+  test:python:
+    desc: Run Python tests
+    cmds:
+      - echo "--- Testing Python SDK ---"
+      - echo "No tests implemented yet"
+
+  test:java:
+    desc: Run Java tests
+    cmds:
+      - echo "--- Testing Java SDK ---"
+      - mvn -f sdks/java/client/pom.xml install
+      - mvn -f sdks/java/wrapper/pom.xml install
+      - mvn -f sdks/java/thunkmetrc/pom.xml install
+
+  test:kotlin:
+    desc: Run Kotlin tests
+    cmds:
+      - echo "--- Testing Kotlin SDK ---"
+      - mvn -f sdks/kotlin/client/pom.xml install
+      - mvn -f sdks/kotlin/wrapper/pom.xml install
+      - mvn -f sdks/kotlin/thunkmetrc/pom.xml install
+
+  test:rust:
+    desc: Run Rust tests
+    cmds:
+      - echo "--- Testing Rust SDK ---"
+      - cargo test --manifest-path sdks/rust/Cargo.toml
+
+  # ============================================================================
+  # PUBLISHING
+  # ============================================================================
+  publish:all:
+    desc: Publish all SDKs (C#, TS, Py, Java, Rust, Kotlin)
+    cmds:
+      - task: gen:sdks
+      - task: publish:csharp
+      - task: publish:typescript
+      - task: publish:python
+      - task: publish:java
+      - task: publish:kotlin
+      - task: publish:rust
+
+  bump:patch:
+    desc: Bump patch version (0.0.X) and regenerate SDKs
+    dir: automation
+    cmds:
+      - go run ./cmd/bump ../VERSION patch
+      - task: gen:sdks
+
+  bump:minor:
+    desc: Bump minor version (0.X.0) and regenerate SDKs
+    dir: automation
+    cmds:
+      - go run ./cmd/bump ../VERSION minor
+      - task: gen:sdks
+
+  bump:major:
+    desc: Bump major version (X.0.0) and regenerate SDKs
+    dir: automation
+    cmds:
+      - go run ./cmd/bump ../VERSION major
+      - task: gen:sdks
+
+  build:all:
+    desc: Build all SDKs to verify compilation
+    deps: [build:csharp, build:typescript, build:python, build:java, build:kotlin, build:rust, build:go]
+
+  build:csharp:
+    desc: Build C# SDK
+    cmds:
+      - dotnet build sdks/csharp/ThunkMetrc.Client/ThunkMetrc.Client.csproj -c Release
+      - dotnet build sdks/csharp/ThunkMetrc.Wrapper/ThunkMetrc.Wrapper.csproj -c Release
+
+  build:typescript:
+    desc: Build TypeScript SDK
+    dir: sdks/typescript
+    cmds:
+      - npm install
+      - npm run build
+
+  build:python:
+    desc: Build Python SDK
+    dir: sdks/python
+    cmds:
+      - python -m py_compile src/thunkmetrc/client/client.py
+
+  build:java:
+    desc: Build Java SDK
+    dir: sdks/java
+    cmds:
+      - mvn clean compile
+
+  build:kotlin:
+    desc: Build Kotlin SDK
+    dir: sdks/kotlin
+    cmds:
+      - mvn clean compile
+
+  build:rust:
+    desc: Build Rust SDK
+    dir: sdks/rust
+    cmds:
+      - cargo check
+
+  build:go:
+    desc: Build Go SDK
+    dir: sdks/go/client
+    cmds:
+      - go build ./...
+
+  publish:csharp:
+    desc: Publish C# SDK to NuGet
+    cmds:
+      - dotnet build ./sdks/csharp/ThunkMetrc.Client/ThunkMetrc.Client.csproj -c Release
+      - dotnet pack ./sdks/csharp/ThunkMetrc.Client/ThunkMetrc.Client.csproj -c Release -o ./out --no-build
+      - dotnet build ./sdks/csharp/ThunkMetrc.Wrapper/ThunkMetrc.Wrapper.csproj -c Release
+      - dotnet pack ./sdks/csharp/ThunkMetrc.Wrapper/ThunkMetrc.Wrapper.csproj -c Release -o ./out --no-build
+      - dotnet build ./sdks/csharp/ThunkMetrc/ThunkMetrc.csproj -c Release
+      - dotnet pack ./sdks/csharp/ThunkMetrc/ThunkMetrc.csproj -c Release -o ./out --no-build
+      - dotnet nuget push ./out/*.nupkg -s https://api.nuget.org/v3/index.json -k "${NUGET_API_KEY}" --skip-duplicate
+
+  publish:typescript:
+    desc: Publish TypeScript SDK to NPM
+    dir: sdks/typescript/client
+    cmds:
+      - npm ci
+      - npm run build
+      - cmd: if [ -z "$NPM_TOKEN" ]; then echo "❌ NPM_TOKEN is missing"; exit 1; fi
+      - cmd: if [ -z "$CARGO_TOKEN" ]; then echo "CARGO_TOKEN is NOT set"; else echo "CARGO_TOKEN is set"; fi
+      - cmd: if [ -z "$GPG_PASSPHRASE" ]; then echo "GPG_PASSPHRASE is NOT set"; else echo "GPG_PASSPHRASE is set"; fi
+      - cmd: if [ -z "$OSSRH_USERNAME" ]; then echo "OSSRH_USERNAME is NOT set"; else echo "OSSRH_USERNAME is set"; fi
+      - cmd: if [ -z "$OSSRH_PASSWORD" ]; then echo "OSSRH_PASSWORD is NOT set"; else echo "OSSRH_PASSWORD is set"; fi
+      - cmd: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+      - npm publish --access public
+      - cmd: rm .npmrc
+      - cmd: cd ../wrapper && npm ci && npm run build
+      - cmd: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ../wrapper/.npmrc
+      - cmd: cd ../wrapper && npm publish --access public
+      - cmd: rm ../wrapper/.npmrc
+      - cmd: cd ../thunkmetrc && npm ci && npm run build
+      - cmd: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ../thunkmetrc/.npmrc
+      - cmd: cd ../thunkmetrc && npm publish --access public
+      - cmd: rm ../thunkmetrc/.npmrc
+
+  publish:python:
+    desc: Publish Python SDK to PyPI
+    dir: sdks/python/client
+    cmds:
+      - pip install hatch twine
+      - hatch build
+      - twine upload dist/*
+      - cmd: cd ../wrapper && pip install hatch twine && hatch build && twine upload dist/*
+      - cmd: cd ../thunkmetrc && pip install hatch twine && hatch build && twine upload dist/*
+
+  publish:rust:
+    desc: Publish Rust SDK to crates.io
+    dir: sdks/rust/client
+    cmds:
+      - cmd: if [ ! -z "$CARGO_TOKEN" ]; then cargo login $CARGO_TOKEN; fi
+      - cargo publish
+      - cmd: cd ../wrapper && cargo publish
+      - cmd: cd ../thunkmetrc && cargo publish
+
+  publish:java:
+    desc: Publish Java SDK to Maven Central
+    dir: sdks/java/client
+    cmds:
+      - mvn clean install central-publishing:publish -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
+      - cmd: cd ../wrapper && mvn clean install central-publishing:publish -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
+      - cmd: cd ../thunkmetrc && mvn clean install central-publishing:publish -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
+
+  publish:kotlin:
+    desc: Publish Kotlin SDK to Maven Central
+    dir: sdks/kotlin/client
+    cmds:
+      - mvn clean install central-publishing:publish -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
+      - cmd: cd ../wrapper && mvn clean install central-publishing:publish -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
+      - cmd: cd ../thunkmetrc && mvn clean install central-publishing:publish -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"

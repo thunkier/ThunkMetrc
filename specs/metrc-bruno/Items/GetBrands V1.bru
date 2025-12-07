@@ -1,0 +1,41 @@
+meta {
+  name: GetBrands V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/items/v1/brands
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - Manage Items
+
+  Example Response:
+  [
+    {
+      "Id": 1,
+      "Name": "Skunk Nasty",
+      "Status": "Paid"
+    },
+    {
+      "Id": 2,
+      "Name": "Darth Buds",
+      "Status": "NotPaid"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+    "java.project.sourcePaths": [
+        "sdks/java"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

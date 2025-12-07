@@ -1,0 +1,53 @@
+meta {
+  name: GetWasteMethodsAll V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/plants/v2/waste/methods/all
+  body: json
+  auth: basic
+}
+
+params:query {
+  pageNumberoptional: 
+  pageSizeoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of all available plant waste methods for use within a Facility.
+
+  Permissions Required:
+  - None
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Name": "Grinder",
+        "ForPlants": true,
+        "ForProductDestruction": false,
+        "LastModified": "0001-01-01T00:00:00+00:00"
+      },
+      {
+        "Name": "Compost",
+        "ForPlants": true,
+        "ForProductDestruction": false,
+        "LastModified": "0001-01-01T00:00:00+00:00"
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

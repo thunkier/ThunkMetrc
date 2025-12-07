@@ -1,0 +1,56 @@
+meta {
+  name: GetAdjustReasons V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/packages/v2/adjust/reasons
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  pageNumberoptional: 
+  pageSizeoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of adjustment reasons for packages at a specified Facility.
+
+  Permissions Required:
+  - None
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Name": "Drying",
+        "RequiresNote": false,
+        "RequiresWasteWeight": false,
+        "RequiresImmatureWasteWeight": false,
+        "RequiresMatureWasteWeight": false
+      },
+      {
+        "Name": "Entry Error",
+        "RequiresNote": false,
+        "RequiresWasteWeight": false,
+        "RequiresImmatureWasteWeight": false,
+        "RequiresMatureWasteWeight": false
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

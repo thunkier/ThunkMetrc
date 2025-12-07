@@ -1,0 +1,32 @@
+meta {
+  name: GetInactive V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/processing/v1/inactive
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  lastModifiedStartoptional: 
+  lastModifiedEndoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - Manage Processing Job
+
+  Example Response:
+  No response
+}

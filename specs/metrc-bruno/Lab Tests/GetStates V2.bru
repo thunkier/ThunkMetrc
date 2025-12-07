@@ -1,0 +1,45 @@
+meta {
+  name: GetStates V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/labtests/v2/states
+  body: json
+  auth: basic
+}
+
+params:query {
+  No: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Returns a list of all lab testing states.
+
+  Permissions Required:
+  - None
+
+  Example Response:
+  [
+    "NotSubmitted",
+    "SubmittedForTesting",
+    "TestFailed",
+    "TestPassed",
+    "TestingInProgress",
+    "AwaitingConfirmation",
+    "RetestFailed",
+    "RetestPassed",
+    "Remediated",
+    "SelectedForRandomTesting",
+    "NotRequired",
+    "ProcessValidated",
+    "Decontaminated",
+    "RandDCompleted"
+  ]
+}

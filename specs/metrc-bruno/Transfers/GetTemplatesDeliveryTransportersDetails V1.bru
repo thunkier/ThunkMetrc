@@ -1,0 +1,51 @@
+meta {
+  name: GetTemplatesDeliveryTransportersDetails V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/transfers/v1/templates/deliveries/{id}/transporters/details
+  body: json
+  auth: basic
+}
+
+params:query {
+  No: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Please note: The {id} parameter above represents a Transfer Template Delivery ID, not a Manifest Number.
+
+  Permissions Required:
+  - Transfer Templates
+
+  Example Response:
+  [
+    {
+      "DriverName": "Lewis Hamilton",
+      "DriverOccupationalLicenseNumber": "G1-302",
+      "DriverVehicleLicenseNumber": "G2f-MFK",
+      "DriverLayoverLeg": null,
+      "VehicleMake": "McLaren",
+      "VehicleModel": "F1",
+      "VehicleLicensePlateNumber": "T00-F4ST",
+      "ActualDriverStartDateTime": null
+    },
+    {
+      "DriverName": "Michael Schumacher",
+      "DriverOccupationalLicenseNumber": "XVG-A01",
+      "DriverVehicleLicenseNumber": "MX1-00F",
+      "DriverLayoverLeg": null,
+      "VehicleMake": "Ferrari",
+      "VehicleModel": "F1",
+      "VehicleLicensePlateNumber": "3K3-GJK",
+      "ActualDriverStartDateTime": null
+    }
+  ]
+}

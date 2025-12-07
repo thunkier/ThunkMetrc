@@ -1,0 +1,42 @@
+meta {
+  name: CreateGenerate V2
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/retailid/v2/generate
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+{
+  "PackageLabel": "ABCDEF012345670000010041",
+  "Quantity": 10
+}
+}
+
+docs {
+  Allows you to generate a specific quantity of QR codes. Id value returned (issuance ID) could be used for printing.
+
+  Permissions Required:
+  - External Sources(ThirdPartyVendorV2)/Retail ID(Write)
+  - WebApi Retail ID Read Write State (All or WriteOnly)
+  - Industry/View Packages
+  - One of the following: Industry/Facility Type/Can Download Product Label, Licensee/Download Product Label or Admin/Employees/Packages Page/Product Labels(Manage)
+
+  Example Response:
+  {
+    "IssuanceId": "652714e9db1b524f7c9ec246"
+  }
+}

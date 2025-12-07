@@ -1,0 +1,66 @@
+meta {
+  name: CreateGrowthphase V2
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/plantbatches/v2/growthphase
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Name": "AK-47 Clone 1/31/2017",
+    "CountPerPlant": null,
+    "Count": 25,
+    "StartingTag": "ABCDEF012345670000020401",
+    "GrowthPhase": "Flowering",
+    "NewLocation": "Plants Location",
+    "NewSublocation": "Plants Sublocation",
+    "GrowthDate": "2015-12-15",
+    "PatientLicenseNumber": "X00001"
+  },
+  {
+    "Name": "AK-47 Clone 1/31/2017",
+    "CountPerPlant": null,
+    "Count": 25,
+    "StartingTag": "ABCDEF012345670000020427",
+    "GrowthPhase": "Vegetative",
+    "NewLocation": "Harvest Location",
+    "NewSublocation": "Harvest Sublocation",
+    "GrowthDate": "2015-12-15",
+    "PatientLicenseNumber": "X00002"
+  }
+]
+}
+
+docs {
+  Updates the growth phase of plants at a specified Facility based on tracking information.
+
+  Permissions Required:
+  - View Immature Plants
+  - Manage Immature Plants Inventory
+  - View Veg/Flower Plants
+  - Manage Veg/Flower Plants Inventory
+
+  Example Response:
+  {
+    "Ids": [
+      1,
+      2
+    ],
+    "Warnings": null
+  }
+}

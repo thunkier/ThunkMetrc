@@ -1,0 +1,35 @@
+meta {
+  name: GetLocations V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/patient-checkins/v1/locations
+  body: json
+  auth: basic
+}
+
+params:query {
+  No: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - None
+
+  Example Response:
+  [
+    {
+      "Id": 4,
+      "Name": "District of Columbia"
+    }
+  ]
+}

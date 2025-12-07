@@ -1,0 +1,57 @@
+meta {
+  name: GetWaste V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/harvests/v2/waste
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  harvestId: 
+  pageNumberoptional: 
+  pageSizeoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of Waste records for a specified Harvest, identified by its Harvest Id, within a Facility identified by its License Number.
+
+  Permissions Required:
+  - View Harvests
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 1,
+        "WasteTypeName": "Plant Material",
+        "WasteWeight": 10.0,
+        "UnitOfWeightName": "Ounces",
+        "ActualDate": "2014-11-19"
+      },
+      {
+        "Id": 2,
+        "WasteTypeName": "Root Ball",
+        "WasteWeight": 15.0,
+        "UnitOfWeightName": "Ounces",
+        "ActualDate": "2014-11-19"
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

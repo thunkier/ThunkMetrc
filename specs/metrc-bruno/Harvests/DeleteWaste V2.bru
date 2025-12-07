@@ -1,0 +1,31 @@
+meta {
+  name: DeleteWaste V2
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/harvests/v2/waste/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Discontinues a specific harvest waste record by Id for the specified Facility.
+
+  Permissions Required:
+  - View Harvests
+  - Discontinue Harvest Waste
+
+  Example Response:
+  No response
+}

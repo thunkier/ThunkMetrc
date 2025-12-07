@@ -1,0 +1,97 @@
+meta {
+  name: GetInactive V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/harvests/v1/inactive
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  lastModifiedStartoptional: 
+  lastModifiedEndoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - View Harvests
+
+  Example Response:
+  [
+    {
+      "Id": 1,
+      "Name": "2014-11-19-Harvest Location-M",
+      "HarvestType": "Product",
+      "SourceStrainCount": 0,
+      "SourceStrainNames": null,
+      "Strains": [],
+      "DryingLocationId": 1,
+      "DryingLocationName": "Harvest Location",
+      "DryingSublocationId": 0,
+      "DryingSublocationName": null,
+      "DryingLocationTypeName": null,
+      "PatientLicenseNumber": null,
+      "CurrentWeight": 0.0,
+      "TotalWasteWeight": 0.0,
+      "PlantCount": 70,
+      "TotalWetWeight": 40.0,
+      "TotalRestoredWeight": 0.0,
+      "PackageCount": 30,
+      "TotalPackagedWeight": 0.0,
+      "UnitOfWeightName": "Ounces",
+      "LabTestingState": null,
+      "LabTestingStateDate": null,
+      "IsOnHold": false,
+      "IsOnInvestigation": false,
+      "IsOnInvestigationHold": false,
+      "IsOnInvestigationRecall": false,
+      "HarvestStartDate": "2014-11-19",
+      "FinishedDate": "2015-01-10",
+      "ArchivedDate": null,
+      "LastModified": "0001-01-01T00:00:00+00:00"
+    },
+    {
+      "Id": 2,
+      "Name": "2014-11-19-Harvest Location-H",
+      "HarvestType": "WholePlant",
+      "SourceStrainCount": 0,
+      "SourceStrainNames": null,
+      "Strains": [],
+      "DryingLocationId": 1,
+      "DryingLocationName": "Harvest Location",
+      "DryingSublocationId": 0,
+      "DryingSublocationName": null,
+      "DryingLocationTypeName": null,
+      "PatientLicenseNumber": null,
+      "CurrentWeight": 0.0,
+      "TotalWasteWeight": 0.0,
+      "PlantCount": 70,
+      "TotalWetWeight": 40.0,
+      "TotalRestoredWeight": 0.0,
+      "PackageCount": 30,
+      "TotalPackagedWeight": 0.0,
+      "UnitOfWeightName": "Ounces",
+      "LabTestingState": null,
+      "LabTestingStateDate": null,
+      "IsOnHold": false,
+      "IsOnInvestigation": false,
+      "IsOnInvestigationHold": false,
+      "IsOnInvestigationRecall": false,
+      "HarvestStartDate": "2014-11-19",
+      "FinishedDate": null,
+      "ArchivedDate": "2015-02-01",
+      "LastModified": "2014-11-19T00:00:00+00:00"
+    }
+  ]
+}

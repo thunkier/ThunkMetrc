@@ -1,0 +1,42 @@
+meta {
+  name: UpdateTradesampleFlag V2
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/packages/v2/tradesample/flag
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Label": "ABCDEF012345670000010041"
+  },
+  {
+    "Label": "ABCDEF012345670000010042"
+  }
+]
+}
+
+docs {
+  Flags or unflags one or more packages at the specified Facility as trade samples.
+
+  Permissions Required:
+  - View Packages
+  - Manage Packages Inventory
+
+  Example Response:
+  No response
+}

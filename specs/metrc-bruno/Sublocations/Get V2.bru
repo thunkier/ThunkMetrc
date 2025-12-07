@@ -1,0 +1,33 @@
+meta {
+  name: Get V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/sublocations/v2/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumberoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a Sublocation by its Id, with an optional license number.
+
+  Permissions Required:
+  - Manage Locations
+
+  Example Response:
+  {
+    "Id": 1,
+    "Name": "Harvest Sublocation"
+  }
+}

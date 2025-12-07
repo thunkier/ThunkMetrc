@@ -1,0 +1,30 @@
+meta {
+  name: Delete V1
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/patient-checkins/v1/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - ManagePatientsCheckIns
+
+  Example Response:
+  No response
+}

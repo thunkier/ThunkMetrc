@@ -1,0 +1,20 @@
+{
+  "name": "@thunkmetrc/wrapper",
+  "version": "0.2.0",
+  "description": "Type-safe wrapper for ThunkMetrc TypeScript client",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@thunkmetrc/client": "file:../client"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

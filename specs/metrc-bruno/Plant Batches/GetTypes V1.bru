@@ -1,0 +1,33 @@
+meta {
+  name: GetTypes V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/plantbatches/v1/types
+  body: json
+  auth: basic
+}
+
+params:query {
+  No: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - None
+
+  Example Response:
+  [
+    "Seed",
+    "Clone"
+  ]
+}

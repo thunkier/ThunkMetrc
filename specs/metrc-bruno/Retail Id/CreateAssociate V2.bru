@@ -1,0 +1,69 @@
+meta {
+  name: CreateAssociate V2
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/retailid/v2/associate
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "PackageLabel": "ABCDEF012345670000010041",
+    "QrUrls": [
+      "https://id.14a.com/3W5E11264SGPN",
+      "https://id.14a.com/3W5E11264SGPO",
+      "https://id.14a.com/3W5E11264SGPP"
+    ]
+  },
+  {
+    "PackageLabel": "ABCDEF012345670000010042",
+    "QrUrls": [
+      "https://id.14a.com/3W5E11264SGPR",
+      "https://id.14a.com/3W5E11264SGPS",
+      "https://id.14a.com/3W5E11264SGPT"
+    ]
+  },
+  {
+    "PackageLabel": "ABCDEF012345670000010043",
+    "QrUrls": [
+      "https://id.14a.com/3W5E11264SGPU",
+      "https://id.14a.com/3W5E11264SGPv",
+      "https://id.14a.com/3W5E11264SGPW"
+    ]
+  }
+]
+}
+
+docs {
+  Facilitate association of QR codes and Package labels. This will return the count of packages and QR codes associated that were added or replaced.
+
+  Permissions Required:
+  - External Sources(ThirdPartyVendorV2)/Retail ID(Write)
+  - WebApi Retail ID Read Write State (All or WriteOnly)
+  - Industry/View Packages
+  - One of the following: Industry/Facility Type/Can Receive Associate Product Label, Licensee/Receive Associate Product Label or Admin/Employees/Packages Page/Product Labels(Manage)
+
+  Example Response:
+  {
+    "Ids": [
+      1,
+      2,
+      3
+    ],
+    "Warnings": null
+  }
+}

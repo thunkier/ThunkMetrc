@@ -1,0 +1,45 @@
+meta {
+  name: UpdateExternalid V2
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/packages/v2/externalid
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "PackageLabel": "ABCDEF012345670000010041",
+    "ExternalId": "1234567890123456."
+  },
+  {
+    "PackageLabel": "ABCDEF012345670000010042",
+    "ExternalId": ""
+  }
+]
+}
+
+docs {
+  Updates the external identifiers for one or more packages at the specified Facility.
+
+  Permissions Required:
+  - View Packages
+  - Manage Package Inventory
+  - External Id Enabled
+
+  Example Response:
+  No response
+}

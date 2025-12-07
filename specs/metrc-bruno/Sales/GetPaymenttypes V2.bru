@@ -1,0 +1,31 @@
+meta {
+  name: GetPaymenttypes V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/sales/v2/paymenttypes
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Returns a list of available payment types for the specified License Number.
+
+  Permissions Required:
+  - View Sales Delivery
+  - Manage Sales Delivery
+
+  Example Response:
+  No response
+}

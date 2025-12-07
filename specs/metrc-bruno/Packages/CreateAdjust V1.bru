@@ -1,0 +1,52 @@
+meta {
+  name: CreateAdjust V1
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/packages/v1/adjust
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Label": "ABCDEF012345670000010041",
+    "Quantity": -2.0,
+    "UnitOfMeasure": "Ounces",
+    "AdjustmentReason": "Drying",
+    "AdjustmentDate": "2015-12-15",
+    "ReasonNote": null
+  },
+  {
+    "Label": "ABCDEF012345670000010042",
+    "Quantity": 1.0,
+    "UnitOfMeasure": "Ounces",
+    "AdjustmentReason": "Scale Variance",
+    "AdjustmentDate": "2015-12-15",
+    "ReasonNote": "We are obtaining a new certified scale"
+  }
+]
+}
+
+docs {
+  
+
+  Permissions Required:
+  - View Packages
+  - Manage Packages Inventory
+
+  Example Response:
+  No response
+}

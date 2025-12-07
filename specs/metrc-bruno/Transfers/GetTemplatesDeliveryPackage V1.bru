@@ -1,0 +1,179 @@
+meta {
+  name: GetTemplatesDeliveryPackage V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/transfers/v1/templates/deliveries/{id}/packages
+  body: json
+  auth: basic
+}
+
+params:query {
+  No: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Please note: The {id} parameter above represents a Transfer Template Delivery ID, not a Manifest Number.
+
+  Permissions Required:
+  - Transfers
+
+  Example Response:
+  [
+    {
+      "PackageId": 1,
+      "PackageLabel": "ABCDEF012345670000010026",
+      "PackageType": "Product",
+      "SourceHarvestNames": null,
+      "SourcePackageLabels": null,
+      "ItemId": 0,
+      "ProductName": "Buds",
+      "ItemName": "Buds",
+      "ProductCategoryName": "Buds",
+      "ItemCategoryName": "Buds",
+      "ItemStrainName": null,
+      "ItemBrandName": null,
+      "ItemUnitCbdPercent": null,
+      "ItemUnitCbdContent": null,
+      "ItemUnitCbdContentUnitOfMeasureName": null,
+      "ItemUnitCbdContentDose": null,
+      "ItemUnitCbdContentDoseUnitOfMeasureName": null,
+      "ItemUnitThcPercent": null,
+      "ItemUnitThcContent": null,
+      "ItemUnitThcContentUnitOfMeasureName": null,
+      "ItemUnitThcContentDose": null,
+      "ItemUnitThcContentDoseUnitOfMeasureName": null,
+      "ItemUnitCbdAPercent": null,
+      "ItemUnitCbdAContent": null,
+      "ItemUnitCbdAContentUnitOfMeasureName": null,
+      "ItemUnitCbdAContentDose": null,
+      "ItemUnitCbdAContentDoseUnitOfMeasureName": null,
+      "ItemUnitThcAPercent": null,
+      "ItemUnitThcAContent": null,
+      "ItemUnitThcAContentUnitOfMeasureName": null,
+      "ItemUnitThcAContentDose": null,
+      "ItemUnitThcAContentDoseUnitOfMeasureName": null,
+      "ItemUnitVolume": null,
+      "ItemUnitVolumeUnitOfMeasureName": null,
+      "ItemUnitWeight": null,
+      "ItemUnitWeightUnitOfMeasureName": null,
+      "ItemServingSize": null,
+      "ItemSupplyDurationDays": null,
+      "ItemUnitQuantity": null,
+      "ItemUnitQuantityUnitOfMeasureName": null,
+      "LabTestingState": "NotSubmitted",
+      "ProductionBatchNumber": null,
+      "IsTradeSample": false,
+      "IsTradeSamplePersistent": false,
+      "SourcePackageIsTradeSample": false,
+      "IsDonation": false,
+      "SourcePackageIsDonation": false,
+      "IsTestingSample": false,
+      "ProductRequiresRemediation": false,
+      "ContainsRemediatedProduct": false,
+      "RemediationDate": null,
+      "ShipmentPackageState": "Accepted",
+      "ShippedQuantity": 10.0,
+      "ShippedUnitOfMeasureName": "Ounces",
+      "PackagedDate": null,
+      "ExpirationDate": null,
+      "SellByDate": null,
+      "UseByDate": null,
+      "GrossUnitOfWeightName": null,
+      "ReceivedQuantity": 10.0,
+      "ReceivedUnitOfMeasureName": "Ounces",
+      "ProductLabel": {
+        "PackageId": null,
+        "TagId": null,
+        "QrCount": 10,
+        "IsDiscontinued": false,
+        "IsChildFromParentWithLabel": false,
+        "LastLabelGenerationDate": null,
+        "IsActive": true
+      },
+      "SourceProductionBatchNumbers": null,
+      "ExternalId": null
+    },
+    {
+      "PackageId": 2,
+      "PackageLabel": "ABCDEF012345670000010027",
+      "PackageType": "Product",
+      "SourceHarvestNames": null,
+      "SourcePackageLabels": null,
+      "ItemId": 0,
+      "ProductName": "Buds",
+      "ItemName": "Buds",
+      "ProductCategoryName": "Buds",
+      "ItemCategoryName": "Buds",
+      "ItemStrainName": null,
+      "ItemBrandName": null,
+      "ItemUnitCbdPercent": null,
+      "ItemUnitCbdContent": null,
+      "ItemUnitCbdContentUnitOfMeasureName": null,
+      "ItemUnitCbdContentDose": null,
+      "ItemUnitCbdContentDoseUnitOfMeasureName": null,
+      "ItemUnitThcPercent": null,
+      "ItemUnitThcContent": null,
+      "ItemUnitThcContentUnitOfMeasureName": null,
+      "ItemUnitThcContentDose": null,
+      "ItemUnitThcContentDoseUnitOfMeasureName": null,
+      "ItemUnitCbdAPercent": null,
+      "ItemUnitCbdAContent": null,
+      "ItemUnitCbdAContentUnitOfMeasureName": null,
+      "ItemUnitCbdAContentDose": null,
+      "ItemUnitCbdAContentDoseUnitOfMeasureName": null,
+      "ItemUnitThcAPercent": null,
+      "ItemUnitThcAContent": null,
+      "ItemUnitThcAContentUnitOfMeasureName": null,
+      "ItemUnitThcAContentDose": null,
+      "ItemUnitThcAContentDoseUnitOfMeasureName": null,
+      "ItemUnitVolume": null,
+      "ItemUnitVolumeUnitOfMeasureName": null,
+      "ItemUnitWeight": null,
+      "ItemUnitWeightUnitOfMeasureName": null,
+      "ItemServingSize": null,
+      "ItemSupplyDurationDays": null,
+      "ItemUnitQuantity": null,
+      "ItemUnitQuantityUnitOfMeasureName": null,
+      "LabTestingState": "NotSubmitted",
+      "ProductionBatchNumber": null,
+      "IsTradeSample": false,
+      "IsTradeSamplePersistent": false,
+      "SourcePackageIsTradeSample": false,
+      "IsDonation": false,
+      "SourcePackageIsDonation": false,
+      "IsTestingSample": false,
+      "ProductRequiresRemediation": false,
+      "ContainsRemediatedProduct": false,
+      "RemediationDate": null,
+      "ShipmentPackageState": "Rejected",
+      "ShippedQuantity": 10.0,
+      "ShippedUnitOfMeasureName": "Ounces",
+      "PackagedDate": null,
+      "ExpirationDate": null,
+      "SellByDate": null,
+      "UseByDate": null,
+      "GrossUnitOfWeightName": null,
+      "ReceivedQuantity": null,
+      "ReceivedUnitOfMeasureName": null,
+      "ProductLabel": {
+        "PackageId": null,
+        "TagId": null,
+        "QrCount": 10,
+        "IsDiscontinued": false,
+        "IsChildFromParentWithLabel": true,
+        "LastLabelGenerationDate": null,
+        "IsActive": true
+      },
+      "SourceProductionBatchNumbers": null,
+      "ExternalId": null
+    }
+  ]
+}

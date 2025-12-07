@@ -1,0 +1,30 @@
+meta {
+  name: Delete V2
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/sublocations/v2/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Archives an existing Sublocation record for a Facility.
+
+  Permissions Required:
+  - Manage Locations
+
+  Example Response:
+  No response
+}

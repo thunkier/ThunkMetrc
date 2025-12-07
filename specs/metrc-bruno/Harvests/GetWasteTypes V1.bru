@@ -1,0 +1,40 @@
+meta {
+  name: GetWasteTypes V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/harvests/v1/waste/types
+  body: json
+  auth: basic
+}
+
+params:query {
+  No: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - None
+
+  Example Response:
+  [
+    {
+      "Name": "Plant Material"
+    },
+    {
+      "Name": "Fibrous"
+    },
+    {
+      "Name": "Root Ball"
+    }
+  ]
+}

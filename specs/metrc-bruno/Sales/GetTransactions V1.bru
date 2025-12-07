@@ -1,0 +1,43 @@
+meta {
+  name: GetTransactions V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/sales/v1/transactions
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - Sales
+
+  Example Response:
+  [
+    {
+      "SalesDate": "2015-01-08",
+      "TotalTransactions": 40,
+      "TotalPackages": 40,
+      "TotalPrice": 399.6
+    },
+    {
+      "SalesDate": "2015-01-14",
+      "TotalTransactions": 1,
+      "TotalPackages": 1,
+      "TotalPrice": 85.0
+    }
+  ]
+}

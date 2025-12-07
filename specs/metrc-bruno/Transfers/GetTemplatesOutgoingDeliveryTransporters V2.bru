@@ -1,0 +1,52 @@
+meta {
+  name: GetTemplatesOutgoingDeliveryTransporters V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/transfers/v2/templates/outgoing/deliveries/{id}/transporters
+  body: json
+  auth: basic
+}
+
+params:query {
+  pageNumberoptional: 
+  pageSizeoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of transporter templates for a given Transfer Template Delivery Id. Please note: The {id} parameter above represents a Transfer Template Delivery Id, not a Manifest Number.
+
+  Permissions Required:
+  - Manage Transfer Templates
+  - View Transfer Templates
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "TransporterFacilityLicenseNumber": "4a-X0001",
+        "TransporterFacilityName": "Standard Cultivation Shipper",
+        "TransporterDirection": "Undesignated"
+      },
+      {
+        "TransporterFacilityLicenseNumber": "3a-X0001",
+        "TransporterFacilityName": "Bulk Cultivation Shipper",
+        "TransporterDirection": "Undesignated"
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

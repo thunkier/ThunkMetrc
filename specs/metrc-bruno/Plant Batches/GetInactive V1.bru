@@ -1,0 +1,95 @@
+meta {
+  name: GetInactive V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/plantbatches/v1/inactive
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  lastModifiedStartoptional: 
+  lastModifiedEndoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - View Immature Plants
+
+  Example Response:
+  [
+    {
+      "Id": 7,
+      "Name": "Demo Plant Batch 3",
+      "PlantBatchTypeId": 1,
+      "PlantBatchTypeName": "Seed",
+      "LocationId": null,
+      "LocationName": null,
+      "LocationTypeName": null,
+      "StrainId": 1,
+      "StrainName": "Spring Hill Kush",
+      "SublocationId": null,
+      "SublocationName": null,
+      "PatientLicenseNumber": null,
+      "UntrackedCount": 0,
+      "TrackedCount": 100,
+      "PackagedCount": 0,
+      "DestroyedCount": 20,
+      "SourcePackageId": null,
+      "SourcePackageLabel": null,
+      "SourcePlantId": null,
+      "SourcePlantLabel": null,
+      "SourcePlantBatchIds": [],
+      "SourcePlantBatchNames": null,
+      "MultiPlantBatch": false,
+      "PlantedDate": "2014-10-10",
+      "LastModified": "0001-01-01T00:00:00+00:00",
+      "IsOnHold": false,
+      "IsOnInvestigation": false,
+      "IsOnInvestigationHold": false,
+      "IsOnInvestigationRecall": false
+    },
+    {
+      "Id": 8,
+      "Name": "Demo Plant Batch 4",
+      "PlantBatchTypeId": 2,
+      "PlantBatchTypeName": "Clone",
+      "LocationId": null,
+      "LocationName": null,
+      "LocationTypeName": null,
+      "StrainId": 1,
+      "StrainName": "Spring Hill Kush",
+      "SublocationId": null,
+      "SublocationName": null,
+      "PatientLicenseNumber": null,
+      "UntrackedCount": 0,
+      "TrackedCount": 75,
+      "PackagedCount": 0,
+      "DestroyedCount": 35,
+      "SourcePackageId": null,
+      "SourcePackageLabel": null,
+      "SourcePlantId": null,
+      "SourcePlantLabel": null,
+      "SourcePlantBatchIds": [],
+      "SourcePlantBatchNames": null,
+      "MultiPlantBatch": false,
+      "PlantedDate": "2014-10-10",
+      "LastModified": "0001-01-01T00:00:00+00:00",
+      "IsOnHold": false,
+      "IsOnInvestigation": false,
+      "IsOnInvestigationHold": false,
+      "IsOnInvestigationRecall": false
+    }
+  ]
+}

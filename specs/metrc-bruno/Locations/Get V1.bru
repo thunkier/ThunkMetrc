@@ -1,0 +1,39 @@
+meta {
+  name: Get V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/locations/v1/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumberoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - Manage Locations
+
+  Example Response:
+  {
+    "Id": 1,
+    "Name": "Harvest Location",
+    "LocationTypeId": 1,
+    "LocationTypeName": "Default",
+    "ForPlantBatches": true,
+    "ForPlants": true,
+    "ForHarvests": true,
+    "ForPackages": true
+  }
+}

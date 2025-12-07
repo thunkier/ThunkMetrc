@@ -1,0 +1,69 @@
+meta {
+  name: GetStatusesByPatientLicenseNumber V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/patients/v2/statuses/{patientLicenseNumber}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of statuses for a Patient License Number for a specified Facility. Data returned by this endpoint is cached for up to one minute.
+
+  Permissions Required:
+  - Lookup Patients
+
+  Example Response:
+  [
+    {
+      "PatientLicenseNumber": "PTN-123-456",
+      "IdentificationMethod": null,
+      "Active": true,
+      "FlowerOuncesAllowed": 0.0,
+      "ThcOuncesAllowed": 0.0,
+      "ConcentrateOuncesAllowed": 0.0,
+      "InfusedOuncesAllowed": 0.0,
+      "FlowerOuncesPurchased": 0.0,
+      "ThcOuncesPurchased": 0.0,
+      "ConcentrateOuncesPurchased": 0.0,
+      "InfusedOuncesPurchased": 0.0,
+      "FlowerOuncesAvailable": 10.0,
+      "ThcOuncesAvailable": 1.0,
+      "ConcentrateOuncesAvailable": 0.0,
+      "InfusedOuncesAvailable": 0.0,
+      "PurchaseAmountDays": 1.0,
+      "PatientLicenseExpirationDate": null
+    },
+    {
+      "PatientLicenseNumber": "PTN-123-456",
+      "IdentificationMethod": null,
+      "Active": true,
+      "FlowerOuncesAllowed": 0.0,
+      "ThcOuncesAllowed": 0.0,
+      "ConcentrateOuncesAllowed": 0.0,
+      "InfusedOuncesAllowed": 0.0,
+      "FlowerOuncesPurchased": 0.0,
+      "ThcOuncesPurchased": 0.0,
+      "ConcentrateOuncesPurchased": 0.0,
+      "InfusedOuncesPurchased": 0.0,
+      "FlowerOuncesAvailable": 120.0,
+      "ThcOuncesAvailable": 10.0,
+      "ConcentrateOuncesAvailable": 0.0,
+      "InfusedOuncesAvailable": 0.0,
+      "PurchaseAmountDays": 31.0,
+      "PatientLicenseExpirationDate": null
+    }
+  ]
+}

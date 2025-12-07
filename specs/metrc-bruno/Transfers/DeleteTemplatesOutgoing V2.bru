@@ -1,0 +1,30 @@
+meta {
+  name: DeleteTemplatesOutgoing V2
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/transfers/v2/templates/outgoing/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Archives a transfer template for a Facility.
+
+  Permissions Required:
+  - Manage Transfer Templates
+
+  Example Response:
+  No response
+}

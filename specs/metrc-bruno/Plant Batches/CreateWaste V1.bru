@@ -1,0 +1,45 @@
+meta {
+  name: CreateWaste V1
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/plantbatches/v1/waste
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "WasteMethodName": "Clipping",
+    "MixedMaterial": "Soil",
+    "WasteWeight": 15.69,
+    "UnitOfMeasureName": "grams",
+    "ReasonName": "Trim",
+    "Note": "",
+    "WasteDate": "2017-01-31",
+    "PlantBatchName": "Plant Batch A"
+  }
+]
+}
+
+docs {
+  
+
+  Permissions Required:
+  - Manage Plants Waste
+
+  Example Response:
+  No response
+}

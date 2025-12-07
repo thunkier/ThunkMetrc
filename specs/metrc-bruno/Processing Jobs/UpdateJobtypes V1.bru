@@ -1,0 +1,46 @@
+meta {
+  name: UpdateJobtypes V1
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/processing/v1/jobtypes
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 1,
+    "Name": "Vape Pen",
+    "Description": "Create extract for vape pen",
+    "CategoryName": "Vape",
+    "ProcessingSteps": "Extract THC and infuse into pen",
+    "Attributes": [
+      "Vape",
+      "Infuse"
+    ]
+  }
+]
+}
+
+docs {
+  
+
+  Permissions Required:
+  - Manage Processing Job
+
+  Example Response:
+  No response
+}

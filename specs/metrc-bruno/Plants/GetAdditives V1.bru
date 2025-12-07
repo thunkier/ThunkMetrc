@@ -1,0 +1,50 @@
+meta {
+  name: GetAdditives V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/plants/v1/additives
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  lastModifiedStartoptional: 
+  lastModifiedEndoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - View/Manage Plants Additives
+
+  Example Response:
+  [
+    {
+      "AdditiveTypeName": null,
+      "ProductTradeName": "Round-Down",
+      "EpaRegistrationNumber": null,
+      "ProductSupplier": "MonSanta",
+      "ApplicationDevice": "Spray",
+      "AmountUnitOfMeasure": "Gallons",
+      "TotalAmountApplied": 5.0,
+      "PlantBatchId": null,
+      "PlantBatchName": null,
+      "PlantCount": 83,
+      "RestrictiveEntryIntervalQuantityDescription": null,
+      "RestrictiveEntryIntervalTimeDescription": null,
+      "Rate": null,
+      "Volume": null,
+      "Note": null
+    }
+  ]
+}

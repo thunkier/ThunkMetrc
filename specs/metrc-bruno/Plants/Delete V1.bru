@@ -1,0 +1,66 @@
+meta {
+  name: Delete V1
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/plants/v1
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": null,
+    "Label": "ABCDEF012345670000000001",
+    "WasteMethodName": "Compost",
+    "WasteMaterialMixed": "Soil",
+    "WasteWeight": 15.69,
+    "WasteUnitOfMeasureName": "grams",
+    "WasteReasonName": "Destroy",
+    "Count": 0,
+    "ReasonNote": "Had to go.",
+    "ActualDate": "2015-12-15"
+  },
+  {
+    "Id": 2,
+    "Label": null,
+    "WasteMethodName": "Grinder",
+    "WasteMaterialMixed": "Soil",
+    "WasteWeight": 15.69,
+    "WasteUnitOfMeasureName": "grams",
+    "WasteReasonName": "Destroy",
+    "Count": 0,
+    "ReasonNote": "Had to go.",
+    "ActualDate": "2015-12-15"
+  }
+]
+}
+
+docs {
+  
+
+  Permissions Required:
+  - View Veg/Flower Plants
+  - Destroy Veg/Flower Plants
+
+  Example Response:
+  {
+    "Ids": [
+      1,
+      2
+    ],
+    "Warnings": null
+  }
+}

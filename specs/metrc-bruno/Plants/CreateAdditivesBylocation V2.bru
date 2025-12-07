@@ -1,0 +1,94 @@
+meta {
+  name: CreateAdditivesBylocation V2
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/plants/v2/additives/bylocation
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "AdditiveType": "Fertilizer",
+    "ProductTradeName": "Wonder Sprout",
+    "EpaRegistrationNumber": null,
+    "ProductSupplier": "G Labs",
+    "ApplicationDevice": "GreatDistributor 210lb",
+    "TotalAmountApplied": 5.0,
+    "TotalAmountUnitOfMeasure": "Gallons",
+    "ActiveIngredients": [
+      {
+        "Name": "Phosphorous",
+        "Percentage": 30.0
+      },
+      {
+        "Name": "Nitrogen",
+        "Percentage": 15.0
+      },
+      {
+        "Name": "Potassium",
+        "Percentage": 15.0
+      }
+    ],
+    "LocationName": "Plants Location",
+    "SublocationName": null,
+    "ActualDate": "2019-12-15"
+  },
+  {
+    "AdditiveType": "Pesticide",
+    "ProductTradeName": "Pure Triazine",
+    "EpaRegistrationNumber": null,
+    "ProductSupplier": "G Labs",
+    "ApplicationDevice": "GreatDistributor 210lb",
+    "TotalAmountApplied": 5.0,
+    "TotalAmountUnitOfMeasure": "Gallons",
+    "ActiveIngredients": [
+      {
+        "Name": "Phosphorous",
+        "Percentage": 30.0
+      },
+      {
+        "Name": "Nitrogen",
+        "Percentage": 15.0
+      },
+      {
+        "Name": "Potassium",
+        "Percentage": 15.0
+      }
+    ],
+    "LocationName": "Plants Location",
+    "SublocationName": null,
+    "ActualDate": "2019-12-15"
+  }
+]
+}
+
+docs {
+  Records additive usage for plants based on their location within a specified Facility.
+
+  Permissions Required:
+  - Manage Plants
+  - Manage Plants Additives
+
+  Example Response:
+  {
+    "Ids": [
+      1,
+      2
+    ],
+    "Warnings": null
+  }
+}

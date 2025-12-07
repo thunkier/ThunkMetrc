@@ -1,0 +1,93 @@
+meta {
+  name: CreatePackageInfo V2
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/retailid/v2/packages/info
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+{
+  "packageLabels": [
+    "ABCDEF012345670000010041",
+    "ABCDEF012345670000010042",
+    "ABCDEF012345670000010043"
+  ]
+}
+}
+
+docs {
+  Retrieves Package information for given list of Package labels.
+
+  Permissions Required:
+  - External Sources(ThirdPartyVendorV2)/Retail ID(Write)
+  - WebApi Retail ID Read Write State (All or WriteOnly)
+  - Industry/View Packages
+  - Admin/Employees/Packages Page/Product Labels(Manage)
+
+  Example Response:
+  {
+    "Packages": [
+      {
+        "Tag": "ABCDEF012345670000010041",
+        "QrCount": 5,
+        "EstimatedBalance": 5,
+        "SiblingCount": 2,
+        "IssuanceId": "ABCDEF012345670000010041",
+        "Issuances": [
+          {
+            "LabelSet": 0,
+            "LabelQuantity": 2,
+            "CreatedAt": "2014-11-19T00:00:00+00:00"
+          },
+          {
+            "LabelSet": 1,
+            "LabelQuantity": 3,
+            "CreatedAt": "2014-11-20T00:00:00+00:00"
+          }
+        ],
+        "HasQrs": true,
+        "RequiresVerification": true
+      },
+      {
+        "Tag": "ABCDEF012345670000010042",
+        "QrCount": 4,
+        "EstimatedBalance": 0,
+        "SiblingCount": 0,
+        "IssuanceId": "ABCDEF012345670000010042",
+        "Issuances": [
+          {
+            "LabelSet": 0,
+            "LabelQuantity": 4,
+            "CreatedAt": "2014-11-19T00:00:00+00:00"
+          }
+        ],
+        "HasQrs": true,
+        "RequiresVerification": false
+      },
+      {
+        "Tag": "ABCDEF012345670000010043",
+        "QrCount": 0,
+        "EstimatedBalance": 0,
+        "SiblingCount": 0,
+        "IssuanceId": null,
+        "Issuances": null,
+        "HasQrs": false,
+        "RequiresVerification": false
+      }
+    ]
+  }
+}

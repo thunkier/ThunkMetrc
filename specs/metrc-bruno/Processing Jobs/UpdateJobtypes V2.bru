@@ -1,0 +1,46 @@
+meta {
+  name: UpdateJobtypes V2
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/processing/v2/jobtypes
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 1,
+    "Name": "Vape Pen",
+    "Description": "Create extract for vape pen",
+    "CategoryName": "Vape",
+    "ProcessingSteps": "Extract THC and infuse into pen",
+    "Attributes": [
+      "Vape",
+      "Infuse"
+    ]
+  }
+]
+}
+
+docs {
+  Updates existing processing job types at a Facility, including their name, category, description, steps, and attributes.
+
+  Permissions Required:
+  - Manage Processing Job
+
+  Example Response:
+  No response
+}

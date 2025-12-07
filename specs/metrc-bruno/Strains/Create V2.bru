@@ -1,0 +1,57 @@
+meta {
+  name: Create V2
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/strains/v2
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Name": "Spring Hill Kush",
+    "TestingStatus": "None",
+    "ThcLevel": 0.1865,
+    "CbdLevel": 0.1075,
+    "IndicaPercentage": 25.0,
+    "SativaPercentage": 75.0
+  },
+  {
+    "Name": "TN Orange Dream",
+    "TestingStatus": "None",
+    "ThcLevel": 0.075,
+    "CbdLevel": 0.14,
+    "IndicaPercentage": 25.0,
+    "SativaPercentage": 75.0
+  }
+]
+}
+
+docs {
+  Creates new strain records for a specified Facility.
+
+  Permissions Required:
+  - Manage Strains
+
+  Example Response:
+  {
+    "Ids": [
+      1,
+      2
+    ],
+    "Warnings": null
+  }
+}

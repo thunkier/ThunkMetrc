@@ -1,0 +1,101 @@
+meta {
+  name: CreateReceipt V2
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/sales/v2/receipts
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "SalesDateTime": "2016-10-04T16:44:53.000",
+    "ExternalReceiptNumber": "ABC-1234",
+    "SalesCustomerType": "Consumer",
+    "PatientLicenseNumber": null,
+    "CaregiverLicenseNumber": null,
+    "IdentificationMethod": null,
+    "PatientRegistrationLocationId": null,
+    "Transactions": [
+      {
+        "PackageLabel": "ABCDEF012345670000010331",
+        "Quantity": 1.0,
+        "UnitOfMeasure": "Ounces",
+        "TotalAmount": 9.99,
+        "UnitThcPercent": null,
+        "UnitThcContent": null,
+        "UnitThcContentUnitOfMeasure": null,
+        "UnitWeight": null,
+        "UnitWeightUnitOfMeasure": null,
+        "InvoiceNumber": null,
+        "Price": null,
+        "ExciseTax": null,
+        "CityTax": null,
+        "CountyTax": null,
+        "MunicipalTax": null,
+        "DiscountAmount": null,
+        "SubTotal": null,
+        "SalesTax": null,
+        "QrCodes": null
+      },
+      {
+        "PackageLabel": "ABCDEF012345670000010332",
+        "Quantity": 1.0,
+        "UnitOfMeasure": "Ounces",
+        "TotalAmount": 9.99,
+        "UnitThcPercent": null,
+        "UnitThcContent": null,
+        "UnitThcContentUnitOfMeasure": null,
+        "UnitWeight": null,
+        "UnitWeightUnitOfMeasure": null,
+        "InvoiceNumber": null,
+        "Price": null,
+        "ExciseTax": null,
+        "CityTax": null,
+        "CountyTax": null,
+        "MunicipalTax": null,
+        "DiscountAmount": null,
+        "SubTotal": null,
+        "SalesTax": null,
+        "QrCodes": [
+          "https://1a4.com/q83vASNFZwAAAQkQCA",
+          "https://1a4.com/q83vASNFZwAAAQkQCb"
+        ]
+      }
+    ]
+  }
+]
+}
+
+docs {
+  Records a list of sales deliveries for a given License Number. Please note: The SalesDateTime field must be the actual date and time of the transaction without the time zone. This date/time must already be in the same time zone as the Facility recording the sales. For example, if the Facility is in Pacific Time, then this time must be in Pacific Standard (or Daylight Savings) Time and not in UTC.
+
+  Permissions Required:
+  - External Sources(ThirdPartyVendorV2)/Sales (Write)
+  - Industry/Facility Type/Consumer Sales or Industry/Facility Type/Patient Sales or Industry/Facility Type/External Patient Sales or Industry/Facility Type/Caregiver Sales
+  - Industry/Facility Type/Advanced Sales
+  - WebApi Sales Read Write State (All or WriteOnly)
+  - WebApi Retail ID Read Write State (All or WriteOnly) - Required for RID only.
+  - External Sources(ThirdPartyVendorV2)/Retail ID(Write) - Required for RID only.
+
+  Example Response:
+  {
+    "Ids": [
+      1
+    ],
+    "Warnings": null
+  }
+}

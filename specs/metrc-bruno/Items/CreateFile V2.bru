@@ -1,0 +1,44 @@
+meta {
+  name: CreateFile V2
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/items/v2/file
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "FileName": "Image.png",
+    "EncodedImageBase64": "File encoded in Base64=="
+  }
+]
+}
+
+docs {
+  Uploads one or more image or PDF files for products, labels, packaging, or documents at the specified Facility.
+
+  Permissions Required:
+  - Manage Items
+
+  Example Response:
+  {
+    "Ids": [
+      1
+    ],
+    "Warnings": null
+  }
+}

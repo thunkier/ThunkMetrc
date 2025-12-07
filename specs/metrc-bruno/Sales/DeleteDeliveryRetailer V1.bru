@@ -1,0 +1,30 @@
+meta {
+  name: DeleteDeliveryRetailer V1
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/sales/v1/deliveries/retailer/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - Retailer Delivery
+
+  Example Response:
+  No response
+}

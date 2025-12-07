@@ -1,0 +1,110 @@
+meta {
+  name: GetJobtypesActive V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/processing/v2/jobtypes/active
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  pageNumberoptional: 
+  pageSizeoptional: 
+  lastModifiedStartoptional: 
+  lastModifiedEndoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of all active processing job types defined within a Facility.
+
+  Permissions Required:
+  - Manage Processing Job
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 1,
+        "Name": "Buds",
+        "Description": "Green",
+        "CategoryName": "Infusing",
+        "ForItems": false,
+        "ForProcessingJobs": false,
+        "RequiresProcessingJobAttributes": false,
+        "ProcessingSteps": "Steps 1",
+        "Attributes": [
+          {
+            "Id": 1,
+            "Name": "Attribute1",
+            "LastModified": "2021-11-23T00:00:00-08:00"
+          },
+          {
+            "Id": 2,
+            "Name": "Attribute2",
+            "LastModified": "2021-07-17T00:00:00-07:00"
+          }
+        ]
+      },
+      {
+        "Id": 2,
+        "Name": "Immature Plants",
+        "Description": "Green",
+        "CategoryName": "Processing",
+        "ForItems": false,
+        "ForProcessingJobs": false,
+        "RequiresProcessingJobAttributes": false,
+        "ProcessingSteps": "Steps 2",
+        "Attributes": [
+          {
+            "Id": 3,
+            "Name": "Attribute3",
+            "LastModified": "2021-11-23T00:00:00-08:00"
+          },
+          {
+            "Id": 4,
+            "Name": "Attribute4",
+            "LastModified": "2021-07-17T00:00:00-07:00"
+          }
+        ]
+      },
+      {
+        "Id": 3,
+        "Name": "Infused",
+        "Description": "Red",
+        "CategoryName": null,
+        "ForItems": false,
+        "ForProcessingJobs": false,
+        "RequiresProcessingJobAttributes": false,
+        "ProcessingSteps": "Steps 3",
+        "Attributes": [
+          {
+            "Id": 2,
+            "Name": "Attribute2",
+            "LastModified": "2021-11-23T00:00:00-08:00"
+          },
+          {
+            "Id": 4,
+            "Name": "Attribute4",
+            "LastModified": "2021-07-17T00:00:00-07:00"
+          }
+        ]
+      }
+    ],
+    "Total": 3,
+    "TotalRecords": 3,
+    "PageSize": 3,
+    "RecordsOnPage": 3,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

@@ -1,0 +1,37 @@
+meta {
+  name: GetByCaregiverLicenseNumber V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/caregivers/v1/status/{caregiverLicenseNumber}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Data returned by this endpoint is cached for up to one minute.
+
+  Permissions Required:
+  - Lookup Caregivers
+
+  Example Response:
+  {
+    "CaregiverLicenseNumber": "CGN-123-456",
+    "Active": true,
+    "Patients": [
+      "PatientLicense_74d59",
+      "PatientLicense_b993f"
+    ]
+  }
+}

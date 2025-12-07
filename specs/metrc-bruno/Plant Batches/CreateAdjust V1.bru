@@ -1,0 +1,50 @@
+meta {
+  name: CreateAdjust V1
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/plantbatches/v1/adjust
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "PlantBatchName": "Testing Plant Batch",
+    "Quantity": -2,
+    "AdjustmentReason": "Drying",
+    "AdjustmentDate": "2023-01-20",
+    "ReasonNote": null
+  },
+  {
+    "PlantBatchName": "Testing Plant Batch",
+    "Quantity": 1,
+    "AdjustmentReason": "Scale Variance",
+    "AdjustmentDate": "2023-01-20",
+    "ReasonNote": "We are obtaining a new certified scale"
+  }
+]
+}
+
+docs {
+  
+
+  Permissions Required:
+  - View Immature Plants
+  - Manage Immature Plants Inventory
+
+  Example Response:
+  No response
+}

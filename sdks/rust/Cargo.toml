@@ -1,0 +1,7 @@
+[workspace]
+members = [
+    "client",
+    "wrapper",
+    "thunkmetrc"
+]
+resolver = "2"

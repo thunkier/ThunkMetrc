@@ -1,0 +1,35 @@
+meta {
+  name: GetDeliveriesPackagesStates V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/transfers/v1/deliveries/packages/states
+  body: json
+  auth: basic
+}
+
+params:query {
+  No: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - None
+
+  Example Response:
+  [
+    "Shipped",
+    "Rejected",
+    "Accepted",
+    "Returned"
+  ]
+}

@@ -1,0 +1,41 @@
+meta {
+  name: UpdateReceiptUnfinalize V2
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/sales/v2/receipts/unfinalize
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 1
+  },
+  {
+    "Id": 2
+  }
+]
+}
+
+docs {
+  Unfinalizes a list of sales receipts for a Facility using the provided License Number and receipt data.
+
+  Permissions Required:
+  - Manage Sales
+
+  Example Response:
+  No response
+}

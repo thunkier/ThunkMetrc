@@ -1,0 +1,48 @@
+meta {
+  name: UpdateStrain V2
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/plants/v2/strain
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 1,
+    "Label": null,
+    "StrainId": 1,
+    "StrainName": null
+  },
+  {
+    "Id": 2,
+    "Label": null,
+    "StrainId": 2,
+    "StrainName": null
+  }
+]
+}
+
+docs {
+  Updates the strain information for plants within a Facility.
+
+  Permissions Required:
+  - View Veg/Flower Plants
+  - Manage Veg/Flower Plants Inventory
+
+  Example Response:
+  No response
+}

@@ -1,0 +1,47 @@
+meta {
+  name: UpdateDriver V2
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/transporters/v2/drivers
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": "Driver-1",
+    "Name": "Michelle Doe",
+    "DriversLicenseNumber": "ABC1234",
+    "EmployeeId": "BTS000007"
+  },
+  {
+    "Id": "Driver-3",
+    "Name": "John Doe",
+    "DriversLicenseNumber": "ABC4567",
+    "EmployeeId": "BTS131206"
+  }
+]
+}
+
+docs {
+  Updates existing driver records for a Facility.
+
+  Permissions Required:
+  - Manage Transporters
+
+  Example Response:
+  No response
+}

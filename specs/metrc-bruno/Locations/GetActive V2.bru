@@ -1,0 +1,64 @@
+meta {
+  name: GetActive V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/locations/v2/active
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  pageNumberoptional: 
+  pageSizeoptional: 
+  lastModifiedStartoptional: 
+  lastModifiedEndoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of active locations for a specified Facility.
+
+  Permissions Required:
+  - Manage Locations
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 1,
+        "Name": "Harvest Location",
+        "LocationTypeId": 1,
+        "LocationTypeName": "Default",
+        "ForPlantBatches": true,
+        "ForPlants": true,
+        "ForHarvests": true,
+        "ForPackages": true
+      },
+      {
+        "Id": 2,
+        "Name": "Plants Location",
+        "LocationTypeId": 2,
+        "LocationTypeName": "Planting Station",
+        "ForPlantBatches": false,
+        "ForPlants": true,
+        "ForHarvests": false,
+        "ForPackages": false
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

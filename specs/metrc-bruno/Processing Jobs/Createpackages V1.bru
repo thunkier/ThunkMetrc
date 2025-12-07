@@ -1,0 +1,60 @@
+meta {
+  name: Createpackages V1
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/processing/v1/createpackages
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "JobName": "Job 1",
+    "Tag": "ABCDEFG11232131",
+    "Location": null,
+    "Sublocation": null,
+    "Item": null,
+    "Quantity": 12.0,
+    "UnitOfMeasure": "Grams",
+    "PatientLicenseNumber": null,
+    "Note": null,
+    "ProductionBatchNumber": null,
+    "FinishProcessingJob": false,
+    "FinishDate": null,
+    "WasteCountQuantity": null,
+    "WasteCountUnitOfMeasureName": null,
+    "WasteVolumeQuantity": null,
+    "WasteVolumeUnitOfMeasureName": null,
+    "WasteWeightQuantity": null,
+    "WasteWeightUnitOfMeasureName": null,
+    "FinishNote": null,
+    "PackageDate": null,
+    "ExpirationDate": null,
+    "SellByDate": null,
+    "UseByDate": null
+  }
+]
+}
+
+docs {
+  
+
+  Permissions Required:
+  - ManageProcessingJobs
+
+  Example Response:
+  No response
+}

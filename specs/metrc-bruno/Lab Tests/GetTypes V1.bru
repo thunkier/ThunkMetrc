@@ -1,0 +1,101 @@
+meta {
+  name: GetTypes V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/labtests/v1/types
+  body: json
+  auth: basic
+}
+
+params:query {
+  No: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - None
+
+  Example Response:
+  [
+    {
+      "Id": 1,
+      "Name": "THC",
+      "RequiresTestResult": false,
+      "InformationalOnly": false,
+      "ResearchAndDevelopment": false,
+      "AlwaysPasses": false,
+      "MaxAllowedFailureCount": 0,
+      "LabTestResultMode": 0,
+      "LabTestResultMinimum": null,
+      "LabTestResultMaximum": null,
+      "LabTestResultExpirationDays": null,
+      "DependencyMode": 0
+    },
+    {
+      "Id": 2,
+      "Name": "THCa",
+      "RequiresTestResult": false,
+      "InformationalOnly": false,
+      "ResearchAndDevelopment": false,
+      "AlwaysPasses": false,
+      "MaxAllowedFailureCount": 0,
+      "LabTestResultMode": 0,
+      "LabTestResultMinimum": null,
+      "LabTestResultMaximum": null,
+      "LabTestResultExpirationDays": null,
+      "DependencyMode": 0
+    },
+    {
+      "Id": 3,
+      "Name": "CBD",
+      "RequiresTestResult": false,
+      "InformationalOnly": false,
+      "ResearchAndDevelopment": false,
+      "AlwaysPasses": false,
+      "MaxAllowedFailureCount": 0,
+      "LabTestResultMode": 0,
+      "LabTestResultMinimum": null,
+      "LabTestResultMaximum": null,
+      "LabTestResultExpirationDays": null,
+      "DependencyMode": 0
+    },
+    {
+      "Id": 4,
+      "Name": "CBDa",
+      "RequiresTestResult": false,
+      "InformationalOnly": false,
+      "ResearchAndDevelopment": false,
+      "AlwaysPasses": false,
+      "MaxAllowedFailureCount": 0,
+      "LabTestResultMode": 0,
+      "LabTestResultMinimum": null,
+      "LabTestResultMaximum": null,
+      "LabTestResultExpirationDays": null,
+      "DependencyMode": 0
+    },
+    {
+      "Id": 5,
+      "Name": "Pesticides",
+      "RequiresTestResult": false,
+      "InformationalOnly": false,
+      "ResearchAndDevelopment": false,
+      "AlwaysPasses": false,
+      "MaxAllowedFailureCount": 0,
+      "LabTestResultMode": 0,
+      "LabTestResultMinimum": null,
+      "LabTestResultMaximum": null,
+      "LabTestResultExpirationDays": null,
+      "DependencyMode": "RequiresOne"
+    }
+  ]
+}

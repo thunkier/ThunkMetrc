@@ -1,0 +1,92 @@
+meta {
+  name: UpdateReceipt V1
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/sales/v1/receipts
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 51,
+    "SalesDateTime": "2016-10-04T16:47:24.000",
+    "ExternalReceiptNumber": "ABC-123",
+    "SalesCustomerType": "Consumer",
+    "PatientLicenseNumber": null,
+    "CaregiverLicenseNumber": null,
+    "IdentificationMethod": null,
+    "PatientRegistrationLocationId": null,
+    "Transactions": [
+      {
+        "PackageLabel": "ABCDEF012345670000010331",
+        "Quantity": 1.0,
+        "UnitOfMeasure": "Ounces",
+        "TotalAmount": 9.98,
+        "UnitThcPercent": null,
+        "UnitThcContent": null,
+        "UnitThcContentUnitOfMeasure": null,
+        "UnitWeight": null,
+        "UnitWeightUnitOfMeasure": null,
+        "InvoiceNumber": null,
+        "Price": null,
+        "ExciseTax": null,
+        "CityTax": null,
+        "CountyTax": null,
+        "MunicipalTax": null,
+        "DiscountAmount": null,
+        "SubTotal": null,
+        "SalesTax": null,
+        "QrCodes": null
+      },
+      {
+        "PackageLabel": "ABCDEF012345670000010332",
+        "Quantity": 2.0,
+        "UnitOfMeasure": "Ounces",
+        "TotalAmount": 9.99,
+        "UnitThcPercent": null,
+        "UnitThcContent": null,
+        "UnitThcContentUnitOfMeasure": null,
+        "UnitWeight": null,
+        "UnitWeightUnitOfMeasure": null,
+        "InvoiceNumber": null,
+        "Price": null,
+        "ExciseTax": null,
+        "CityTax": null,
+        "CountyTax": null,
+        "MunicipalTax": null,
+        "DiscountAmount": null,
+        "SubTotal": null,
+        "SalesTax": null,
+        "QrCodes": [
+          "https://1a4.com/q83vASNFZwAAAQkQRe",
+          "https://1a4.com/q83vASNFZwAAAQkQRa"
+        ]
+      }
+    ]
+  }
+]
+}
+
+docs {
+  Please note: The SalesDateTime field must be the actual date and time of the transaction without time zone. This date/time must already be in the same time zone as the Facility recording the sales. For example, if the Facility is in Pacific Time, then this time must be Pacific Standard (or Daylight Savings) Time and not in UTC.
+
+  Permissions Required:
+  - Sales
+
+  Example Response:
+  No response
+}

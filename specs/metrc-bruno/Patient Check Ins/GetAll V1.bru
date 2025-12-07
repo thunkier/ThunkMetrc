@@ -1,0 +1,42 @@
+meta {
+  name: GetAll V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/patient-checkins/v1
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  checkinDateStartoptional: 
+  checkinDateEndoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - ManagePatientsCheckIns
+
+  Example Response:
+  [
+    {
+      "Id": 4,
+      "PatientLicenseNumber": "X100420",
+      "CheckInLocationId": 4,
+      "CheckInLocationName": "District of Columbia",
+      "RegistrationStartDate": "2022-11-01",
+      "RegistrationExpiryDate": "2024-10-31",
+      "CheckInDate": "2022-11-06"
+    }
+  ]
+}

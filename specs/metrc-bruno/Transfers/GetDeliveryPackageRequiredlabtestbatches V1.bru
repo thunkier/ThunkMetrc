@@ -1,0 +1,41 @@
+meta {
+  name: GetDeliveryPackageRequiredlabtestbatches V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/transfers/v1/deliveries/package/{id}/requiredlabtestbatches
+  body: json
+  auth: basic
+}
+
+params:query {
+  No: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Please note: The {id} parameter above represents a Transfer Delivery Package ID, not a Manifest Number.
+
+  Permissions Required:
+  - Transfers
+
+  Example Response:
+  [
+    {
+      "PackageId": 2,
+      "LabTestBatchId": 1,
+      "LabTestBatchName": "Cannabinoids"
+    },
+    {
+      "PackageId": 2,
+      "LabTestBatchId": 2,
+      "LabTestBatchName": "Category I Residual Pesticides (required)"
+    }
+  ]
+}

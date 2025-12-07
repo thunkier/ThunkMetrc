@@ -1,0 +1,77 @@
+meta {
+  name: CreateTransactionByDate V1
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/sales/v1/transactions/{date}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "PackageLabel": "ABCDEF012345670000010331",
+    "Quantity": 1.0,
+    "UnitOfMeasure": "Ounces",
+    "TotalAmount": 9.99,
+    "UnitThcPercent": null,
+    "UnitThcContent": null,
+    "UnitThcContentUnitOfMeasure": null,
+    "UnitWeight": null,
+    "UnitWeightUnitOfMeasure": null,
+    "InvoiceNumber": null,
+    "Price": null,
+    "ExciseTax": null,
+    "CityTax": null,
+    "CountyTax": null,
+    "MunicipalTax": null,
+    "DiscountAmount": null,
+    "SubTotal": null,
+    "SalesTax": null,
+    "QrCodes": null
+  },
+  {
+    "PackageLabel": "ABCDEF012345670000010332",
+    "Quantity": 1.0,
+    "UnitOfMeasure": "Ounces",
+    "TotalAmount": 9.99,
+    "UnitThcPercent": null,
+    "UnitThcContent": null,
+    "UnitThcContentUnitOfMeasure": null,
+    "UnitWeight": null,
+    "UnitWeightUnitOfMeasure": null,
+    "InvoiceNumber": null,
+    "Price": null,
+    "ExciseTax": null,
+    "CityTax": null,
+    "CountyTax": null,
+    "MunicipalTax": null,
+    "DiscountAmount": null,
+    "SubTotal": null,
+    "SalesTax": null,
+    "QrCodes": null
+  }
+]
+}
+
+docs {
+  
+
+  Permissions Required:
+  - Sales
+
+  Example Response:
+  No response
+}

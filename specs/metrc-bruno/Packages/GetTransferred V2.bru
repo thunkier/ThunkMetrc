@@ -1,0 +1,71 @@
+meta {
+  name: GetTransferred V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/packages/v2/transferred
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  pageNumberoptional: 
+  pageSizeoptional: 
+  lastModifiedStartoptional: 
+  lastModifiedEndoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of transferred packages for a specific Facility.
+
+  Permissions Required:
+  - View Packages
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 201,
+        "PackageId": 288,
+        "RecipientFacilityLicenseNumber": "4a-X0001",
+        "RecipientFacilityName": "AK LOFTY ESTABLISHMENT, LLC",
+        "ManifestNumber": "0000000035",
+        "PackageLabel": "ABCDEF012345670000011979",
+        "ExternalId": null,
+        "SourceHarvestNames": "2025-01-18-Harvest Location-H",
+        "SourcePackageLabels": "ABCDEF012345670000025718",
+        "ProductName": "Buds - Metrc Bliss",
+        "ProductCategoryName": "Bud/Flower",
+        "ItemStrainName": "Metrc Bliss",
+        "LabTestingStateName": "NotSubmitted",
+        "ShippedQuantity": 14.0,
+        "ShippedUnitOfMeasureAbbreviation": "oz",
+        "GrossWeight": 28.0,
+        "GrossUnitOfWeightAbbreviation": "oz",
+        "ShipperWholesalePrice": 17.98,
+        "ReceivedQuantity": 14.0,
+        "ReceivedUnitOfMeasureAbbreviation": "oz",
+        "ReceiverWholesalePrice": 17.99,
+        "ShipmentPackageStateName": "Accepted",
+        "ActualDepartureDateTime": "2025-01-19T00:00:00+00:00",
+        "ReceivedDateTime": "2025-01-25T00:00:00+00:00",
+        "ProcessingJobTypeName": "Pick and Extract"
+      }
+    ],
+    "Total": 1,
+    "TotalRecords": 1,
+    "PageSize": 1,
+    "RecordsOnPage": 1,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

@@ -1,0 +1,30 @@
+meta {
+  name: GetPaymenttypes V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/sales/v1/paymenttypes
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - Sales Delivery
+
+  Example Response:
+  No response
+}

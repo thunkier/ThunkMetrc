@@ -1,0 +1,51 @@
+meta {
+  name: CreateDriver V2
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/transporters/v2/drivers
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Name": "Joe Smith",
+    "DriversLicenseNumber": "ABC1234",
+    "EmployeeId": "BTS000007"
+  },
+  {
+    "Name": "Jane Doe",
+    "DriversLicenseNumber": "ABC1235",
+    "EmployeeId": "BTS131206"
+  }
+]
+}
+
+docs {
+  Creates new driver records for a Facility.
+
+  Permissions Required:
+  - Manage Transporters
+
+  Example Response:
+  {
+    "Ids": [
+      1,
+      2
+    ],
+    "Warnings": null
+  }
+}

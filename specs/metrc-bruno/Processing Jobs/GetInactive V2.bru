@@ -1,0 +1,116 @@
+meta {
+  name: GetInactive V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/processing/v2/inactive
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  pageNumberoptional: 
+  pageSizeoptional: 
+  lastModifiedStartoptional: 
+  lastModifiedEndoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves inactive processing jobs at a specified Facility.
+
+  Permissions Required:
+  - Manage Processing Job
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 1,
+        "Name": "brownies",
+        "Number": "MN001",
+        "JobTypeId": 1,
+        "JobTypeName": null,
+        "StartDate": "2025-12-11",
+        "TotalCount": 0.0,
+        "CountUnitOfMeasureId": 1,
+        "CountUnitOfMeasureName": "Each",
+        "CountUnitOfMeasureAbbreviation": null,
+        "TotalVolume": 8.0,
+        "VolumeUnitOfMeasureId": 7,
+        "VolumeUnitOfMeasureName": "Fluid Ounces",
+        "VolumeUnitOfMeasureAbbreviation": null,
+        "TotalWeight": 1.0,
+        "WeightUnitOfMeasureId": 2,
+        "WeightUnitOfMeasureName": "Ounces",
+        "WeightUnitOfMeasureAbbreviation": null,
+        "TotalCountWaste": null,
+        "WasteCountUnitOfMeasureId": null,
+        "WasteCountUnitOfMeasureName": null,
+        "WasteCountUnitOfMeasureAbbreviation": null,
+        "TotalVolumeWaste": null,
+        "WasteVolumeUnitOfMeasureId": null,
+        "WasteVolumeUnitOfMeasureName": null,
+        "WasteVolumeUnitOfMeasureAbbreviation": null,
+        "TotalWeightWaste": null,
+        "WasteWeightUnitOfMeasureId": null,
+        "WasteWeightUnitOfMeasureName": null,
+        "WasteWeightUnitOfMeasureAbbreviation": null,
+        "Packages": [],
+        "IsFinished": false,
+        "FinishNote": null,
+        "FinishedDate": null
+      },
+      {
+        "Id": 3,
+        "Name": "extract oil",
+        "Number": "MN003",
+        "JobTypeId": 0,
+        "JobTypeName": null,
+        "StartDate": "2025-12-11",
+        "TotalCount": 0.0,
+        "CountUnitOfMeasureId": 1,
+        "CountUnitOfMeasureName": "Each",
+        "CountUnitOfMeasureAbbreviation": null,
+        "TotalVolume": 0.0,
+        "VolumeUnitOfMeasureId": 7,
+        "VolumeUnitOfMeasureName": "Fluid Ounces",
+        "VolumeUnitOfMeasureAbbreviation": null,
+        "TotalWeight": 0.8,
+        "WeightUnitOfMeasureId": 6,
+        "WeightUnitOfMeasureName": "Kilograms",
+        "WeightUnitOfMeasureAbbreviation": null,
+        "TotalCountWaste": null,
+        "WasteCountUnitOfMeasureId": null,
+        "WasteCountUnitOfMeasureName": null,
+        "WasteCountUnitOfMeasureAbbreviation": null,
+        "TotalVolumeWaste": null,
+        "WasteVolumeUnitOfMeasureId": null,
+        "WasteVolumeUnitOfMeasureName": null,
+        "WasteVolumeUnitOfMeasureAbbreviation": null,
+        "TotalWeightWaste": null,
+        "WasteWeightUnitOfMeasureId": null,
+        "WasteWeightUnitOfMeasureName": null,
+        "WasteWeightUnitOfMeasureAbbreviation": null,
+        "Packages": [],
+        "IsFinished": false,
+        "FinishNote": null,
+        "FinishedDate": null
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

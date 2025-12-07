@@ -1,0 +1,45 @@
+meta {
+  name: UpdateNote V2
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/packages/v2/note
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "PackageLabel": "ABCDEF012345670000010041",
+    "Note": "Package note here."
+  },
+  {
+    "PackageLabel": "ABCDEF012345670000010042",
+    "Note": ""
+  }
+]
+}
+
+docs {
+  Updates notes associated with one or more packages for the specified Facility.
+
+  Permissions Required:
+  - View Packages
+  - Manage Packages Inventory
+  - Manage Package Notes
+
+  Example Response:
+  No response
+}

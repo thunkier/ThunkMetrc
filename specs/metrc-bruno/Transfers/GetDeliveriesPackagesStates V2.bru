@@ -1,0 +1,35 @@
+meta {
+  name: GetDeliveriesPackagesStates V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/transfers/v2/deliveries/packages/states
+  body: json
+  auth: basic
+}
+
+params:query {
+  No: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Returns a list of available shipment Package states.
+
+  Permissions Required:
+  - None
+
+  Example Response:
+  [
+    "Shipped",
+    "Rejected",
+    "Accepted",
+    "Returned"
+  ]
+}

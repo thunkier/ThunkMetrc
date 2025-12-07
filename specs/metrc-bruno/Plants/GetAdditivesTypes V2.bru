@@ -1,0 +1,34 @@
+meta {
+  name: GetAdditivesTypes V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/plants/v2/additives/types
+  body: json
+  auth: basic
+}
+
+params:query {
+  No: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of all plant additive types defined within a Facility.
+
+  Permissions Required:
+  - None
+
+  Example Response:
+  [
+    "Fertilizer",
+    "Pesticide",
+    "Other"
+  ]
+}

@@ -1,0 +1,60 @@
+meta {
+  name: CreateStart V2
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/processing/v2/start
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "JobName": "Job 1",
+    "JobType": "Infusing",
+    "CountUnitOfMeasure": "Each",
+    "VolumeUnitOfMeasure": "Fluid Ounces",
+    "WeightUnitOfMeasure": "Ounces",
+    "Packages": [
+      {
+        "Label": "ABCDEF012345670000010042",
+        "Quantity": 10.0,
+        "UnitOfMeasure": "Grams"
+      },
+      {
+        "Label": "ABCDEF012345670000010043",
+        "Quantity": 5.0,
+        "UnitOfMeasure": "Grams"
+      }
+    ],
+    "StartDate": "0001-01-01T00:00:00Z"
+  }
+]
+}
+
+docs {
+  Initiates new processing jobs at a Facility, including job details and associated packages.
+
+  Permissions Required:
+  - Manage Processing Job
+
+  Example Response:
+  {
+    "Ids": [
+      1
+    ],
+    "Warnings": null
+  }
+}

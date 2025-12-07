@@ -1,0 +1,48 @@
+meta {
+  name: CreateChangeLocation V1
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/packages/v1/change/locations
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Label": "ABCDEF012345670000010041",
+    "Location": "Back Location",
+    "Sublocation": "Back Sublocation",
+    "MoveDate": "0001-01-01"
+  },
+  {
+    "Label": "ABCDEF012345670000010042",
+    "Location": "Storage Closet",
+    "Sublocation": "Shelf 2",
+    "MoveDate": "2018-03-15"
+  }
+]
+}
+
+docs {
+  
+
+  Permissions Required:
+  - View Packages
+  - Create/Submit/Discontinue Packages
+
+  Example Response:
+  No response
+}

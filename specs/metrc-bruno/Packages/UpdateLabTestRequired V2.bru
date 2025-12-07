@@ -1,0 +1,48 @@
+meta {
+  name: UpdateLabTestRequired V2
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/packages/v2/labtests/required
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Label": "ABCDEF012345670000010041",
+    "RequiredLabTestBatches": [
+      "Usable Marijuana for Retail"
+    ]
+  },
+  {
+    "Label": "ABCDEF012345670000010041",
+    "RequiredLabTestBatches": [
+      "Usable Marijuana for Retail"
+    ]
+  }
+]
+}
+
+docs {
+  Updates the list of required lab test batches for one or more packages at the specified Facility.
+
+  Permissions Required:
+  - View Packages
+  - Create/Submit/Discontinue Packages
+
+  Example Response:
+  No response
+}

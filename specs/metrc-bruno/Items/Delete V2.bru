@@ -1,0 +1,30 @@
+meta {
+  name: Delete V2
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/items/v2/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Archives the specified Product by Id for the given Facility License Number.
+
+  Permissions Required:
+  - Manage Items
+
+  Example Response:
+  No response
+}

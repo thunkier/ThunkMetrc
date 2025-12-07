@@ -1,0 +1,50 @@
+meta {
+  name: UpdateFinish V2
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/harvests/v2/finish
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 1,
+    "ActualDate": "2015-12-15"
+  },
+  {
+    "Id": 2,
+    "ActualDate": "2015-12-15"
+  }
+]
+}
+
+docs {
+  Marks one or more harvests as finished for the specified Facility.
+
+  Permissions Required:
+  - View Harvests
+  - Finish/Discontinue Harvests
+
+  Example Response:
+  {
+    "Ids": [
+      1,
+      2
+    ],
+    "Warnings": null
+  }
+}

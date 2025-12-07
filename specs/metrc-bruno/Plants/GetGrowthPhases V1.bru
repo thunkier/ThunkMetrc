@@ -1,0 +1,35 @@
+meta {
+  name: GetGrowthPhases V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/plants/v1/growthphases
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - None
+
+  Example Response:
+  [
+    "Immature",
+    "Vegetative",
+    "Flowering",
+    "Mother"
+  ]
+}

@@ -1,0 +1,36 @@
+meta {
+  name: GetVehicle V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/transporters/v2/vehicles/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a Vehicle by its Id, with an optional license number. Please note: The {id} parameter above represents a Vehicle Id.
+
+  Permissions Required:
+  - Transporters
+
+  Example Response:
+  {
+    "Id": 1,
+    "FacilityId": 1,
+    "Make": "Honda",
+    "Model": "Accord",
+    "LicensePlateNumber": "ABC1234"
+  }
+}

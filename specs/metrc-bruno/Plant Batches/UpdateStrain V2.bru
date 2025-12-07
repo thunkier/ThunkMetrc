@@ -1,0 +1,48 @@
+meta {
+  name: UpdateStrain V2
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/plantbatches/v2/strain
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 1,
+    "Name": null,
+    "StrainId": 1,
+    "StrainName": null
+  },
+  {
+    "Id": 2,
+    "Name": null,
+    "StrainId": 2,
+    "StrainName": null
+  }
+]
+}
+
+docs {
+  Changes the strain of plant batches at a specified Facility.
+
+  Permissions Required:
+  - View Veg/Flower Plants
+  - Manage Veg/Flower Plants Inventory
+
+  Example Response:
+  No response
+}

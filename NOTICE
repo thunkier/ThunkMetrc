@@ -1,0 +1,127 @@
+ThunkMetrc
+Copyright (c) 2025 Thunkiér, Hunter Coupe DeVillez
+
+This product includes software developed by third parties.
+
+The following components are used in the build and automation tools provided in this repository, 
+or are required dependencies for the generated SDKs.
+
+# Automation Tools & Build Components (Go)
+
+========================================================================
+goquery
+Copyright (c) 2012-2021, Martin Angers & Contributors
+Distributed under the BSD 3-Clause License
+https://github.com/PuerkitoBio/goquery
+========================================================================
+
+========================================================================
+Task
+Copyright (c) 2016 Andrey Nering
+Distributed under the MIT License
+https://github.com/go-task/task
+========================================================================
+
+========================================================================
+godotenv
+Copyright (c) 2013 John Barton
+Distributed under the MIT License
+https://github.com/joho/godotenv
+========================================================================
+
+========================================================================
+golang.org/x/text
+Copyright (c) 2009 The Go Authors
+Distributed under the BSD 3-Clause License
+https://pkg.go.dev/golang.org/x/text
+========================================================================
+
+# SDK Runtime Dependencies
+
+## TypeScript / Node.js
+
+========================================================================
+Axios
+Copyright (c) 2014-present Matt Zabriskie & Collaborators
+Distributed under the MIT License
+https://github.com/axios/axios
+========================================================================
+
+## Python
+
+========================================================================
+HTTPX
+Copyright © 2019, Encode OSS Ltd. All rights reserved.
+Distributed under the BSD 3-Clause License
+https://github.com/encode/httpx/
+========================================================================
+
+## Java & Kotlin
+
+========================================================================
+OkHttp
+Copyright (c) 2019 Square, Inc.
+Distributed under the Apache License, Version 2.0
+https://square.github.io/okhttp/
+========================================================================
+
+========================================================================
+Jackson Databind & Jackson Module Kotlin
+Copyright (c) 2019 FasterXML, LLC
+Distributed under the Apache License, Version 2.0
+https://github.com/FasterXML/jackson-databind
+https://github.com/FasterXML/jackson-module-kotlin
+========================================================================
+
+========================================================================
+Kotlin Standard Library
+Copyright (c) 2010-2023 JetBrains s.r.o.
+Distributed under the Apache License, Version 2.0
+https://kotlinlang.org/
+========================================================================
+
+## Rust
+
+========================================================================
+Reqwest
+Copyright (c) 2016-2025 Sean McArthur
+Distributed under the MIT License / Apache License, Version 2.0
+https://github.com/seanmonstar/reqwest
+========================================================================
+
+========================================================================
+Serde & Serde JSON
+Copyright (c) 2014 Erick Tryzelaar and David Tolnay
+Distributed under the MIT License / Apache License, Version 2.0
+https://serde.rs/
+========================================================================
+
+========================================================================
+Tokio
+Copyright (c) 2020 Tokio Contributors
+Distributed under the MIT License
+https://tokio.rs/
+========================================================================
+
+========================================================================
+urlencoding
+Copyright (c) 2018 Bert Peters
+Distributed under the MIT License
+https://github.com/bertptrs/urlencoding
+========================================================================
+
+# Testing Frameworks (Development Only)
+
+========================================================================
+JUnit 5 (Java/Kotlin)
+Copyright (c) 2025 JUnit Team
+Distributed under the Eclipse Public License v2.0
+https://junit.org/junit5/
+========================================================================
+
+========================================================================
+java-dotenv (Java/Kotlin)
+Copyright (c) 2018 Carmelo Iantosca
+Distributed under the Apache License, Version 2.0
+https://github.com/cdimascio/java-dotenv
+========================================================================

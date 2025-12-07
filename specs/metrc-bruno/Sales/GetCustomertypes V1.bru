@@ -1,0 +1,36 @@
+meta {
+  name: GetCustomertypes V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/sales/v1/customertypes
+  body: json
+  auth: basic
+}
+
+params:query {
+  No: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - None
+
+  Example Response:
+  [
+    "Consumer",
+    "Patient",
+    "Caregiver",
+    "ExternalPatient",
+    "NonResidentConsumer"
+  ]
+}

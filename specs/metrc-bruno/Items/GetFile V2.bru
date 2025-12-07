@@ -1,0 +1,34 @@
+meta {
+  name: GetFile V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/items/v2/file/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumberoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a file by its Id for the specified Facility.
+
+  Permissions Required:
+  - Manage Items
+
+  Example Response:
+  {
+    "FileContents": "iVBORw0KGgoAAAANSUhEUg...[truncated Base64 string]",
+    "ContentType": "application/octet-stream",
+    "FileDownloadName": "gummies.png"
+  }
+}

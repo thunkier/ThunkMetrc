@@ -1,0 +1,34 @@
+meta {
+  name: DeleteDeliveryRetailer V2
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/sales/v2/deliveries/retailer/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Voids a retailer delivery for a Facility using the provided License Number and delivery Id.
+
+  Permissions Required:
+  - External Sources(ThirdPartyVendorV2)/Sales Deliveries(Write)
+  - Industry/Facility Type/Retailer Delivery
+  - Industry/Facility Type/Consumer Sales Delivery or Industry/Facility Type/Patient Sales Delivery
+  - WebApi Sales Deliveries Read Write State (All or WriteOnly)
+  - Manage Retailer Delivery
+
+  Example Response:
+  No response
+}

@@ -1,0 +1,46 @@
+meta {
+  name: UpdateMerge V2
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/plants/v2/merge
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "TargetPlantGroupLabel": "ABCDEF012345670000000001",
+    "SourcePlantGroupLabel": "ABCDEF012345670000000002",
+    "MergeDate": "2015-12-15"
+  },
+  {
+    "TargetPlantGroupLabel": "ABCDEF012345670000000003",
+    "SourcePlantGroupLabel": "ABCDEF012345670000000004",
+    "MergeDate": "2015-12-16"
+  }
+]
+}
+
+docs {
+  Merges multiple plant groups into a single group within a Facility.
+
+  Permissions Required:
+  - View Veg/Flower Plants
+  - Manicure/Harvest Veg/Flower Plants
+
+  Example Response:
+  No response
+}

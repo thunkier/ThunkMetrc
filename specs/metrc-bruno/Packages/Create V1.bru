@@ -1,0 +1,141 @@
+meta {
+  name: Create V1
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/packages/v1/create
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Tag": "ABCDEF012345670000020201",
+    "Location": null,
+    "Sublocation": null,
+    "Item": "Buds",
+    "Quantity": 16.0,
+    "UnitOfMeasure": "Ounces",
+    "PatientLicenseNumber": "X00001",
+    "Note": "This is a note.",
+    "IsProductionBatch": false,
+    "ProductionBatchNumber": null,
+    "IsDonation": false,
+    "IsTradeSample": false,
+    "ProductRequiresRemediation": false,
+    "UseSameItem": false,
+    "ActualDate": "2015-12-15",
+    "ExpirationDate": null,
+    "SellByDate": null,
+    "UseByDate": null,
+    "Ingredients": [
+      {
+        "Package": "ABCDEF012345670000010041",
+        "Quantity": 8.0,
+        "UnitOfMeasure": "Ounces"
+      },
+      {
+        "Package": "ABCDEF012345670000010042",
+        "Quantity": 8.0,
+        "UnitOfMeasure": "Ounces"
+      }
+    ],
+    "RequiredLabTestBatches": null,
+    "ProcessingJobTypeId": null,
+    "LabTestStageId": null
+  },
+  {
+    "Tag": "ABCDEF012345670000020202",
+    "Location": null,
+    "Sublocation": null,
+    "Item": "Buds",
+    "Quantity": 16.0,
+    "UnitOfMeasure": "Ounces",
+    "PatientLicenseNumber": "X00002",
+    "Note": null,
+    "IsProductionBatch": true,
+    "ProductionBatchNumber": "PB-2015-12-15",
+    "IsDonation": false,
+    "IsTradeSample": true,
+    "ProductRequiresRemediation": false,
+    "UseSameItem": false,
+    "ActualDate": "2015-12-15",
+    "ExpirationDate": null,
+    "SellByDate": null,
+    "UseByDate": null,
+    "Ingredients": [
+      {
+        "Package": "ABCDEF012345670000010043",
+        "Quantity": 8.0,
+        "UnitOfMeasure": "Ounces"
+      },
+      {
+        "Package": "ABCDEF012345670000010044",
+        "Quantity": 8.0,
+        "UnitOfMeasure": "Ounces"
+      }
+    ],
+    "RequiredLabTestBatches": null,
+    "ProcessingJobTypeId": null,
+    "LabTestStageId": null
+  },
+  {
+    "Tag": "ABCDEF012345670000020202",
+    "Location": null,
+    "Sublocation": null,
+    "Item": null,
+    "Quantity": 16.0,
+    "UnitOfMeasure": "Ounces",
+    "PatientLicenseNumber": "X00002",
+    "Note": null,
+    "IsProductionBatch": false,
+    "ProductionBatchNumber": null,
+    "IsDonation": false,
+    "IsTradeSample": false,
+    "ProductRequiresRemediation": false,
+    "UseSameItem": true,
+    "ActualDate": "2015-12-15",
+    "ExpirationDate": null,
+    "SellByDate": null,
+    "UseByDate": null,
+    "Ingredients": [
+      {
+        "Package": "ABCDEF012345670000010043",
+        "Quantity": 8.0,
+        "UnitOfMeasure": "Ounces"
+      },
+      {
+        "Package": "ABCDEF012345670000010044",
+        "Quantity": 8.0,
+        "UnitOfMeasure": "Ounces"
+      }
+    ],
+    "RequiredLabTestBatches": null,
+    "ProcessingJobTypeId": null,
+    "LabTestStageId": null
+  }
+]
+}
+
+docs {
+  
+
+  Permissions Required:
+  - View Packages
+  - Create/Submit/Discontinue Packages
+
+  Example Response:
+  No response
+}

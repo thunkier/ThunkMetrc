@@ -1,0 +1,45 @@
+meta {
+  name: GetDeliveriesReturnreasons V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/sales/v1/deliveries/returnreasons
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - 
+
+  Example Response:
+  [
+    {
+      "Name": "Spoilage",
+      "RequiresNote": false,
+      "RequiresWasteWeight": false,
+      "RequiresImmatureWasteWeight": false,
+      "RequiresMatureWasteWeight": false
+    },
+    {
+      "Name": "Theft",
+      "RequiresNote": false,
+      "RequiresWasteWeight": false,
+      "RequiresImmatureWasteWeight": false,
+      "RequiresMatureWasteWeight": false
+    }
+  ]
+}

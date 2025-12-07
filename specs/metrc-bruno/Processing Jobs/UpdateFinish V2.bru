@@ -1,0 +1,46 @@
+meta {
+  name: UpdateFinish V2
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/processing/v2/finish
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 1,
+    "FinishDate": "2021-11-23T00:00:00Z",
+    "FinishNote": "Infusing",
+    "TotalCountWaste": null,
+    "WasteCountUnitOfMeasureName": null,
+    "TotalVolumeWaste": null,
+    "WasteVolumeUnitOfMeasureName": null,
+    "TotalWeightWaste": 10.0,
+    "WasteWeightUnitOfMeasureName": "Ounces"
+  }
+]
+}
+
+docs {
+  Completes processing jobs at a Facility by recording final notes and waste measurements.
+
+  Permissions Required:
+  - Manage Processing Job
+
+  Example Response:
+  No response
+}

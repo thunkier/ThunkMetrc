@@ -1,0 +1,16 @@
+{
+  "name": "@thunkmetrc/main",
+  "version": "0.2.0",
+  "description": "High-level ThunkMetrc TypeScript SDK",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@thunkmetrc/wrapper": "file:../wrapper"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

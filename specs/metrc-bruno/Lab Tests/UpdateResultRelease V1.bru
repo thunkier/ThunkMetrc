@@ -1,0 +1,42 @@
+meta {
+  name: UpdateResultRelease V1
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/labtests/v1/results/release
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "PackageLabel": "ABCDEF012345670000010041"
+  },
+  {
+    "PackageLabel": "ABCDEF012345670000010042"
+  }
+]
+}
+
+docs {
+  
+
+  Permissions Required:
+  - View Packages
+  - Manage Packages Inventory
+
+  Example Response:
+  No response
+}

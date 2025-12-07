@@ -1,0 +1,40 @@
+{
+  "name": "@thunkmetrc/client",
+  "version": "0.2.0",
+  "description": "Auto-generated TypeScript client for ThunkMetrc",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thunkmetrc/sdks.git"
+  },
+  "keywords": [
+    "thunkmetrc",
+    "cannabis",
+    "compliance",
+    "api",
+    "sdk"
+  ],
+  "author": "ThunkMetrc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thunkmetrc/sdks/issues"
+  },
+  "homepage": "https://github.com/thunkmetrc/sdks#readme",
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

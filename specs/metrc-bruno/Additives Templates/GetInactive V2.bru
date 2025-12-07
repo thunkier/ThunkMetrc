@@ -1,0 +1,70 @@
+meta {
+  name: GetInactive V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/additivestemplates/v2/inactive
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  pageNumberoptional: 
+  pageSizeoptional: 
+  lastModifiedStartoptional: 
+  lastModifiedEndoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of inactive additive templates for a specified Facility.
+
+  Permissions Required:
+  - Manage Additives
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 0,
+        "FacilityId": 0,
+        "Name": null,
+        "AdditiveType": "Fertilizer",
+        "AdditiveTypeName": null,
+        "ApplicationDevice": "Device 1",
+        "EpaRegistrationNumber": "EPA NO 1",
+        "Note": null,
+        "ProductSupplier": "Supplier 1",
+        "ProductTradeName": "Product Name 1",
+        "RestrictiveEntryIntervalQuantityDescription": null,
+        "RestrictiveEntryIntervalTimeDescription": null,
+        "ActiveIngredients": [
+          {
+            "Name": "Additive 1 1",
+            "Percentage": 1.1
+          },
+          {
+            "Name": "Additive 1 2",
+            "Percentage": 1.2
+          }
+        ],
+        "LastModified": "0001-01-01T00:00:00+00:00",
+        "IsActive": false
+      }
+    ],
+    "Total": 1,
+    "TotalRecords": 1,
+    "PageSize": 1,
+    "RecordsOnPage": 1,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

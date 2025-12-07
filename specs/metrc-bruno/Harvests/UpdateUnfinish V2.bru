@@ -1,0 +1,48 @@
+meta {
+  name: UpdateUnfinish V2
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/harvests/v2/unfinish
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 1
+  },
+  {
+    "Id": 2
+  }
+]
+}
+
+docs {
+  Reopens one or more previously finished harvests for the specified Facility.
+
+  Permissions Required:
+  - View Harvests
+  - Finish/Discontinue Harvests
+
+  Example Response:
+  {
+    "Ids": [
+      1,
+      2
+    ],
+    "Warnings": null
+  }
+}

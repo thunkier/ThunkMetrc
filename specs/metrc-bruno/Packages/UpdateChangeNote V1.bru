@@ -1,0 +1,45 @@
+meta {
+  name: UpdateChangeNote V1
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/packages/v1/change/note
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "PackageLabel": "ABCDEF012345670000010041",
+    "Note": "Package note here."
+  },
+  {
+    "PackageLabel": "ABCDEF012345670000010042",
+    "Note": ""
+  }
+]
+}
+
+docs {
+  
+
+  Permissions Required:
+  - View Packages
+  - Manage Packages Inventory
+  - Manage Package Notes
+
+  Example Response:
+  No response
+}

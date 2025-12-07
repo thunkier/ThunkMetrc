@@ -1,0 +1,47 @@
+meta {
+  name: Create V2
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/sublocations/v2
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Name": "Room 1 Sublocation"
+  },
+  {
+    "Name": "Table 1 Sublocation"
+  }
+]
+}
+
+docs {
+  Creates new sublocation records for a Facility.
+
+  Permissions Required:
+  - Manage Locations
+
+  Example Response:
+  {
+    "Ids": [
+      1,
+      2
+    ],
+    "Warnings": null
+  }
+}

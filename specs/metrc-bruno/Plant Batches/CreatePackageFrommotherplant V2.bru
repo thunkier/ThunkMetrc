@@ -1,0 +1,78 @@
+meta {
+  name: CreatePackageFrommotherplant V2
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/plantbatches/v2/packages/frommotherplant
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": null,
+    "PlantBatch": "Demo Plant Batch 1",
+    "Count": 10,
+    "Location": null,
+    "Sublocation": null,
+    "Item": "Immature Plants",
+    "Tag": "ABCDEF012345670000020201",
+    "PatientLicenseNumber": "P00001",
+    "Note": "This is a note.",
+    "IsTradeSample": false,
+    "IsDonation": false,
+    "ActualDate": "2015-12-15",
+    "ExpirationDate": "2016-09-15",
+    "SellByDate": "2016-09-15",
+    "UseByDate": "2016-09-15"
+  },
+  {
+    "Id": 5,
+    "PlantBatch": null,
+    "Count": 10,
+    "Location": null,
+    "Sublocation": null,
+    "Item": "Immature Plants",
+    "Tag": "ABCDEF012345670000020202",
+    "PatientLicenseNumber": "P00002",
+    "Note": "",
+    "IsTradeSample": true,
+    "IsDonation": false,
+    "ActualDate": "2015-12-15",
+    "ExpirationDate": "2016-09-15",
+    "SellByDate": "2016-09-15",
+    "UseByDate": "2016-09-15"
+  }
+]
+}
+
+docs {
+  Creates packages from mother plants at the specified Facility.
+
+  Permissions Required:
+  - View Immature Plants
+  - Manage Immature Plants Inventory
+  - View Packages
+  - Create/Submit/Discontinue Packages
+
+  Example Response:
+  {
+    "Ids": [
+      1,
+      2
+    ],
+    "Warnings": null
+  }
+}

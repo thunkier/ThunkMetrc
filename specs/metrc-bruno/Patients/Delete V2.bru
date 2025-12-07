@@ -1,0 +1,30 @@
+meta {
+  name: Delete V2
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/patients/v2/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Removes a Patient, identified by an Id, from a specified Facility.
+
+  Permissions Required:
+  - Manage Patients
+
+  Example Response:
+  No response
+}

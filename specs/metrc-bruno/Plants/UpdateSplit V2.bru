@@ -1,0 +1,55 @@
+meta {
+  name: UpdateSplit V2
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/plants/v2/split
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "SplitDate": "2022-12-15",
+    "SourcePlantLabel": "ABCDEF012345670000000001",
+    "PlantCount": 5,
+    "TagLabel": "ABCDEF012345670000000005",
+    "StrainLabel": "efg"
+  },
+  {
+    "SplitDate": "2022-12-15",
+    "SourcePlantLabel": "ABCDEF012345670000000002",
+    "PlantCount": 10,
+    "TagLabel": "ABCDEF012345670000000006",
+    "StrainLabel": "efg"
+  }
+]
+}
+
+docs {
+  Splits an existing plant group into multiple groups within a Facility.
+
+  Permissions Required:
+  - View Plant
+
+  Example Response:
+  {
+    "Ids": [
+      1,
+      2
+    ],
+    "Warnings": null
+  }
+}

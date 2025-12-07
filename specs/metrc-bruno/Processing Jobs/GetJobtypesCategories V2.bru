@@ -1,0 +1,68 @@
+meta {
+  name: GetJobtypesCategories V2
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/processing/v2/jobtypes/categories
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves all processing job categories available for a specified Facility.
+
+  Permissions Required:
+  - Manage Processing Job
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 1,
+        "Name": "Buds",
+        "ForItems": false,
+        "ForProcessingJobs": false,
+        "RequiresProcessingJobAttributes": false
+      },
+      {
+        "Id": 2,
+        "Name": "Immature Plants",
+        "ForItems": false,
+        "ForProcessingJobs": false,
+        "RequiresProcessingJobAttributes": false
+      },
+      {
+        "Id": 3,
+        "Name": "Infused",
+        "ForItems": false,
+        "ForProcessingJobs": false,
+        "RequiresProcessingJobAttributes": false
+      },
+      {
+        "Id": 4,
+        "Name": "Infused Liquid",
+        "ForItems": false,
+        "ForProcessingJobs": false,
+        "RequiresProcessingJobAttributes": false
+      }
+    ],
+    "Total": 4,
+    "TotalRecords": 4,
+    "PageSize": 4,
+    "RecordsOnPage": 4,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

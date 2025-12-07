@@ -1,0 +1,30 @@
+meta {
+  name: GetPhoto V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/items/v1/photo/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumberoptional: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+
+  Permissions Required:
+  - Manage Items
+
+  Example Response:
+  No response
+}

@@ -1,0 +1,82 @@
+{
+  "Automation": {
+    "CaregiverLicenseNumber": "",
+    "SanitizeRules": [
+      {
+        "Pattern": "*",
+        "Fields": [
+          "ProductImageFileSystemIds",
+          "LabelImageFileSystemIds",
+          "PackagingImageFileSystemIds",
+          "ProductPDFFileSystemIds",
+          "ProductPhotoDescription",
+          "LabelPhotoDescription",
+          "PackagingPhotoDescription",
+          "ProcessingJobCategoryName",
+          "ProcessingJobTypeName"
+        ]
+      }
+    ],
+    "BlockedEndpoints": [
+      "/integrator/setup",
+      "/retailid/",
+      "/items/v1/photo",
+      "/items/v2/photo"
+    ]
+  },
+  "PermissionOverrides": {
+    "WebApi Tags Read Write State (All or WriteOnly)": "Manage Tags"
+  },
+  "Scraper": {
+    "SingularMap": {
+      "deliveries": "Delivery",
+      "facilities": "Facility",
+      "harvests": "Harvest",
+      "packages": "Package",
+      "plantbatches": "PlantBatch",
+      "plants": "Plant",
+      "rooms": "Room",
+      "sales": "Sale",
+      "strains": "Strain",
+      "items": "Item",
+      "labtests": "LabTest",
+      "transfers": "Transfer",
+      "wastes": "Waste",
+      "locations": "Location",
+      "patients": "Patient",
+      "receipts": "Receipt",
+      "transactions": "Transaction",
+      "customertypes": "CustomerType",
+      "paymenttypes": "PaymentType",
+      "counties": "County",
+      "employees": "Employee",
+      "drivers": "Driver",
+      "vehicles": "Vehicle",
+      "uom": "UOM",
+      "unitsofmeasure": "UOM",
+      "patientregistration": "PatientRegistration",
+      "caregivers": "Caregiver",
+      "processing": "Processing",
+      "jobs": "Job",
+      "results": "Result",
+      "types": "Type",
+      "reasons": "Reason",
+      "notes": "Note",
+      "photos": "Photo",
+      "history": "History"
+    },
+    "CasingOverrides": {
+      "removewaste": "RemoveWaste",
+      "harvestedplants": "HarvestedPlants",
+      "growthphases": "GrowthPhases",
+      "labtestresults": "LabTestResults",
+      "active": "Active",
+      "inactive": "Inactive",
+      "restock": "Restock",
+      "depart": "Depart",
+      "arrive": "Arrive",
+      "void": "Void",
+      "discontinue": "Discontinue"
+    }
+  }
+}
