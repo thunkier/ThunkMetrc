@@ -37,6 +37,13 @@ The wrappers include a built-in rate limiter (token bucket + semaphore) that han
 *   **Go**: `wrapper.RateLimiter.Config.Enabled = true`
 *   **Python**: `wrapper = MetrcWrapper(client, RateLimiterConfig(enabled=True))`
 
+### Default Limits
+*   `MaxGetPerSecondPerFacility`: 50.0
+*   `MaxGetPerSecondIntegrator`: 150.0
+*   `MaxConcurrentGetPerFacility`: 10
+*   `MaxConcurrentGetIntegrator`: 30
+*   **Enabled**: `false` (default)
+
 ### Usage Examples
 
 #### C# / .NET 8 (Wrapper)
@@ -93,9 +100,23 @@ resp, err := w.SalesGetDeliveryV1("12345")
 
 We are actively improving the SDKs. The next major milestones are:
 
-- [ ] **Response Models**: Generate strong types within wrapper packages.
+### SDK Improvements
 - [ ] **Implement Response Models**: Ensure all API responses are strongly typed in the wrappers.
-- [ ] **High-Level Utilities**: Add more helper functions for common Metrc workflows (e.g. Multi-State and Multi-Facility requests).
+- [ ] **Error Handling**: Add custom exception types for Metrc-specific errors (validation, license, quota).
+- [ ] **Retry Policies**: Configurable exponential backoff for transient failures.
+- [ ] **Logging Integration**: Structured logging hooks for debugging and auditing.
+- [ ] **Batch Request Utilities**: Helper methods for bulk operations with automatic chunking.
+
+### High-Level Utilities (`thunkmetrc`)
+- [ ] **Multi-Facility Sync**: Sync data across multiple facilities in a single call.
+- [ ] **Multi-State Operations**: Chain requests across state-specific Metrc endpoints.
+- [ ] **Inventory Reconciliation**: Compare local inventory with Metrc and generate diff reports.
+- [ ] **Package History Tracker**: Fetch full lifecycle of a package from source to sale.
+
+### Developer Experience
+- [ ] **Mock Server**: Local mock server for development and testing without sandbox access.
+- [ ] **Webhook Integration**: Helpers for processing Metrc webhook events.
+
 
 ---
 
@@ -108,7 +129,8 @@ We provide a **High-Level Package** that aggregates the Wrapper and Client, and 
 *   **npm**: `npm install @thunkier/thunkmetrc`
 *   **PyPI**: `pip install thunkmetrc`
 *   **Go**: `go get github.com/thunkier/ThunkMetrc/sdks/go/thunkmetrc`
-*   **Java/Kotlin**: `com.thunkmetrc:thunkmetrc`
+*   **Java**: `io.github.thunkier:thunkmetrc`
+*   **Kotlin**: `io.github.thunkier:thunkmetrc-kotlin`
 
 ### Features
 *   **`ActivePackagesInventorySync`**: Efficiently syncs all active packages for a facility, handling time windows, pagination (limit 20), and date formatting automatically.
