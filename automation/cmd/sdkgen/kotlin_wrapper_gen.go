@@ -30,16 +30,42 @@ func generateKotlinWrapperPom(dir string, version string) {
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.thunkmetrc</groupId>
+    <groupId>io.github.thunkier</groupId>
     <artifactId>thunkmetrc-kotlin-wrapper</artifactId>
     <version>%s</version>
     <packaging>jar</packaging>
 
+    <name>ThunkMetrc Kotlin Wrapper</name>
+    <description>Type-safe wrapper for ThunkMetrc Kotlin client with rate limiting.</description>
+    <url>https://github.com/thunkmetrc/sdks</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>ThunkMetrc Team</name>
+            <email>dev@thunkmetrc.com</email>
+            <organization>ThunkMetrc</organization>
+            <organizationUrl>https://thunkmetrc.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/thunkmetrc/sdks.git</connection>
+        <developerConnection>scm:git:ssh://github.com:thunkmetrc/sdks.git</developerConnection>
+        <url>https://github.com/thunkmetrc/sdks/tree/main</url>
+    </scm>
+
     <properties>
         <kotlin.version>1.9.0</kotlin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -54,7 +80,7 @@ func generateKotlinWrapperPom(dir string, version string) {
             <version>1.7.3</version>
         </dependency>
         <dependency>
-            <groupId>com.thunkmetrc</groupId>
+            <groupId>io.github.thunkier</groupId>
             <artifactId>thunkmetrc-kotlin-client</artifactId>
             <version>%s</version>
         </dependency>
@@ -77,8 +103,75 @@ func generateKotlinWrapperPom(dir string, version string) {
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jetbrains.dokka</groupId>
+                <artifactId>dokka-maven-plugin</artifactId>
+                <version>1.9.0</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>javadocJar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.9.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <tokenAuth>true</tokenAuth>
+                    <autoPublish>true</autoPublish>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>ossrh</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
 `, version, version)
 	os.WriteFile(filepath.Join(dir, "pom.xml"), []byte(content), 0644)

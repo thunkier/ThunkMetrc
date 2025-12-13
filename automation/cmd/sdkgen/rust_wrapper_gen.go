@@ -387,6 +387,11 @@ func generateRustWrapperCargo(dir string, version string) {
 name = "thunkmetrc-wrapper"
 version = "%s"
 edition = "2021"
+description = "Type-safe wrapper for ThunkMetrc Rust client with rate limiting"
+license = "MIT"
+repository = "https://github.com/thunkmetrc/sdks"
+keywords = ["thunkmetrc", "cannabis", "compliance", "api", "sdk"]
+categories = ["api-bindings", "web-programming::http-client"]
 
 [dependencies]
 thunkmetrc-client = { path = "../client", version = "%s" }

@@ -236,18 +236,15 @@ tasks:
       - npm ci
       - npm run build
       - cmd: if [ -z "$NPM_TOKEN" ]; then echo "❌ NPM_TOKEN is missing"; exit 1; fi
-      - cmd: if [ -z "$CARGO_TOKEN" ]; then echo "CARGO_TOKEN is NOT set"; else echo "CARGO_TOKEN is set"; fi
-      - cmd: if [ -z "$GPG_PASSPHRASE" ]; then echo "GPG_PASSPHRASE is NOT set"; else echo "GPG_PASSPHRASE is set"; fi
-      - cmd: if [ -z "$OSSRH_USERNAME" ]; then echo "OSSRH_USERNAME is NOT set"; else echo "OSSRH_USERNAME is set"; fi
-      - cmd: if [ -z "$OSSRH_PASSWORD" ]; then echo "OSSRH_PASSWORD is NOT set"; else echo "OSSRH_PASSWORD is set"; fi
+
       - cmd: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
       - npm publish --access public
       - cmd: rm .npmrc
-      - cmd: cd ../wrapper && npm ci && npm run build
+      - cmd: cd ../wrapper && npm install && npm run build
       - cmd: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ../wrapper/.npmrc
       - cmd: cd ../wrapper && npm publish --access public
       - cmd: rm ../wrapper/.npmrc
-      - cmd: cd ../thunkmetrc && npm ci && npm run build
+      - cmd: cd ../thunkmetrc && npm install && npm run build
       - cmd: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ../thunkmetrc/.npmrc
       - cmd: cd ../thunkmetrc && npm publish --access public
       - cmd: rm ../thunkmetrc/.npmrc
@@ -275,14 +272,14 @@ tasks:
     desc: Publish Java SDK to Maven Central
     dir: sdks/java/client
     cmds:
-      - mvn clean install central-publishing:publish -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
-      - cmd: cd ../wrapper && mvn clean install central-publishing:publish -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
-      - cmd: cd ../thunkmetrc && mvn clean install central-publishing:publish -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
+      - mvn clean deploy -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
+      - cmd: cd ../wrapper && mvn clean deploy -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
+      - cmd: cd ../thunkmetrc && mvn clean deploy -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
 
   publish:kotlin:
     desc: Publish Kotlin SDK to Maven Central
     dir: sdks/kotlin/client
     cmds:
-      - mvn clean install central-publishing:publish -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
-      - cmd: cd ../wrapper && mvn clean install central-publishing:publish -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
-      - cmd: cd ../thunkmetrc && mvn clean install central-publishing:publish -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
+      - mvn clean deploy -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
+      - cmd: cd ../wrapper && mvn clean deploy -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
+      - cmd: cd ../thunkmetrc && mvn clean deploy -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"

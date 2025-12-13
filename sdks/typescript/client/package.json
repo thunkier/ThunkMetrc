@@ -1,6 +1,6 @@
 {
-  "name": "@thunkmetrc/client",
-  "version": "0.2.0",
+  "name": "@thunkier/thunkmetrc-client",
+  "version": "0.2.2",
   "description": "Auto-generated TypeScript client for ThunkMetrc",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
