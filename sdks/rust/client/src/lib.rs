@@ -41,560 +41,6 @@ impl MetrcClient {
         Ok(Some(json))
     }
 
-    /// GET GetAll V1
-    /// Permissions Required:
-    ///   - Manage Employees
-    ///
-    pub async fn employees_get_all_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/employees/v1");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetAll V2
-    /// Retrieves a list of employees for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Employees
-    ///   - View Employees
-    ///
-    pub async fn employees_get_all_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/employees/v2");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetPermissions V2
-    /// Retrieves the permissions of a specified Employee, identified by their Employee License Number, for a given Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Employees
-    ///
-    pub async fn employees_get_permissions_v2(&self, employee_license_number: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/employees/v2/permissions");
-        let mut query_params = Vec::new();
-        if let Some(p) = employee_license_number {
-            query_params.push(format!("employeeLicenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST Create V1
-    /// NOTE: To include a photo with an item, first use POST /items/v1/photo to POST the photo, and then use the returned ID in the request body in this endpoint.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_create_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v1/create");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST Create V2
-    /// Creates one or more new products for the specified Facility. NOTE: To include a photo with an item, first use POST /items/v2/photo to POST the photo, and then use the returned Id in the request body in this endpoint.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_create_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v2");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateBrand V2
-    /// Creates one or more new item brands for the specified Facility identified by the License Number.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_create_brand_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v2/brand");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateFile V2
-    /// Uploads one or more image or PDF files for products, labels, packaging, or documents at the specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_create_file_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v2/file");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreatePhoto V1
-    /// This endpoint allows only BMP, GIF, JPG, and PNG files and uploaded files can be no more than 5 MB in size.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_create_photo_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v1/photo");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreatePhoto V2
-    /// This endpoint allows only BMP, GIF, JPG, and PNG files and uploaded files can be no more than 5 MB in size.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_create_photo_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v2/photo");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateUpdate V1
-    /// Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_create_update_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v1/update");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// DELETE Delete V1
-    /// Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_delete_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v1/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// DELETE Delete V2
-    /// Archives the specified Product by Id for the given Facility License Number.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_delete_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v2/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// DELETE DeleteBrand V2
-    /// Archives the specified Item Brand by Id for the given Facility License Number.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_delete_brand_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v2/brand/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET Get V1
-    /// Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_get_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v1/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET Get V2
-    /// Retrieves detailed information about a specific Item by Id.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_get_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v2/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetActive V1
-    /// Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_get_active_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v1/active");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetActive V2
-    /// Returns a list of active items for the specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_get_active_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v2/active");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetBrands V1
-    /// Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_get_brands_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v1/brands");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetBrands V2
-    /// Retrieves a list of active item brands for the specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_get_brands_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v2/brands");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetCategories V1
-    /// Permissions Required:
-    ///   - None
-    ///
-    pub async fn items_get_categories_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v1/categories");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetCategories V2
-    /// Retrieves a list of item categories.
-    /// 
-    ///   Permissions Required:
-    ///   - None
-    ///
-    pub async fn items_get_categories_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v2/categories");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetFile V2
-    /// Retrieves a file by its Id for the specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_get_file_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v2/file/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetInactive V1
-    /// Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_get_inactive_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v1/inactive");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetInactive V2
-    /// Retrieves a list of inactive items for the specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_get_inactive_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v2/inactive");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetPhoto V1
-    /// Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_get_photo_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v1/photo/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetPhoto V2
-    /// Retrieves an image by its Id for the specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_get_photo_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v2/photo/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT Update V2
-    /// Updates one or more existing products for the specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_update_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v2");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateBrand V2
-    /// Updates one or more existing item brands for the specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Items
-    ///
-    pub async fn items_update_brand_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/items/v2/brand");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
     /// POST Create V1
     /// Permissions Required:
     ///   - View Packages
@@ -1796,6 +1242,1542 @@ impl MetrcClient {
             path.push_str(&query_params.join("&"));
         }
         self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetActive V1
+    /// Permissions Required:
+    ///   - None
+    ///
+    pub async fn units_of_measure_get_active_v1(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/unitsofmeasure/v1/active");
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetActive V2
+    /// Retrieves all active units of measure.
+    /// 
+    ///   Permissions Required:
+    ///   - None
+    ///
+    pub async fn units_of_measure_get_active_v2(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/unitsofmeasure/v2/active");
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetInactive V2
+    /// Retrieves all inactive units of measure.
+    /// 
+    ///   Permissions Required:
+    ///   - None
+    ///
+    pub async fn units_of_measure_get_inactive_v2(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/unitsofmeasure/v2/inactive");
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetAll V2
+    /// Retrieves all available waste methods.
+    /// 
+    ///   Permissions Required:
+    ///   - None
+    ///
+    pub async fn waste_methods_get_all_v2(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/wastemethods/v2");
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetAll V1
+    /// Permissions Required:
+    ///   - Manage Employees
+    ///
+    pub async fn employees_get_all_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/employees/v1");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetAll V2
+    /// Retrieves a list of employees for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Employees
+    ///   - View Employees
+    ///
+    pub async fn employees_get_all_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/employees/v2");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetPermissions V2
+    /// Retrieves the permissions of a specified Employee, identified by their Employee License Number, for a given Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Employees
+    ///
+    pub async fn employees_get_permissions_v2(&self, employee_license_number: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/employees/v2/permissions");
+        let mut query_params = Vec::new();
+        if let Some(p) = employee_license_number {
+            query_params.push(format!("employeeLicenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST Create V1
+    /// NOTE: To include a photo with an item, first use POST /items/v1/photo to POST the photo, and then use the returned ID in the request body in this endpoint.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_create_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v1/create");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST Create V2
+    /// Creates one or more new products for the specified Facility. NOTE: To include a photo with an item, first use POST /items/v2/photo to POST the photo, and then use the returned Id in the request body in this endpoint.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_create_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v2");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateBrand V2
+    /// Creates one or more new item brands for the specified Facility identified by the License Number.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_create_brand_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v2/brand");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateFile V2
+    /// Uploads one or more image or PDF files for products, labels, packaging, or documents at the specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_create_file_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v2/file");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreatePhoto V1
+    /// This endpoint allows only BMP, GIF, JPG, and PNG files and uploaded files can be no more than 5 MB in size.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_create_photo_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v1/photo");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreatePhoto V2
+    /// This endpoint allows only BMP, GIF, JPG, and PNG files and uploaded files can be no more than 5 MB in size.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_create_photo_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v2/photo");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateUpdate V1
+    /// Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_create_update_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v1/update");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// DELETE Delete V1
+    /// Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_delete_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v1/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// DELETE Delete V2
+    /// Archives the specified Product by Id for the given Facility License Number.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_delete_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v2/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// DELETE DeleteBrand V2
+    /// Archives the specified Item Brand by Id for the given Facility License Number.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_delete_brand_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v2/brand/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET Get V1
+    /// Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_get_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v1/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET Get V2
+    /// Retrieves detailed information about a specific Item by Id.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_get_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v2/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetActive V1
+    /// Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_get_active_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v1/active");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetActive V2
+    /// Returns a list of active items for the specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_get_active_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v2/active");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetBrands V1
+    /// Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_get_brands_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v1/brands");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetBrands V2
+    /// Retrieves a list of active item brands for the specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_get_brands_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v2/brands");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetCategories V1
+    /// Permissions Required:
+    ///   - None
+    ///
+    pub async fn items_get_categories_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v1/categories");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetCategories V2
+    /// Retrieves a list of item categories.
+    /// 
+    ///   Permissions Required:
+    ///   - None
+    ///
+    pub async fn items_get_categories_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v2/categories");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetFile V2
+    /// Retrieves a file by its Id for the specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_get_file_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v2/file/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetInactive V1
+    /// Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_get_inactive_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v1/inactive");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetInactive V2
+    /// Retrieves a list of inactive items for the specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_get_inactive_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v2/inactive");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetPhoto V1
+    /// Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_get_photo_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v1/photo/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetPhoto V2
+    /// Retrieves an image by its Id for the specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_get_photo_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v2/photo/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT Update V2
+    /// Updates one or more existing products for the specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_update_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v2");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateBrand V2
+    /// Updates one or more existing item brands for the specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Items
+    ///
+    pub async fn items_update_brand_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/items/v2/brand");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST Create V1
+    /// Permissions Required:
+    ///   - Manage Locations
+    ///
+    pub async fn locations_create_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/locations/v1/create");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST Create V2
+    /// Creates new locations for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Locations
+    ///
+    pub async fn locations_create_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/locations/v2");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateUpdate V1
+    /// Permissions Required:
+    ///   - Manage Locations
+    ///
+    pub async fn locations_create_update_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/locations/v1/update");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// DELETE Delete V1
+    /// Permissions Required:
+    ///   - Manage Locations
+    ///
+    pub async fn locations_delete_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/locations/v1/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// DELETE Delete V2
+    /// Archives a specified Location, identified by its Id, for a Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Locations
+    ///
+    pub async fn locations_delete_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/locations/v2/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET Get V1
+    /// Permissions Required:
+    ///   - Manage Locations
+    ///
+    pub async fn locations_get_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/locations/v1/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET Get V2
+    /// Retrieves a Location by its Id.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Locations
+    ///
+    pub async fn locations_get_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/locations/v2/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetActive V1
+    /// Permissions Required:
+    ///   - Manage Locations
+    ///
+    pub async fn locations_get_active_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/locations/v1/active");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetActive V2
+    /// Retrieves a list of active locations for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Locations
+    ///
+    pub async fn locations_get_active_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/locations/v2/active");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetInactive V2
+    /// Retrieves a list of inactive locations for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Locations
+    ///
+    pub async fn locations_get_inactive_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/locations/v2/inactive");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetTypes V1
+    /// Permissions Required:
+    ///   - Manage Locations
+    ///
+    pub async fn locations_get_types_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/locations/v1/types");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetTypes V2
+    /// Retrieves a list of active location types for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Locations
+    ///
+    pub async fn locations_get_types_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/locations/v2/types");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT Update V2
+    /// Updates existing locations for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Locations
+    ///
+    pub async fn locations_update_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/locations/v2");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST Create V2
+    /// Adds new patients to a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Patients
+    ///
+    pub async fn patients_create_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/patients/v2");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateAdd V1
+    /// Permissions Required:
+    ///   - Manage Patients
+    ///
+    pub async fn patients_create_add_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/patients/v1/add");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateUpdate V1
+    /// Permissions Required:
+    ///   - Manage Patients
+    ///
+    pub async fn patients_create_update_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/patients/v1/update");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// DELETE Delete V1
+    /// Permissions Required:
+    ///   - Manage Patients
+    ///
+    pub async fn patients_delete_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/patients/v1/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// DELETE Delete V2
+    /// Removes a Patient, identified by an Id, from a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Patients
+    ///
+    pub async fn patients_delete_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/patients/v2/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET Get V1
+    /// Permissions Required:
+    ///   - Manage Patients
+    ///
+    pub async fn patients_get_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/patients/v1/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET Get V2
+    /// Retrieves a Patient by Id.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Patients
+    ///
+    pub async fn patients_get_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/patients/v2/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetActive V1
+    /// Permissions Required:
+    ///   - Manage Patients
+    ///
+    pub async fn patients_get_active_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/patients/v1/active");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetActive V2
+    /// Retrieves a list of active patients for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Patients
+    ///
+    pub async fn patients_get_active_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/patients/v2/active");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT Update V2
+    /// Updates Patient information for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Patients
+    ///
+    pub async fn patients_update_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/patients/v2");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateAssociate V2
+    /// Facilitate association of QR codes and Package labels. This will return the count of packages and QR codes associated that were added or replaced.
+    /// 
+    ///   Permissions Required:
+    ///   - External Sources(ThirdPartyVendorV2)/Retail ID(Write)
+    ///   - WebApi Retail ID Read Write State (All or WriteOnly)
+    ///   - Industry/View Packages
+    ///   - One of the following: Industry/Facility Type/Can Receive Associate Product Label, Licensee/Receive Associate Product Label or Admin/Employees/Packages Page/Product Labels(Manage)
+    ///
+    pub async fn retail_id_create_associate_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/retailid/v2/associate");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateGenerate V2
+    /// Allows you to generate a specific quantity of QR codes. Id value returned (issuance ID) could be used for printing.
+    /// 
+    ///   Permissions Required:
+    ///   - External Sources(ThirdPartyVendorV2)/Retail ID(Write)
+    ///   - WebApi Retail ID Read Write State (All or WriteOnly)
+    ///   - Industry/View Packages
+    ///   - One of the following: Industry/Facility Type/Can Download Product Label, Licensee/Download Product Label or Admin/Employees/Packages Page/Product Labels(Manage)
+    ///
+    pub async fn retail_id_create_generate_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/retailid/v2/generate");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateMerge V2
+    /// Merge and adjust one source to one target Package. First Package detected will be processed as target Package. This requires an action reason with name containing the 'Merge' word and setup with 'Package adjustment' area.
+    /// 
+    ///   Permissions Required:
+    ///   - External Sources(ThirdPartyVendorV2)/Retail ID(Write)
+    ///   - WebApi Retail ID Read Write State (All or WriteOnly)
+    ///   - Key Value Settings/Retail ID Merge Packages Enabled
+    ///
+    pub async fn retail_id_create_merge_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/retailid/v2/merge");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreatePackageInfo V2
+    /// Retrieves Package information for given list of Package labels.
+    /// 
+    ///   Permissions Required:
+    ///   - External Sources(ThirdPartyVendorV2)/Retail ID(Write)
+    ///   - WebApi Retail ID Read Write State (All or WriteOnly)
+    ///   - Industry/View Packages
+    ///   - Admin/Employees/Packages Page/Product Labels(Manage)
+    ///
+    pub async fn retail_id_create_package_info_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/retailid/v2/packages/info");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetReceiveByLabel V2
+    /// Get a list of eaches (Retail ID QR code URL) and sibling tags based on given Package label.
+    /// 
+    ///   Permissions Required:
+    ///   - External Sources(ThirdPartyVendorV2)/Manage RetailId
+    ///   - WebApi Retail ID Read Write State (All or ReadOnly)
+    ///   - Industry/View Packages
+    ///   - One of the following: Industry/Facility Type/Can Receive Associate Product Label, Licensee/Receive Associate Product Label or Admin/Employees/Packages Page/Product Labels(View or Manage)
+    ///
+    pub async fn retail_id_get_receive_by_label_v2(&self, label: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/retailid/v2/receive/{}", urlencoding::encode(label).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetReceiveQrByShortCode V2
+    /// Get a list of eaches (Retail ID QR code URL) and sibling tags based on given short code value (first segment in Retail ID QR code URL).
+    /// 
+    ///   Permissions Required:
+    ///   - External Sources(ThirdPartyVendorV2)/Manage RetailId
+    ///   - WebApi Retail ID Read Write State (All or ReadOnly)
+    ///   - Industry/View Packages
+    ///   - One of the following: Industry/Facility Type/Can Receive Associate Product Label, Licensee/Receive Associate Product Label or Admin/Employees/Packages Page/Product Labels(View or Manage)
+    ///
+    pub async fn retail_id_get_receive_qr_by_short_code_v2(&self, short_code: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/retailid/v2/receive/qr/{}", urlencoding::encode(short_code).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateIntegratorSetup V2
+    /// This endpoint is used to handle the setup of an external integrator for sandbox environments. It processes a request to create a new sandbox user for integration based on an external source's API key. It checks whether the API key is valid, manages the user creation process, and returns an appropriate status based on the current state of the request.
+    /// 
+    ///   Permissions Required:
+    ///   - None
+    ///
+    pub async fn sandbox_create_integrator_setup_v2(&self, user_key: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/sandbox/v2/integrator/setup");
+        let mut query_params = Vec::new();
+        if let Some(p) = user_key {
+            query_params.push(format!("userKey={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST Create V1
+    /// Permissions Required:
+    ///   - Manage Strains
+    ///
+    pub async fn strains_create_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/strains/v1/create");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST Create V2
+    /// Creates new strain records for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Strains
+    ///
+    pub async fn strains_create_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/strains/v2");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateUpdate V1
+    /// Permissions Required:
+    ///   - Manage Strains
+    ///
+    pub async fn strains_create_update_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/strains/v1/update");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// DELETE Delete V1
+    /// Permissions Required:
+    ///   - Manage Strains
+    ///
+    pub async fn strains_delete_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/strains/v1/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// DELETE Delete V2
+    /// Archives an existing strain record for a Facility
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Strains
+    ///
+    pub async fn strains_delete_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/strains/v2/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET Get V1
+    /// Permissions Required:
+    ///   - Manage Strains
+    ///
+    pub async fn strains_get_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/strains/v1/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET Get V2
+    /// Retrieves a Strain record by its Id, with an optional license number.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Strains
+    ///
+    pub async fn strains_get_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/strains/v2/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetActive V1
+    /// Permissions Required:
+    ///   - Manage Strains
+    ///
+    pub async fn strains_get_active_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/strains/v1/active");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetActive V2
+    /// Retrieves a list of active strains for the current Facility, optionally filtered by last modified date range.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Strains
+    ///
+    pub async fn strains_get_active_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/strains/v2/active");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetInactive V2
+    /// Retrieves a list of inactive strains for the current Facility, optionally filtered by last modified date range.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Strains
+    ///
+    pub async fn strains_get_inactive_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/strains/v2/inactive");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT Update V2
+    /// Updates existing strain records for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Strains
+    ///
+    pub async fn strains_update_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/strains/v2");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetPackageAvailable V2
+    /// Returns a list of available package tags. NOTE: This is a premium endpoint.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Tags
+    ///
+    pub async fn tags_get_package_available_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/tags/v2/package/available");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetPlantAvailable V2
+    /// Returns a list of available plant tags. NOTE: This is a premium endpoint.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Tags
+    ///
+    pub async fn tags_get_plant_available_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/tags/v2/plant/available");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetStaged V2
+    /// Returns a list of staged tags. NOTE: This is a premium endpoint.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Tags
+    ///   - RetailId.AllowPackageStaging Key Value enabled
+    ///
+    pub async fn tags_get_staged_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/tags/v2/staged");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetStatusesByPatientLicenseNumber V1
+    /// Data returned by this endpoint is cached for up to one minute.
+    /// 
+    ///   Permissions Required:
+    ///   - Lookup Patients
+    ///
+    pub async fn patients_status_get_statuses_by_patient_license_number_v1(&self, patient_license_number: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/patients/v1/statuses/{}", urlencoding::encode(patient_license_number).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetStatusesByPatientLicenseNumber V2
+    /// Retrieves a list of statuses for a Patient License Number for a specified Facility. Data returned by this endpoint is cached for up to one minute.
+    /// 
+    ///   Permissions Required:
+    ///   - Lookup Patients
+    ///
+    pub async fn patients_status_get_statuses_by_patient_license_number_v2(&self, patient_license_number: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/patients/v2/statuses/{}", urlencoding::encode(patient_license_number).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
     }
 
     /// POST CreateAdditives V1
@@ -3283,6 +4265,3185 @@ impl MetrcClient {
     ///
     pub async fn sublocations_update_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
         let mut path = format!("/sublocations/v2");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateExternalIncoming V1
+    /// Permissions Required:
+    ///   - Transfers
+    ///
+    pub async fn transfers_create_external_incoming_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/external/incoming");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateExternalIncoming V2
+    /// Creates external incoming shipment plans for a Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfers
+    ///
+    pub async fn transfers_create_external_incoming_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/external/incoming");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateTemplates V1
+    /// Permissions Required:
+    ///   - Transfer Templates
+    ///
+    pub async fn transfers_create_templates_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/templates");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateTemplatesOutgoing V2
+    /// Creates new transfer templates for a Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfer Templates
+    ///
+    pub async fn transfers_create_templates_outgoing_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/templates/outgoing");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// DELETE DeleteExternalIncoming V1
+    /// Permissions Required:
+    ///   - Transfers
+    ///
+    pub async fn transfers_delete_external_incoming_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/external/incoming/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// DELETE DeleteExternalIncoming V2
+    /// Voids an external incoming shipment plan for a Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfers
+    ///
+    pub async fn transfers_delete_external_incoming_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/external/incoming/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// DELETE DeleteTemplates V1
+    /// Permissions Required:
+    ///   - Transfer Templates
+    ///
+    pub async fn transfers_delete_templates_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/templates/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// DELETE DeleteTemplatesOutgoing V2
+    /// Archives a transfer template for a Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfer Templates
+    ///
+    pub async fn transfers_delete_templates_outgoing_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/templates/outgoing/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetDeliveriesPackagesStates V1
+    /// Permissions Required:
+    ///   - None
+    ///
+    pub async fn transfers_get_deliveries_packages_states_v1(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/deliveries/packages/states");
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetDeliveriesPackagesStates V2
+    /// Returns a list of available shipment Package states.
+    /// 
+    ///   Permissions Required:
+    ///   - None
+    ///
+    pub async fn transfers_get_deliveries_packages_states_v2(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/deliveries/packages/states");
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetDelivery V1
+    /// Please note: that the {id} parameter above represents a Shipment Plan ID.
+    /// 
+    ///   Permissions Required:
+    ///   - Transfers
+    ///
+    pub async fn transfers_get_delivery_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/{}/deliveries", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetDelivery V2
+    /// Retrieves a list of shipment deliveries for a given Transfer Id. Please note: The {id} parameter above represents a Transfer Id.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfers
+    ///   - View Transfers
+    ///
+    pub async fn transfers_get_delivery_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/{}/deliveries", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetDeliveryPackage V1
+    /// Please note: The {id} parameter above represents a Transfer Delivery ID, not a Manifest Number.
+    /// 
+    ///   Permissions Required:
+    ///   - Transfers
+    ///
+    pub async fn transfers_get_delivery_package_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/deliveries/{}/packages", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetDeliveryPackage V2
+    /// Retrieves a list of packages associated with a given Transfer Delivery Id. Please note: The {id} parameter above represents a Transfer Delivery Id, not a Manifest Number.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfers
+    ///   - View Transfers
+    ///
+    pub async fn transfers_get_delivery_package_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/deliveries/{}/packages", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetDeliveryPackageRequiredlabtestbatches V1
+    /// Please note: The {id} parameter above represents a Transfer Delivery Package ID, not a Manifest Number.
+    /// 
+    ///   Permissions Required:
+    ///   - Transfers
+    ///
+    pub async fn transfers_get_delivery_package_requiredlabtestbatches_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/deliveries/package/{}/requiredlabtestbatches", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetDeliveryPackageRequiredlabtestbatches V2
+    /// Retrieves a list of required lab test batches for a given Transfer Delivery Package Id. Please note: The {id} parameter above represents a Transfer Delivery Package Id, not a Manifest Number.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfers
+    ///   - View Transfers
+    ///
+    pub async fn transfers_get_delivery_package_requiredlabtestbatches_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/deliveries/package/{}/requiredlabtestbatches", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetDeliveryPackageWholesale V1
+    /// Please note: The {id} parameter above represents a Transfer Delivery ID, not a Manifest Number.
+    /// 
+    ///   Permissions Required:
+    ///   - Transfers
+    ///
+    pub async fn transfers_get_delivery_package_wholesale_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/deliveries/{}/packages/wholesale", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetDeliveryPackageWholesale V2
+    /// Retrieves a list of wholesale shipment packages for a given Transfer Delivery Id. Please note: The {id} parameter above represents a Transfer Delivery Id, not a Manifest Number.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfers
+    ///   - View Transfers
+    ///
+    pub async fn transfers_get_delivery_package_wholesale_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/deliveries/{}/packages/wholesale", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetDeliveryTransporters V1
+    /// Please note: that the {id} parameter above represents a Shipment Delivery ID.
+    /// 
+    ///   Permissions Required:
+    ///   - Transfers
+    ///
+    pub async fn transfers_get_delivery_transporters_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/deliveries/{}/transporters", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetDeliveryTransporters V2
+    /// Retrieves a list of transporters for a given Transfer Delivery Id. Please note: The {id} parameter above represents a Transfer Delivery Id, not a Manifest Number.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfers
+    ///   - View Transfers
+    ///
+    pub async fn transfers_get_delivery_transporters_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/deliveries/{}/transporters", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetDeliveryTransportersDetails V1
+    /// Please note: The {id} parameter above represents a Shipment Delivery ID.
+    /// 
+    ///   Permissions Required:
+    ///   - Transfers
+    ///
+    pub async fn transfers_get_delivery_transporters_details_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/deliveries/{}/transporters/details", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetDeliveryTransportersDetails V2
+    /// Retrieves a list of transporter details for a given Transfer Delivery Id. Please note: The {id} parameter above represents a Transfer Delivery Id, not a Manifest Number.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfers
+    ///   - View Transfers
+    ///
+    pub async fn transfers_get_delivery_transporters_details_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/deliveries/{}/transporters/details", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetHub V2
+    /// Retrieves a list of transfer hub shipments for a Facility, filtered by either last modified or estimated arrival date range.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfers
+    ///   - View Transfers
+    ///
+    pub async fn transfers_get_hub_v2(&self, estimated_arrival_end: Option<String>, estimated_arrival_start: Option<String>, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/hub");
+        let mut query_params = Vec::new();
+        if let Some(p) = estimated_arrival_end {
+            query_params.push(format!("estimatedArrivalEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = estimated_arrival_start {
+            query_params.push(format!("estimatedArrivalStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetIncoming V1
+    /// Permissions Required:
+    ///   - Transfers
+    ///
+    pub async fn transfers_get_incoming_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/incoming");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetIncoming V2
+    /// Retrieves a list of incoming shipments for a Facility, optionally filtered by last modified date range.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfers
+    ///   - View Transfers
+    ///
+    pub async fn transfers_get_incoming_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/incoming");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetOutgoing V1
+    /// Permissions Required:
+    ///   - Transfers
+    ///
+    pub async fn transfers_get_outgoing_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/outgoing");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetOutgoing V2
+    /// Retrieves a list of outgoing shipments for a Facility, optionally filtered by last modified date range.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfers
+    ///   - View Transfers
+    ///
+    pub async fn transfers_get_outgoing_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/outgoing");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetRejected V1
+    /// Permissions Required:
+    ///   - Transfers
+    ///
+    pub async fn transfers_get_rejected_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/rejected");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetRejected V2
+    /// Retrieves a list of shipments with rejected packages for a Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfers
+    ///   - View Transfers
+    ///
+    pub async fn transfers_get_rejected_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/rejected");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetTemplates V1
+    /// Permissions Required:
+    ///   - Transfer Templates
+    ///
+    pub async fn transfers_get_templates_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/templates");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetTemplatesDelivery V1
+    /// Permissions Required:
+    ///   - Transfer Templates
+    ///
+    pub async fn transfers_get_templates_delivery_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/templates/{}/deliveries", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetTemplatesDeliveryPackage V1
+    /// Please note: The {id} parameter above represents a Transfer Template Delivery ID, not a Manifest Number.
+    /// 
+    ///   Permissions Required:
+    ///   - Transfers
+    ///
+    pub async fn transfers_get_templates_delivery_package_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/templates/deliveries/{}/packages", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetTemplatesDeliveryTransporters V1
+    /// Please note: The {id} parameter above represents a Transfer Template Delivery ID, not a Manifest Number.
+    /// 
+    ///   Permissions Required:
+    ///   - Transfer Templates
+    ///
+    pub async fn transfers_get_templates_delivery_transporters_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/templates/deliveries/{}/transporters", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetTemplatesDeliveryTransportersDetails V1
+    /// Please note: The {id} parameter above represents a Transfer Template Delivery ID, not a Manifest Number.
+    /// 
+    ///   Permissions Required:
+    ///   - Transfer Templates
+    ///
+    pub async fn transfers_get_templates_delivery_transporters_details_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/templates/deliveries/{}/transporters/details", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetTemplatesOutgoing V2
+    /// Retrieves a list of transfer templates for a Facility, optionally filtered by last modified date range.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfer Templates
+    ///   - View Transfer Templates
+    ///
+    pub async fn transfers_get_templates_outgoing_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/templates/outgoing");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetTemplatesOutgoingDelivery V2
+    /// Retrieves a list of deliveries associated with a specific transfer template.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfer Templates
+    ///   - View Transfer Templates
+    ///
+    pub async fn transfers_get_templates_outgoing_delivery_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/templates/outgoing/{}/deliveries", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetTemplatesOutgoingDeliveryPackage V2
+    /// Retrieves a list of delivery package templates for a given Transfer Template Delivery Id. Please note: The {id} parameter above represents a Transfer Template Delivery Id, not a Manifest Number.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfer Templates
+    ///   - View Transfer Templates
+    ///
+    pub async fn transfers_get_templates_outgoing_delivery_package_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/templates/outgoing/deliveries/{}/packages", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetTemplatesOutgoingDeliveryTransporters V2
+    /// Retrieves a list of transporter templates for a given Transfer Template Delivery Id. Please note: The {id} parameter above represents a Transfer Template Delivery Id, not a Manifest Number.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfer Templates
+    ///   - View Transfer Templates
+    ///
+    pub async fn transfers_get_templates_outgoing_delivery_transporters_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/templates/outgoing/deliveries/{}/transporters", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetTemplatesOutgoingDeliveryTransportersDetails V2
+    /// Retrieves detailed transporter templates for a given Transfer Template Delivery Id. Please note: The {id} parameter above represents a Transfer Template Delivery Id, not a Manifest Number.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfer Templates
+    ///   - View Transfer Templates
+    ///
+    pub async fn transfers_get_templates_outgoing_delivery_transporters_details_v2(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/templates/outgoing/deliveries/{}/transporters/details", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetTypes V1
+    /// Permissions Required:
+    ///   - None
+    ///
+    pub async fn transfers_get_types_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/types");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetTypes V2
+    /// Retrieves a list of available transfer types for a Facility based on its license number.
+    /// 
+    ///   Permissions Required:
+    ///   - None
+    ///
+    pub async fn transfers_get_types_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/types");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateExternalIncoming V1
+    /// Permissions Required:
+    ///   - Transfers
+    ///
+    pub async fn transfers_update_external_incoming_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/external/incoming");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateExternalIncoming V2
+    /// Updates external incoming shipment plans for a Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfers
+    ///
+    pub async fn transfers_update_external_incoming_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/external/incoming");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateTemplates V1
+    /// Permissions Required:
+    ///   - Transfer Templates
+    ///
+    pub async fn transfers_update_templates_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v1/templates");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateTemplatesOutgoing V2
+    /// Updates existing transfer templates for a Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Transfer Templates
+    ///
+    pub async fn transfers_update_templates_outgoing_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/transfers/v2/templates/outgoing");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateAdditives V1
+    /// Permissions Required:
+    ///   - Manage Plants Additives
+    ///
+    pub async fn plants_create_additives_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/additives");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateAdditives V2
+    /// Records additive usage details applied to specific plants at a Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Plants Additives
+    ///
+    pub async fn plants_create_additives_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/additives");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateAdditivesBylocation V1
+    /// Permissions Required:
+    ///   - Manage Plants
+    ///   - Manage Plants Additives
+    ///
+    pub async fn plants_create_additives_bylocation_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/additives/bylocation");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateAdditivesBylocation V2
+    /// Records additive usage for plants based on their location within a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Plants
+    ///   - Manage Plants Additives
+    ///
+    pub async fn plants_create_additives_bylocation_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/additives/bylocation");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateAdditivesBylocationUsingtemplate V2
+    /// Records additive usage for plants by location using a predefined additive template at a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Plants Additives
+    ///
+    pub async fn plants_create_additives_bylocation_usingtemplate_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/additives/bylocation/usingtemplate");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateAdditivesUsingtemplate V2
+    /// Records additive usage for plants using predefined additive templates at a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Plants Additives
+    ///
+    pub async fn plants_create_additives_usingtemplate_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/additives/usingtemplate");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateChangegrowthphases V1
+    /// Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///   - Manage Veg/Flower Plants Inventory
+    ///
+    pub async fn plants_create_changegrowthphases_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/changegrowthphases");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateHarvestplants V1
+    /// NOTE: If HarvestName is excluded from the request body, or if it is passed in as null, the harvest name is auto-generated.
+    /// 
+    ///   Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///   - Manicure/Harvest Veg/Flower Plants
+    ///
+    pub async fn plants_create_harvestplants_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/harvestplants");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateManicure V2
+    /// Creates harvest product records from plant batches at a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///   - Manicure/Harvest Veg/Flower Plants
+    ///
+    pub async fn plants_create_manicure_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/manicure");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateManicureplants V1
+    /// Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///   - Manicure/Harvest Veg/Flower Plants
+    ///
+    pub async fn plants_create_manicureplants_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/manicureplants");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateMoveplants V1
+    /// Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///   - Manage Veg/Flower Plants Inventory
+    ///
+    pub async fn plants_create_moveplants_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/moveplants");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreatePlantbatchPackage V1
+    /// Permissions Required:
+    ///   - View Immature Plants
+    ///   - Manage Immature Plants Inventory
+    ///   - View Veg/Flower Plants
+    ///   - Manage Veg/Flower Plants Inventory
+    ///   - View Packages
+    ///   - Create/Submit/Discontinue Packages
+    ///
+    pub async fn plants_create_plantbatch_package_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/create/plantbatch/packages");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreatePlantbatchPackage V2
+    /// Creates packages from plant batches at a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Immature Plants
+    ///   - Manage Immature Plants Inventory
+    ///   - View Veg/Flower Plants
+    ///   - Manage Veg/Flower Plants Inventory
+    ///   - View Packages
+    ///   - Create/Submit/Discontinue Packages
+    ///
+    pub async fn plants_create_plantbatch_package_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/plantbatch/packages");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreatePlantings V1
+    /// Permissions Required:
+    ///   - View Immature Plants
+    ///   - Manage Immature Plants Inventory
+    ///   - View Veg/Flower Plants
+    ///   - Manage Veg/Flower Plants Inventory
+    ///
+    pub async fn plants_create_plantings_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/create/plantings");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreatePlantings V2
+    /// Creates new plant batches at a specified Facility from existing plant data.
+    /// 
+    ///   Permissions Required:
+    ///   - View Immature Plants
+    ///   - Manage Immature Plants Inventory
+    ///   - View Veg/Flower Plants
+    ///   - Manage Veg/Flower Plants Inventory
+    ///
+    pub async fn plants_create_plantings_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/plantings");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateWaste V1
+    /// Permissions Required:
+    ///   - Manage Plants Waste
+    ///
+    pub async fn plants_create_waste_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/waste");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateWaste V2
+    /// Records waste events for plants at a Facility, including method, reason, and location details.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Plants Waste
+    ///
+    pub async fn plants_create_waste_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/waste");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// DELETE Delete V1
+    /// Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///   - Destroy Veg/Flower Plants
+    ///
+    pub async fn plants_delete_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// DELETE Delete V2
+    /// Removes plants from a Facility’s inventory while recording the reason for their disposal.
+    /// 
+    ///   Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///   - Destroy Veg/Flower Plants
+    ///
+    pub async fn plants_delete_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET Get V1
+    /// Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///
+    pub async fn plants_get_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET Get V2
+    /// Retrieves a Plant by Id.
+    /// 
+    ///   Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///
+    pub async fn plants_get_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetAdditives V1
+    /// Permissions Required:
+    ///   - View/Manage Plants Additives
+    ///
+    pub async fn plants_get_additives_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/additives");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetAdditives V2
+    /// Retrieves additive records applied to plants at a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View/Manage Plants Additives
+    ///
+    pub async fn plants_get_additives_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/additives");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetAdditivesTypes V1
+    /// Permissions Required:
+    ///   -
+    ///
+    pub async fn plants_get_additives_types_v1(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/additives/types");
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetAdditivesTypes V2
+    /// Retrieves a list of all plant additive types defined within a Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - None
+    ///
+    pub async fn plants_get_additives_types_v2(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/additives/types");
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetByLabel V1
+    /// Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///
+    pub async fn plants_get_by_label_v1(&self, label: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/{}", urlencoding::encode(label).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetByLabel V2
+    /// Retrieves a Plant by label.
+    /// 
+    ///   Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///
+    pub async fn plants_get_by_label_v2(&self, label: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/{}", urlencoding::encode(label).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetFlowering V1
+    /// Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///
+    pub async fn plants_get_flowering_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/flowering");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetFlowering V2
+    /// Retrieves flowering-phase plants at a specified Facility, optionally filtered by last modified date.
+    /// 
+    ///   Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///
+    pub async fn plants_get_flowering_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/flowering");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetGrowthPhases V1
+    /// Permissions Required:
+    ///   - None
+    ///
+    pub async fn plants_get_growth_phases_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/growthphases");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetGrowthPhases V2
+    /// Retrieves the list of growth phases supported by a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - None
+    ///
+    pub async fn plants_get_growth_phases_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/growthphases");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetInactive V1
+    /// Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///
+    pub async fn plants_get_inactive_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/inactive");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetInactive V2
+    /// Retrieves inactive plants at a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///
+    pub async fn plants_get_inactive_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/inactive");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetMother V2
+    /// Retrieves mother-phase plants at a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Mother Plants
+    ///
+    pub async fn plants_get_mother_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/mother");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetMotherInactive V2
+    /// Retrieves inactive mother-phase plants at a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Mother Plants
+    ///
+    pub async fn plants_get_mother_inactive_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/mother/inactive");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetMotherOnhold V2
+    /// Retrieves mother-phase plants currently marked as on hold at a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Mother Plants
+    ///
+    pub async fn plants_get_mother_onhold_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/mother/onhold");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetOnhold V1
+    /// Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///
+    pub async fn plants_get_onhold_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/onhold");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetOnhold V2
+    /// Retrieves plants that are currently on hold at a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///
+    pub async fn plants_get_onhold_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/onhold");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetVegetative V1
+    /// Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///
+    pub async fn plants_get_vegetative_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/vegetative");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetVegetative V2
+    /// Retrieves vegetative-phase plants at a specified Facility, optionally filtered by last modified date.
+    /// 
+    ///   Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///
+    pub async fn plants_get_vegetative_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/vegetative");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetWaste V2
+    /// Retrieves a list of recorded plant waste events for a specific Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Plants Waste
+    ///
+    pub async fn plants_get_waste_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/waste");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetWasteMethodsAll V1
+    /// Permissions Required:
+    ///   - None
+    ///
+    pub async fn plants_get_waste_methods_all_v1(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/waste/methods/all");
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetWasteMethodsAll V2
+    /// Retrieves a list of all available plant waste methods for use within a Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - None
+    ///
+    pub async fn plants_get_waste_methods_all_v2(&self, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/waste/methods/all");
+        let mut query_params = Vec::new();
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetWastePackage V2
+    /// Retrieves a list of package records linked to the specified plantWasteId for a given facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Plants Waste
+    ///
+    pub async fn plants_get_waste_package_v2(&self, id: &str, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/waste/{}/package", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetWastePlant V2
+    /// Retrieves a list of plants records linked to the specified plantWasteId for a given facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Plants Waste
+    ///
+    pub async fn plants_get_waste_plant_v2(&self, id: &str, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/waste/{}/plant", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetWasteReasons V1
+    /// Permissions Required:
+    ///   - None
+    ///
+    pub async fn plants_get_waste_reasons_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v1/waste/reasons");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetWasteReasons V2
+    /// Retriveves available reasons for recording mature plant waste at a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - None
+    ///
+    pub async fn plants_get_waste_reasons_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/waste/reasons");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateAdjust V2
+    /// Adjusts the recorded count of plants at a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///   - Manage Veg/Flower Plants Inventory
+    ///
+    pub async fn plants_update_adjust_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/adjust");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateGrowthphase V2
+    /// Changes the growth phases of plants within a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///   - Manage Veg/Flower Plants Inventory
+    ///
+    pub async fn plants_update_growthphase_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/growthphase");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateHarvest V2
+    /// Processes whole plant Harvest data for a specific Facility. NOTE: If HarvestName is excluded from the request body, or if it is passed in as null, the harvest name is auto-generated.
+    /// 
+    ///   Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///   - Manicure/Harvest Veg/Flower Plants
+    ///
+    pub async fn plants_update_harvest_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/harvest");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateLocation V2
+    /// Moves plant batches to new locations within a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///   - Manage Veg/Flower Plants Inventory
+    ///
+    pub async fn plants_update_location_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/location");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateMerge V2
+    /// Merges multiple plant groups into a single group within a Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///   - Manicure/Harvest Veg/Flower Plants
+    ///
+    pub async fn plants_update_merge_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/merge");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateSplit V2
+    /// Splits an existing plant group into multiple groups within a Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Plant
+    ///
+    pub async fn plants_update_split_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/split");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateStrain V2
+    /// Updates the strain information for plants within a Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///   - Manage Veg/Flower Plants Inventory
+    ///
+    pub async fn plants_update_strain_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/strain");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateTag V2
+    /// Replaces existing plant tags with new tags for plants within a Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Veg/Flower Plants
+    ///   - Manage Veg/Flower Plants Inventory
+    ///
+    pub async fn plants_update_tag_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/plants/v2/tag");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST Create V2
+    /// Creates new additive templates for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Additives
+    ///
+    pub async fn additives_templates_create_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/additivestemplates/v2");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET Get V2
+    /// Retrieves an Additive Template by its Id.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Additives
+    ///
+    pub async fn additives_templates_get_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/additivestemplates/v2/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetActive V2
+    /// Retrieves a list of active additive templates for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Additives
+    ///
+    pub async fn additives_templates_get_active_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/additivestemplates/v2/active");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetInactive V2
+    /// Retrieves a list of inactive additive templates for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Additives
+    ///
+    pub async fn additives_templates_get_inactive_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/additivestemplates/v2/inactive");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT Update V2
+    /// Updates existing additive templates for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - Manage Additives
+    ///
+    pub async fn additives_templates_update_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/additivestemplates/v2");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetByCaregiverLicenseNumber V1
+    /// Data returned by this endpoint is cached for up to one minute.
+    /// 
+    ///   Permissions Required:
+    ///   - Lookup Caregivers
+    ///
+    pub async fn caregivers_status_get_by_caregiver_license_number_v1(&self, caregiver_license_number: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/caregivers/v1/status/{}", urlencoding::encode(caregiver_license_number).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetByCaregiverLicenseNumber V2
+    /// Retrieves the status of a Caregiver by their License Number for a specified Facility. Data returned by this endpoint is cached for up to one minute.
+    /// 
+    ///   Permissions Required:
+    ///   - Lookup Caregivers
+    ///
+    pub async fn caregivers_status_get_by_caregiver_license_number_v2(&self, caregiver_license_number: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/caregivers/v2/status/{}", urlencoding::encode(caregiver_license_number).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateFinish V1
+    /// Permissions Required:
+    ///   - View Harvests
+    ///   - Finish/Discontinue Harvests
+    ///
+    pub async fn harvests_create_finish_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v1/finish");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreatePackage V1
+    /// Permissions Required:
+    ///   - View Harvests
+    ///   - Manage Harvests
+    ///   - View Packages
+    ///   - Create/Submit/Discontinue Packages
+    ///
+    pub async fn harvests_create_package_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v1/create/packages");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreatePackage V2
+    /// Creates packages from harvested products for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Harvests
+    ///   - Manage Harvests
+    ///   - View Packages
+    ///   - Create/Submit/Discontinue Packages
+    ///
+    pub async fn harvests_create_package_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v2/packages");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreatePackageTesting V1
+    /// Permissions Required:
+    ///   - View Harvests
+    ///   - Manage Harvests
+    ///   - View Packages
+    ///   - Create/Submit/Discontinue Packages
+    ///
+    pub async fn harvests_create_package_testing_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v1/create/packages/testing");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreatePackageTesting V2
+    /// Creates packages for testing from harvested products for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Harvests
+    ///   - Manage Harvests
+    ///   - View Packages
+    ///   - Create/Submit/Discontinue Packages
+    ///
+    pub async fn harvests_create_package_testing_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v2/packages/testing");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateRemoveWaste V1
+    /// Permissions Required:
+    ///   - View Harvests
+    ///   - Manage Harvests
+    ///
+    pub async fn harvests_create_remove_waste_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v1/removewaste");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateUnfinish V1
+    /// Permissions Required:
+    ///   - View Harvests
+    ///   - Finish/Discontinue Harvests
+    ///
+    pub async fn harvests_create_unfinish_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v1/unfinish");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateWaste V2
+    /// Records Waste from harvests for a specified Facility. NOTE: The IDs passed in the request body are the harvest IDs for which you are documenting waste.
+    /// 
+    ///   Permissions Required:
+    ///   - View Harvests
+    ///   - Manage Harvests
+    ///
+    pub async fn harvests_create_waste_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v2/waste");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// DELETE DeleteWaste V2
+    /// Discontinues a specific harvest waste record by Id for the specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Harvests
+    ///   - Discontinue Harvest Waste
+    ///
+    pub async fn harvests_delete_waste_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v2/waste/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET Get V1
+    /// Permissions Required:
+    ///   - View Harvests
+    ///
+    pub async fn harvests_get_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v1/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET Get V2
+    /// Retrieves a Harvest by its Id, optionally validated against a specified Facility License Number.
+    /// 
+    ///   Permissions Required:
+    ///   - View Harvests
+    ///
+    pub async fn harvests_get_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v2/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetActive V1
+    /// Permissions Required:
+    ///   - View Harvests
+    ///
+    pub async fn harvests_get_active_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v1/active");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetActive V2
+    /// Retrieves a list of active harvests for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Harvests
+    ///
+    pub async fn harvests_get_active_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v2/active");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetInactive V1
+    /// Permissions Required:
+    ///   - View Harvests
+    ///
+    pub async fn harvests_get_inactive_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v1/inactive");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetInactive V2
+    /// Retrieves a list of inactive harvests for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Harvests
+    ///
+    pub async fn harvests_get_inactive_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v2/inactive");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetOnhold V1
+    /// Permissions Required:
+    ///   - View Harvests
+    ///
+    pub async fn harvests_get_onhold_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v1/onhold");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetOnhold V2
+    /// Retrieves a list of harvests on hold for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Harvests
+    ///
+    pub async fn harvests_get_onhold_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v2/onhold");
+        let mut query_params = Vec::new();
+        if let Some(p) = last_modified_end {
+            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = last_modified_start {
+            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetWaste V2
+    /// Retrieves a list of Waste records for a specified Harvest, identified by its Harvest Id, within a Facility identified by its License Number.
+    /// 
+    ///   Permissions Required:
+    ///   - View Harvests
+    ///
+    pub async fn harvests_get_waste_v2(&self, harvest_id: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v2/waste");
+        let mut query_params = Vec::new();
+        if let Some(p) = harvest_id {
+            query_params.push(format!("harvestId={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetWasteTypes V1
+    /// Permissions Required:
+    ///   - None
+    ///
+    pub async fn harvests_get_waste_types_v1(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v1/waste/types");
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetWasteTypes V2
+    /// Retrieves a list of Waste types for harvests.
+    /// 
+    ///   Permissions Required:
+    ///   - None
+    ///
+    pub async fn harvests_get_waste_types_v2(&self, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v2/waste/types");
+        let mut query_params = Vec::new();
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateFinish V2
+    /// Marks one or more harvests as finished for the specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Harvests
+    ///   - Finish/Discontinue Harvests
+    ///
+    pub async fn harvests_update_finish_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v2/finish");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateLocation V2
+    /// Updates the Location of Harvest for a specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Harvests
+    ///   - Manage Harvests
+    ///
+    pub async fn harvests_update_location_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v2/location");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateMove V1
+    /// Permissions Required:
+    ///   - View Harvests
+    ///   - Manage Harvests
+    ///
+    pub async fn harvests_update_move_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v1/move");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateRename V1
+    /// Permissions Required:
+    ///   - View Harvests
+    ///   - Manage Harvests
+    ///
+    pub async fn harvests_update_rename_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v1/rename");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateRename V2
+    /// Renames one or more harvests for the specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Harvests
+    ///   - Manage Harvests
+    ///
+    pub async fn harvests_update_rename_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v2/rename");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateRestoreHarvestedPlants V2
+    /// Restores previously harvested plants to their original state for the specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Harvests
+    ///   - Finish/Discontinue Harvests
+    ///
+    pub async fn harvests_update_restore_harvested_plants_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v2/restore/harvestedplants");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateUnfinish V2
+    /// Reopens one or more previously finished harvests for the specified Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Harvests
+    ///   - Finish/Discontinue Harvests
+    ///
+    pub async fn harvests_update_unfinish_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/harvests/v2/unfinish");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateRecord V1
+    /// Permissions Required:
+    ///   - View Packages
+    ///   - Manage Packages Inventory
+    ///
+    pub async fn lab_tests_create_record_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/labtests/v1/record");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// POST CreateRecord V2
+    /// Submits Lab Test results for one or more packages. NOTE: This endpoint allows only PDF files, and uploaded files can be no more than 5 MB in size. The Label element in the request is a Package Label.
+    /// 
+    ///   Permissions Required:
+    ///   - View Packages
+    ///   - Manage Packages Inventory
+    ///
+    pub async fn lab_tests_create_record_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/labtests/v2/record");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetBatches V2
+    /// Retrieves a list of Lab Test batches.
+    /// 
+    ///   Permissions Required:
+    ///   - None
+    ///
+    pub async fn lab_tests_get_batches_v2(&self, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/labtests/v2/batches");
+        let mut query_params = Vec::new();
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetLabtestdocument V1
+    /// Permissions Required:
+    ///   - View Packages
+    ///   - Manage Packages Inventory
+    ///
+    pub async fn lab_tests_get_labtestdocument_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/labtests/v1/labtestdocument/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetLabtestdocument V2
+    /// Retrieves a specific Lab Test result document by its Id for a given Facility.
+    /// 
+    ///   Permissions Required:
+    ///   - View Packages
+    ///   - Manage Packages Inventory
+    ///
+    pub async fn lab_tests_get_labtestdocument_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/labtests/v2/labtestdocument/{}", urlencoding::encode(id).as_ref());
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetResults V1
+    /// Permissions Required:
+    ///   - View Packages
+    ///
+    pub async fn lab_tests_get_results_v1(&self, license_number: Option<String>, package_id: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/labtests/v1/results");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = package_id {
+            query_params.push(format!("packageId={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetResults V2
+    /// Retrieves Lab Test results for a specified Package.
+    /// 
+    ///   Permissions Required:
+    ///   - View Packages
+    ///   - Manage Packages Inventory
+    ///
+    pub async fn lab_tests_get_results_v2(&self, license_number: Option<String>, package_id: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/labtests/v2/results");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = package_id {
+            query_params.push(format!("packageId={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetStates V1
+    /// Permissions Required:
+    ///   - None
+    ///
+    pub async fn lab_tests_get_states_v1(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/labtests/v1/states");
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetStates V2
+    /// Returns a list of all lab testing states.
+    /// 
+    ///   Permissions Required:
+    ///   - None
+    ///
+    pub async fn lab_tests_get_states_v2(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/labtests/v2/states");
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetTypes V1
+    /// Permissions Required:
+    ///   - None
+    ///
+    pub async fn lab_tests_get_types_v1(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/labtests/v1/types");
+        let mut query_params = Vec::new();
+        if let Some(p) = no {
+            query_params.push(format!("No={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// GET GetTypes V2
+    /// Returns a list of Lab Test types.
+    /// 
+    ///   Permissions Required:
+    ///   - None
+    ///
+    pub async fn lab_tests_get_types_v2(&self, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/labtests/v2/types");
+        let mut query_params = Vec::new();
+        if let Some(p) = page_number {
+            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
+        }
+        if let Some(p) = page_size {
+            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateLabtestdocument V1
+    /// Permissions Required:
+    ///   - View Packages
+    ///   - Manage Packages Inventory
+    ///
+    pub async fn lab_tests_update_labtestdocument_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/labtests/v1/labtestdocument");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateLabtestdocument V2
+    /// Updates one or more documents for previously submitted lab tests.
+    /// 
+    ///   Permissions Required:
+    ///   - View Packages
+    ///   - Manage Packages Inventory
+    ///
+    pub async fn lab_tests_update_labtestdocument_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/labtests/v2/labtestdocument");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateResultRelease V1
+    /// Permissions Required:
+    ///   - View Packages
+    ///   - Manage Packages Inventory
+    ///
+    pub async fn lab_tests_update_result_release_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/labtests/v1/results/release");
+        let mut query_params = Vec::new();
+        if let Some(p) = license_number {
+            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
+        }
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+
+    /// PUT UpdateResultRelease V2
+    /// Releases Lab Test results for one or more packages.
+    /// 
+    ///   Permissions Required:
+    ///   - View Packages
+    ///   - Manage Packages Inventory
+    ///
+    pub async fn lab_tests_update_result_release_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/labtests/v2/results/release");
         let mut query_params = Vec::new();
         if let Some(p) = license_number {
             query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
@@ -4806,4093 +8967,6 @@ impl MetrcClient {
         self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
     }
 
-    /// POST Create V1
-    /// Permissions Required:
-    ///   - Manage Strains
-    ///
-    pub async fn strains_create_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/strains/v1/create");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST Create V2
-    /// Creates new strain records for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Strains
-    ///
-    pub async fn strains_create_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/strains/v2");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateUpdate V1
-    /// Permissions Required:
-    ///   - Manage Strains
-    ///
-    pub async fn strains_create_update_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/strains/v1/update");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// DELETE Delete V1
-    /// Permissions Required:
-    ///   - Manage Strains
-    ///
-    pub async fn strains_delete_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/strains/v1/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// DELETE Delete V2
-    /// Archives an existing strain record for a Facility
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Strains
-    ///
-    pub async fn strains_delete_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/strains/v2/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET Get V1
-    /// Permissions Required:
-    ///   - Manage Strains
-    ///
-    pub async fn strains_get_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/strains/v1/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET Get V2
-    /// Retrieves a Strain record by its Id, with an optional license number.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Strains
-    ///
-    pub async fn strains_get_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/strains/v2/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetActive V1
-    /// Permissions Required:
-    ///   - Manage Strains
-    ///
-    pub async fn strains_get_active_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/strains/v1/active");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetActive V2
-    /// Retrieves a list of active strains for the current Facility, optionally filtered by last modified date range.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Strains
-    ///
-    pub async fn strains_get_active_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/strains/v2/active");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetInactive V2
-    /// Retrieves a list of inactive strains for the current Facility, optionally filtered by last modified date range.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Strains
-    ///
-    pub async fn strains_get_inactive_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/strains/v2/inactive");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT Update V2
-    /// Updates existing strain records for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Strains
-    ///
-    pub async fn strains_update_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/strains/v2");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetPackageAvailable V2
-    /// Returns a list of available package tags. NOTE: This is a premium endpoint.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Tags
-    ///
-    pub async fn tags_get_package_available_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/tags/v2/package/available");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetPlantAvailable V2
-    /// Returns a list of available plant tags. NOTE: This is a premium endpoint.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Tags
-    ///
-    pub async fn tags_get_plant_available_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/tags/v2/plant/available");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetStaged V2
-    /// Returns a list of staged tags. NOTE: This is a premium endpoint.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Tags
-    ///   - RetailId.AllowPackageStaging Key Value enabled
-    ///
-    pub async fn tags_get_staged_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/tags/v2/staged");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST Create V2
-    /// Creates new additive templates for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Additives
-    ///
-    pub async fn additives_templates_create_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/additivestemplates/v2");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET Get V2
-    /// Retrieves an Additive Template by its Id.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Additives
-    ///
-    pub async fn additives_templates_get_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/additivestemplates/v2/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetActive V2
-    /// Retrieves a list of active additive templates for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Additives
-    ///
-    pub async fn additives_templates_get_active_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/additivestemplates/v2/active");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetInactive V2
-    /// Retrieves a list of inactive additive templates for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Additives
-    ///
-    pub async fn additives_templates_get_inactive_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/additivestemplates/v2/inactive");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT Update V2
-    /// Updates existing additive templates for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Additives
-    ///
-    pub async fn additives_templates_update_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/additivestemplates/v2");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateFinish V1
-    /// Permissions Required:
-    ///   - View Harvests
-    ///   - Finish/Discontinue Harvests
-    ///
-    pub async fn harvests_create_finish_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v1/finish");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreatePackage V1
-    /// Permissions Required:
-    ///   - View Harvests
-    ///   - Manage Harvests
-    ///   - View Packages
-    ///   - Create/Submit/Discontinue Packages
-    ///
-    pub async fn harvests_create_package_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v1/create/packages");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreatePackage V2
-    /// Creates packages from harvested products for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Harvests
-    ///   - Manage Harvests
-    ///   - View Packages
-    ///   - Create/Submit/Discontinue Packages
-    ///
-    pub async fn harvests_create_package_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v2/packages");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreatePackageTesting V1
-    /// Permissions Required:
-    ///   - View Harvests
-    ///   - Manage Harvests
-    ///   - View Packages
-    ///   - Create/Submit/Discontinue Packages
-    ///
-    pub async fn harvests_create_package_testing_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v1/create/packages/testing");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreatePackageTesting V2
-    /// Creates packages for testing from harvested products for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Harvests
-    ///   - Manage Harvests
-    ///   - View Packages
-    ///   - Create/Submit/Discontinue Packages
-    ///
-    pub async fn harvests_create_package_testing_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v2/packages/testing");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateRemoveWaste V1
-    /// Permissions Required:
-    ///   - View Harvests
-    ///   - Manage Harvests
-    ///
-    pub async fn harvests_create_remove_waste_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v1/removewaste");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateUnfinish V1
-    /// Permissions Required:
-    ///   - View Harvests
-    ///   - Finish/Discontinue Harvests
-    ///
-    pub async fn harvests_create_unfinish_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v1/unfinish");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateWaste V2
-    /// Records Waste from harvests for a specified Facility. NOTE: The IDs passed in the request body are the harvest IDs for which you are documenting waste.
-    /// 
-    ///   Permissions Required:
-    ///   - View Harvests
-    ///   - Manage Harvests
-    ///
-    pub async fn harvests_create_waste_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v2/waste");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// DELETE DeleteWaste V2
-    /// Discontinues a specific harvest waste record by Id for the specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Harvests
-    ///   - Discontinue Harvest Waste
-    ///
-    pub async fn harvests_delete_waste_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v2/waste/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET Get V1
-    /// Permissions Required:
-    ///   - View Harvests
-    ///
-    pub async fn harvests_get_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v1/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET Get V2
-    /// Retrieves a Harvest by its Id, optionally validated against a specified Facility License Number.
-    /// 
-    ///   Permissions Required:
-    ///   - View Harvests
-    ///
-    pub async fn harvests_get_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v2/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetActive V1
-    /// Permissions Required:
-    ///   - View Harvests
-    ///
-    pub async fn harvests_get_active_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v1/active");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetActive V2
-    /// Retrieves a list of active harvests for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Harvests
-    ///
-    pub async fn harvests_get_active_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v2/active");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetInactive V1
-    /// Permissions Required:
-    ///   - View Harvests
-    ///
-    pub async fn harvests_get_inactive_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v1/inactive");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetInactive V2
-    /// Retrieves a list of inactive harvests for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Harvests
-    ///
-    pub async fn harvests_get_inactive_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v2/inactive");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetOnhold V1
-    /// Permissions Required:
-    ///   - View Harvests
-    ///
-    pub async fn harvests_get_onhold_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v1/onhold");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetOnhold V2
-    /// Retrieves a list of harvests on hold for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Harvests
-    ///
-    pub async fn harvests_get_onhold_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v2/onhold");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetWaste V2
-    /// Retrieves a list of Waste records for a specified Harvest, identified by its Harvest Id, within a Facility identified by its License Number.
-    /// 
-    ///   Permissions Required:
-    ///   - View Harvests
-    ///
-    pub async fn harvests_get_waste_v2(&self, harvest_id: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v2/waste");
-        let mut query_params = Vec::new();
-        if let Some(p) = harvest_id {
-            query_params.push(format!("harvestId={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetWasteTypes V1
-    /// Permissions Required:
-    ///   - None
-    ///
-    pub async fn harvests_get_waste_types_v1(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v1/waste/types");
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetWasteTypes V2
-    /// Retrieves a list of Waste types for harvests.
-    /// 
-    ///   Permissions Required:
-    ///   - None
-    ///
-    pub async fn harvests_get_waste_types_v2(&self, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v2/waste/types");
-        let mut query_params = Vec::new();
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateFinish V2
-    /// Marks one or more harvests as finished for the specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Harvests
-    ///   - Finish/Discontinue Harvests
-    ///
-    pub async fn harvests_update_finish_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v2/finish");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateLocation V2
-    /// Updates the Location of Harvest for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Harvests
-    ///   - Manage Harvests
-    ///
-    pub async fn harvests_update_location_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v2/location");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateMove V1
-    /// Permissions Required:
-    ///   - View Harvests
-    ///   - Manage Harvests
-    ///
-    pub async fn harvests_update_move_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v1/move");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateRename V1
-    /// Permissions Required:
-    ///   - View Harvests
-    ///   - Manage Harvests
-    ///
-    pub async fn harvests_update_rename_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v1/rename");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateRename V2
-    /// Renames one or more harvests for the specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Harvests
-    ///   - Manage Harvests
-    ///
-    pub async fn harvests_update_rename_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v2/rename");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateRestoreHarvestedPlants V2
-    /// Restores previously harvested plants to their original state for the specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Harvests
-    ///   - Finish/Discontinue Harvests
-    ///
-    pub async fn harvests_update_restore_harvested_plants_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v2/restore/harvestedplants");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateUnfinish V2
-    /// Reopens one or more previously finished harvests for the specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Harvests
-    ///   - Finish/Discontinue Harvests
-    ///
-    pub async fn harvests_update_unfinish_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/harvests/v2/unfinish");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateRecord V1
-    /// Permissions Required:
-    ///   - View Packages
-    ///   - Manage Packages Inventory
-    ///
-    pub async fn lab_tests_create_record_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/labtests/v1/record");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateRecord V2
-    /// Submits Lab Test results for one or more packages. NOTE: This endpoint allows only PDF files, and uploaded files can be no more than 5 MB in size. The Label element in the request is a Package Label.
-    /// 
-    ///   Permissions Required:
-    ///   - View Packages
-    ///   - Manage Packages Inventory
-    ///
-    pub async fn lab_tests_create_record_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/labtests/v2/record");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetBatches V2
-    /// Retrieves a list of Lab Test batches.
-    /// 
-    ///   Permissions Required:
-    ///   - None
-    ///
-    pub async fn lab_tests_get_batches_v2(&self, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/labtests/v2/batches");
-        let mut query_params = Vec::new();
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetLabtestdocument V1
-    /// Permissions Required:
-    ///   - View Packages
-    ///   - Manage Packages Inventory
-    ///
-    pub async fn lab_tests_get_labtestdocument_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/labtests/v1/labtestdocument/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetLabtestdocument V2
-    /// Retrieves a specific Lab Test result document by its Id for a given Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Packages
-    ///   - Manage Packages Inventory
-    ///
-    pub async fn lab_tests_get_labtestdocument_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/labtests/v2/labtestdocument/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetResults V1
-    /// Permissions Required:
-    ///   - View Packages
-    ///
-    pub async fn lab_tests_get_results_v1(&self, license_number: Option<String>, package_id: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/labtests/v1/results");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = package_id {
-            query_params.push(format!("packageId={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetResults V2
-    /// Retrieves Lab Test results for a specified Package.
-    /// 
-    ///   Permissions Required:
-    ///   - View Packages
-    ///   - Manage Packages Inventory
-    ///
-    pub async fn lab_tests_get_results_v2(&self, license_number: Option<String>, package_id: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/labtests/v2/results");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = package_id {
-            query_params.push(format!("packageId={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetStates V1
-    /// Permissions Required:
-    ///   - None
-    ///
-    pub async fn lab_tests_get_states_v1(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/labtests/v1/states");
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetStates V2
-    /// Returns a list of all lab testing states.
-    /// 
-    ///   Permissions Required:
-    ///   - None
-    ///
-    pub async fn lab_tests_get_states_v2(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/labtests/v2/states");
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetTypes V1
-    /// Permissions Required:
-    ///   - None
-    ///
-    pub async fn lab_tests_get_types_v1(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/labtests/v1/types");
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetTypes V2
-    /// Returns a list of Lab Test types.
-    /// 
-    ///   Permissions Required:
-    ///   - None
-    ///
-    pub async fn lab_tests_get_types_v2(&self, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/labtests/v2/types");
-        let mut query_params = Vec::new();
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateLabtestdocument V1
-    /// Permissions Required:
-    ///   - View Packages
-    ///   - Manage Packages Inventory
-    ///
-    pub async fn lab_tests_update_labtestdocument_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/labtests/v1/labtestdocument");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateLabtestdocument V2
-    /// Updates one or more documents for previously submitted lab tests.
-    /// 
-    ///   Permissions Required:
-    ///   - View Packages
-    ///   - Manage Packages Inventory
-    ///
-    pub async fn lab_tests_update_labtestdocument_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/labtests/v2/labtestdocument");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateResultRelease V1
-    /// Permissions Required:
-    ///   - View Packages
-    ///   - Manage Packages Inventory
-    ///
-    pub async fn lab_tests_update_result_release_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/labtests/v1/results/release");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateResultRelease V2
-    /// Releases Lab Test results for one or more packages.
-    /// 
-    ///   Permissions Required:
-    ///   - View Packages
-    ///   - Manage Packages Inventory
-    ///
-    pub async fn lab_tests_update_result_release_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/labtests/v2/results/release");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST Create V1
-    /// Permissions Required:
-    ///   - Manage Locations
-    ///
-    pub async fn locations_create_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/locations/v1/create");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST Create V2
-    /// Creates new locations for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Locations
-    ///
-    pub async fn locations_create_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/locations/v2");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateUpdate V1
-    /// Permissions Required:
-    ///   - Manage Locations
-    ///
-    pub async fn locations_create_update_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/locations/v1/update");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// DELETE Delete V1
-    /// Permissions Required:
-    ///   - Manage Locations
-    ///
-    pub async fn locations_delete_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/locations/v1/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// DELETE Delete V2
-    /// Archives a specified Location, identified by its Id, for a Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Locations
-    ///
-    pub async fn locations_delete_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/locations/v2/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET Get V1
-    /// Permissions Required:
-    ///   - Manage Locations
-    ///
-    pub async fn locations_get_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/locations/v1/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET Get V2
-    /// Retrieves a Location by its Id.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Locations
-    ///
-    pub async fn locations_get_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/locations/v2/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetActive V1
-    /// Permissions Required:
-    ///   - Manage Locations
-    ///
-    pub async fn locations_get_active_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/locations/v1/active");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetActive V2
-    /// Retrieves a list of active locations for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Locations
-    ///
-    pub async fn locations_get_active_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/locations/v2/active");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetInactive V2
-    /// Retrieves a list of inactive locations for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Locations
-    ///
-    pub async fn locations_get_inactive_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/locations/v2/inactive");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetTypes V1
-    /// Permissions Required:
-    ///   - Manage Locations
-    ///
-    pub async fn locations_get_types_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/locations/v1/types");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetTypes V2
-    /// Retrieves a list of active location types for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Locations
-    ///
-    pub async fn locations_get_types_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/locations/v2/types");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT Update V2
-    /// Updates existing locations for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Locations
-    ///
-    pub async fn locations_update_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/locations/v2");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetStatusesByPatientLicenseNumber V1
-    /// Data returned by this endpoint is cached for up to one minute.
-    /// 
-    ///   Permissions Required:
-    ///   - Lookup Patients
-    ///
-    pub async fn patients_status_get_statuses_by_patient_license_number_v1(&self, patient_license_number: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/patients/v1/statuses/{}", urlencoding::encode(patient_license_number).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetStatusesByPatientLicenseNumber V2
-    /// Retrieves a list of statuses for a Patient License Number for a specified Facility. Data returned by this endpoint is cached for up to one minute.
-    /// 
-    ///   Permissions Required:
-    ///   - Lookup Patients
-    ///
-    pub async fn patients_status_get_statuses_by_patient_license_number_v2(&self, patient_license_number: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/patients/v2/statuses/{}", urlencoding::encode(patient_license_number).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateAdditives V1
-    /// Permissions Required:
-    ///   - Manage Plants Additives
-    ///
-    pub async fn plants_create_additives_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/additives");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateAdditives V2
-    /// Records additive usage details applied to specific plants at a Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Plants Additives
-    ///
-    pub async fn plants_create_additives_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/additives");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateAdditivesBylocation V1
-    /// Permissions Required:
-    ///   - Manage Plants
-    ///   - Manage Plants Additives
-    ///
-    pub async fn plants_create_additives_bylocation_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/additives/bylocation");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateAdditivesBylocation V2
-    /// Records additive usage for plants based on their location within a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Plants
-    ///   - Manage Plants Additives
-    ///
-    pub async fn plants_create_additives_bylocation_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/additives/bylocation");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateAdditivesBylocationUsingtemplate V2
-    /// Records additive usage for plants by location using a predefined additive template at a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Plants Additives
-    ///
-    pub async fn plants_create_additives_bylocation_usingtemplate_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/additives/bylocation/usingtemplate");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateAdditivesUsingtemplate V2
-    /// Records additive usage for plants using predefined additive templates at a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Plants Additives
-    ///
-    pub async fn plants_create_additives_usingtemplate_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/additives/usingtemplate");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateChangegrowthphases V1
-    /// Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///   - Manage Veg/Flower Plants Inventory
-    ///
-    pub async fn plants_create_changegrowthphases_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/changegrowthphases");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateHarvestplants V1
-    /// NOTE: If HarvestName is excluded from the request body, or if it is passed in as null, the harvest name is auto-generated.
-    /// 
-    ///   Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///   - Manicure/Harvest Veg/Flower Plants
-    ///
-    pub async fn plants_create_harvestplants_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/harvestplants");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateManicure V2
-    /// Creates harvest product records from plant batches at a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///   - Manicure/Harvest Veg/Flower Plants
-    ///
-    pub async fn plants_create_manicure_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/manicure");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateManicureplants V1
-    /// Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///   - Manicure/Harvest Veg/Flower Plants
-    ///
-    pub async fn plants_create_manicureplants_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/manicureplants");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateMoveplants V1
-    /// Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///   - Manage Veg/Flower Plants Inventory
-    ///
-    pub async fn plants_create_moveplants_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/moveplants");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreatePlantbatchPackage V1
-    /// Permissions Required:
-    ///   - View Immature Plants
-    ///   - Manage Immature Plants Inventory
-    ///   - View Veg/Flower Plants
-    ///   - Manage Veg/Flower Plants Inventory
-    ///   - View Packages
-    ///   - Create/Submit/Discontinue Packages
-    ///
-    pub async fn plants_create_plantbatch_package_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/create/plantbatch/packages");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreatePlantbatchPackage V2
-    /// Creates packages from plant batches at a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Immature Plants
-    ///   - Manage Immature Plants Inventory
-    ///   - View Veg/Flower Plants
-    ///   - Manage Veg/Flower Plants Inventory
-    ///   - View Packages
-    ///   - Create/Submit/Discontinue Packages
-    ///
-    pub async fn plants_create_plantbatch_package_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/plantbatch/packages");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreatePlantings V1
-    /// Permissions Required:
-    ///   - View Immature Plants
-    ///   - Manage Immature Plants Inventory
-    ///   - View Veg/Flower Plants
-    ///   - Manage Veg/Flower Plants Inventory
-    ///
-    pub async fn plants_create_plantings_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/create/plantings");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreatePlantings V2
-    /// Creates new plant batches at a specified Facility from existing plant data.
-    /// 
-    ///   Permissions Required:
-    ///   - View Immature Plants
-    ///   - Manage Immature Plants Inventory
-    ///   - View Veg/Flower Plants
-    ///   - Manage Veg/Flower Plants Inventory
-    ///
-    pub async fn plants_create_plantings_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/plantings");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateWaste V1
-    /// Permissions Required:
-    ///   - Manage Plants Waste
-    ///
-    pub async fn plants_create_waste_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/waste");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateWaste V2
-    /// Records waste events for plants at a Facility, including method, reason, and location details.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Plants Waste
-    ///
-    pub async fn plants_create_waste_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/waste");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// DELETE Delete V1
-    /// Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///   - Destroy Veg/Flower Plants
-    ///
-    pub async fn plants_delete_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// DELETE Delete V2
-    /// Removes plants from a Facility’s inventory while recording the reason for their disposal.
-    /// 
-    ///   Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///   - Destroy Veg/Flower Plants
-    ///
-    pub async fn plants_delete_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET Get V1
-    /// Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///
-    pub async fn plants_get_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET Get V2
-    /// Retrieves a Plant by Id.
-    /// 
-    ///   Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///
-    pub async fn plants_get_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetAdditives V1
-    /// Permissions Required:
-    ///   - View/Manage Plants Additives
-    ///
-    pub async fn plants_get_additives_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/additives");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetAdditives V2
-    /// Retrieves additive records applied to plants at a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View/Manage Plants Additives
-    ///
-    pub async fn plants_get_additives_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/additives");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetAdditivesTypes V1
-    /// Permissions Required:
-    ///   -
-    ///
-    pub async fn plants_get_additives_types_v1(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/additives/types");
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetAdditivesTypes V2
-    /// Retrieves a list of all plant additive types defined within a Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - None
-    ///
-    pub async fn plants_get_additives_types_v2(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/additives/types");
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetByLabel V1
-    /// Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///
-    pub async fn plants_get_by_label_v1(&self, label: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/{}", urlencoding::encode(label).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetByLabel V2
-    /// Retrieves a Plant by label.
-    /// 
-    ///   Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///
-    pub async fn plants_get_by_label_v2(&self, label: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/{}", urlencoding::encode(label).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetFlowering V1
-    /// Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///
-    pub async fn plants_get_flowering_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/flowering");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetFlowering V2
-    /// Retrieves flowering-phase plants at a specified Facility, optionally filtered by last modified date.
-    /// 
-    ///   Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///
-    pub async fn plants_get_flowering_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/flowering");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetGrowthPhases V1
-    /// Permissions Required:
-    ///   - None
-    ///
-    pub async fn plants_get_growth_phases_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/growthphases");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetGrowthPhases V2
-    /// Retrieves the list of growth phases supported by a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - None
-    ///
-    pub async fn plants_get_growth_phases_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/growthphases");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetInactive V1
-    /// Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///
-    pub async fn plants_get_inactive_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/inactive");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetInactive V2
-    /// Retrieves inactive plants at a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///
-    pub async fn plants_get_inactive_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/inactive");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetMother V2
-    /// Retrieves mother-phase plants at a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Mother Plants
-    ///
-    pub async fn plants_get_mother_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/mother");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetMotherInactive V2
-    /// Retrieves inactive mother-phase plants at a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Mother Plants
-    ///
-    pub async fn plants_get_mother_inactive_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/mother/inactive");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetMotherOnhold V2
-    /// Retrieves mother-phase plants currently marked as on hold at a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Mother Plants
-    ///
-    pub async fn plants_get_mother_onhold_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/mother/onhold");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetOnhold V1
-    /// Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///
-    pub async fn plants_get_onhold_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/onhold");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetOnhold V2
-    /// Retrieves plants that are currently on hold at a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///
-    pub async fn plants_get_onhold_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/onhold");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetVegetative V1
-    /// Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///
-    pub async fn plants_get_vegetative_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/vegetative");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetVegetative V2
-    /// Retrieves vegetative-phase plants at a specified Facility, optionally filtered by last modified date.
-    /// 
-    ///   Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///
-    pub async fn plants_get_vegetative_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/vegetative");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetWaste V2
-    /// Retrieves a list of recorded plant waste events for a specific Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Plants Waste
-    ///
-    pub async fn plants_get_waste_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/waste");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetWasteMethodsAll V1
-    /// Permissions Required:
-    ///   - None
-    ///
-    pub async fn plants_get_waste_methods_all_v1(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/waste/methods/all");
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetWasteMethodsAll V2
-    /// Retrieves a list of all available plant waste methods for use within a Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - None
-    ///
-    pub async fn plants_get_waste_methods_all_v2(&self, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/waste/methods/all");
-        let mut query_params = Vec::new();
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetWastePackage V2
-    /// Retrieves a list of package records linked to the specified plantWasteId for a given facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Plants Waste
-    ///
-    pub async fn plants_get_waste_package_v2(&self, id: &str, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/waste/{}/package", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetWastePlant V2
-    /// Retrieves a list of plants records linked to the specified plantWasteId for a given facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Plants Waste
-    ///
-    pub async fn plants_get_waste_plant_v2(&self, id: &str, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/waste/{}/plant", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetWasteReasons V1
-    /// Permissions Required:
-    ///   - None
-    ///
-    pub async fn plants_get_waste_reasons_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v1/waste/reasons");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetWasteReasons V2
-    /// Retriveves available reasons for recording mature plant waste at a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - None
-    ///
-    pub async fn plants_get_waste_reasons_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/waste/reasons");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateAdjust V2
-    /// Adjusts the recorded count of plants at a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///   - Manage Veg/Flower Plants Inventory
-    ///
-    pub async fn plants_update_adjust_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/adjust");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateGrowthphase V2
-    /// Changes the growth phases of plants within a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///   - Manage Veg/Flower Plants Inventory
-    ///
-    pub async fn plants_update_growthphase_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/growthphase");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateHarvest V2
-    /// Processes whole plant Harvest data for a specific Facility. NOTE: If HarvestName is excluded from the request body, or if it is passed in as null, the harvest name is auto-generated.
-    /// 
-    ///   Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///   - Manicure/Harvest Veg/Flower Plants
-    ///
-    pub async fn plants_update_harvest_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/harvest");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateLocation V2
-    /// Moves plant batches to new locations within a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///   - Manage Veg/Flower Plants Inventory
-    ///
-    pub async fn plants_update_location_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/location");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateMerge V2
-    /// Merges multiple plant groups into a single group within a Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///   - Manicure/Harvest Veg/Flower Plants
-    ///
-    pub async fn plants_update_merge_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/merge");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateSplit V2
-    /// Splits an existing plant group into multiple groups within a Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Plant
-    ///
-    pub async fn plants_update_split_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/split");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateStrain V2
-    /// Updates the strain information for plants within a Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///   - Manage Veg/Flower Plants Inventory
-    ///
-    pub async fn plants_update_strain_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/strain");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateTag V2
-    /// Replaces existing plant tags with new tags for plants within a Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - View Veg/Flower Plants
-    ///   - Manage Veg/Flower Plants Inventory
-    ///
-    pub async fn plants_update_tag_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/plants/v2/tag");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateAssociate V2
-    /// Facilitate association of QR codes and Package labels. This will return the count of packages and QR codes associated that were added or replaced.
-    /// 
-    ///   Permissions Required:
-    ///   - External Sources(ThirdPartyVendorV2)/Retail ID(Write)
-    ///   - WebApi Retail ID Read Write State (All or WriteOnly)
-    ///   - Industry/View Packages
-    ///   - One of the following: Industry/Facility Type/Can Receive Associate Product Label, Licensee/Receive Associate Product Label or Admin/Employees/Packages Page/Product Labels(Manage)
-    ///
-    pub async fn retail_id_create_associate_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/retailid/v2/associate");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateGenerate V2
-    /// Allows you to generate a specific quantity of QR codes. Id value returned (issuance ID) could be used for printing.
-    /// 
-    ///   Permissions Required:
-    ///   - External Sources(ThirdPartyVendorV2)/Retail ID(Write)
-    ///   - WebApi Retail ID Read Write State (All or WriteOnly)
-    ///   - Industry/View Packages
-    ///   - One of the following: Industry/Facility Type/Can Download Product Label, Licensee/Download Product Label or Admin/Employees/Packages Page/Product Labels(Manage)
-    ///
-    pub async fn retail_id_create_generate_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/retailid/v2/generate");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateMerge V2
-    /// Merge and adjust one source to one target Package. First Package detected will be processed as target Package. This requires an action reason with name containing the 'Merge' word and setup with 'Package adjustment' area.
-    /// 
-    ///   Permissions Required:
-    ///   - External Sources(ThirdPartyVendorV2)/Retail ID(Write)
-    ///   - WebApi Retail ID Read Write State (All or WriteOnly)
-    ///   - Key Value Settings/Retail ID Merge Packages Enabled
-    ///
-    pub async fn retail_id_create_merge_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/retailid/v2/merge");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreatePackageInfo V2
-    /// Retrieves Package information for given list of Package labels.
-    /// 
-    ///   Permissions Required:
-    ///   - External Sources(ThirdPartyVendorV2)/Retail ID(Write)
-    ///   - WebApi Retail ID Read Write State (All or WriteOnly)
-    ///   - Industry/View Packages
-    ///   - Admin/Employees/Packages Page/Product Labels(Manage)
-    ///
-    pub async fn retail_id_create_package_info_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/retailid/v2/packages/info");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetReceiveByLabel V2
-    /// Get a list of eaches (Retail ID QR code URL) and sibling tags based on given Package label.
-    /// 
-    ///   Permissions Required:
-    ///   - External Sources(ThirdPartyVendorV2)/Manage RetailId
-    ///   - WebApi Retail ID Read Write State (All or ReadOnly)
-    ///   - Industry/View Packages
-    ///   - One of the following: Industry/Facility Type/Can Receive Associate Product Label, Licensee/Receive Associate Product Label or Admin/Employees/Packages Page/Product Labels(View or Manage)
-    ///
-    pub async fn retail_id_get_receive_by_label_v2(&self, label: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/retailid/v2/receive/{}", urlencoding::encode(label).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetReceiveQrByShortCode V2
-    /// Get a list of eaches (Retail ID QR code URL) and sibling tags based on given short code value (first segment in Retail ID QR code URL).
-    /// 
-    ///   Permissions Required:
-    ///   - External Sources(ThirdPartyVendorV2)/Manage RetailId
-    ///   - WebApi Retail ID Read Write State (All or ReadOnly)
-    ///   - Industry/View Packages
-    ///   - One of the following: Industry/Facility Type/Can Receive Associate Product Label, Licensee/Receive Associate Product Label or Admin/Employees/Packages Page/Product Labels(View or Manage)
-    ///
-    pub async fn retail_id_get_receive_qr_by_short_code_v2(&self, short_code: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/retailid/v2/receive/qr/{}", urlencoding::encode(short_code).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateIntegratorSetup V2
-    /// This endpoint is used to handle the setup of an external integrator for sandbox environments. It processes a request to create a new sandbox user for integration based on an external source's API key. It checks whether the API key is valid, manages the user creation process, and returns an appropriate status based on the current state of the request.
-    /// 
-    ///   Permissions Required:
-    ///   - None
-    ///
-    pub async fn sandbox_create_integrator_setup_v2(&self, user_key: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/sandbox/v2/integrator/setup");
-        let mut query_params = Vec::new();
-        if let Some(p) = user_key {
-            query_params.push(format!("userKey={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetAll V1
-    /// This endpoint provides a list of facilities for which the authenticated user has access.
-    /// 
-    ///   Permissions Required:
-    ///   - None
-    ///
-    pub async fn facilities_get_all_v1(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/facilities/v1");
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetAll V2
-    /// This endpoint provides a list of facilities for which the authenticated user has access.
-    /// 
-    ///   Permissions Required:
-    ///   - None
-    ///
-    pub async fn facilities_get_all_v2(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/facilities/v2");
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST Create V2
-    /// Adds new patients to a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Patients
-    ///
-    pub async fn patients_create_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/patients/v2");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateAdd V1
-    /// Permissions Required:
-    ///   - Manage Patients
-    ///
-    pub async fn patients_create_add_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/patients/v1/add");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateUpdate V1
-    /// Permissions Required:
-    ///   - Manage Patients
-    ///
-    pub async fn patients_create_update_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/patients/v1/update");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// DELETE Delete V1
-    /// Permissions Required:
-    ///   - Manage Patients
-    ///
-    pub async fn patients_delete_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/patients/v1/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// DELETE Delete V2
-    /// Removes a Patient, identified by an Id, from a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Patients
-    ///
-    pub async fn patients_delete_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/patients/v2/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET Get V1
-    /// Permissions Required:
-    ///   - Manage Patients
-    ///
-    pub async fn patients_get_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/patients/v1/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET Get V2
-    /// Retrieves a Patient by Id.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Patients
-    ///
-    pub async fn patients_get_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/patients/v2/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetActive V1
-    /// Permissions Required:
-    ///   - Manage Patients
-    ///
-    pub async fn patients_get_active_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/patients/v1/active");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetActive V2
-    /// Retrieves a list of active patients for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Patients
-    ///
-    pub async fn patients_get_active_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/patients/v2/active");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT Update V2
-    /// Updates Patient information for a specified Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Patients
-    ///
-    pub async fn patients_update_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/patients/v2");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateExternalIncoming V1
-    /// Permissions Required:
-    ///   - Transfers
-    ///
-    pub async fn transfers_create_external_incoming_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/external/incoming");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateExternalIncoming V2
-    /// Creates external incoming shipment plans for a Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfers
-    ///
-    pub async fn transfers_create_external_incoming_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/external/incoming");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateTemplates V1
-    /// Permissions Required:
-    ///   - Transfer Templates
-    ///
-    pub async fn transfers_create_templates_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/templates");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// POST CreateTemplatesOutgoing V2
-    /// Creates new transfer templates for a Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfer Templates
-    ///
-    pub async fn transfers_create_templates_outgoing_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/templates/outgoing");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::POST, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// DELETE DeleteExternalIncoming V1
-    /// Permissions Required:
-    ///   - Transfers
-    ///
-    pub async fn transfers_delete_external_incoming_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/external/incoming/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// DELETE DeleteExternalIncoming V2
-    /// Voids an external incoming shipment plan for a Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfers
-    ///
-    pub async fn transfers_delete_external_incoming_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/external/incoming/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// DELETE DeleteTemplates V1
-    /// Permissions Required:
-    ///   - Transfer Templates
-    ///
-    pub async fn transfers_delete_templates_v1(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/templates/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// DELETE DeleteTemplatesOutgoing V2
-    /// Archives a transfer template for a Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfer Templates
-    ///
-    pub async fn transfers_delete_templates_outgoing_v2(&self, id: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/templates/outgoing/{}", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::DELETE, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetDeliveriesPackagesStates V1
-    /// Permissions Required:
-    ///   - None
-    ///
-    pub async fn transfers_get_deliveries_packages_states_v1(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/deliveries/packages/states");
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetDeliveriesPackagesStates V2
-    /// Returns a list of available shipment Package states.
-    /// 
-    ///   Permissions Required:
-    ///   - None
-    ///
-    pub async fn transfers_get_deliveries_packages_states_v2(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/deliveries/packages/states");
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetDelivery V1
-    /// Please note: that the {id} parameter above represents a Shipment Plan ID.
-    /// 
-    ///   Permissions Required:
-    ///   - Transfers
-    ///
-    pub async fn transfers_get_delivery_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/{}/deliveries", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetDelivery V2
-    /// Retrieves a list of shipment deliveries for a given Transfer Id. Please note: The {id} parameter above represents a Transfer Id.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfers
-    ///   - View Transfers
-    ///
-    pub async fn transfers_get_delivery_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/{}/deliveries", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetDeliveryPackage V1
-    /// Please note: The {id} parameter above represents a Transfer Delivery ID, not a Manifest Number.
-    /// 
-    ///   Permissions Required:
-    ///   - Transfers
-    ///
-    pub async fn transfers_get_delivery_package_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/deliveries/{}/packages", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetDeliveryPackage V2
-    /// Retrieves a list of packages associated with a given Transfer Delivery Id. Please note: The {id} parameter above represents a Transfer Delivery Id, not a Manifest Number.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfers
-    ///   - View Transfers
-    ///
-    pub async fn transfers_get_delivery_package_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/deliveries/{}/packages", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetDeliveryPackageRequiredlabtestbatches V1
-    /// Please note: The {id} parameter above represents a Transfer Delivery Package ID, not a Manifest Number.
-    /// 
-    ///   Permissions Required:
-    ///   - Transfers
-    ///
-    pub async fn transfers_get_delivery_package_requiredlabtestbatches_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/deliveries/package/{}/requiredlabtestbatches", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetDeliveryPackageRequiredlabtestbatches V2
-    /// Retrieves a list of required lab test batches for a given Transfer Delivery Package Id. Please note: The {id} parameter above represents a Transfer Delivery Package Id, not a Manifest Number.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfers
-    ///   - View Transfers
-    ///
-    pub async fn transfers_get_delivery_package_requiredlabtestbatches_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/deliveries/package/{}/requiredlabtestbatches", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetDeliveryPackageWholesale V1
-    /// Please note: The {id} parameter above represents a Transfer Delivery ID, not a Manifest Number.
-    /// 
-    ///   Permissions Required:
-    ///   - Transfers
-    ///
-    pub async fn transfers_get_delivery_package_wholesale_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/deliveries/{}/packages/wholesale", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetDeliveryPackageWholesale V2
-    /// Retrieves a list of wholesale shipment packages for a given Transfer Delivery Id. Please note: The {id} parameter above represents a Transfer Delivery Id, not a Manifest Number.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfers
-    ///   - View Transfers
-    ///
-    pub async fn transfers_get_delivery_package_wholesale_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/deliveries/{}/packages/wholesale", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetDeliveryTransporters V1
-    /// Please note: that the {id} parameter above represents a Shipment Delivery ID.
-    /// 
-    ///   Permissions Required:
-    ///   - Transfers
-    ///
-    pub async fn transfers_get_delivery_transporters_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/deliveries/{}/transporters", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetDeliveryTransporters V2
-    /// Retrieves a list of transporters for a given Transfer Delivery Id. Please note: The {id} parameter above represents a Transfer Delivery Id, not a Manifest Number.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfers
-    ///   - View Transfers
-    ///
-    pub async fn transfers_get_delivery_transporters_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/deliveries/{}/transporters", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetDeliveryTransportersDetails V1
-    /// Please note: The {id} parameter above represents a Shipment Delivery ID.
-    /// 
-    ///   Permissions Required:
-    ///   - Transfers
-    ///
-    pub async fn transfers_get_delivery_transporters_details_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/deliveries/{}/transporters/details", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetDeliveryTransportersDetails V2
-    /// Retrieves a list of transporter details for a given Transfer Delivery Id. Please note: The {id} parameter above represents a Transfer Delivery Id, not a Manifest Number.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfers
-    ///   - View Transfers
-    ///
-    pub async fn transfers_get_delivery_transporters_details_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/deliveries/{}/transporters/details", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetHub V2
-    /// Retrieves a list of transfer hub shipments for a Facility, filtered by either last modified or estimated arrival date range.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfers
-    ///   - View Transfers
-    ///
-    pub async fn transfers_get_hub_v2(&self, estimated_arrival_end: Option<String>, estimated_arrival_start: Option<String>, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/hub");
-        let mut query_params = Vec::new();
-        if let Some(p) = estimated_arrival_end {
-            query_params.push(format!("estimatedArrivalEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = estimated_arrival_start {
-            query_params.push(format!("estimatedArrivalStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetIncoming V1
-    /// Permissions Required:
-    ///   - Transfers
-    ///
-    pub async fn transfers_get_incoming_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/incoming");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetIncoming V2
-    /// Retrieves a list of incoming shipments for a Facility, optionally filtered by last modified date range.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfers
-    ///   - View Transfers
-    ///
-    pub async fn transfers_get_incoming_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/incoming");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetOutgoing V1
-    /// Permissions Required:
-    ///   - Transfers
-    ///
-    pub async fn transfers_get_outgoing_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/outgoing");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetOutgoing V2
-    /// Retrieves a list of outgoing shipments for a Facility, optionally filtered by last modified date range.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfers
-    ///   - View Transfers
-    ///
-    pub async fn transfers_get_outgoing_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/outgoing");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetRejected V1
-    /// Permissions Required:
-    ///   - Transfers
-    ///
-    pub async fn transfers_get_rejected_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/rejected");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetRejected V2
-    /// Retrieves a list of shipments with rejected packages for a Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfers
-    ///   - View Transfers
-    ///
-    pub async fn transfers_get_rejected_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/rejected");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetTemplates V1
-    /// Permissions Required:
-    ///   - Transfer Templates
-    ///
-    pub async fn transfers_get_templates_v1(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/templates");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetTemplatesDelivery V1
-    /// Permissions Required:
-    ///   - Transfer Templates
-    ///
-    pub async fn transfers_get_templates_delivery_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/templates/{}/deliveries", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetTemplatesDeliveryPackage V1
-    /// Please note: The {id} parameter above represents a Transfer Template Delivery ID, not a Manifest Number.
-    /// 
-    ///   Permissions Required:
-    ///   - Transfers
-    ///
-    pub async fn transfers_get_templates_delivery_package_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/templates/deliveries/{}/packages", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetTemplatesDeliveryTransporters V1
-    /// Please note: The {id} parameter above represents a Transfer Template Delivery ID, not a Manifest Number.
-    /// 
-    ///   Permissions Required:
-    ///   - Transfer Templates
-    ///
-    pub async fn transfers_get_templates_delivery_transporters_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/templates/deliveries/{}/transporters", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetTemplatesDeliveryTransportersDetails V1
-    /// Please note: The {id} parameter above represents a Transfer Template Delivery ID, not a Manifest Number.
-    /// 
-    ///   Permissions Required:
-    ///   - Transfer Templates
-    ///
-    pub async fn transfers_get_templates_delivery_transporters_details_v1(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/templates/deliveries/{}/transporters/details", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetTemplatesOutgoing V2
-    /// Retrieves a list of transfer templates for a Facility, optionally filtered by last modified date range.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfer Templates
-    ///   - View Transfer Templates
-    ///
-    pub async fn transfers_get_templates_outgoing_v2(&self, last_modified_end: Option<String>, last_modified_start: Option<String>, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/templates/outgoing");
-        let mut query_params = Vec::new();
-        if let Some(p) = last_modified_end {
-            query_params.push(format!("lastModifiedEnd={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = last_modified_start {
-            query_params.push(format!("lastModifiedStart={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetTemplatesOutgoingDelivery V2
-    /// Retrieves a list of deliveries associated with a specific transfer template.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfer Templates
-    ///   - View Transfer Templates
-    ///
-    pub async fn transfers_get_templates_outgoing_delivery_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/templates/outgoing/{}/deliveries", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetTemplatesOutgoingDeliveryPackage V2
-    /// Retrieves a list of delivery package templates for a given Transfer Template Delivery Id. Please note: The {id} parameter above represents a Transfer Template Delivery Id, not a Manifest Number.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfer Templates
-    ///   - View Transfer Templates
-    ///
-    pub async fn transfers_get_templates_outgoing_delivery_package_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/templates/outgoing/deliveries/{}/packages", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetTemplatesOutgoingDeliveryTransporters V2
-    /// Retrieves a list of transporter templates for a given Transfer Template Delivery Id. Please note: The {id} parameter above represents a Transfer Template Delivery Id, not a Manifest Number.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfer Templates
-    ///   - View Transfer Templates
-    ///
-    pub async fn transfers_get_templates_outgoing_delivery_transporters_v2(&self, id: &str, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/templates/outgoing/deliveries/{}/transporters", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetTemplatesOutgoingDeliveryTransportersDetails V2
-    /// Retrieves detailed transporter templates for a given Transfer Template Delivery Id. Please note: The {id} parameter above represents a Transfer Template Delivery Id, not a Manifest Number.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfer Templates
-    ///   - View Transfer Templates
-    ///
-    pub async fn transfers_get_templates_outgoing_delivery_transporters_details_v2(&self, id: &str, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/templates/outgoing/deliveries/{}/transporters/details", urlencoding::encode(id).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetTypes V1
-    /// Permissions Required:
-    ///   - None
-    ///
-    pub async fn transfers_get_types_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/types");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetTypes V2
-    /// Retrieves a list of available transfer types for a Facility based on its license number.
-    /// 
-    ///   Permissions Required:
-    ///   - None
-    ///
-    pub async fn transfers_get_types_v2(&self, license_number: Option<String>, page_number: Option<String>, page_size: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/types");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_number {
-            query_params.push(format!("pageNumber={}", urlencoding::encode(&p)));
-        }
-        if let Some(p) = page_size {
-            query_params.push(format!("pageSize={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateExternalIncoming V1
-    /// Permissions Required:
-    ///   - Transfers
-    ///
-    pub async fn transfers_update_external_incoming_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/external/incoming");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateExternalIncoming V2
-    /// Updates external incoming shipment plans for a Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfers
-    ///
-    pub async fn transfers_update_external_incoming_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/external/incoming");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateTemplates V1
-    /// Permissions Required:
-    ///   - Transfer Templates
-    ///
-    pub async fn transfers_update_templates_v1(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v1/templates");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// PUT UpdateTemplatesOutgoing V2
-    /// Updates existing transfer templates for a Facility.
-    /// 
-    ///   Permissions Required:
-    ///   - Manage Transfer Templates
-    ///
-    pub async fn transfers_update_templates_outgoing_v2(&self, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/transfers/v2/templates/outgoing");
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
     /// POST CreateDriver V2
     /// Creates new driver records for a Facility.
     /// 
@@ -9095,50 +9169,14 @@ impl MetrcClient {
         self.send(reqwest::Method::PUT, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
     }
 
-    /// GET GetActive V1
-    /// Permissions Required:
-    ///   - None
-    ///
-    pub async fn units_of_measure_get_active_v1(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/unitsofmeasure/v1/active");
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetActive V2
-    /// Retrieves all active units of measure.
+    /// GET GetAll V1
+    /// This endpoint provides a list of facilities for which the authenticated user has access.
     /// 
     ///   Permissions Required:
     ///   - None
     ///
-    pub async fn units_of_measure_get_active_v2(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/unitsofmeasure/v2/active");
-        let mut query_params = Vec::new();
-        if let Some(p) = no {
-            query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetInactive V2
-    /// Retrieves all inactive units of measure.
-    /// 
-    ///   Permissions Required:
-    ///   - None
-    ///
-    pub async fn units_of_measure_get_inactive_v2(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/unitsofmeasure/v2/inactive");
+    pub async fn facilities_get_all_v1(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/facilities/v1");
         let mut query_params = Vec::new();
         if let Some(p) = no {
             query_params.push(format!("No={}", urlencoding::encode(&p)));
@@ -9151,54 +9189,16 @@ impl MetrcClient {
     }
 
     /// GET GetAll V2
-    /// Retrieves all available waste methods.
+    /// This endpoint provides a list of facilities for which the authenticated user has access.
     /// 
     ///   Permissions Required:
     ///   - None
     ///
-    pub async fn waste_methods_get_all_v2(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/wastemethods/v2");
+    pub async fn facilities_get_all_v2(&self, no: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
+        let mut path = format!("/facilities/v2");
         let mut query_params = Vec::new();
         if let Some(p) = no {
             query_params.push(format!("No={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetByCaregiverLicenseNumber V1
-    /// Data returned by this endpoint is cached for up to one minute.
-    /// 
-    ///   Permissions Required:
-    ///   - Lookup Caregivers
-    ///
-    pub async fn caregivers_status_get_by_caregiver_license_number_v1(&self, caregiver_license_number: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/caregivers/v1/status/{}", urlencoding::encode(caregiver_license_number).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
-        }
-        if !query_params.is_empty() {
-            path.push_str("?");
-            path.push_str(&query_params.join("&"));
-        }
-        self.send(reqwest::Method::GET, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
-    }
-
-    /// GET GetByCaregiverLicenseNumber V2
-    /// Retrieves the status of a Caregiver by their License Number for a specified Facility. Data returned by this endpoint is cached for up to one minute.
-    /// 
-    ///   Permissions Required:
-    ///   - Lookup Caregivers
-    ///
-    pub async fn caregivers_status_get_by_caregiver_license_number_v2(&self, caregiver_license_number: &str, license_number: Option<String>, body: Option<&Value>) -> Result<Option<Value>, Box<dyn Error>> {
-        let mut path = format!("/caregivers/v2/status/{}", urlencoding::encode(caregiver_license_number).as_ref());
-        let mut query_params = Vec::new();
-        if let Some(p) = license_number {
-            query_params.push(format!("licenseNumber={}", urlencoding::encode(&p)));
         }
         if !query_params.is_empty() {
             path.push_str("?");

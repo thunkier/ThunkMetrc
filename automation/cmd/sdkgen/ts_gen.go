@@ -24,7 +24,7 @@ func generateTypeScript(groups map[string][]bruno.Request, version string) {
 
 func generateTsPackageJson(dir string, version string) {
 	content := fmt.Sprintf(`{
-  "name": "@thunkmetrc/client",
+  "name": "@thunkier/thunkmetrc-client",
   "version": "%s",
   "description": "Auto-generated TypeScript client for ThunkMetrc",
   "main": "dist/index.js",

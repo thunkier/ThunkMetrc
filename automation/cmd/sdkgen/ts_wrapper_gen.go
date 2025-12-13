@@ -24,7 +24,7 @@ func generateTypeScriptWrapper(groups map[string][]bruno.Request, version string
 
 func generateTsWrapperPackageJson(dir string, version string) {
 	content := fmt.Sprintf(`{
-  "name": "@thunkmetrc/wrapper",
+  "name": "@thunkier/thunkmetrc-wrapper",
   "version": "%s",
   "description": "Type-safe wrapper for ThunkMetrc TypeScript client",
   "main": "dist/index.js",
@@ -37,7 +37,7 @@ func generateTsWrapperPackageJson(dir string, version string) {
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@thunkmetrc/client": "file:../client"
+    "@thunkier/thunkmetrc-client": "file:../client"
   },
   "devDependencies": {
     "typescript": "^5.0.0"
@@ -219,9 +219,9 @@ func generateTsWrapperCode(dir string, groups map[string][]bruno.Request) {
 
 	sb := strings.Builder{}
 	// Re-export Client so users can use MetrcClient from this package
-	sb.WriteString("export * from '@thunkmetrc/client';\n")
+	sb.WriteString("export * from '@thunkier/thunkmetrc-client';\n")
 	// Import for internal usage (renaming to avoid conflict with export *)
-	sb.WriteString("import { MetrcClient as InternalMetrcClient } from '@thunkmetrc/client';\n")
+	sb.WriteString("import { MetrcClient as InternalMetrcClient } from '@thunkier/thunkmetrc-client';\n")
 	sb.WriteString("import { MetrcRateLimiter, RateLimiterConfig } from './RateLimiter';\n\n")
 
 	// Model Generation Builder

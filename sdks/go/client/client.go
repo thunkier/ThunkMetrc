@@ -70,1281 +70,6 @@ func (c *MetrcClient) send(method, path string, queryParams map[string]string, b
 	return result, nil
 }
 
-// POST CreateRecord V1
-// Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) LabTestsCreateRecordV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/labtests/v1/record", queryParams, body)
-}
-
-// POST CreateRecord V2
-// Submits Lab Test results for one or more packages. NOTE: This endpoint allows only PDF files, and uploaded files can be no more than 5 MB in size. The Label element in the request is a Package Label.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) LabTestsCreateRecordV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/labtests/v2/record", queryParams, body)
-}
-
-// GET GetBatches V2
-// Retrieves a list of Lab Test batches.
-// 
-//   Permissions Required:
-//   - None
-func (c *MetrcClient) LabTestsGetBatchesV2(pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/labtests/v2/batches", queryParams, nil)
-}
-
-// GET GetLabtestdocument V1
-// Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) LabTestsGetLabtestdocumentV1(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/labtests/v1/labtestdocument/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET GetLabtestdocument V2
-// Retrieves a specific Lab Test result document by its Id for a given Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) LabTestsGetLabtestdocumentV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/labtests/v2/labtestdocument/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET GetResults V1
-// Permissions Required:
-//   - View Packages
-func (c *MetrcClient) LabTestsGetResultsV1(licensenumber string, packageid string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if packageid != "" {
-		queryParams["packageId"] = packageid
-	}
-	return c.send("GET", "/labtests/v1/results", queryParams, nil)
-}
-
-// GET GetResults V2
-// Retrieves Lab Test results for a specified Package.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) LabTestsGetResultsV2(licensenumber string, packageid string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if packageid != "" {
-		queryParams["packageId"] = packageid
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/labtests/v2/results", queryParams, nil)
-}
-
-// GET GetStates V1
-// Permissions Required:
-//   - None
-func (c *MetrcClient) LabTestsGetStatesV1(no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/labtests/v1/states", queryParams, nil)
-}
-
-// GET GetStates V2
-// Returns a list of all lab testing states.
-// 
-//   Permissions Required:
-//   - None
-func (c *MetrcClient) LabTestsGetStatesV2(no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/labtests/v2/states", queryParams, nil)
-}
-
-// GET GetTypes V1
-// Permissions Required:
-//   - None
-func (c *MetrcClient) LabTestsGetTypesV1(no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/labtests/v1/types", queryParams, nil)
-}
-
-// GET GetTypes V2
-// Returns a list of Lab Test types.
-// 
-//   Permissions Required:
-//   - None
-func (c *MetrcClient) LabTestsGetTypesV2(pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/labtests/v2/types", queryParams, nil)
-}
-
-// PUT UpdateLabtestdocument V1
-// Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) LabTestsUpdateLabtestdocumentV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/labtests/v1/labtestdocument", queryParams, body)
-}
-
-// PUT UpdateLabtestdocument V2
-// Updates one or more documents for previously submitted lab tests.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) LabTestsUpdateLabtestdocumentV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/labtests/v2/labtestdocument", queryParams, body)
-}
-
-// PUT UpdateResultRelease V1
-// Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) LabTestsUpdateResultReleaseV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/labtests/v1/results/release", queryParams, body)
-}
-
-// PUT UpdateResultRelease V2
-// Releases Lab Test results for one or more packages.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) LabTestsUpdateResultReleaseV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/labtests/v2/results/release", queryParams, body)
-}
-
-// POST Create V1
-// Permissions Required:
-//   - Manage Locations
-func (c *MetrcClient) LocationsCreateV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/locations/v1/create", queryParams, body)
-}
-
-// POST Create V2
-// Creates new locations for a specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Locations
-func (c *MetrcClient) LocationsCreateV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/locations/v2", queryParams, body)
-}
-
-// POST CreateUpdate V1
-// Permissions Required:
-//   - Manage Locations
-func (c *MetrcClient) LocationsCreateUpdateV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/locations/v1/update", queryParams, body)
-}
-
-// DELETE Delete V1
-// Permissions Required:
-//   - Manage Locations
-func (c *MetrcClient) LocationsDeleteV1(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/locations/v1/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// DELETE Delete V2
-// Archives a specified Location, identified by its Id, for a Facility.
-// 
-//   Permissions Required:
-//   - Manage Locations
-func (c *MetrcClient) LocationsDeleteV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/locations/v2/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET Get V1
-// Permissions Required:
-//   - Manage Locations
-func (c *MetrcClient) LocationsGetV1(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/locations/v1/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET Get V2
-// Retrieves a Location by its Id.
-// 
-//   Permissions Required:
-//   - Manage Locations
-func (c *MetrcClient) LocationsGetV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/locations/v2/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET GetActive V1
-// Permissions Required:
-//   - Manage Locations
-func (c *MetrcClient) LocationsGetActiveV1(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/locations/v1/active", queryParams, nil)
-}
-
-// GET GetActive V2
-// Retrieves a list of active locations for a specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Locations
-func (c *MetrcClient) LocationsGetActiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/locations/v2/active", queryParams, nil)
-}
-
-// GET GetInactive V2
-// Retrieves a list of inactive locations for a specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Locations
-func (c *MetrcClient) LocationsGetInactiveV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/locations/v2/inactive", queryParams, nil)
-}
-
-// GET GetTypes V1
-// Permissions Required:
-//   - Manage Locations
-func (c *MetrcClient) LocationsGetTypesV1(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/locations/v1/types", queryParams, nil)
-}
-
-// GET GetTypes V2
-// Retrieves a list of active location types for a specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Locations
-func (c *MetrcClient) LocationsGetTypesV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/locations/v2/types", queryParams, nil)
-}
-
-// PUT Update V2
-// Updates existing locations for a specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Locations
-func (c *MetrcClient) LocationsUpdateV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/locations/v2", queryParams, body)
-}
-
-// GET GetStatusesByPatientLicenseNumber V1
-// Data returned by this endpoint is cached for up to one minute.
-// 
-//   Permissions Required:
-//   - Lookup Patients
-func (c *MetrcClient) PatientsStatusGetStatusesByPatientLicenseNumberV1(patientlicensenumber string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/patients/v1/statuses/"+url.QueryEscape(patientlicensenumber)+"", queryParams, nil)
-}
-
-// GET GetStatusesByPatientLicenseNumber V2
-// Retrieves a list of statuses for a Patient License Number for a specified Facility. Data returned by this endpoint is cached for up to one minute.
-// 
-//   Permissions Required:
-//   - Lookup Patients
-func (c *MetrcClient) PatientsStatusGetStatusesByPatientLicenseNumberV2(patientlicensenumber string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/patients/v2/statuses/"+url.QueryEscape(patientlicensenumber)+"", queryParams, nil)
-}
-
-// POST CreateAdditives V1
-// Permissions Required:
-//   - Manage Plants Additives
-func (c *MetrcClient) PlantsCreateAdditivesV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/plants/v1/additives", queryParams, body)
-}
-
-// POST CreateAdditives V2
-// Records additive usage details applied to specific plants at a Facility.
-// 
-//   Permissions Required:
-//   - Manage Plants Additives
-func (c *MetrcClient) PlantsCreateAdditivesV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/plants/v2/additives", queryParams, body)
-}
-
-// POST CreateAdditivesBylocation V1
-// Permissions Required:
-//   - Manage Plants
-//   - Manage Plants Additives
-func (c *MetrcClient) PlantsCreateAdditivesBylocationV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/plants/v1/additives/bylocation", queryParams, body)
-}
-
-// POST CreateAdditivesBylocation V2
-// Records additive usage for plants based on their location within a specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Plants
-//   - Manage Plants Additives
-func (c *MetrcClient) PlantsCreateAdditivesBylocationV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/plants/v2/additives/bylocation", queryParams, body)
-}
-
-// POST CreateAdditivesBylocationUsingtemplate V2
-// Records additive usage for plants by location using a predefined additive template at a specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Plants Additives
-func (c *MetrcClient) PlantsCreateAdditivesBylocationUsingtemplateV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/plants/v2/additives/bylocation/usingtemplate", queryParams, body)
-}
-
-// POST CreateAdditivesUsingtemplate V2
-// Records additive usage for plants using predefined additive templates at a specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Plants Additives
-func (c *MetrcClient) PlantsCreateAdditivesUsingtemplateV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/plants/v2/additives/usingtemplate", queryParams, body)
-}
-
-// POST CreateChangegrowthphases V1
-// Permissions Required:
-//   - View Veg/Flower Plants
-//   - Manage Veg/Flower Plants Inventory
-func (c *MetrcClient) PlantsCreateChangegrowthphasesV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/plants/v1/changegrowthphases", queryParams, body)
-}
-
-// POST CreateHarvestplants V1
-// NOTE: If HarvestName is excluded from the request body, or if it is passed in as null, the harvest name is auto-generated.
-// 
-//   Permissions Required:
-//   - View Veg/Flower Plants
-//   - Manicure/Harvest Veg/Flower Plants
-func (c *MetrcClient) PlantsCreateHarvestplantsV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/plants/v1/harvestplants", queryParams, body)
-}
-
-// POST CreateManicure V2
-// Creates harvest product records from plant batches at a specified Facility.
-// 
-//   Permissions Required:
-//   - View Veg/Flower Plants
-//   - Manicure/Harvest Veg/Flower Plants
-func (c *MetrcClient) PlantsCreateManicureV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/plants/v2/manicure", queryParams, body)
-}
-
-// POST CreateManicureplants V1
-// Permissions Required:
-//   - View Veg/Flower Plants
-//   - Manicure/Harvest Veg/Flower Plants
-func (c *MetrcClient) PlantsCreateManicureplantsV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/plants/v1/manicureplants", queryParams, body)
-}
-
-// POST CreateMoveplants V1
-// Permissions Required:
-//   - View Veg/Flower Plants
-//   - Manage Veg/Flower Plants Inventory
-func (c *MetrcClient) PlantsCreateMoveplantsV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/plants/v1/moveplants", queryParams, body)
-}
-
-// POST CreatePlantbatchPackage V1
-// Permissions Required:
-//   - View Immature Plants
-//   - Manage Immature Plants Inventory
-//   - View Veg/Flower Plants
-//   - Manage Veg/Flower Plants Inventory
-//   - View Packages
-//   - Create/Submit/Discontinue Packages
-func (c *MetrcClient) PlantsCreatePlantbatchPackageV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/plants/v1/create/plantbatch/packages", queryParams, body)
-}
-
-// POST CreatePlantbatchPackage V2
-// Creates packages from plant batches at a specified Facility.
-// 
-//   Permissions Required:
-//   - View Immature Plants
-//   - Manage Immature Plants Inventory
-//   - View Veg/Flower Plants
-//   - Manage Veg/Flower Plants Inventory
-//   - View Packages
-//   - Create/Submit/Discontinue Packages
-func (c *MetrcClient) PlantsCreatePlantbatchPackageV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/plants/v2/plantbatch/packages", queryParams, body)
-}
-
-// POST CreatePlantings V1
-// Permissions Required:
-//   - View Immature Plants
-//   - Manage Immature Plants Inventory
-//   - View Veg/Flower Plants
-//   - Manage Veg/Flower Plants Inventory
-func (c *MetrcClient) PlantsCreatePlantingsV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/plants/v1/create/plantings", queryParams, body)
-}
-
-// POST CreatePlantings V2
-// Creates new plant batches at a specified Facility from existing plant data.
-// 
-//   Permissions Required:
-//   - View Immature Plants
-//   - Manage Immature Plants Inventory
-//   - View Veg/Flower Plants
-//   - Manage Veg/Flower Plants Inventory
-func (c *MetrcClient) PlantsCreatePlantingsV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/plants/v2/plantings", queryParams, body)
-}
-
-// POST CreateWaste V1
-// Permissions Required:
-//   - Manage Plants Waste
-func (c *MetrcClient) PlantsCreateWasteV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/plants/v1/waste", queryParams, body)
-}
-
-// POST CreateWaste V2
-// Records waste events for plants at a Facility, including method, reason, and location details.
-// 
-//   Permissions Required:
-//   - Manage Plants Waste
-func (c *MetrcClient) PlantsCreateWasteV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/plants/v2/waste", queryParams, body)
-}
-
-// DELETE Delete V1
-// Permissions Required:
-//   - View Veg/Flower Plants
-//   - Destroy Veg/Flower Plants
-func (c *MetrcClient) PlantsDeleteV1(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/plants/v1", queryParams, nil)
-}
-
-// DELETE Delete V2
-// Removes plants from a Facility’s inventory while recording the reason for their disposal.
-// 
-//   Permissions Required:
-//   - View Veg/Flower Plants
-//   - Destroy Veg/Flower Plants
-func (c *MetrcClient) PlantsDeleteV2(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/plants/v2", queryParams, nil)
-}
-
-// GET Get V1
-// Permissions Required:
-//   - View Veg/Flower Plants
-func (c *MetrcClient) PlantsGetV1(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/plants/v1/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET Get V2
-// Retrieves a Plant by Id.
-// 
-//   Permissions Required:
-//   - View Veg/Flower Plants
-func (c *MetrcClient) PlantsGetV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/plants/v2/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET GetAdditives V1
-// Permissions Required:
-//   - View/Manage Plants Additives
-func (c *MetrcClient) PlantsGetAdditivesV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/plants/v1/additives", queryParams, nil)
-}
-
-// GET GetAdditives V2
-// Retrieves additive records applied to plants at a specified Facility.
-// 
-//   Permissions Required:
-//   - View/Manage Plants Additives
-func (c *MetrcClient) PlantsGetAdditivesV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/plants/v2/additives", queryParams, nil)
-}
-
-// GET GetAdditivesTypes V1
-// Permissions Required:
-//   -
-func (c *MetrcClient) PlantsGetAdditivesTypesV1(no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/plants/v1/additives/types", queryParams, nil)
-}
-
-// GET GetAdditivesTypes V2
-// Retrieves a list of all plant additive types defined within a Facility.
-// 
-//   Permissions Required:
-//   - None
-func (c *MetrcClient) PlantsGetAdditivesTypesV2(no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/plants/v2/additives/types", queryParams, nil)
-}
-
-// GET GetByLabel V1
-// Permissions Required:
-//   - View Veg/Flower Plants
-func (c *MetrcClient) PlantsGetByLabelV1(label string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/plants/v1/"+url.QueryEscape(label)+"", queryParams, nil)
-}
-
-// GET GetByLabel V2
-// Retrieves a Plant by label.
-// 
-//   Permissions Required:
-//   - View Veg/Flower Plants
-func (c *MetrcClient) PlantsGetByLabelV2(label string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/plants/v2/"+url.QueryEscape(label)+"", queryParams, nil)
-}
-
-// GET GetFlowering V1
-// Permissions Required:
-//   - View Veg/Flower Plants
-func (c *MetrcClient) PlantsGetFloweringV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/plants/v1/flowering", queryParams, nil)
-}
-
-// GET GetFlowering V2
-// Retrieves flowering-phase plants at a specified Facility, optionally filtered by last modified date.
-// 
-//   Permissions Required:
-//   - View Veg/Flower Plants
-func (c *MetrcClient) PlantsGetFloweringV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/plants/v2/flowering", queryParams, nil)
-}
-
-// GET GetGrowthPhases V1
-// Permissions Required:
-//   - None
-func (c *MetrcClient) PlantsGetGrowthPhasesV1(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/plants/v1/growthphases", queryParams, nil)
-}
-
-// GET GetGrowthPhases V2
-// Retrieves the list of growth phases supported by a specified Facility.
-// 
-//   Permissions Required:
-//   - None
-func (c *MetrcClient) PlantsGetGrowthPhasesV2(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/plants/v2/growthphases", queryParams, nil)
-}
-
-// GET GetInactive V1
-// Permissions Required:
-//   - View Veg/Flower Plants
-func (c *MetrcClient) PlantsGetInactiveV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/plants/v1/inactive", queryParams, nil)
-}
-
-// GET GetInactive V2
-// Retrieves inactive plants at a specified Facility.
-// 
-//   Permissions Required:
-//   - View Veg/Flower Plants
-func (c *MetrcClient) PlantsGetInactiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/plants/v2/inactive", queryParams, nil)
-}
-
-// GET GetMother V2
-// Retrieves mother-phase plants at a specified Facility.
-// 
-//   Permissions Required:
-//   - View Mother Plants
-func (c *MetrcClient) PlantsGetMotherV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/plants/v2/mother", queryParams, nil)
-}
-
-// GET GetMotherInactive V2
-// Retrieves inactive mother-phase plants at a specified Facility.
-// 
-//   Permissions Required:
-//   - View Mother Plants
-func (c *MetrcClient) PlantsGetMotherInactiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/plants/v2/mother/inactive", queryParams, nil)
-}
-
-// GET GetMotherOnhold V2
-// Retrieves mother-phase plants currently marked as on hold at a specified Facility.
-// 
-//   Permissions Required:
-//   - View Mother Plants
-func (c *MetrcClient) PlantsGetMotherOnholdV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/plants/v2/mother/onhold", queryParams, nil)
-}
-
-// GET GetOnhold V1
-// Permissions Required:
-//   - View Veg/Flower Plants
-func (c *MetrcClient) PlantsGetOnholdV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/plants/v1/onhold", queryParams, nil)
-}
-
-// GET GetOnhold V2
-// Retrieves plants that are currently on hold at a specified Facility.
-// 
-//   Permissions Required:
-//   - View Veg/Flower Plants
-func (c *MetrcClient) PlantsGetOnholdV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/plants/v2/onhold", queryParams, nil)
-}
-
-// GET GetVegetative V1
-// Permissions Required:
-//   - View Veg/Flower Plants
-func (c *MetrcClient) PlantsGetVegetativeV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/plants/v1/vegetative", queryParams, nil)
-}
-
-// GET GetVegetative V2
-// Retrieves vegetative-phase plants at a specified Facility, optionally filtered by last modified date.
-// 
-//   Permissions Required:
-//   - View Veg/Flower Plants
-func (c *MetrcClient) PlantsGetVegetativeV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/plants/v2/vegetative", queryParams, nil)
-}
-
-// GET GetWaste V2
-// Retrieves a list of recorded plant waste events for a specific Facility.
-// 
-//   Permissions Required:
-//   - View Plants Waste
-func (c *MetrcClient) PlantsGetWasteV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/plants/v2/waste", queryParams, nil)
-}
-
-// GET GetWasteMethodsAll V1
-// Permissions Required:
-//   - None
-func (c *MetrcClient) PlantsGetWasteMethodsAllV1(no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/plants/v1/waste/methods/all", queryParams, nil)
-}
-
-// GET GetWasteMethodsAll V2
-// Retrieves a list of all available plant waste methods for use within a Facility.
-// 
-//   Permissions Required:
-//   - None
-func (c *MetrcClient) PlantsGetWasteMethodsAllV2(pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/plants/v2/waste/methods/all", queryParams, nil)
-}
-
-// GET GetWastePackage V2
-// Retrieves a list of package records linked to the specified plantWasteId for a given facility.
-// 
-//   Permissions Required:
-//   - View Plants Waste
-func (c *MetrcClient) PlantsGetWastePackageV2(id string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/plants/v2/waste/"+url.QueryEscape(id)+"/package", queryParams, nil)
-}
-
-// GET GetWastePlant V2
-// Retrieves a list of plants records linked to the specified plantWasteId for a given facility.
-// 
-//   Permissions Required:
-//   - View Plants Waste
-func (c *MetrcClient) PlantsGetWastePlantV2(id string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/plants/v2/waste/"+url.QueryEscape(id)+"/plant", queryParams, nil)
-}
-
-// GET GetWasteReasons V1
-// Permissions Required:
-//   - None
-func (c *MetrcClient) PlantsGetWasteReasonsV1(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/plants/v1/waste/reasons", queryParams, nil)
-}
-
-// GET GetWasteReasons V2
-// Retriveves available reasons for recording mature plant waste at a specified Facility.
-// 
-//   Permissions Required:
-//   - None
-func (c *MetrcClient) PlantsGetWasteReasonsV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/plants/v2/waste/reasons", queryParams, nil)
-}
-
-// PUT UpdateAdjust V2
-// Adjusts the recorded count of plants at a specified Facility.
-// 
-//   Permissions Required:
-//   - View Veg/Flower Plants
-//   - Manage Veg/Flower Plants Inventory
-func (c *MetrcClient) PlantsUpdateAdjustV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/plants/v2/adjust", queryParams, body)
-}
-
-// PUT UpdateGrowthphase V2
-// Changes the growth phases of plants within a specified Facility.
-// 
-//   Permissions Required:
-//   - View Veg/Flower Plants
-//   - Manage Veg/Flower Plants Inventory
-func (c *MetrcClient) PlantsUpdateGrowthphaseV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/plants/v2/growthphase", queryParams, body)
-}
-
-// PUT UpdateHarvest V2
-// Processes whole plant Harvest data for a specific Facility. NOTE: If HarvestName is excluded from the request body, or if it is passed in as null, the harvest name is auto-generated.
-// 
-//   Permissions Required:
-//   - View Veg/Flower Plants
-//   - Manicure/Harvest Veg/Flower Plants
-func (c *MetrcClient) PlantsUpdateHarvestV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/plants/v2/harvest", queryParams, body)
-}
-
-// PUT UpdateLocation V2
-// Moves plant batches to new locations within a specified Facility.
-// 
-//   Permissions Required:
-//   - View Veg/Flower Plants
-//   - Manage Veg/Flower Plants Inventory
-func (c *MetrcClient) PlantsUpdateLocationV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/plants/v2/location", queryParams, body)
-}
-
-// PUT UpdateMerge V2
-// Merges multiple plant groups into a single group within a Facility.
-// 
-//   Permissions Required:
-//   - View Veg/Flower Plants
-//   - Manicure/Harvest Veg/Flower Plants
-func (c *MetrcClient) PlantsUpdateMergeV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/plants/v2/merge", queryParams, body)
-}
-
-// PUT UpdateSplit V2
-// Splits an existing plant group into multiple groups within a Facility.
-// 
-//   Permissions Required:
-//   - View Plant
-func (c *MetrcClient) PlantsUpdateSplitV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/plants/v2/split", queryParams, body)
-}
-
-// PUT UpdateStrain V2
-// Updates the strain information for plants within a Facility.
-// 
-//   Permissions Required:
-//   - View Veg/Flower Plants
-//   - Manage Veg/Flower Plants Inventory
-func (c *MetrcClient) PlantsUpdateStrainV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/plants/v2/strain", queryParams, body)
-}
-
-// PUT UpdateTag V2
-// Replaces existing plant tags with new tags for plants within a Facility.
-// 
-//   Permissions Required:
-//   - View Veg/Flower Plants
-//   - Manage Veg/Flower Plants Inventory
-func (c *MetrcClient) PlantsUpdateTagV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/plants/v2/tag", queryParams, body)
-}
-
 // POST CreateAssociate V2
 // Facilitate association of QR codes and Package labels. This will return the count of packages and QR codes associated that were added or replaced.
 // 
@@ -1453,514 +178,106 @@ func (c *MetrcClient) SandboxCreateIntegratorSetupV2(userkey string, body interf
 	return c.send("POST", "/sandbox/v2/integrator/setup", queryParams, body)
 }
 
-// GET GetAll V1
-// This endpoint provides a list of facilities for which the authenticated user has access.
-// 
-//   Permissions Required:
-//   - None
-func (c *MetrcClient) FacilitiesGetAllV1(no string) (interface{}, error) {
+// POST Create V1
+// Permissions Required:
+//   - Manage Strains
+func (c *MetrcClient) StrainsCreateV1(licensenumber string, body interface{}) (interface{}, error) {
 	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("GET", "/facilities/v1", queryParams, nil)
-}
-
-// GET GetAll V2
-// This endpoint provides a list of facilities for which the authenticated user has access.
-// 
-//   Permissions Required:
-//   - None
-func (c *MetrcClient) FacilitiesGetAllV2(no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/facilities/v2", queryParams, nil)
+	return c.send("POST", "/strains/v1/create", queryParams, body)
 }
 
 // POST Create V2
-// Adds new patients to a specified Facility.
+// Creates new strain records for a specified Facility.
 // 
 //   Permissions Required:
-//   - Manage Patients
-func (c *MetrcClient) PatientsCreateV2(licensenumber string, body interface{}) (interface{}, error) {
+//   - Manage Strains
+func (c *MetrcClient) StrainsCreateV2(licensenumber string, body interface{}) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("POST", "/patients/v2", queryParams, body)
-}
-
-// POST CreateAdd V1
-// Permissions Required:
-//   - Manage Patients
-func (c *MetrcClient) PatientsCreateAddV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/patients/v1/add", queryParams, body)
+	return c.send("POST", "/strains/v2", queryParams, body)
 }
 
 // POST CreateUpdate V1
 // Permissions Required:
-//   - Manage Patients
-func (c *MetrcClient) PatientsCreateUpdateV1(licensenumber string, body interface{}) (interface{}, error) {
+//   - Manage Strains
+func (c *MetrcClient) StrainsCreateUpdateV1(licensenumber string, body interface{}) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("POST", "/patients/v1/update", queryParams, body)
+	return c.send("POST", "/strains/v1/update", queryParams, body)
 }
 
 // DELETE Delete V1
 // Permissions Required:
-//   - Manage Patients
-func (c *MetrcClient) PatientsDeleteV1(id string, licensenumber string) (interface{}, error) {
+//   - Manage Strains
+func (c *MetrcClient) StrainsDeleteV1(id string, licensenumber string) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("DELETE", "/patients/v1/"+url.QueryEscape(id)+"", queryParams, nil)
+	return c.send("DELETE", "/strains/v1/"+url.QueryEscape(id)+"", queryParams, nil)
 }
 
 // DELETE Delete V2
-// Removes a Patient, identified by an Id, from a specified Facility.
+// Archives an existing strain record for a Facility
 // 
 //   Permissions Required:
-//   - Manage Patients
-func (c *MetrcClient) PatientsDeleteV2(id string, licensenumber string) (interface{}, error) {
+//   - Manage Strains
+func (c *MetrcClient) StrainsDeleteV2(id string, licensenumber string) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("DELETE", "/patients/v2/"+url.QueryEscape(id)+"", queryParams, nil)
+	return c.send("DELETE", "/strains/v2/"+url.QueryEscape(id)+"", queryParams, nil)
 }
 
 // GET Get V1
 // Permissions Required:
-//   - Manage Patients
-func (c *MetrcClient) PatientsGetV1(id string, licensenumber string) (interface{}, error) {
+//   - Manage Strains
+func (c *MetrcClient) StrainsGetV1(id string, licensenumber string) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("GET", "/patients/v1/"+url.QueryEscape(id)+"", queryParams, nil)
+	return c.send("GET", "/strains/v1/"+url.QueryEscape(id)+"", queryParams, nil)
 }
 
 // GET Get V2
-// Retrieves a Patient by Id.
+// Retrieves a Strain record by its Id, with an optional license number.
 // 
 //   Permissions Required:
-//   - Manage Patients
-func (c *MetrcClient) PatientsGetV2(id string, licensenumber string) (interface{}, error) {
+//   - Manage Strains
+func (c *MetrcClient) StrainsGetV2(id string, licensenumber string) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("GET", "/patients/v2/"+url.QueryEscape(id)+"", queryParams, nil)
+	return c.send("GET", "/strains/v2/"+url.QueryEscape(id)+"", queryParams, nil)
 }
 
 // GET GetActive V1
 // Permissions Required:
-//   - Manage Patients
-func (c *MetrcClient) PatientsGetActiveV1(licensenumber string) (interface{}, error) {
+//   - Manage Strains
+func (c *MetrcClient) StrainsGetActiveV1(licensenumber string) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("GET", "/patients/v1/active", queryParams, nil)
+	return c.send("GET", "/strains/v1/active", queryParams, nil)
 }
 
 // GET GetActive V2
-// Retrieves a list of active patients for a specified Facility.
+// Retrieves a list of active strains for the current Facility, optionally filtered by last modified date range.
 // 
 //   Permissions Required:
-//   - Manage Patients
-func (c *MetrcClient) PatientsGetActiveV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/patients/v2/active", queryParams, nil)
-}
-
-// PUT Update V2
-// Updates Patient information for a specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Patients
-func (c *MetrcClient) PatientsUpdateV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/patients/v2", queryParams, body)
-}
-
-// POST CreateExternalIncoming V1
-// Permissions Required:
-//   - Transfers
-func (c *MetrcClient) TransfersCreateExternalIncomingV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/transfers/v1/external/incoming", queryParams, body)
-}
-
-// POST CreateExternalIncoming V2
-// Creates external incoming shipment plans for a Facility.
-// 
-//   Permissions Required:
-//   - Manage Transfers
-func (c *MetrcClient) TransfersCreateExternalIncomingV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/transfers/v2/external/incoming", queryParams, body)
-}
-
-// POST CreateTemplates V1
-// Permissions Required:
-//   - Transfer Templates
-func (c *MetrcClient) TransfersCreateTemplatesV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/transfers/v1/templates", queryParams, body)
-}
-
-// POST CreateTemplatesOutgoing V2
-// Creates new transfer templates for a Facility.
-// 
-//   Permissions Required:
-//   - Manage Transfer Templates
-func (c *MetrcClient) TransfersCreateTemplatesOutgoingV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/transfers/v2/templates/outgoing", queryParams, body)
-}
-
-// DELETE DeleteExternalIncoming V1
-// Permissions Required:
-//   - Transfers
-func (c *MetrcClient) TransfersDeleteExternalIncomingV1(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/transfers/v1/external/incoming/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// DELETE DeleteExternalIncoming V2
-// Voids an external incoming shipment plan for a Facility.
-// 
-//   Permissions Required:
-//   - Manage Transfers
-func (c *MetrcClient) TransfersDeleteExternalIncomingV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/transfers/v2/external/incoming/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// DELETE DeleteTemplates V1
-// Permissions Required:
-//   - Transfer Templates
-func (c *MetrcClient) TransfersDeleteTemplatesV1(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/transfers/v1/templates/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// DELETE DeleteTemplatesOutgoing V2
-// Archives a transfer template for a Facility.
-// 
-//   Permissions Required:
-//   - Manage Transfer Templates
-func (c *MetrcClient) TransfersDeleteTemplatesOutgoingV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/transfers/v2/templates/outgoing/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET GetDeliveriesPackagesStates V1
-// Permissions Required:
-//   - None
-func (c *MetrcClient) TransfersGetDeliveriesPackagesStatesV1(no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/transfers/v1/deliveries/packages/states", queryParams, nil)
-}
-
-// GET GetDeliveriesPackagesStates V2
-// Returns a list of available shipment Package states.
-// 
-//   Permissions Required:
-//   - None
-func (c *MetrcClient) TransfersGetDeliveriesPackagesStatesV2(no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/transfers/v2/deliveries/packages/states", queryParams, nil)
-}
-
-// GET GetDelivery V1
-// Please note: that the {id} parameter above represents a Shipment Plan ID.
-// 
-//   Permissions Required:
-//   - Transfers
-func (c *MetrcClient) TransfersGetDeliveryV1(id string, no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/transfers/v1/"+url.QueryEscape(id)+"/deliveries", queryParams, nil)
-}
-
-// GET GetDelivery V2
-// Retrieves a list of shipment deliveries for a given Transfer Id. Please note: The {id} parameter above represents a Transfer Id.
-// 
-//   Permissions Required:
-//   - Manage Transfers
-//   - View Transfers
-func (c *MetrcClient) TransfersGetDeliveryV2(id string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/transfers/v2/"+url.QueryEscape(id)+"/deliveries", queryParams, nil)
-}
-
-// GET GetDeliveryPackage V1
-// Please note: The {id} parameter above represents a Transfer Delivery ID, not a Manifest Number.
-// 
-//   Permissions Required:
-//   - Transfers
-func (c *MetrcClient) TransfersGetDeliveryPackageV1(id string, no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/transfers/v1/deliveries/"+url.QueryEscape(id)+"/packages", queryParams, nil)
-}
-
-// GET GetDeliveryPackage V2
-// Retrieves a list of packages associated with a given Transfer Delivery Id. Please note: The {id} parameter above represents a Transfer Delivery Id, not a Manifest Number.
-// 
-//   Permissions Required:
-//   - Manage Transfers
-//   - View Transfers
-func (c *MetrcClient) TransfersGetDeliveryPackageV2(id string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/transfers/v2/deliveries/"+url.QueryEscape(id)+"/packages", queryParams, nil)
-}
-
-// GET GetDeliveryPackageRequiredlabtestbatches V1
-// Please note: The {id} parameter above represents a Transfer Delivery Package ID, not a Manifest Number.
-// 
-//   Permissions Required:
-//   - Transfers
-func (c *MetrcClient) TransfersGetDeliveryPackageRequiredlabtestbatchesV1(id string, no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/transfers/v1/deliveries/package/"+url.QueryEscape(id)+"/requiredlabtestbatches", queryParams, nil)
-}
-
-// GET GetDeliveryPackageRequiredlabtestbatches V2
-// Retrieves a list of required lab test batches for a given Transfer Delivery Package Id. Please note: The {id} parameter above represents a Transfer Delivery Package Id, not a Manifest Number.
-// 
-//   Permissions Required:
-//   - Manage Transfers
-//   - View Transfers
-func (c *MetrcClient) TransfersGetDeliveryPackageRequiredlabtestbatchesV2(id string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/transfers/v2/deliveries/package/"+url.QueryEscape(id)+"/requiredlabtestbatches", queryParams, nil)
-}
-
-// GET GetDeliveryPackageWholesale V1
-// Please note: The {id} parameter above represents a Transfer Delivery ID, not a Manifest Number.
-// 
-//   Permissions Required:
-//   - Transfers
-func (c *MetrcClient) TransfersGetDeliveryPackageWholesaleV1(id string, no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/transfers/v1/deliveries/"+url.QueryEscape(id)+"/packages/wholesale", queryParams, nil)
-}
-
-// GET GetDeliveryPackageWholesale V2
-// Retrieves a list of wholesale shipment packages for a given Transfer Delivery Id. Please note: The {id} parameter above represents a Transfer Delivery Id, not a Manifest Number.
-// 
-//   Permissions Required:
-//   - Manage Transfers
-//   - View Transfers
-func (c *MetrcClient) TransfersGetDeliveryPackageWholesaleV2(id string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/transfers/v2/deliveries/"+url.QueryEscape(id)+"/packages/wholesale", queryParams, nil)
-}
-
-// GET GetDeliveryTransporters V1
-// Please note: that the {id} parameter above represents a Shipment Delivery ID.
-// 
-//   Permissions Required:
-//   - Transfers
-func (c *MetrcClient) TransfersGetDeliveryTransportersV1(id string, no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/transfers/v1/deliveries/"+url.QueryEscape(id)+"/transporters", queryParams, nil)
-}
-
-// GET GetDeliveryTransporters V2
-// Retrieves a list of transporters for a given Transfer Delivery Id. Please note: The {id} parameter above represents a Transfer Delivery Id, not a Manifest Number.
-// 
-//   Permissions Required:
-//   - Manage Transfers
-//   - View Transfers
-func (c *MetrcClient) TransfersGetDeliveryTransportersV2(id string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/transfers/v2/deliveries/"+url.QueryEscape(id)+"/transporters", queryParams, nil)
-}
-
-// GET GetDeliveryTransportersDetails V1
-// Please note: The {id} parameter above represents a Shipment Delivery ID.
-// 
-//   Permissions Required:
-//   - Transfers
-func (c *MetrcClient) TransfersGetDeliveryTransportersDetailsV1(id string, no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/transfers/v1/deliveries/"+url.QueryEscape(id)+"/transporters/details", queryParams, nil)
-}
-
-// GET GetDeliveryTransportersDetails V2
-// Retrieves a list of transporter details for a given Transfer Delivery Id. Please note: The {id} parameter above represents a Transfer Delivery Id, not a Manifest Number.
-// 
-//   Permissions Required:
-//   - Manage Transfers
-//   - View Transfers
-func (c *MetrcClient) TransfersGetDeliveryTransportersDetailsV2(id string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/transfers/v2/deliveries/"+url.QueryEscape(id)+"/transporters/details", queryParams, nil)
-}
-
-// GET GetHub V2
-// Retrieves a list of transfer hub shipments for a Facility, filtered by either last modified or estimated arrival date range.
-// 
-//   Permissions Required:
-//   - Manage Transfers
-//   - View Transfers
-func (c *MetrcClient) TransfersGetHubV2(estimatedarrivalend string, estimatedarrivalstart string, lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if estimatedarrivalend != "" {
-		queryParams["estimatedArrivalEnd"] = estimatedarrivalend
-	}
-	if estimatedarrivalstart != "" {
-		queryParams["estimatedArrivalStart"] = estimatedarrivalstart
-	}
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/transfers/v2/hub", queryParams, nil)
-}
-
-// GET GetIncoming V1
-// Permissions Required:
-//   - Transfers
-func (c *MetrcClient) TransfersGetIncomingV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/transfers/v1/incoming", queryParams, nil)
-}
-
-// GET GetIncoming V2
-// Retrieves a list of incoming shipments for a Facility, optionally filtered by last modified date range.
-// 
-//   Permissions Required:
-//   - Manage Transfers
-//   - View Transfers
-func (c *MetrcClient) TransfersGetIncomingV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+//   - Manage Strains
+func (c *MetrcClient) StrainsGetActiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if lastmodifiedend != "" {
 		queryParams["lastModifiedEnd"] = lastmodifiedend
@@ -1977,1776 +294,105 @@ func (c *MetrcClient) TransfersGetIncomingV2(lastmodifiedend string, lastmodifie
 	if pagesize != "" {
 		queryParams["pageSize"] = pagesize
 	}
-	return c.send("GET", "/transfers/v2/incoming", queryParams, nil)
-}
-
-// GET GetOutgoing V1
-// Permissions Required:
-//   - Transfers
-func (c *MetrcClient) TransfersGetOutgoingV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/transfers/v1/outgoing", queryParams, nil)
-}
-
-// GET GetOutgoing V2
-// Retrieves a list of outgoing shipments for a Facility, optionally filtered by last modified date range.
-// 
-//   Permissions Required:
-//   - Manage Transfers
-//   - View Transfers
-func (c *MetrcClient) TransfersGetOutgoingV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/transfers/v2/outgoing", queryParams, nil)
-}
-
-// GET GetRejected V1
-// Permissions Required:
-//   - Transfers
-func (c *MetrcClient) TransfersGetRejectedV1(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/transfers/v1/rejected", queryParams, nil)
-}
-
-// GET GetRejected V2
-// Retrieves a list of shipments with rejected packages for a Facility.
-// 
-//   Permissions Required:
-//   - Manage Transfers
-//   - View Transfers
-func (c *MetrcClient) TransfersGetRejectedV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/transfers/v2/rejected", queryParams, nil)
-}
-
-// GET GetTemplates V1
-// Permissions Required:
-//   - Transfer Templates
-func (c *MetrcClient) TransfersGetTemplatesV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/transfers/v1/templates", queryParams, nil)
-}
-
-// GET GetTemplatesDelivery V1
-// Permissions Required:
-//   - Transfer Templates
-func (c *MetrcClient) TransfersGetTemplatesDeliveryV1(id string, no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/transfers/v1/templates/"+url.QueryEscape(id)+"/deliveries", queryParams, nil)
-}
-
-// GET GetTemplatesDeliveryPackage V1
-// Please note: The {id} parameter above represents a Transfer Template Delivery ID, not a Manifest Number.
-// 
-//   Permissions Required:
-//   - Transfers
-func (c *MetrcClient) TransfersGetTemplatesDeliveryPackageV1(id string, no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/transfers/v1/templates/deliveries/"+url.QueryEscape(id)+"/packages", queryParams, nil)
-}
-
-// GET GetTemplatesDeliveryTransporters V1
-// Please note: The {id} parameter above represents a Transfer Template Delivery ID, not a Manifest Number.
-// 
-//   Permissions Required:
-//   - Transfer Templates
-func (c *MetrcClient) TransfersGetTemplatesDeliveryTransportersV1(id string, no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/transfers/v1/templates/deliveries/"+url.QueryEscape(id)+"/transporters", queryParams, nil)
-}
-
-// GET GetTemplatesDeliveryTransportersDetails V1
-// Please note: The {id} parameter above represents a Transfer Template Delivery ID, not a Manifest Number.
-// 
-//   Permissions Required:
-//   - Transfer Templates
-func (c *MetrcClient) TransfersGetTemplatesDeliveryTransportersDetailsV1(id string, no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/transfers/v1/templates/deliveries/"+url.QueryEscape(id)+"/transporters/details", queryParams, nil)
-}
-
-// GET GetTemplatesOutgoing V2
-// Retrieves a list of transfer templates for a Facility, optionally filtered by last modified date range.
-// 
-//   Permissions Required:
-//   - Manage Transfer Templates
-//   - View Transfer Templates
-func (c *MetrcClient) TransfersGetTemplatesOutgoingV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/transfers/v2/templates/outgoing", queryParams, nil)
-}
-
-// GET GetTemplatesOutgoingDelivery V2
-// Retrieves a list of deliveries associated with a specific transfer template.
-// 
-//   Permissions Required:
-//   - Manage Transfer Templates
-//   - View Transfer Templates
-func (c *MetrcClient) TransfersGetTemplatesOutgoingDeliveryV2(id string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/transfers/v2/templates/outgoing/"+url.QueryEscape(id)+"/deliveries", queryParams, nil)
-}
-
-// GET GetTemplatesOutgoingDeliveryPackage V2
-// Retrieves a list of delivery package templates for a given Transfer Template Delivery Id. Please note: The {id} parameter above represents a Transfer Template Delivery Id, not a Manifest Number.
-// 
-//   Permissions Required:
-//   - Manage Transfer Templates
-//   - View Transfer Templates
-func (c *MetrcClient) TransfersGetTemplatesOutgoingDeliveryPackageV2(id string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/transfers/v2/templates/outgoing/deliveries/"+url.QueryEscape(id)+"/packages", queryParams, nil)
-}
-
-// GET GetTemplatesOutgoingDeliveryTransporters V2
-// Retrieves a list of transporter templates for a given Transfer Template Delivery Id. Please note: The {id} parameter above represents a Transfer Template Delivery Id, not a Manifest Number.
-// 
-//   Permissions Required:
-//   - Manage Transfer Templates
-//   - View Transfer Templates
-func (c *MetrcClient) TransfersGetTemplatesOutgoingDeliveryTransportersV2(id string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/transfers/v2/templates/outgoing/deliveries/"+url.QueryEscape(id)+"/transporters", queryParams, nil)
-}
-
-// GET GetTemplatesOutgoingDeliveryTransportersDetails V2
-// Retrieves detailed transporter templates for a given Transfer Template Delivery Id. Please note: The {id} parameter above represents a Transfer Template Delivery Id, not a Manifest Number.
-// 
-//   Permissions Required:
-//   - Manage Transfer Templates
-//   - View Transfer Templates
-func (c *MetrcClient) TransfersGetTemplatesOutgoingDeliveryTransportersDetailsV2(id string, no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/transfers/v2/templates/outgoing/deliveries/"+url.QueryEscape(id)+"/transporters/details", queryParams, nil)
-}
-
-// GET GetTypes V1
-// Permissions Required:
-//   - None
-func (c *MetrcClient) TransfersGetTypesV1(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/transfers/v1/types", queryParams, nil)
-}
-
-// GET GetTypes V2
-// Retrieves a list of available transfer types for a Facility based on its license number.
-// 
-//   Permissions Required:
-//   - None
-func (c *MetrcClient) TransfersGetTypesV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/transfers/v2/types", queryParams, nil)
-}
-
-// PUT UpdateExternalIncoming V1
-// Permissions Required:
-//   - Transfers
-func (c *MetrcClient) TransfersUpdateExternalIncomingV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/transfers/v1/external/incoming", queryParams, body)
-}
-
-// PUT UpdateExternalIncoming V2
-// Updates external incoming shipment plans for a Facility.
-// 
-//   Permissions Required:
-//   - Manage Transfers
-func (c *MetrcClient) TransfersUpdateExternalIncomingV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/transfers/v2/external/incoming", queryParams, body)
-}
-
-// PUT UpdateTemplates V1
-// Permissions Required:
-//   - Transfer Templates
-func (c *MetrcClient) TransfersUpdateTemplatesV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/transfers/v1/templates", queryParams, body)
-}
-
-// PUT UpdateTemplatesOutgoing V2
-// Updates existing transfer templates for a Facility.
-// 
-//   Permissions Required:
-//   - Manage Transfer Templates
-func (c *MetrcClient) TransfersUpdateTemplatesOutgoingV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/transfers/v2/templates/outgoing", queryParams, body)
-}
-
-// POST CreateDriver V2
-// Creates new driver records for a Facility.
-// 
-//   Permissions Required:
-//   - Manage Transporters
-func (c *MetrcClient) TransportersCreateDriverV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/transporters/v2/drivers", queryParams, body)
-}
-
-// POST CreateVehicle V2
-// Creates new vehicle records for a Facility.
-// 
-//   Permissions Required:
-//   - Manage Transporters
-func (c *MetrcClient) TransportersCreateVehicleV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/transporters/v2/vehicles", queryParams, body)
-}
-
-// DELETE DeleteDriver V2
-// Archives a Driver record for a Facility.  Please note: The {id} parameter above represents a Driver Id.
-// 
-//   Permissions Required:
-//   - Manage Transporters
-func (c *MetrcClient) TransportersDeleteDriverV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/transporters/v2/drivers/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// DELETE DeleteVehicle V2
-// Archives a Vehicle for a facility.  Please note: The {id} parameter above represents a Vehicle Id.
-// 
-//   Permissions Required:
-//   - Manage Transporters
-func (c *MetrcClient) TransportersDeleteVehicleV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/transporters/v2/vehicles/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET GetDriver V2
-// Retrieves a Driver by its Id, with an optional license number. Please note: The {id} parameter above represents a Driver Id.
-// 
-//   Permissions Required:
-//   - Transporters
-func (c *MetrcClient) TransportersGetDriverV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/transporters/v2/drivers/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET GetDrivers V2
-// Retrieves a list of drivers for a Facility.
-// 
-//   Permissions Required:
-//   - Transporters
-func (c *MetrcClient) TransportersGetDriversV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/transporters/v2/drivers", queryParams, nil)
-}
-
-// GET GetVehicle V2
-// Retrieves a Vehicle by its Id, with an optional license number. Please note: The {id} parameter above represents a Vehicle Id.
-// 
-//   Permissions Required:
-//   - Transporters
-func (c *MetrcClient) TransportersGetVehicleV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/transporters/v2/vehicles/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET GetVehicles V2
-// Retrieves a list of vehicles for a Facility.
-// 
-//   Permissions Required:
-//   - Transporters
-func (c *MetrcClient) TransportersGetVehiclesV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/transporters/v2/vehicles", queryParams, nil)
-}
-
-// PUT UpdateDriver V2
-// Updates existing driver records for a Facility.
-// 
-//   Permissions Required:
-//   - Manage Transporters
-func (c *MetrcClient) TransportersUpdateDriverV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/transporters/v2/drivers", queryParams, body)
-}
-
-// PUT UpdateVehicle V2
-// Updates existing vehicle records for a facility.
-// 
-//   Permissions Required:
-//   - Manage Transporters
-func (c *MetrcClient) TransportersUpdateVehicleV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/transporters/v2/vehicles", queryParams, body)
-}
-
-// GET GetActive V1
-// Permissions Required:
-//   - None
-func (c *MetrcClient) UnitsOfMeasureGetActiveV1(no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/unitsofmeasure/v1/active", queryParams, nil)
-}
-
-// GET GetActive V2
-// Retrieves all active units of measure.
-// 
-//   Permissions Required:
-//   - None
-func (c *MetrcClient) UnitsOfMeasureGetActiveV2(no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/unitsofmeasure/v2/active", queryParams, nil)
+	return c.send("GET", "/strains/v2/active", queryParams, nil)
 }
 
 // GET GetInactive V2
-// Retrieves all inactive units of measure.
+// Retrieves a list of inactive strains for the current Facility, optionally filtered by last modified date range.
 // 
 //   Permissions Required:
-//   - None
-func (c *MetrcClient) UnitsOfMeasureGetInactiveV2(no string) (interface{}, error) {
+//   - Manage Strains
+func (c *MetrcClient) StrainsGetInactiveV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
 	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("GET", "/unitsofmeasure/v2/inactive", queryParams, nil)
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/strains/v2/inactive", queryParams, nil)
 }
 
-// GET GetAll V2
-// Retrieves all available waste methods.
+// PUT Update V2
+// Updates existing strain records for a specified Facility.
 // 
 //   Permissions Required:
-//   - None
-func (c *MetrcClient) WasteMethodsGetAllV2(no string) (interface{}, error) {
+//   - Manage Strains
+func (c *MetrcClient) StrainsUpdateV2(licensenumber string, body interface{}) (interface{}, error) {
 	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("GET", "/wastemethods/v2", queryParams, nil)
+	return c.send("PUT", "/strains/v2", queryParams, body)
 }
 
-// GET GetByCaregiverLicenseNumber V1
+// GET GetPackageAvailable V2
+// Returns a list of available package tags. NOTE: This is a premium endpoint.
+// 
+//   Permissions Required:
+//   - Manage Tags
+func (c *MetrcClient) TagsGetPackageAvailableV2(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/tags/v2/package/available", queryParams, nil)
+}
+
+// GET GetPlantAvailable V2
+// Returns a list of available plant tags. NOTE: This is a premium endpoint.
+// 
+//   Permissions Required:
+//   - Manage Tags
+func (c *MetrcClient) TagsGetPlantAvailableV2(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/tags/v2/plant/available", queryParams, nil)
+}
+
+// GET GetStaged V2
+// Returns a list of staged tags. NOTE: This is a premium endpoint.
+// 
+//   Permissions Required:
+//   - Manage Tags
+//   - RetailId.AllowPackageStaging Key Value enabled
+func (c *MetrcClient) TagsGetStagedV2(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/tags/v2/staged", queryParams, nil)
+}
+
+// GET GetStatusesByPatientLicenseNumber V1
 // Data returned by this endpoint is cached for up to one minute.
 // 
 //   Permissions Required:
-//   - Lookup Caregivers
-func (c *MetrcClient) CaregiversStatusGetByCaregiverLicenseNumberV1(caregiverlicensenumber string, licensenumber string) (interface{}, error) {
+//   - Lookup Patients
+func (c *MetrcClient) PatientsStatusGetStatusesByPatientLicenseNumberV1(patientlicensenumber string, licensenumber string) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("GET", "/caregivers/v1/status/"+url.QueryEscape(caregiverlicensenumber)+"", queryParams, nil)
+	return c.send("GET", "/patients/v1/statuses/"+url.QueryEscape(patientlicensenumber)+"", queryParams, nil)
 }
 
-// GET GetByCaregiverLicenseNumber V2
-// Retrieves the status of a Caregiver by their License Number for a specified Facility. Data returned by this endpoint is cached for up to one minute.
+// GET GetStatusesByPatientLicenseNumber V2
+// Retrieves a list of statuses for a Patient License Number for a specified Facility. Data returned by this endpoint is cached for up to one minute.
 // 
 //   Permissions Required:
-//   - Lookup Caregivers
-func (c *MetrcClient) CaregiversStatusGetByCaregiverLicenseNumberV2(caregiverlicensenumber string, licensenumber string) (interface{}, error) {
+//   - Lookup Patients
+func (c *MetrcClient) PatientsStatusGetStatusesByPatientLicenseNumberV2(patientlicensenumber string, licensenumber string) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("GET", "/caregivers/v2/status/"+url.QueryEscape(caregiverlicensenumber)+"", queryParams, nil)
-}
-
-// GET GetAll V1
-// Permissions Required:
-//   - Manage Employees
-func (c *MetrcClient) EmployeesGetAllV1(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/employees/v1", queryParams, nil)
-}
-
-// GET GetAll V2
-// Retrieves a list of employees for a specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Employees
-//   - View Employees
-func (c *MetrcClient) EmployeesGetAllV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/employees/v2", queryParams, nil)
-}
-
-// GET GetPermissions V2
-// Retrieves the permissions of a specified Employee, identified by their Employee License Number, for a given Facility.
-// 
-//   Permissions Required:
-//   - Manage Employees
-func (c *MetrcClient) EmployeesGetPermissionsV2(employeelicensenumber string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if employeelicensenumber != "" {
-		queryParams["employeeLicenseNumber"] = employeelicensenumber
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/employees/v2/permissions", queryParams, nil)
-}
-
-// POST Create V1
-// NOTE: To include a photo with an item, first use POST /items/v1/photo to POST the photo, and then use the returned ID in the request body in this endpoint.
-// 
-//   Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsCreateV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/items/v1/create", queryParams, body)
-}
-
-// POST Create V2
-// Creates one or more new products for the specified Facility. NOTE: To include a photo with an item, first use POST /items/v2/photo to POST the photo, and then use the returned Id in the request body in this endpoint.
-// 
-//   Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsCreateV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/items/v2", queryParams, body)
-}
-
-// POST CreateBrand V2
-// Creates one or more new item brands for the specified Facility identified by the License Number.
-// 
-//   Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsCreateBrandV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/items/v2/brand", queryParams, body)
-}
-
-// POST CreateFile V2
-// Uploads one or more image or PDF files for products, labels, packaging, or documents at the specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsCreateFileV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/items/v2/file", queryParams, body)
-}
-
-// POST CreatePhoto V1
-// This endpoint allows only BMP, GIF, JPG, and PNG files and uploaded files can be no more than 5 MB in size.
-// 
-//   Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsCreatePhotoV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/items/v1/photo", queryParams, body)
-}
-
-// POST CreatePhoto V2
-// This endpoint allows only BMP, GIF, JPG, and PNG files and uploaded files can be no more than 5 MB in size.
-// 
-//   Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsCreatePhotoV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/items/v2/photo", queryParams, body)
-}
-
-// POST CreateUpdate V1
-// Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsCreateUpdateV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/items/v1/update", queryParams, body)
-}
-
-// DELETE Delete V1
-// Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsDeleteV1(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/items/v1/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// DELETE Delete V2
-// Archives the specified Product by Id for the given Facility License Number.
-// 
-//   Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsDeleteV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/items/v2/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// DELETE DeleteBrand V2
-// Archives the specified Item Brand by Id for the given Facility License Number.
-// 
-//   Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsDeleteBrandV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/items/v2/brand/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET Get V1
-// Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsGetV1(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/items/v1/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET Get V2
-// Retrieves detailed information about a specific Item by Id.
-// 
-//   Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsGetV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/items/v2/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET GetActive V1
-// Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsGetActiveV1(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/items/v1/active", queryParams, nil)
-}
-
-// GET GetActive V2
-// Returns a list of active items for the specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsGetActiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/items/v2/active", queryParams, nil)
-}
-
-// GET GetBrands V1
-// Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsGetBrandsV1(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/items/v1/brands", queryParams, nil)
-}
-
-// GET GetBrands V2
-// Retrieves a list of active item brands for the specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsGetBrandsV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/items/v2/brands", queryParams, nil)
-}
-
-// GET GetCategories V1
-// Permissions Required:
-//   - None
-func (c *MetrcClient) ItemsGetCategoriesV1(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/items/v1/categories", queryParams, nil)
-}
-
-// GET GetCategories V2
-// Retrieves a list of item categories.
-// 
-//   Permissions Required:
-//   - None
-func (c *MetrcClient) ItemsGetCategoriesV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/items/v2/categories", queryParams, nil)
-}
-
-// GET GetFile V2
-// Retrieves a file by its Id for the specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsGetFileV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/items/v2/file/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET GetInactive V1
-// Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsGetInactiveV1(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/items/v1/inactive", queryParams, nil)
-}
-
-// GET GetInactive V2
-// Retrieves a list of inactive items for the specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsGetInactiveV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/items/v2/inactive", queryParams, nil)
-}
-
-// GET GetPhoto V1
-// Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsGetPhotoV1(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/items/v1/photo/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET GetPhoto V2
-// Retrieves an image by its Id for the specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsGetPhotoV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/items/v2/photo/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// PUT Update V2
-// Updates one or more existing products for the specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsUpdateV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/items/v2", queryParams, body)
-}
-
-// PUT UpdateBrand V2
-// Updates one or more existing item brands for the specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Items
-func (c *MetrcClient) ItemsUpdateBrandV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/items/v2/brand", queryParams, body)
-}
-
-// POST Create V1
-// Permissions Required:
-//   - View Packages
-//   - Create/Submit/Discontinue Packages
-func (c *MetrcClient) PackagesCreateV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/packages/v1/create", queryParams, body)
-}
-
-// POST Create V2
-// Creates new packages for a specified Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Create/Submit/Discontinue Packages
-func (c *MetrcClient) PackagesCreateV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/packages/v2", queryParams, body)
-}
-
-// POST CreateAdjust V1
-// Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) PackagesCreateAdjustV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/packages/v1/adjust", queryParams, body)
-}
-
-// POST CreateAdjust V2
-// Records a list of adjustments for packages at a specific Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) PackagesCreateAdjustV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/packages/v2/adjust", queryParams, body)
-}
-
-// POST CreateChangeItem V1
-// Permissions Required:
-//   - View Packages
-//   - Create/Submit/Discontinue Packages
-func (c *MetrcClient) PackagesCreateChangeItemV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/packages/v1/change/item", queryParams, body)
-}
-
-// POST CreateChangeLocation V1
-// Permissions Required:
-//   - View Packages
-//   - Create/Submit/Discontinue Packages
-func (c *MetrcClient) PackagesCreateChangeLocationV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/packages/v1/change/locations", queryParams, body)
-}
-
-// POST CreateFinish V1
-// Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) PackagesCreateFinishV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/packages/v1/finish", queryParams, body)
-}
-
-// POST CreatePlantings V1
-// Permissions Required:
-//   - View Immature Plants
-//   - Manage Immature Plants
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) PackagesCreatePlantingsV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/packages/v1/create/plantings", queryParams, body)
-}
-
-// POST CreatePlantings V2
-// Creates new plantings from packages for a specified Facility.
-// 
-//   Permissions Required:
-//   - View Immature Plants
-//   - Manage Immature Plants
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) PackagesCreatePlantingsV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/packages/v2/plantings", queryParams, body)
-}
-
-// POST CreateRemediate V1
-// Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) PackagesCreateRemediateV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/packages/v1/remediate", queryParams, body)
-}
-
-// POST CreateTesting V1
-// Permissions Required:
-//   - View Packages
-//   - Create/Submit/Discontinue Packages
-func (c *MetrcClient) PackagesCreateTestingV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/packages/v1/create/testing", queryParams, body)
-}
-
-// POST CreateTesting V2
-// Creates new packages for testing for a specified Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Create/Submit/Discontinue Packages
-func (c *MetrcClient) PackagesCreateTestingV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/packages/v2/testing", queryParams, body)
-}
-
-// POST CreateUnfinish V1
-// Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) PackagesCreateUnfinishV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/packages/v1/unfinish", queryParams, body)
-}
-
-// DELETE Delete V2
-// Discontinues a Package at a specific Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Create/Submit/Discontinue Packages
-func (c *MetrcClient) PackagesDeleteV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/packages/v2/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET Get V1
-// Permissions Required:
-//   - View Packages
-func (c *MetrcClient) PackagesGetV1(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/packages/v1/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET Get V2
-// Retrieves a Package by its Id.
-// 
-//   Permissions Required:
-//   - View Packages
-func (c *MetrcClient) PackagesGetV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/packages/v2/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET GetActive V1
-// Permissions Required:
-//   - View Packages
-func (c *MetrcClient) PackagesGetActiveV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/packages/v1/active", queryParams, nil)
-}
-
-// GET GetActive V2
-// Retrieves a list of active packages for a specified Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-func (c *MetrcClient) PackagesGetActiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/packages/v2/active", queryParams, nil)
-}
-
-// GET GetAdjustReasons V1
-// Permissions Required:
-//   - None
-func (c *MetrcClient) PackagesGetAdjustReasonsV1(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/packages/v1/adjust/reasons", queryParams, nil)
-}
-
-// GET GetAdjustReasons V2
-// Retrieves a list of adjustment reasons for packages at a specified Facility.
-// 
-//   Permissions Required:
-//   - None
-func (c *MetrcClient) PackagesGetAdjustReasonsV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/packages/v2/adjust/reasons", queryParams, nil)
-}
-
-// GET GetByLabel V1
-// Permissions Required:
-//   - View Packages
-func (c *MetrcClient) PackagesGetByLabelV1(label string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/packages/v1/"+url.QueryEscape(label)+"", queryParams, nil)
-}
-
-// GET GetByLabel V2
-// Retrieves a Package by its label.
-// 
-//   Permissions Required:
-//   - View Packages
-func (c *MetrcClient) PackagesGetByLabelV2(label string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/packages/v2/"+url.QueryEscape(label)+"", queryParams, nil)
-}
-
-// GET GetInactive V1
-// Permissions Required:
-//   - View Packages
-func (c *MetrcClient) PackagesGetInactiveV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/packages/v1/inactive", queryParams, nil)
-}
-
-// GET GetInactive V2
-// Retrieves a list of inactive packages for a specified Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-func (c *MetrcClient) PackagesGetInactiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/packages/v2/inactive", queryParams, nil)
-}
-
-// GET GetIntransit V2
-// Retrieves a list of packages in transit for a specified Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-func (c *MetrcClient) PackagesGetIntransitV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/packages/v2/intransit", queryParams, nil)
-}
-
-// GET GetLabsamples V2
-// Retrieves a list of lab sample packages created or sent for testing for a specified Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-func (c *MetrcClient) PackagesGetLabsamplesV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/packages/v2/labsamples", queryParams, nil)
-}
-
-// GET GetOnhold V1
-// Permissions Required:
-//   - View Packages
-func (c *MetrcClient) PackagesGetOnholdV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/packages/v1/onhold", queryParams, nil)
-}
-
-// GET GetOnhold V2
-// Retrieves a list of packages on hold for a specified Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-func (c *MetrcClient) PackagesGetOnholdV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/packages/v2/onhold", queryParams, nil)
-}
-
-// GET GetSourceHarvest V2
-// Retrieves the source harvests for a Package by its Id.
-// 
-//   Permissions Required:
-//   - View Package Source Harvests
-func (c *MetrcClient) PackagesGetSourceHarvestV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/packages/v2/"+url.QueryEscape(id)+"/source/harvests", queryParams, nil)
-}
-
-// GET GetTransferred V2
-// Retrieves a list of transferred packages for a specific Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-func (c *MetrcClient) PackagesGetTransferredV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/packages/v2/transferred", queryParams, nil)
-}
-
-// GET GetTypes V1
-// Permissions Required:
-//   - None
-func (c *MetrcClient) PackagesGetTypesV1(no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/packages/v1/types", queryParams, nil)
-}
-
-// GET GetTypes V2
-// Retrieves a list of available Package types.
-// 
-//   Permissions Required:
-//   - None
-func (c *MetrcClient) PackagesGetTypesV2(no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/packages/v2/types", queryParams, nil)
-}
-
-// PUT UpdateAdjust V2
-// Set the final quantity for a Package.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) PackagesUpdateAdjustV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/packages/v2/adjust", queryParams, body)
-}
-
-// PUT UpdateChangeNote V1
-// Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-//   - Manage Package Notes
-func (c *MetrcClient) PackagesUpdateChangeNoteV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/packages/v1/change/note", queryParams, body)
-}
-
-// PUT UpdateDecontaminate V2
-// Updates the Product decontaminate information for a list of packages at a specific Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) PackagesUpdateDecontaminateV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/packages/v2/decontaminate", queryParams, body)
-}
-
-// PUT UpdateDonationFlag V2
-// Flags one or more packages for donation at the specified Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) PackagesUpdateDonationFlagV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/packages/v2/donation/flag", queryParams, body)
-}
-
-// PUT UpdateDonationUnflag V2
-// Removes the donation flag from one or more packages at the specified Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) PackagesUpdateDonationUnflagV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/packages/v2/donation/unflag", queryParams, body)
-}
-
-// PUT UpdateExternalid V2
-// Updates the external identifiers for one or more packages at the specified Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Manage Package Inventory
-//   - External Id Enabled
-func (c *MetrcClient) PackagesUpdateExternalidV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/packages/v2/externalid", queryParams, body)
-}
-
-// PUT UpdateFinish V2
-// Updates a list of packages as finished for a specific Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) PackagesUpdateFinishV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/packages/v2/finish", queryParams, body)
-}
-
-// PUT UpdateItem V2
-// Updates the associated Item for one or more packages at the specified Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Create/Submit/Discontinue Packages
-func (c *MetrcClient) PackagesUpdateItemV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/packages/v2/item", queryParams, body)
-}
-
-// PUT UpdateLabTestRequired V2
-// Updates the list of required lab test batches for one or more packages at the specified Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Create/Submit/Discontinue Packages
-func (c *MetrcClient) PackagesUpdateLabTestRequiredV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/packages/v2/labtests/required", queryParams, body)
-}
-
-// PUT UpdateLocation V2
-// Updates the Location and Sublocation for one or more packages at the specified Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Create/Submit/Discontinue Packages
-func (c *MetrcClient) PackagesUpdateLocationV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/packages/v2/location", queryParams, body)
-}
-
-// PUT UpdateNote V2
-// Updates notes associated with one or more packages for the specified Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-//   - Manage Package Notes
-func (c *MetrcClient) PackagesUpdateNoteV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/packages/v2/note", queryParams, body)
-}
-
-// PUT UpdateRemediate V2
-// Updates a list of Product remediations for packages at a specific Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) PackagesUpdateRemediateV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/packages/v2/remediate", queryParams, body)
-}
-
-// PUT UpdateTradesampleFlag V2
-// Flags or unflags one or more packages at the specified Facility as trade samples.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) PackagesUpdateTradesampleFlagV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/packages/v2/tradesample/flag", queryParams, body)
-}
-
-// PUT UpdateTradesampleUnflag V2
-// Removes the trade sample flag from one or more packages at the specified Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) PackagesUpdateTradesampleUnflagV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/packages/v2/tradesample/unflag", queryParams, body)
-}
-
-// PUT UpdateUnfinish V2
-// Updates a list of packages as unfinished for a specific Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Manage Packages Inventory
-func (c *MetrcClient) PackagesUpdateUnfinishV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/packages/v2/unfinish", queryParams, body)
-}
-
-// PUT UpdateUsebydate V2
-// Updates the use-by date for one or more packages at the specified Facility.
-// 
-//   Permissions Required:
-//   - View Packages
-//   - Create/Submit/Discontinue Packages
-func (c *MetrcClient) PackagesUpdateUsebydateV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/packages/v2/usebydate", queryParams, body)
-}
-
-// POST Create V1
-// Permissions Required:
-//   - ManagePatientsCheckIns
-func (c *MetrcClient) PatientCheckInsCreateV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/patient-checkins/v1", queryParams, body)
-}
-
-// POST Create V2
-// Records patient check-ins for a specified Facility.
-// 
-//   Permissions Required:
-//   - ManagePatientsCheckIns
-func (c *MetrcClient) PatientCheckInsCreateV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/patient-checkins/v2", queryParams, body)
-}
-
-// DELETE Delete V1
-// Permissions Required:
-//   - ManagePatientsCheckIns
-func (c *MetrcClient) PatientCheckInsDeleteV1(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/patient-checkins/v1/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// DELETE Delete V2
-// Archives a Patient Check-In, identified by its Id, for a specified Facility.
-// 
-//   Permissions Required:
-//   - ManagePatientsCheckIns
-func (c *MetrcClient) PatientCheckInsDeleteV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/patient-checkins/v2/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET GetAll V1
-// Permissions Required:
-//   - ManagePatientsCheckIns
-func (c *MetrcClient) PatientCheckInsGetAllV1(checkindateend string, checkindatestart string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if checkindateend != "" {
-		queryParams["checkinDateEnd"] = checkindateend
-	}
-	if checkindatestart != "" {
-		queryParams["checkinDateStart"] = checkindatestart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/patient-checkins/v1", queryParams, nil)
-}
-
-// GET GetAll V2
-// Retrieves a list of patient check-ins for a specified Facility.
-// 
-//   Permissions Required:
-//   - ManagePatientsCheckIns
-func (c *MetrcClient) PatientCheckInsGetAllV2(checkindateend string, checkindatestart string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if checkindateend != "" {
-		queryParams["checkinDateEnd"] = checkindateend
-	}
-	if checkindatestart != "" {
-		queryParams["checkinDateStart"] = checkindatestart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/patient-checkins/v2", queryParams, nil)
-}
-
-// GET GetLocations V1
-// Permissions Required:
-//   - None
-func (c *MetrcClient) PatientCheckInsGetLocationsV1(no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/patient-checkins/v1/locations", queryParams, nil)
-}
-
-// GET GetLocations V2
-// Retrieves a list of Patient Check-In locations.
-// 
-//   Permissions Required:
-//   - None
-func (c *MetrcClient) PatientCheckInsGetLocationsV2(no string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if no != "" {
-		queryParams["No"] = no
-	}
-	return c.send("GET", "/patient-checkins/v2/locations", queryParams, nil)
-}
-
-// PUT Update V1
-// Permissions Required:
-//   - ManagePatientsCheckIns
-func (c *MetrcClient) PatientCheckInsUpdateV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/patient-checkins/v1", queryParams, body)
-}
-
-// PUT Update V2
-// Updates patient check-ins for a specified Facility.
-// 
-//   Permissions Required:
-//   - ManagePatientsCheckIns
-func (c *MetrcClient) PatientCheckInsUpdateV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/patient-checkins/v2", queryParams, body)
+	return c.send("GET", "/patients/v2/statuses/"+url.QueryEscape(patientlicensenumber)+"", queryParams, nil)
 }
 
 // POST CreateAdditives V1
@@ -4805,6 +1451,2291 @@ func (c *MetrcClient) SublocationsUpdateV2(licensenumber string, body interface{
 		queryParams["licenseNumber"] = licensenumber
 	}
 	return c.send("PUT", "/sublocations/v2", queryParams, body)
+}
+
+// POST CreateExternalIncoming V1
+// Permissions Required:
+//   - Transfers
+func (c *MetrcClient) TransfersCreateExternalIncomingV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/transfers/v1/external/incoming", queryParams, body)
+}
+
+// POST CreateExternalIncoming V2
+// Creates external incoming shipment plans for a Facility.
+// 
+//   Permissions Required:
+//   - Manage Transfers
+func (c *MetrcClient) TransfersCreateExternalIncomingV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/transfers/v2/external/incoming", queryParams, body)
+}
+
+// POST CreateTemplates V1
+// Permissions Required:
+//   - Transfer Templates
+func (c *MetrcClient) TransfersCreateTemplatesV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/transfers/v1/templates", queryParams, body)
+}
+
+// POST CreateTemplatesOutgoing V2
+// Creates new transfer templates for a Facility.
+// 
+//   Permissions Required:
+//   - Manage Transfer Templates
+func (c *MetrcClient) TransfersCreateTemplatesOutgoingV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/transfers/v2/templates/outgoing", queryParams, body)
+}
+
+// DELETE DeleteExternalIncoming V1
+// Permissions Required:
+//   - Transfers
+func (c *MetrcClient) TransfersDeleteExternalIncomingV1(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("DELETE", "/transfers/v1/external/incoming/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// DELETE DeleteExternalIncoming V2
+// Voids an external incoming shipment plan for a Facility.
+// 
+//   Permissions Required:
+//   - Manage Transfers
+func (c *MetrcClient) TransfersDeleteExternalIncomingV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("DELETE", "/transfers/v2/external/incoming/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// DELETE DeleteTemplates V1
+// Permissions Required:
+//   - Transfer Templates
+func (c *MetrcClient) TransfersDeleteTemplatesV1(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("DELETE", "/transfers/v1/templates/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// DELETE DeleteTemplatesOutgoing V2
+// Archives a transfer template for a Facility.
+// 
+//   Permissions Required:
+//   - Manage Transfer Templates
+func (c *MetrcClient) TransfersDeleteTemplatesOutgoingV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("DELETE", "/transfers/v2/templates/outgoing/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET GetDeliveriesPackagesStates V1
+// Permissions Required:
+//   - None
+func (c *MetrcClient) TransfersGetDeliveriesPackagesStatesV1(no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/transfers/v1/deliveries/packages/states", queryParams, nil)
+}
+
+// GET GetDeliveriesPackagesStates V2
+// Returns a list of available shipment Package states.
+// 
+//   Permissions Required:
+//   - None
+func (c *MetrcClient) TransfersGetDeliveriesPackagesStatesV2(no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/transfers/v2/deliveries/packages/states", queryParams, nil)
+}
+
+// GET GetDelivery V1
+// Please note: that the {id} parameter above represents a Shipment Plan ID.
+// 
+//   Permissions Required:
+//   - Transfers
+func (c *MetrcClient) TransfersGetDeliveryV1(id string, no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/transfers/v1/"+url.QueryEscape(id)+"/deliveries", queryParams, nil)
+}
+
+// GET GetDelivery V2
+// Retrieves a list of shipment deliveries for a given Transfer Id. Please note: The {id} parameter above represents a Transfer Id.
+// 
+//   Permissions Required:
+//   - Manage Transfers
+//   - View Transfers
+func (c *MetrcClient) TransfersGetDeliveryV2(id string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/transfers/v2/"+url.QueryEscape(id)+"/deliveries", queryParams, nil)
+}
+
+// GET GetDeliveryPackage V1
+// Please note: The {id} parameter above represents a Transfer Delivery ID, not a Manifest Number.
+// 
+//   Permissions Required:
+//   - Transfers
+func (c *MetrcClient) TransfersGetDeliveryPackageV1(id string, no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/transfers/v1/deliveries/"+url.QueryEscape(id)+"/packages", queryParams, nil)
+}
+
+// GET GetDeliveryPackage V2
+// Retrieves a list of packages associated with a given Transfer Delivery Id. Please note: The {id} parameter above represents a Transfer Delivery Id, not a Manifest Number.
+// 
+//   Permissions Required:
+//   - Manage Transfers
+//   - View Transfers
+func (c *MetrcClient) TransfersGetDeliveryPackageV2(id string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/transfers/v2/deliveries/"+url.QueryEscape(id)+"/packages", queryParams, nil)
+}
+
+// GET GetDeliveryPackageRequiredlabtestbatches V1
+// Please note: The {id} parameter above represents a Transfer Delivery Package ID, not a Manifest Number.
+// 
+//   Permissions Required:
+//   - Transfers
+func (c *MetrcClient) TransfersGetDeliveryPackageRequiredlabtestbatchesV1(id string, no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/transfers/v1/deliveries/package/"+url.QueryEscape(id)+"/requiredlabtestbatches", queryParams, nil)
+}
+
+// GET GetDeliveryPackageRequiredlabtestbatches V2
+// Retrieves a list of required lab test batches for a given Transfer Delivery Package Id. Please note: The {id} parameter above represents a Transfer Delivery Package Id, not a Manifest Number.
+// 
+//   Permissions Required:
+//   - Manage Transfers
+//   - View Transfers
+func (c *MetrcClient) TransfersGetDeliveryPackageRequiredlabtestbatchesV2(id string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/transfers/v2/deliveries/package/"+url.QueryEscape(id)+"/requiredlabtestbatches", queryParams, nil)
+}
+
+// GET GetDeliveryPackageWholesale V1
+// Please note: The {id} parameter above represents a Transfer Delivery ID, not a Manifest Number.
+// 
+//   Permissions Required:
+//   - Transfers
+func (c *MetrcClient) TransfersGetDeliveryPackageWholesaleV1(id string, no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/transfers/v1/deliveries/"+url.QueryEscape(id)+"/packages/wholesale", queryParams, nil)
+}
+
+// GET GetDeliveryPackageWholesale V2
+// Retrieves a list of wholesale shipment packages for a given Transfer Delivery Id. Please note: The {id} parameter above represents a Transfer Delivery Id, not a Manifest Number.
+// 
+//   Permissions Required:
+//   - Manage Transfers
+//   - View Transfers
+func (c *MetrcClient) TransfersGetDeliveryPackageWholesaleV2(id string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/transfers/v2/deliveries/"+url.QueryEscape(id)+"/packages/wholesale", queryParams, nil)
+}
+
+// GET GetDeliveryTransporters V1
+// Please note: that the {id} parameter above represents a Shipment Delivery ID.
+// 
+//   Permissions Required:
+//   - Transfers
+func (c *MetrcClient) TransfersGetDeliveryTransportersV1(id string, no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/transfers/v1/deliveries/"+url.QueryEscape(id)+"/transporters", queryParams, nil)
+}
+
+// GET GetDeliveryTransporters V2
+// Retrieves a list of transporters for a given Transfer Delivery Id. Please note: The {id} parameter above represents a Transfer Delivery Id, not a Manifest Number.
+// 
+//   Permissions Required:
+//   - Manage Transfers
+//   - View Transfers
+func (c *MetrcClient) TransfersGetDeliveryTransportersV2(id string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/transfers/v2/deliveries/"+url.QueryEscape(id)+"/transporters", queryParams, nil)
+}
+
+// GET GetDeliveryTransportersDetails V1
+// Please note: The {id} parameter above represents a Shipment Delivery ID.
+// 
+//   Permissions Required:
+//   - Transfers
+func (c *MetrcClient) TransfersGetDeliveryTransportersDetailsV1(id string, no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/transfers/v1/deliveries/"+url.QueryEscape(id)+"/transporters/details", queryParams, nil)
+}
+
+// GET GetDeliveryTransportersDetails V2
+// Retrieves a list of transporter details for a given Transfer Delivery Id. Please note: The {id} parameter above represents a Transfer Delivery Id, not a Manifest Number.
+// 
+//   Permissions Required:
+//   - Manage Transfers
+//   - View Transfers
+func (c *MetrcClient) TransfersGetDeliveryTransportersDetailsV2(id string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/transfers/v2/deliveries/"+url.QueryEscape(id)+"/transporters/details", queryParams, nil)
+}
+
+// GET GetHub V2
+// Retrieves a list of transfer hub shipments for a Facility, filtered by either last modified or estimated arrival date range.
+// 
+//   Permissions Required:
+//   - Manage Transfers
+//   - View Transfers
+func (c *MetrcClient) TransfersGetHubV2(estimatedarrivalend string, estimatedarrivalstart string, lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if estimatedarrivalend != "" {
+		queryParams["estimatedArrivalEnd"] = estimatedarrivalend
+	}
+	if estimatedarrivalstart != "" {
+		queryParams["estimatedArrivalStart"] = estimatedarrivalstart
+	}
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/transfers/v2/hub", queryParams, nil)
+}
+
+// GET GetIncoming V1
+// Permissions Required:
+//   - Transfers
+func (c *MetrcClient) TransfersGetIncomingV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/transfers/v1/incoming", queryParams, nil)
+}
+
+// GET GetIncoming V2
+// Retrieves a list of incoming shipments for a Facility, optionally filtered by last modified date range.
+// 
+//   Permissions Required:
+//   - Manage Transfers
+//   - View Transfers
+func (c *MetrcClient) TransfersGetIncomingV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/transfers/v2/incoming", queryParams, nil)
+}
+
+// GET GetOutgoing V1
+// Permissions Required:
+//   - Transfers
+func (c *MetrcClient) TransfersGetOutgoingV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/transfers/v1/outgoing", queryParams, nil)
+}
+
+// GET GetOutgoing V2
+// Retrieves a list of outgoing shipments for a Facility, optionally filtered by last modified date range.
+// 
+//   Permissions Required:
+//   - Manage Transfers
+//   - View Transfers
+func (c *MetrcClient) TransfersGetOutgoingV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/transfers/v2/outgoing", queryParams, nil)
+}
+
+// GET GetRejected V1
+// Permissions Required:
+//   - Transfers
+func (c *MetrcClient) TransfersGetRejectedV1(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/transfers/v1/rejected", queryParams, nil)
+}
+
+// GET GetRejected V2
+// Retrieves a list of shipments with rejected packages for a Facility.
+// 
+//   Permissions Required:
+//   - Manage Transfers
+//   - View Transfers
+func (c *MetrcClient) TransfersGetRejectedV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/transfers/v2/rejected", queryParams, nil)
+}
+
+// GET GetTemplates V1
+// Permissions Required:
+//   - Transfer Templates
+func (c *MetrcClient) TransfersGetTemplatesV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/transfers/v1/templates", queryParams, nil)
+}
+
+// GET GetTemplatesDelivery V1
+// Permissions Required:
+//   - Transfer Templates
+func (c *MetrcClient) TransfersGetTemplatesDeliveryV1(id string, no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/transfers/v1/templates/"+url.QueryEscape(id)+"/deliveries", queryParams, nil)
+}
+
+// GET GetTemplatesDeliveryPackage V1
+// Please note: The {id} parameter above represents a Transfer Template Delivery ID, not a Manifest Number.
+// 
+//   Permissions Required:
+//   - Transfers
+func (c *MetrcClient) TransfersGetTemplatesDeliveryPackageV1(id string, no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/transfers/v1/templates/deliveries/"+url.QueryEscape(id)+"/packages", queryParams, nil)
+}
+
+// GET GetTemplatesDeliveryTransporters V1
+// Please note: The {id} parameter above represents a Transfer Template Delivery ID, not a Manifest Number.
+// 
+//   Permissions Required:
+//   - Transfer Templates
+func (c *MetrcClient) TransfersGetTemplatesDeliveryTransportersV1(id string, no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/transfers/v1/templates/deliveries/"+url.QueryEscape(id)+"/transporters", queryParams, nil)
+}
+
+// GET GetTemplatesDeliveryTransportersDetails V1
+// Please note: The {id} parameter above represents a Transfer Template Delivery ID, not a Manifest Number.
+// 
+//   Permissions Required:
+//   - Transfer Templates
+func (c *MetrcClient) TransfersGetTemplatesDeliveryTransportersDetailsV1(id string, no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/transfers/v1/templates/deliveries/"+url.QueryEscape(id)+"/transporters/details", queryParams, nil)
+}
+
+// GET GetTemplatesOutgoing V2
+// Retrieves a list of transfer templates for a Facility, optionally filtered by last modified date range.
+// 
+//   Permissions Required:
+//   - Manage Transfer Templates
+//   - View Transfer Templates
+func (c *MetrcClient) TransfersGetTemplatesOutgoingV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/transfers/v2/templates/outgoing", queryParams, nil)
+}
+
+// GET GetTemplatesOutgoingDelivery V2
+// Retrieves a list of deliveries associated with a specific transfer template.
+// 
+//   Permissions Required:
+//   - Manage Transfer Templates
+//   - View Transfer Templates
+func (c *MetrcClient) TransfersGetTemplatesOutgoingDeliveryV2(id string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/transfers/v2/templates/outgoing/"+url.QueryEscape(id)+"/deliveries", queryParams, nil)
+}
+
+// GET GetTemplatesOutgoingDeliveryPackage V2
+// Retrieves a list of delivery package templates for a given Transfer Template Delivery Id. Please note: The {id} parameter above represents a Transfer Template Delivery Id, not a Manifest Number.
+// 
+//   Permissions Required:
+//   - Manage Transfer Templates
+//   - View Transfer Templates
+func (c *MetrcClient) TransfersGetTemplatesOutgoingDeliveryPackageV2(id string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/transfers/v2/templates/outgoing/deliveries/"+url.QueryEscape(id)+"/packages", queryParams, nil)
+}
+
+// GET GetTemplatesOutgoingDeliveryTransporters V2
+// Retrieves a list of transporter templates for a given Transfer Template Delivery Id. Please note: The {id} parameter above represents a Transfer Template Delivery Id, not a Manifest Number.
+// 
+//   Permissions Required:
+//   - Manage Transfer Templates
+//   - View Transfer Templates
+func (c *MetrcClient) TransfersGetTemplatesOutgoingDeliveryTransportersV2(id string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/transfers/v2/templates/outgoing/deliveries/"+url.QueryEscape(id)+"/transporters", queryParams, nil)
+}
+
+// GET GetTemplatesOutgoingDeliveryTransportersDetails V2
+// Retrieves detailed transporter templates for a given Transfer Template Delivery Id. Please note: The {id} parameter above represents a Transfer Template Delivery Id, not a Manifest Number.
+// 
+//   Permissions Required:
+//   - Manage Transfer Templates
+//   - View Transfer Templates
+func (c *MetrcClient) TransfersGetTemplatesOutgoingDeliveryTransportersDetailsV2(id string, no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/transfers/v2/templates/outgoing/deliveries/"+url.QueryEscape(id)+"/transporters/details", queryParams, nil)
+}
+
+// GET GetTypes V1
+// Permissions Required:
+//   - None
+func (c *MetrcClient) TransfersGetTypesV1(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/transfers/v1/types", queryParams, nil)
+}
+
+// GET GetTypes V2
+// Retrieves a list of available transfer types for a Facility based on its license number.
+// 
+//   Permissions Required:
+//   - None
+func (c *MetrcClient) TransfersGetTypesV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/transfers/v2/types", queryParams, nil)
+}
+
+// PUT UpdateExternalIncoming V1
+// Permissions Required:
+//   - Transfers
+func (c *MetrcClient) TransfersUpdateExternalIncomingV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/transfers/v1/external/incoming", queryParams, body)
+}
+
+// PUT UpdateExternalIncoming V2
+// Updates external incoming shipment plans for a Facility.
+// 
+//   Permissions Required:
+//   - Manage Transfers
+func (c *MetrcClient) TransfersUpdateExternalIncomingV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/transfers/v2/external/incoming", queryParams, body)
+}
+
+// PUT UpdateTemplates V1
+// Permissions Required:
+//   - Transfer Templates
+func (c *MetrcClient) TransfersUpdateTemplatesV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/transfers/v1/templates", queryParams, body)
+}
+
+// PUT UpdateTemplatesOutgoing V2
+// Updates existing transfer templates for a Facility.
+// 
+//   Permissions Required:
+//   - Manage Transfer Templates
+func (c *MetrcClient) TransfersUpdateTemplatesOutgoingV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/transfers/v2/templates/outgoing", queryParams, body)
+}
+
+// POST CreateAdditives V1
+// Permissions Required:
+//   - Manage Plants Additives
+func (c *MetrcClient) PlantsCreateAdditivesV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/plants/v1/additives", queryParams, body)
+}
+
+// POST CreateAdditives V2
+// Records additive usage details applied to specific plants at a Facility.
+// 
+//   Permissions Required:
+//   - Manage Plants Additives
+func (c *MetrcClient) PlantsCreateAdditivesV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/plants/v2/additives", queryParams, body)
+}
+
+// POST CreateAdditivesBylocation V1
+// Permissions Required:
+//   - Manage Plants
+//   - Manage Plants Additives
+func (c *MetrcClient) PlantsCreateAdditivesBylocationV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/plants/v1/additives/bylocation", queryParams, body)
+}
+
+// POST CreateAdditivesBylocation V2
+// Records additive usage for plants based on their location within a specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Plants
+//   - Manage Plants Additives
+func (c *MetrcClient) PlantsCreateAdditivesBylocationV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/plants/v2/additives/bylocation", queryParams, body)
+}
+
+// POST CreateAdditivesBylocationUsingtemplate V2
+// Records additive usage for plants by location using a predefined additive template at a specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Plants Additives
+func (c *MetrcClient) PlantsCreateAdditivesBylocationUsingtemplateV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/plants/v2/additives/bylocation/usingtemplate", queryParams, body)
+}
+
+// POST CreateAdditivesUsingtemplate V2
+// Records additive usage for plants using predefined additive templates at a specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Plants Additives
+func (c *MetrcClient) PlantsCreateAdditivesUsingtemplateV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/plants/v2/additives/usingtemplate", queryParams, body)
+}
+
+// POST CreateChangegrowthphases V1
+// Permissions Required:
+//   - View Veg/Flower Plants
+//   - Manage Veg/Flower Plants Inventory
+func (c *MetrcClient) PlantsCreateChangegrowthphasesV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/plants/v1/changegrowthphases", queryParams, body)
+}
+
+// POST CreateHarvestplants V1
+// NOTE: If HarvestName is excluded from the request body, or if it is passed in as null, the harvest name is auto-generated.
+// 
+//   Permissions Required:
+//   - View Veg/Flower Plants
+//   - Manicure/Harvest Veg/Flower Plants
+func (c *MetrcClient) PlantsCreateHarvestplantsV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/plants/v1/harvestplants", queryParams, body)
+}
+
+// POST CreateManicure V2
+// Creates harvest product records from plant batches at a specified Facility.
+// 
+//   Permissions Required:
+//   - View Veg/Flower Plants
+//   - Manicure/Harvest Veg/Flower Plants
+func (c *MetrcClient) PlantsCreateManicureV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/plants/v2/manicure", queryParams, body)
+}
+
+// POST CreateManicureplants V1
+// Permissions Required:
+//   - View Veg/Flower Plants
+//   - Manicure/Harvest Veg/Flower Plants
+func (c *MetrcClient) PlantsCreateManicureplantsV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/plants/v1/manicureplants", queryParams, body)
+}
+
+// POST CreateMoveplants V1
+// Permissions Required:
+//   - View Veg/Flower Plants
+//   - Manage Veg/Flower Plants Inventory
+func (c *MetrcClient) PlantsCreateMoveplantsV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/plants/v1/moveplants", queryParams, body)
+}
+
+// POST CreatePlantbatchPackage V1
+// Permissions Required:
+//   - View Immature Plants
+//   - Manage Immature Plants Inventory
+//   - View Veg/Flower Plants
+//   - Manage Veg/Flower Plants Inventory
+//   - View Packages
+//   - Create/Submit/Discontinue Packages
+func (c *MetrcClient) PlantsCreatePlantbatchPackageV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/plants/v1/create/plantbatch/packages", queryParams, body)
+}
+
+// POST CreatePlantbatchPackage V2
+// Creates packages from plant batches at a specified Facility.
+// 
+//   Permissions Required:
+//   - View Immature Plants
+//   - Manage Immature Plants Inventory
+//   - View Veg/Flower Plants
+//   - Manage Veg/Flower Plants Inventory
+//   - View Packages
+//   - Create/Submit/Discontinue Packages
+func (c *MetrcClient) PlantsCreatePlantbatchPackageV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/plants/v2/plantbatch/packages", queryParams, body)
+}
+
+// POST CreatePlantings V1
+// Permissions Required:
+//   - View Immature Plants
+//   - Manage Immature Plants Inventory
+//   - View Veg/Flower Plants
+//   - Manage Veg/Flower Plants Inventory
+func (c *MetrcClient) PlantsCreatePlantingsV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/plants/v1/create/plantings", queryParams, body)
+}
+
+// POST CreatePlantings V2
+// Creates new plant batches at a specified Facility from existing plant data.
+// 
+//   Permissions Required:
+//   - View Immature Plants
+//   - Manage Immature Plants Inventory
+//   - View Veg/Flower Plants
+//   - Manage Veg/Flower Plants Inventory
+func (c *MetrcClient) PlantsCreatePlantingsV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/plants/v2/plantings", queryParams, body)
+}
+
+// POST CreateWaste V1
+// Permissions Required:
+//   - Manage Plants Waste
+func (c *MetrcClient) PlantsCreateWasteV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/plants/v1/waste", queryParams, body)
+}
+
+// POST CreateWaste V2
+// Records waste events for plants at a Facility, including method, reason, and location details.
+// 
+//   Permissions Required:
+//   - Manage Plants Waste
+func (c *MetrcClient) PlantsCreateWasteV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/plants/v2/waste", queryParams, body)
+}
+
+// DELETE Delete V1
+// Permissions Required:
+//   - View Veg/Flower Plants
+//   - Destroy Veg/Flower Plants
+func (c *MetrcClient) PlantsDeleteV1(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("DELETE", "/plants/v1", queryParams, nil)
+}
+
+// DELETE Delete V2
+// Removes plants from a Facility’s inventory while recording the reason for their disposal.
+// 
+//   Permissions Required:
+//   - View Veg/Flower Plants
+//   - Destroy Veg/Flower Plants
+func (c *MetrcClient) PlantsDeleteV2(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("DELETE", "/plants/v2", queryParams, nil)
+}
+
+// GET Get V1
+// Permissions Required:
+//   - View Veg/Flower Plants
+func (c *MetrcClient) PlantsGetV1(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/plants/v1/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET Get V2
+// Retrieves a Plant by Id.
+// 
+//   Permissions Required:
+//   - View Veg/Flower Plants
+func (c *MetrcClient) PlantsGetV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/plants/v2/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET GetAdditives V1
+// Permissions Required:
+//   - View/Manage Plants Additives
+func (c *MetrcClient) PlantsGetAdditivesV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/plants/v1/additives", queryParams, nil)
+}
+
+// GET GetAdditives V2
+// Retrieves additive records applied to plants at a specified Facility.
+// 
+//   Permissions Required:
+//   - View/Manage Plants Additives
+func (c *MetrcClient) PlantsGetAdditivesV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/plants/v2/additives", queryParams, nil)
+}
+
+// GET GetAdditivesTypes V1
+// Permissions Required:
+//   -
+func (c *MetrcClient) PlantsGetAdditivesTypesV1(no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/plants/v1/additives/types", queryParams, nil)
+}
+
+// GET GetAdditivesTypes V2
+// Retrieves a list of all plant additive types defined within a Facility.
+// 
+//   Permissions Required:
+//   - None
+func (c *MetrcClient) PlantsGetAdditivesTypesV2(no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/plants/v2/additives/types", queryParams, nil)
+}
+
+// GET GetByLabel V1
+// Permissions Required:
+//   - View Veg/Flower Plants
+func (c *MetrcClient) PlantsGetByLabelV1(label string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/plants/v1/"+url.QueryEscape(label)+"", queryParams, nil)
+}
+
+// GET GetByLabel V2
+// Retrieves a Plant by label.
+// 
+//   Permissions Required:
+//   - View Veg/Flower Plants
+func (c *MetrcClient) PlantsGetByLabelV2(label string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/plants/v2/"+url.QueryEscape(label)+"", queryParams, nil)
+}
+
+// GET GetFlowering V1
+// Permissions Required:
+//   - View Veg/Flower Plants
+func (c *MetrcClient) PlantsGetFloweringV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/plants/v1/flowering", queryParams, nil)
+}
+
+// GET GetFlowering V2
+// Retrieves flowering-phase plants at a specified Facility, optionally filtered by last modified date.
+// 
+//   Permissions Required:
+//   - View Veg/Flower Plants
+func (c *MetrcClient) PlantsGetFloweringV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/plants/v2/flowering", queryParams, nil)
+}
+
+// GET GetGrowthPhases V1
+// Permissions Required:
+//   - None
+func (c *MetrcClient) PlantsGetGrowthPhasesV1(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/plants/v1/growthphases", queryParams, nil)
+}
+
+// GET GetGrowthPhases V2
+// Retrieves the list of growth phases supported by a specified Facility.
+// 
+//   Permissions Required:
+//   - None
+func (c *MetrcClient) PlantsGetGrowthPhasesV2(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/plants/v2/growthphases", queryParams, nil)
+}
+
+// GET GetInactive V1
+// Permissions Required:
+//   - View Veg/Flower Plants
+func (c *MetrcClient) PlantsGetInactiveV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/plants/v1/inactive", queryParams, nil)
+}
+
+// GET GetInactive V2
+// Retrieves inactive plants at a specified Facility.
+// 
+//   Permissions Required:
+//   - View Veg/Flower Plants
+func (c *MetrcClient) PlantsGetInactiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/plants/v2/inactive", queryParams, nil)
+}
+
+// GET GetMother V2
+// Retrieves mother-phase plants at a specified Facility.
+// 
+//   Permissions Required:
+//   - View Mother Plants
+func (c *MetrcClient) PlantsGetMotherV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/plants/v2/mother", queryParams, nil)
+}
+
+// GET GetMotherInactive V2
+// Retrieves inactive mother-phase plants at a specified Facility.
+// 
+//   Permissions Required:
+//   - View Mother Plants
+func (c *MetrcClient) PlantsGetMotherInactiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/plants/v2/mother/inactive", queryParams, nil)
+}
+
+// GET GetMotherOnhold V2
+// Retrieves mother-phase plants currently marked as on hold at a specified Facility.
+// 
+//   Permissions Required:
+//   - View Mother Plants
+func (c *MetrcClient) PlantsGetMotherOnholdV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/plants/v2/mother/onhold", queryParams, nil)
+}
+
+// GET GetOnhold V1
+// Permissions Required:
+//   - View Veg/Flower Plants
+func (c *MetrcClient) PlantsGetOnholdV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/plants/v1/onhold", queryParams, nil)
+}
+
+// GET GetOnhold V2
+// Retrieves plants that are currently on hold at a specified Facility.
+// 
+//   Permissions Required:
+//   - View Veg/Flower Plants
+func (c *MetrcClient) PlantsGetOnholdV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/plants/v2/onhold", queryParams, nil)
+}
+
+// GET GetVegetative V1
+// Permissions Required:
+//   - View Veg/Flower Plants
+func (c *MetrcClient) PlantsGetVegetativeV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/plants/v1/vegetative", queryParams, nil)
+}
+
+// GET GetVegetative V2
+// Retrieves vegetative-phase plants at a specified Facility, optionally filtered by last modified date.
+// 
+//   Permissions Required:
+//   - View Veg/Flower Plants
+func (c *MetrcClient) PlantsGetVegetativeV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/plants/v2/vegetative", queryParams, nil)
+}
+
+// GET GetWaste V2
+// Retrieves a list of recorded plant waste events for a specific Facility.
+// 
+//   Permissions Required:
+//   - View Plants Waste
+func (c *MetrcClient) PlantsGetWasteV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/plants/v2/waste", queryParams, nil)
+}
+
+// GET GetWasteMethodsAll V1
+// Permissions Required:
+//   - None
+func (c *MetrcClient) PlantsGetWasteMethodsAllV1(no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/plants/v1/waste/methods/all", queryParams, nil)
+}
+
+// GET GetWasteMethodsAll V2
+// Retrieves a list of all available plant waste methods for use within a Facility.
+// 
+//   Permissions Required:
+//   - None
+func (c *MetrcClient) PlantsGetWasteMethodsAllV2(pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/plants/v2/waste/methods/all", queryParams, nil)
+}
+
+// GET GetWastePackage V2
+// Retrieves a list of package records linked to the specified plantWasteId for a given facility.
+// 
+//   Permissions Required:
+//   - View Plants Waste
+func (c *MetrcClient) PlantsGetWastePackageV2(id string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/plants/v2/waste/"+url.QueryEscape(id)+"/package", queryParams, nil)
+}
+
+// GET GetWastePlant V2
+// Retrieves a list of plants records linked to the specified plantWasteId for a given facility.
+// 
+//   Permissions Required:
+//   - View Plants Waste
+func (c *MetrcClient) PlantsGetWastePlantV2(id string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/plants/v2/waste/"+url.QueryEscape(id)+"/plant", queryParams, nil)
+}
+
+// GET GetWasteReasons V1
+// Permissions Required:
+//   - None
+func (c *MetrcClient) PlantsGetWasteReasonsV1(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/plants/v1/waste/reasons", queryParams, nil)
+}
+
+// GET GetWasteReasons V2
+// Retriveves available reasons for recording mature plant waste at a specified Facility.
+// 
+//   Permissions Required:
+//   - None
+func (c *MetrcClient) PlantsGetWasteReasonsV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/plants/v2/waste/reasons", queryParams, nil)
+}
+
+// PUT UpdateAdjust V2
+// Adjusts the recorded count of plants at a specified Facility.
+// 
+//   Permissions Required:
+//   - View Veg/Flower Plants
+//   - Manage Veg/Flower Plants Inventory
+func (c *MetrcClient) PlantsUpdateAdjustV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/plants/v2/adjust", queryParams, body)
+}
+
+// PUT UpdateGrowthphase V2
+// Changes the growth phases of plants within a specified Facility.
+// 
+//   Permissions Required:
+//   - View Veg/Flower Plants
+//   - Manage Veg/Flower Plants Inventory
+func (c *MetrcClient) PlantsUpdateGrowthphaseV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/plants/v2/growthphase", queryParams, body)
+}
+
+// PUT UpdateHarvest V2
+// Processes whole plant Harvest data for a specific Facility. NOTE: If HarvestName is excluded from the request body, or if it is passed in as null, the harvest name is auto-generated.
+// 
+//   Permissions Required:
+//   - View Veg/Flower Plants
+//   - Manicure/Harvest Veg/Flower Plants
+func (c *MetrcClient) PlantsUpdateHarvestV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/plants/v2/harvest", queryParams, body)
+}
+
+// PUT UpdateLocation V2
+// Moves plant batches to new locations within a specified Facility.
+// 
+//   Permissions Required:
+//   - View Veg/Flower Plants
+//   - Manage Veg/Flower Plants Inventory
+func (c *MetrcClient) PlantsUpdateLocationV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/plants/v2/location", queryParams, body)
+}
+
+// PUT UpdateMerge V2
+// Merges multiple plant groups into a single group within a Facility.
+// 
+//   Permissions Required:
+//   - View Veg/Flower Plants
+//   - Manicure/Harvest Veg/Flower Plants
+func (c *MetrcClient) PlantsUpdateMergeV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/plants/v2/merge", queryParams, body)
+}
+
+// PUT UpdateSplit V2
+// Splits an existing plant group into multiple groups within a Facility.
+// 
+//   Permissions Required:
+//   - View Plant
+func (c *MetrcClient) PlantsUpdateSplitV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/plants/v2/split", queryParams, body)
+}
+
+// PUT UpdateStrain V2
+// Updates the strain information for plants within a Facility.
+// 
+//   Permissions Required:
+//   - View Veg/Flower Plants
+//   - Manage Veg/Flower Plants Inventory
+func (c *MetrcClient) PlantsUpdateStrainV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/plants/v2/strain", queryParams, body)
+}
+
+// PUT UpdateTag V2
+// Replaces existing plant tags with new tags for plants within a Facility.
+// 
+//   Permissions Required:
+//   - View Veg/Flower Plants
+//   - Manage Veg/Flower Plants Inventory
+func (c *MetrcClient) PlantsUpdateTagV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/plants/v2/tag", queryParams, body)
+}
+
+// POST Create V2
+// Creates new additive templates for a specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Additives
+func (c *MetrcClient) AdditivesTemplatesCreateV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/additivestemplates/v2", queryParams, body)
+}
+
+// GET Get V2
+// Retrieves an Additive Template by its Id.
+// 
+//   Permissions Required:
+//   - Manage Additives
+func (c *MetrcClient) AdditivesTemplatesGetV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/additivestemplates/v2/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET GetActive V2
+// Retrieves a list of active additive templates for a specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Additives
+func (c *MetrcClient) AdditivesTemplatesGetActiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/additivestemplates/v2/active", queryParams, nil)
+}
+
+// GET GetInactive V2
+// Retrieves a list of inactive additive templates for a specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Additives
+func (c *MetrcClient) AdditivesTemplatesGetInactiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/additivestemplates/v2/inactive", queryParams, nil)
+}
+
+// PUT Update V2
+// Updates existing additive templates for a specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Additives
+func (c *MetrcClient) AdditivesTemplatesUpdateV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/additivestemplates/v2", queryParams, body)
+}
+
+// GET GetByCaregiverLicenseNumber V1
+// Data returned by this endpoint is cached for up to one minute.
+// 
+//   Permissions Required:
+//   - Lookup Caregivers
+func (c *MetrcClient) CaregiversStatusGetByCaregiverLicenseNumberV1(caregiverlicensenumber string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/caregivers/v1/status/"+url.QueryEscape(caregiverlicensenumber)+"", queryParams, nil)
+}
+
+// GET GetByCaregiverLicenseNumber V2
+// Retrieves the status of a Caregiver by their License Number for a specified Facility. Data returned by this endpoint is cached for up to one minute.
+// 
+//   Permissions Required:
+//   - Lookup Caregivers
+func (c *MetrcClient) CaregiversStatusGetByCaregiverLicenseNumberV2(caregiverlicensenumber string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/caregivers/v2/status/"+url.QueryEscape(caregiverlicensenumber)+"", queryParams, nil)
+}
+
+// POST CreateFinish V1
+// Permissions Required:
+//   - View Harvests
+//   - Finish/Discontinue Harvests
+func (c *MetrcClient) HarvestsCreateFinishV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/harvests/v1/finish", queryParams, body)
+}
+
+// POST CreatePackage V1
+// Permissions Required:
+//   - View Harvests
+//   - Manage Harvests
+//   - View Packages
+//   - Create/Submit/Discontinue Packages
+func (c *MetrcClient) HarvestsCreatePackageV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/harvests/v1/create/packages", queryParams, body)
+}
+
+// POST CreatePackage V2
+// Creates packages from harvested products for a specified Facility.
+// 
+//   Permissions Required:
+//   - View Harvests
+//   - Manage Harvests
+//   - View Packages
+//   - Create/Submit/Discontinue Packages
+func (c *MetrcClient) HarvestsCreatePackageV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/harvests/v2/packages", queryParams, body)
+}
+
+// POST CreatePackageTesting V1
+// Permissions Required:
+//   - View Harvests
+//   - Manage Harvests
+//   - View Packages
+//   - Create/Submit/Discontinue Packages
+func (c *MetrcClient) HarvestsCreatePackageTestingV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/harvests/v1/create/packages/testing", queryParams, body)
+}
+
+// POST CreatePackageTesting V2
+// Creates packages for testing from harvested products for a specified Facility.
+// 
+//   Permissions Required:
+//   - View Harvests
+//   - Manage Harvests
+//   - View Packages
+//   - Create/Submit/Discontinue Packages
+func (c *MetrcClient) HarvestsCreatePackageTestingV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/harvests/v2/packages/testing", queryParams, body)
+}
+
+// POST CreateRemoveWaste V1
+// Permissions Required:
+//   - View Harvests
+//   - Manage Harvests
+func (c *MetrcClient) HarvestsCreateRemoveWasteV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/harvests/v1/removewaste", queryParams, body)
+}
+
+// POST CreateUnfinish V1
+// Permissions Required:
+//   - View Harvests
+//   - Finish/Discontinue Harvests
+func (c *MetrcClient) HarvestsCreateUnfinishV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/harvests/v1/unfinish", queryParams, body)
+}
+
+// POST CreateWaste V2
+// Records Waste from harvests for a specified Facility. NOTE: The IDs passed in the request body are the harvest IDs for which you are documenting waste.
+// 
+//   Permissions Required:
+//   - View Harvests
+//   - Manage Harvests
+func (c *MetrcClient) HarvestsCreateWasteV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/harvests/v2/waste", queryParams, body)
+}
+
+// DELETE DeleteWaste V2
+// Discontinues a specific harvest waste record by Id for the specified Facility.
+// 
+//   Permissions Required:
+//   - View Harvests
+//   - Discontinue Harvest Waste
+func (c *MetrcClient) HarvestsDeleteWasteV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("DELETE", "/harvests/v2/waste/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET Get V1
+// Permissions Required:
+//   - View Harvests
+func (c *MetrcClient) HarvestsGetV1(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/harvests/v1/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET Get V2
+// Retrieves a Harvest by its Id, optionally validated against a specified Facility License Number.
+// 
+//   Permissions Required:
+//   - View Harvests
+func (c *MetrcClient) HarvestsGetV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/harvests/v2/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET GetActive V1
+// Permissions Required:
+//   - View Harvests
+func (c *MetrcClient) HarvestsGetActiveV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/harvests/v1/active", queryParams, nil)
+}
+
+// GET GetActive V2
+// Retrieves a list of active harvests for a specified Facility.
+// 
+//   Permissions Required:
+//   - View Harvests
+func (c *MetrcClient) HarvestsGetActiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/harvests/v2/active", queryParams, nil)
+}
+
+// GET GetInactive V1
+// Permissions Required:
+//   - View Harvests
+func (c *MetrcClient) HarvestsGetInactiveV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/harvests/v1/inactive", queryParams, nil)
+}
+
+// GET GetInactive V2
+// Retrieves a list of inactive harvests for a specified Facility.
+// 
+//   Permissions Required:
+//   - View Harvests
+func (c *MetrcClient) HarvestsGetInactiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/harvests/v2/inactive", queryParams, nil)
+}
+
+// GET GetOnhold V1
+// Permissions Required:
+//   - View Harvests
+func (c *MetrcClient) HarvestsGetOnholdV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/harvests/v1/onhold", queryParams, nil)
+}
+
+// GET GetOnhold V2
+// Retrieves a list of harvests on hold for a specified Facility.
+// 
+//   Permissions Required:
+//   - View Harvests
+func (c *MetrcClient) HarvestsGetOnholdV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/harvests/v2/onhold", queryParams, nil)
+}
+
+// GET GetWaste V2
+// Retrieves a list of Waste records for a specified Harvest, identified by its Harvest Id, within a Facility identified by its License Number.
+// 
+//   Permissions Required:
+//   - View Harvests
+func (c *MetrcClient) HarvestsGetWasteV2(harvestid string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if harvestid != "" {
+		queryParams["harvestId"] = harvestid
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/harvests/v2/waste", queryParams, nil)
+}
+
+// GET GetWasteTypes V1
+// Permissions Required:
+//   - None
+func (c *MetrcClient) HarvestsGetWasteTypesV1(no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/harvests/v1/waste/types", queryParams, nil)
+}
+
+// GET GetWasteTypes V2
+// Retrieves a list of Waste types for harvests.
+// 
+//   Permissions Required:
+//   - None
+func (c *MetrcClient) HarvestsGetWasteTypesV2(pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/harvests/v2/waste/types", queryParams, nil)
+}
+
+// PUT UpdateFinish V2
+// Marks one or more harvests as finished for the specified Facility.
+// 
+//   Permissions Required:
+//   - View Harvests
+//   - Finish/Discontinue Harvests
+func (c *MetrcClient) HarvestsUpdateFinishV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/harvests/v2/finish", queryParams, body)
+}
+
+// PUT UpdateLocation V2
+// Updates the Location of Harvest for a specified Facility.
+// 
+//   Permissions Required:
+//   - View Harvests
+//   - Manage Harvests
+func (c *MetrcClient) HarvestsUpdateLocationV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/harvests/v2/location", queryParams, body)
+}
+
+// PUT UpdateMove V1
+// Permissions Required:
+//   - View Harvests
+//   - Manage Harvests
+func (c *MetrcClient) HarvestsUpdateMoveV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/harvests/v1/move", queryParams, body)
+}
+
+// PUT UpdateRename V1
+// Permissions Required:
+//   - View Harvests
+//   - Manage Harvests
+func (c *MetrcClient) HarvestsUpdateRenameV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/harvests/v1/rename", queryParams, body)
+}
+
+// PUT UpdateRename V2
+// Renames one or more harvests for the specified Facility.
+// 
+//   Permissions Required:
+//   - View Harvests
+//   - Manage Harvests
+func (c *MetrcClient) HarvestsUpdateRenameV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/harvests/v2/rename", queryParams, body)
+}
+
+// PUT UpdateRestoreHarvestedPlants V2
+// Restores previously harvested plants to their original state for the specified Facility.
+// 
+//   Permissions Required:
+//   - View Harvests
+//   - Finish/Discontinue Harvests
+func (c *MetrcClient) HarvestsUpdateRestoreHarvestedPlantsV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/harvests/v2/restore/harvestedplants", queryParams, body)
+}
+
+// PUT UpdateUnfinish V2
+// Reopens one or more previously finished harvests for the specified Facility.
+// 
+//   Permissions Required:
+//   - View Harvests
+//   - Finish/Discontinue Harvests
+func (c *MetrcClient) HarvestsUpdateUnfinishV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/harvests/v2/unfinish", queryParams, body)
+}
+
+// POST CreateRecord V1
+// Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) LabTestsCreateRecordV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/labtests/v1/record", queryParams, body)
+}
+
+// POST CreateRecord V2
+// Submits Lab Test results for one or more packages. NOTE: This endpoint allows only PDF files, and uploaded files can be no more than 5 MB in size. The Label element in the request is a Package Label.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) LabTestsCreateRecordV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/labtests/v2/record", queryParams, body)
+}
+
+// GET GetBatches V2
+// Retrieves a list of Lab Test batches.
+// 
+//   Permissions Required:
+//   - None
+func (c *MetrcClient) LabTestsGetBatchesV2(pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/labtests/v2/batches", queryParams, nil)
+}
+
+// GET GetLabtestdocument V1
+// Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) LabTestsGetLabtestdocumentV1(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/labtests/v1/labtestdocument/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET GetLabtestdocument V2
+// Retrieves a specific Lab Test result document by its Id for a given Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) LabTestsGetLabtestdocumentV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/labtests/v2/labtestdocument/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET GetResults V1
+// Permissions Required:
+//   - View Packages
+func (c *MetrcClient) LabTestsGetResultsV1(licensenumber string, packageid string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if packageid != "" {
+		queryParams["packageId"] = packageid
+	}
+	return c.send("GET", "/labtests/v1/results", queryParams, nil)
+}
+
+// GET GetResults V2
+// Retrieves Lab Test results for a specified Package.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) LabTestsGetResultsV2(licensenumber string, packageid string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if packageid != "" {
+		queryParams["packageId"] = packageid
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/labtests/v2/results", queryParams, nil)
+}
+
+// GET GetStates V1
+// Permissions Required:
+//   - None
+func (c *MetrcClient) LabTestsGetStatesV1(no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/labtests/v1/states", queryParams, nil)
+}
+
+// GET GetStates V2
+// Returns a list of all lab testing states.
+// 
+//   Permissions Required:
+//   - None
+func (c *MetrcClient) LabTestsGetStatesV2(no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/labtests/v2/states", queryParams, nil)
+}
+
+// GET GetTypes V1
+// Permissions Required:
+//   - None
+func (c *MetrcClient) LabTestsGetTypesV1(no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/labtests/v1/types", queryParams, nil)
+}
+
+// GET GetTypes V2
+// Returns a list of Lab Test types.
+// 
+//   Permissions Required:
+//   - None
+func (c *MetrcClient) LabTestsGetTypesV2(pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/labtests/v2/types", queryParams, nil)
+}
+
+// PUT UpdateLabtestdocument V1
+// Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) LabTestsUpdateLabtestdocumentV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/labtests/v1/labtestdocument", queryParams, body)
+}
+
+// PUT UpdateLabtestdocument V2
+// Updates one or more documents for previously submitted lab tests.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) LabTestsUpdateLabtestdocumentV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/labtests/v2/labtestdocument", queryParams, body)
+}
+
+// PUT UpdateResultRelease V1
+// Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) LabTestsUpdateResultReleaseV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/labtests/v1/results/release", queryParams, body)
+}
+
+// PUT UpdateResultRelease V2
+// Releases Lab Test results for one or more packages.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) LabTestsUpdateResultReleaseV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/labtests/v2/results/release", queryParams, body)
 }
 
 // POST CreateDelivery V1
@@ -5893,131 +4824,77 @@ func (c *MetrcClient) SalesUpdateTransactionByDateV1(date string, licensenumber 
 	return c.send("PUT", "/sales/v1/transactions/"+url.QueryEscape(date)+"", queryParams, body)
 }
 
-// POST Create V1
-// Permissions Required:
-//   - Manage Strains
-func (c *MetrcClient) StrainsCreateV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/strains/v1/create", queryParams, body)
-}
-
-// POST Create V2
-// Creates new strain records for a specified Facility.
+// POST CreateDriver V2
+// Creates new driver records for a Facility.
 // 
 //   Permissions Required:
-//   - Manage Strains
-func (c *MetrcClient) StrainsCreateV2(licensenumber string, body interface{}) (interface{}, error) {
+//   - Manage Transporters
+func (c *MetrcClient) TransportersCreateDriverV2(licensenumber string, body interface{}) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("POST", "/strains/v2", queryParams, body)
+	return c.send("POST", "/transporters/v2/drivers", queryParams, body)
 }
 
-// POST CreateUpdate V1
-// Permissions Required:
-//   - Manage Strains
-func (c *MetrcClient) StrainsCreateUpdateV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/strains/v1/update", queryParams, body)
-}
-
-// DELETE Delete V1
-// Permissions Required:
-//   - Manage Strains
-func (c *MetrcClient) StrainsDeleteV1(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/strains/v1/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// DELETE Delete V2
-// Archives an existing strain record for a Facility
+// POST CreateVehicle V2
+// Creates new vehicle records for a Facility.
 // 
 //   Permissions Required:
-//   - Manage Strains
-func (c *MetrcClient) StrainsDeleteV2(id string, licensenumber string) (interface{}, error) {
+//   - Manage Transporters
+func (c *MetrcClient) TransportersCreateVehicleV2(licensenumber string, body interface{}) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("DELETE", "/strains/v2/"+url.QueryEscape(id)+"", queryParams, nil)
+	return c.send("POST", "/transporters/v2/vehicles", queryParams, body)
 }
 
-// GET Get V1
-// Permissions Required:
-//   - Manage Strains
-func (c *MetrcClient) StrainsGetV1(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/strains/v1/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET Get V2
-// Retrieves a Strain record by its Id, with an optional license number.
+// DELETE DeleteDriver V2
+// Archives a Driver record for a Facility.  Please note: The {id} parameter above represents a Driver Id.
 // 
 //   Permissions Required:
-//   - Manage Strains
-func (c *MetrcClient) StrainsGetV2(id string, licensenumber string) (interface{}, error) {
+//   - Manage Transporters
+func (c *MetrcClient) TransportersDeleteDriverV2(id string, licensenumber string) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("GET", "/strains/v2/"+url.QueryEscape(id)+"", queryParams, nil)
+	return c.send("DELETE", "/transporters/v2/drivers/"+url.QueryEscape(id)+"", queryParams, nil)
 }
 
-// GET GetActive V1
-// Permissions Required:
-//   - Manage Strains
-func (c *MetrcClient) StrainsGetActiveV1(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/strains/v1/active", queryParams, nil)
-}
-
-// GET GetActive V2
-// Retrieves a list of active strains for the current Facility, optionally filtered by last modified date range.
+// DELETE DeleteVehicle V2
+// Archives a Vehicle for a facility.  Please note: The {id} parameter above represents a Vehicle Id.
 // 
 //   Permissions Required:
-//   - Manage Strains
-func (c *MetrcClient) StrainsGetActiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+//   - Manage Transporters
+func (c *MetrcClient) TransportersDeleteVehicleV2(id string, licensenumber string) (interface{}, error) {
 	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/strains/v2/active", queryParams, nil)
+	return c.send("DELETE", "/transporters/v2/vehicles/"+url.QueryEscape(id)+"", queryParams, nil)
 }
 
-// GET GetInactive V2
-// Retrieves a list of inactive strains for the current Facility, optionally filtered by last modified date range.
+// GET GetDriver V2
+// Retrieves a Driver by its Id, with an optional license number. Please note: The {id} parameter above represents a Driver Id.
 // 
 //   Permissions Required:
-//   - Manage Strains
-func (c *MetrcClient) StrainsGetInactiveV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+//   - Transporters
+func (c *MetrcClient) TransportersGetDriverV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/transporters/v2/drivers/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET GetDrivers V2
+// Retrieves a list of drivers for a Facility.
+// 
+//   Permissions Required:
+//   - Transporters
+func (c *MetrcClient) TransportersGetDriversV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
@@ -6028,101 +4905,29 @@ func (c *MetrcClient) StrainsGetInactiveV2(licensenumber string, pagenumber stri
 	if pagesize != "" {
 		queryParams["pageSize"] = pagesize
 	}
-	return c.send("GET", "/strains/v2/inactive", queryParams, nil)
+	return c.send("GET", "/transporters/v2/drivers", queryParams, nil)
 }
 
-// PUT Update V2
-// Updates existing strain records for a specified Facility.
+// GET GetVehicle V2
+// Retrieves a Vehicle by its Id, with an optional license number. Please note: The {id} parameter above represents a Vehicle Id.
 // 
 //   Permissions Required:
-//   - Manage Strains
-func (c *MetrcClient) StrainsUpdateV2(licensenumber string, body interface{}) (interface{}, error) {
+//   - Transporters
+func (c *MetrcClient) TransportersGetVehicleV2(id string, licensenumber string) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("PUT", "/strains/v2", queryParams, body)
+	return c.send("GET", "/transporters/v2/vehicles/"+url.QueryEscape(id)+"", queryParams, nil)
 }
 
-// GET GetPackageAvailable V2
-// Returns a list of available package tags. NOTE: This is a premium endpoint.
+// GET GetVehicles V2
+// Retrieves a list of vehicles for a Facility.
 // 
 //   Permissions Required:
-//   - Manage Tags
-func (c *MetrcClient) TagsGetPackageAvailableV2(licensenumber string) (interface{}, error) {
+//   - Transporters
+func (c *MetrcClient) TransportersGetVehiclesV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
 	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/tags/v2/package/available", queryParams, nil)
-}
-
-// GET GetPlantAvailable V2
-// Returns a list of available plant tags. NOTE: This is a premium endpoint.
-// 
-//   Permissions Required:
-//   - Manage Tags
-func (c *MetrcClient) TagsGetPlantAvailableV2(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/tags/v2/plant/available", queryParams, nil)
-}
-
-// GET GetStaged V2
-// Returns a list of staged tags. NOTE: This is a premium endpoint.
-// 
-//   Permissions Required:
-//   - Manage Tags
-//   - RetailId.AllowPackageStaging Key Value enabled
-func (c *MetrcClient) TagsGetStagedV2(licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/tags/v2/staged", queryParams, nil)
-}
-
-// POST Create V2
-// Creates new additive templates for a specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Additives
-func (c *MetrcClient) AdditivesTemplatesCreateV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/additivestemplates/v2", queryParams, body)
-}
-
-// GET Get V2
-// Retrieves an Additive Template by its Id.
-// 
-//   Permissions Required:
-//   - Manage Additives
-func (c *MetrcClient) AdditivesTemplatesGetV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/additivestemplates/v2/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET GetActive V2
-// Retrieves a list of active additive templates for a specified Facility.
-// 
-//   Permissions Required:
-//   - Manage Additives
-func (c *MetrcClient) AdditivesTemplatesGetActiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
@@ -6132,461 +4937,1656 @@ func (c *MetrcClient) AdditivesTemplatesGetActiveV2(lastmodifiedend string, last
 	if pagesize != "" {
 		queryParams["pageSize"] = pagesize
 	}
-	return c.send("GET", "/additivestemplates/v2/active", queryParams, nil)
+	return c.send("GET", "/transporters/v2/vehicles", queryParams, nil)
 }
 
-// GET GetInactive V2
-// Retrieves a list of inactive additive templates for a specified Facility.
+// PUT UpdateDriver V2
+// Updates existing driver records for a Facility.
 // 
 //   Permissions Required:
-//   - Manage Additives
-func (c *MetrcClient) AdditivesTemplatesGetInactiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+//   - Manage Transporters
+func (c *MetrcClient) TransportersUpdateDriverV2(licensenumber string, body interface{}) (interface{}, error) {
 	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/additivestemplates/v2/inactive", queryParams, nil)
+	return c.send("PUT", "/transporters/v2/drivers", queryParams, body)
 }
 
-// PUT Update V2
-// Updates existing additive templates for a specified Facility.
+// PUT UpdateVehicle V2
+// Updates existing vehicle records for a facility.
 // 
 //   Permissions Required:
-//   - Manage Additives
-func (c *MetrcClient) AdditivesTemplatesUpdateV2(licensenumber string, body interface{}) (interface{}, error) {
+//   - Manage Transporters
+func (c *MetrcClient) TransportersUpdateVehicleV2(licensenumber string, body interface{}) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("PUT", "/additivestemplates/v2", queryParams, body)
+	return c.send("PUT", "/transporters/v2/vehicles", queryParams, body)
 }
 
-// POST CreateFinish V1
-// Permissions Required:
-//   - View Harvests
-//   - Finish/Discontinue Harvests
-func (c *MetrcClient) HarvestsCreateFinishV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/harvests/v1/finish", queryParams, body)
-}
-
-// POST CreatePackage V1
-// Permissions Required:
-//   - View Harvests
-//   - Manage Harvests
-//   - View Packages
-//   - Create/Submit/Discontinue Packages
-func (c *MetrcClient) HarvestsCreatePackageV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/harvests/v1/create/packages", queryParams, body)
-}
-
-// POST CreatePackage V2
-// Creates packages from harvested products for a specified Facility.
+// GET GetAll V1
+// This endpoint provides a list of facilities for which the authenticated user has access.
 // 
 //   Permissions Required:
-//   - View Harvests
-//   - Manage Harvests
-//   - View Packages
-//   - Create/Submit/Discontinue Packages
-func (c *MetrcClient) HarvestsCreatePackageV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/harvests/v2/packages", queryParams, body)
-}
-
-// POST CreatePackageTesting V1
-// Permissions Required:
-//   - View Harvests
-//   - Manage Harvests
-//   - View Packages
-//   - Create/Submit/Discontinue Packages
-func (c *MetrcClient) HarvestsCreatePackageTestingV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/harvests/v1/create/packages/testing", queryParams, body)
-}
-
-// POST CreatePackageTesting V2
-// Creates packages for testing from harvested products for a specified Facility.
-// 
-//   Permissions Required:
-//   - View Harvests
-//   - Manage Harvests
-//   - View Packages
-//   - Create/Submit/Discontinue Packages
-func (c *MetrcClient) HarvestsCreatePackageTestingV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/harvests/v2/packages/testing", queryParams, body)
-}
-
-// POST CreateRemoveWaste V1
-// Permissions Required:
-//   - View Harvests
-//   - Manage Harvests
-func (c *MetrcClient) HarvestsCreateRemoveWasteV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/harvests/v1/removewaste", queryParams, body)
-}
-
-// POST CreateUnfinish V1
-// Permissions Required:
-//   - View Harvests
-//   - Finish/Discontinue Harvests
-func (c *MetrcClient) HarvestsCreateUnfinishV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/harvests/v1/unfinish", queryParams, body)
-}
-
-// POST CreateWaste V2
-// Records Waste from harvests for a specified Facility. NOTE: The IDs passed in the request body are the harvest IDs for which you are documenting waste.
-// 
-//   Permissions Required:
-//   - View Harvests
-//   - Manage Harvests
-func (c *MetrcClient) HarvestsCreateWasteV2(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("POST", "/harvests/v2/waste", queryParams, body)
-}
-
-// DELETE DeleteWaste V2
-// Discontinues a specific harvest waste record by Id for the specified Facility.
-// 
-//   Permissions Required:
-//   - View Harvests
-//   - Discontinue Harvest Waste
-func (c *MetrcClient) HarvestsDeleteWasteV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("DELETE", "/harvests/v2/waste/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET Get V1
-// Permissions Required:
-//   - View Harvests
-func (c *MetrcClient) HarvestsGetV1(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/harvests/v1/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET Get V2
-// Retrieves a Harvest by its Id, optionally validated against a specified Facility License Number.
-// 
-//   Permissions Required:
-//   - View Harvests
-func (c *MetrcClient) HarvestsGetV2(id string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/harvests/v2/"+url.QueryEscape(id)+"", queryParams, nil)
-}
-
-// GET GetActive V1
-// Permissions Required:
-//   - View Harvests
-func (c *MetrcClient) HarvestsGetActiveV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/harvests/v1/active", queryParams, nil)
-}
-
-// GET GetActive V2
-// Retrieves a list of active harvests for a specified Facility.
-// 
-//   Permissions Required:
-//   - View Harvests
-func (c *MetrcClient) HarvestsGetActiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/harvests/v2/active", queryParams, nil)
-}
-
-// GET GetInactive V1
-// Permissions Required:
-//   - View Harvests
-func (c *MetrcClient) HarvestsGetInactiveV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/harvests/v1/inactive", queryParams, nil)
-}
-
-// GET GetInactive V2
-// Retrieves a list of inactive harvests for a specified Facility.
-// 
-//   Permissions Required:
-//   - View Harvests
-func (c *MetrcClient) HarvestsGetInactiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/harvests/v2/inactive", queryParams, nil)
-}
-
-// GET GetOnhold V1
-// Permissions Required:
-//   - View Harvests
-func (c *MetrcClient) HarvestsGetOnholdV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("GET", "/harvests/v1/onhold", queryParams, nil)
-}
-
-// GET GetOnhold V2
-// Retrieves a list of harvests on hold for a specified Facility.
-// 
-//   Permissions Required:
-//   - View Harvests
-func (c *MetrcClient) HarvestsGetOnholdV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if lastmodifiedend != "" {
-		queryParams["lastModifiedEnd"] = lastmodifiedend
-	}
-	if lastmodifiedstart != "" {
-		queryParams["lastModifiedStart"] = lastmodifiedstart
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/harvests/v2/onhold", queryParams, nil)
-}
-
-// GET GetWaste V2
-// Retrieves a list of Waste records for a specified Harvest, identified by its Harvest Id, within a Facility identified by its License Number.
-// 
-//   Permissions Required:
-//   - View Harvests
-func (c *MetrcClient) HarvestsGetWasteV2(harvestid string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if harvestid != "" {
-		queryParams["harvestId"] = harvestid
-	}
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	if pagenumber != "" {
-		queryParams["pageNumber"] = pagenumber
-	}
-	if pagesize != "" {
-		queryParams["pageSize"] = pagesize
-	}
-	return c.send("GET", "/harvests/v2/waste", queryParams, nil)
-}
-
-// GET GetWasteTypes V1
-// Permissions Required:
 //   - None
-func (c *MetrcClient) HarvestsGetWasteTypesV1(no string) (interface{}, error) {
+func (c *MetrcClient) FacilitiesGetAllV1(no string) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if no != "" {
 		queryParams["No"] = no
 	}
-	return c.send("GET", "/harvests/v1/waste/types", queryParams, nil)
+	return c.send("GET", "/facilities/v1", queryParams, nil)
 }
 
-// GET GetWasteTypes V2
-// Retrieves a list of Waste types for harvests.
+// GET GetAll V2
+// This endpoint provides a list of facilities for which the authenticated user has access.
 // 
 //   Permissions Required:
 //   - None
-func (c *MetrcClient) HarvestsGetWasteTypesV2(pagenumber string, pagesize string) (interface{}, error) {
+func (c *MetrcClient) FacilitiesGetAllV2(no string) (interface{}, error) {
 	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/facilities/v2", queryParams, nil)
+}
+
+// POST Create V1
+// Permissions Required:
+//   - View Packages
+//   - Create/Submit/Discontinue Packages
+func (c *MetrcClient) PackagesCreateV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/packages/v1/create", queryParams, body)
+}
+
+// POST Create V2
+// Creates new packages for a specified Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Create/Submit/Discontinue Packages
+func (c *MetrcClient) PackagesCreateV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/packages/v2", queryParams, body)
+}
+
+// POST CreateAdjust V1
+// Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) PackagesCreateAdjustV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/packages/v1/adjust", queryParams, body)
+}
+
+// POST CreateAdjust V2
+// Records a list of adjustments for packages at a specific Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) PackagesCreateAdjustV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/packages/v2/adjust", queryParams, body)
+}
+
+// POST CreateChangeItem V1
+// Permissions Required:
+//   - View Packages
+//   - Create/Submit/Discontinue Packages
+func (c *MetrcClient) PackagesCreateChangeItemV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/packages/v1/change/item", queryParams, body)
+}
+
+// POST CreateChangeLocation V1
+// Permissions Required:
+//   - View Packages
+//   - Create/Submit/Discontinue Packages
+func (c *MetrcClient) PackagesCreateChangeLocationV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/packages/v1/change/locations", queryParams, body)
+}
+
+// POST CreateFinish V1
+// Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) PackagesCreateFinishV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/packages/v1/finish", queryParams, body)
+}
+
+// POST CreatePlantings V1
+// Permissions Required:
+//   - View Immature Plants
+//   - Manage Immature Plants
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) PackagesCreatePlantingsV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/packages/v1/create/plantings", queryParams, body)
+}
+
+// POST CreatePlantings V2
+// Creates new plantings from packages for a specified Facility.
+// 
+//   Permissions Required:
+//   - View Immature Plants
+//   - Manage Immature Plants
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) PackagesCreatePlantingsV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/packages/v2/plantings", queryParams, body)
+}
+
+// POST CreateRemediate V1
+// Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) PackagesCreateRemediateV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/packages/v1/remediate", queryParams, body)
+}
+
+// POST CreateTesting V1
+// Permissions Required:
+//   - View Packages
+//   - Create/Submit/Discontinue Packages
+func (c *MetrcClient) PackagesCreateTestingV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/packages/v1/create/testing", queryParams, body)
+}
+
+// POST CreateTesting V2
+// Creates new packages for testing for a specified Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Create/Submit/Discontinue Packages
+func (c *MetrcClient) PackagesCreateTestingV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/packages/v2/testing", queryParams, body)
+}
+
+// POST CreateUnfinish V1
+// Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) PackagesCreateUnfinishV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/packages/v1/unfinish", queryParams, body)
+}
+
+// DELETE Delete V2
+// Discontinues a Package at a specific Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Create/Submit/Discontinue Packages
+func (c *MetrcClient) PackagesDeleteV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("DELETE", "/packages/v2/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET Get V1
+// Permissions Required:
+//   - View Packages
+func (c *MetrcClient) PackagesGetV1(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/packages/v1/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET Get V2
+// Retrieves a Package by its Id.
+// 
+//   Permissions Required:
+//   - View Packages
+func (c *MetrcClient) PackagesGetV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/packages/v2/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET GetActive V1
+// Permissions Required:
+//   - View Packages
+func (c *MetrcClient) PackagesGetActiveV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/packages/v1/active", queryParams, nil)
+}
+
+// GET GetActive V2
+// Retrieves a list of active packages for a specified Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+func (c *MetrcClient) PackagesGetActiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
 	if pagenumber != "" {
 		queryParams["pageNumber"] = pagenumber
 	}
 	if pagesize != "" {
 		queryParams["pageSize"] = pagesize
 	}
-	return c.send("GET", "/harvests/v2/waste/types", queryParams, nil)
+	return c.send("GET", "/packages/v2/active", queryParams, nil)
+}
+
+// GET GetAdjustReasons V1
+// Permissions Required:
+//   - None
+func (c *MetrcClient) PackagesGetAdjustReasonsV1(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/packages/v1/adjust/reasons", queryParams, nil)
+}
+
+// GET GetAdjustReasons V2
+// Retrieves a list of adjustment reasons for packages at a specified Facility.
+// 
+//   Permissions Required:
+//   - None
+func (c *MetrcClient) PackagesGetAdjustReasonsV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/packages/v2/adjust/reasons", queryParams, nil)
+}
+
+// GET GetByLabel V1
+// Permissions Required:
+//   - View Packages
+func (c *MetrcClient) PackagesGetByLabelV1(label string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/packages/v1/"+url.QueryEscape(label)+"", queryParams, nil)
+}
+
+// GET GetByLabel V2
+// Retrieves a Package by its label.
+// 
+//   Permissions Required:
+//   - View Packages
+func (c *MetrcClient) PackagesGetByLabelV2(label string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/packages/v2/"+url.QueryEscape(label)+"", queryParams, nil)
+}
+
+// GET GetInactive V1
+// Permissions Required:
+//   - View Packages
+func (c *MetrcClient) PackagesGetInactiveV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/packages/v1/inactive", queryParams, nil)
+}
+
+// GET GetInactive V2
+// Retrieves a list of inactive packages for a specified Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+func (c *MetrcClient) PackagesGetInactiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/packages/v2/inactive", queryParams, nil)
+}
+
+// GET GetIntransit V2
+// Retrieves a list of packages in transit for a specified Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+func (c *MetrcClient) PackagesGetIntransitV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/packages/v2/intransit", queryParams, nil)
+}
+
+// GET GetLabsamples V2
+// Retrieves a list of lab sample packages created or sent for testing for a specified Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+func (c *MetrcClient) PackagesGetLabsamplesV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/packages/v2/labsamples", queryParams, nil)
+}
+
+// GET GetOnhold V1
+// Permissions Required:
+//   - View Packages
+func (c *MetrcClient) PackagesGetOnholdV1(lastmodifiedend string, lastmodifiedstart string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/packages/v1/onhold", queryParams, nil)
+}
+
+// GET GetOnhold V2
+// Retrieves a list of packages on hold for a specified Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+func (c *MetrcClient) PackagesGetOnholdV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/packages/v2/onhold", queryParams, nil)
+}
+
+// GET GetSourceHarvest V2
+// Retrieves the source harvests for a Package by its Id.
+// 
+//   Permissions Required:
+//   - View Package Source Harvests
+func (c *MetrcClient) PackagesGetSourceHarvestV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/packages/v2/"+url.QueryEscape(id)+"/source/harvests", queryParams, nil)
+}
+
+// GET GetTransferred V2
+// Retrieves a list of transferred packages for a specific Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+func (c *MetrcClient) PackagesGetTransferredV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/packages/v2/transferred", queryParams, nil)
+}
+
+// GET GetTypes V1
+// Permissions Required:
+//   - None
+func (c *MetrcClient) PackagesGetTypesV1(no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/packages/v1/types", queryParams, nil)
+}
+
+// GET GetTypes V2
+// Retrieves a list of available Package types.
+// 
+//   Permissions Required:
+//   - None
+func (c *MetrcClient) PackagesGetTypesV2(no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/packages/v2/types", queryParams, nil)
+}
+
+// PUT UpdateAdjust V2
+// Set the final quantity for a Package.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) PackagesUpdateAdjustV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/packages/v2/adjust", queryParams, body)
+}
+
+// PUT UpdateChangeNote V1
+// Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+//   - Manage Package Notes
+func (c *MetrcClient) PackagesUpdateChangeNoteV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/packages/v1/change/note", queryParams, body)
+}
+
+// PUT UpdateDecontaminate V2
+// Updates the Product decontaminate information for a list of packages at a specific Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) PackagesUpdateDecontaminateV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/packages/v2/decontaminate", queryParams, body)
+}
+
+// PUT UpdateDonationFlag V2
+// Flags one or more packages for donation at the specified Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) PackagesUpdateDonationFlagV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/packages/v2/donation/flag", queryParams, body)
+}
+
+// PUT UpdateDonationUnflag V2
+// Removes the donation flag from one or more packages at the specified Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) PackagesUpdateDonationUnflagV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/packages/v2/donation/unflag", queryParams, body)
+}
+
+// PUT UpdateExternalid V2
+// Updates the external identifiers for one or more packages at the specified Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Manage Package Inventory
+//   - External Id Enabled
+func (c *MetrcClient) PackagesUpdateExternalidV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/packages/v2/externalid", queryParams, body)
 }
 
 // PUT UpdateFinish V2
-// Marks one or more harvests as finished for the specified Facility.
+// Updates a list of packages as finished for a specific Facility.
 // 
 //   Permissions Required:
-//   - View Harvests
-//   - Finish/Discontinue Harvests
-func (c *MetrcClient) HarvestsUpdateFinishV2(licensenumber string, body interface{}) (interface{}, error) {
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) PackagesUpdateFinishV2(licensenumber string, body interface{}) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("PUT", "/harvests/v2/finish", queryParams, body)
+	return c.send("PUT", "/packages/v2/finish", queryParams, body)
+}
+
+// PUT UpdateItem V2
+// Updates the associated Item for one or more packages at the specified Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Create/Submit/Discontinue Packages
+func (c *MetrcClient) PackagesUpdateItemV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/packages/v2/item", queryParams, body)
+}
+
+// PUT UpdateLabTestRequired V2
+// Updates the list of required lab test batches for one or more packages at the specified Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Create/Submit/Discontinue Packages
+func (c *MetrcClient) PackagesUpdateLabTestRequiredV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/packages/v2/labtests/required", queryParams, body)
 }
 
 // PUT UpdateLocation V2
-// Updates the Location of Harvest for a specified Facility.
+// Updates the Location and Sublocation for one or more packages at the specified Facility.
 // 
 //   Permissions Required:
-//   - View Harvests
-//   - Manage Harvests
-func (c *MetrcClient) HarvestsUpdateLocationV2(licensenumber string, body interface{}) (interface{}, error) {
+//   - View Packages
+//   - Create/Submit/Discontinue Packages
+func (c *MetrcClient) PackagesUpdateLocationV2(licensenumber string, body interface{}) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("PUT", "/harvests/v2/location", queryParams, body)
+	return c.send("PUT", "/packages/v2/location", queryParams, body)
 }
 
-// PUT UpdateMove V1
-// Permissions Required:
-//   - View Harvests
-//   - Manage Harvests
-func (c *MetrcClient) HarvestsUpdateMoveV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/harvests/v1/move", queryParams, body)
-}
-
-// PUT UpdateRename V1
-// Permissions Required:
-//   - View Harvests
-//   - Manage Harvests
-func (c *MetrcClient) HarvestsUpdateRenameV1(licensenumber string, body interface{}) (interface{}, error) {
-	queryParams := make(map[string]string)
-	if licensenumber != "" {
-		queryParams["licenseNumber"] = licensenumber
-	}
-	return c.send("PUT", "/harvests/v1/rename", queryParams, body)
-}
-
-// PUT UpdateRename V2
-// Renames one or more harvests for the specified Facility.
+// PUT UpdateNote V2
+// Updates notes associated with one or more packages for the specified Facility.
 // 
 //   Permissions Required:
-//   - View Harvests
-//   - Manage Harvests
-func (c *MetrcClient) HarvestsUpdateRenameV2(licensenumber string, body interface{}) (interface{}, error) {
+//   - View Packages
+//   - Manage Packages Inventory
+//   - Manage Package Notes
+func (c *MetrcClient) PackagesUpdateNoteV2(licensenumber string, body interface{}) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("PUT", "/harvests/v2/rename", queryParams, body)
+	return c.send("PUT", "/packages/v2/note", queryParams, body)
 }
 
-// PUT UpdateRestoreHarvestedPlants V2
-// Restores previously harvested plants to their original state for the specified Facility.
+// PUT UpdateRemediate V2
+// Updates a list of Product remediations for packages at a specific Facility.
 // 
 //   Permissions Required:
-//   - View Harvests
-//   - Finish/Discontinue Harvests
-func (c *MetrcClient) HarvestsUpdateRestoreHarvestedPlantsV2(licensenumber string, body interface{}) (interface{}, error) {
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) PackagesUpdateRemediateV2(licensenumber string, body interface{}) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("PUT", "/harvests/v2/restore/harvestedplants", queryParams, body)
+	return c.send("PUT", "/packages/v2/remediate", queryParams, body)
+}
+
+// PUT UpdateTradesampleFlag V2
+// Flags or unflags one or more packages at the specified Facility as trade samples.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) PackagesUpdateTradesampleFlagV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/packages/v2/tradesample/flag", queryParams, body)
+}
+
+// PUT UpdateTradesampleUnflag V2
+// Removes the trade sample flag from one or more packages at the specified Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) PackagesUpdateTradesampleUnflagV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/packages/v2/tradesample/unflag", queryParams, body)
 }
 
 // PUT UpdateUnfinish V2
-// Reopens one or more previously finished harvests for the specified Facility.
+// Updates a list of packages as unfinished for a specific Facility.
 // 
 //   Permissions Required:
-//   - View Harvests
-//   - Finish/Discontinue Harvests
-func (c *MetrcClient) HarvestsUpdateUnfinishV2(licensenumber string, body interface{}) (interface{}, error) {
+//   - View Packages
+//   - Manage Packages Inventory
+func (c *MetrcClient) PackagesUpdateUnfinishV2(licensenumber string, body interface{}) (interface{}, error) {
 	queryParams := make(map[string]string)
 	if licensenumber != "" {
 		queryParams["licenseNumber"] = licensenumber
 	}
-	return c.send("PUT", "/harvests/v2/unfinish", queryParams, body)
+	return c.send("PUT", "/packages/v2/unfinish", queryParams, body)
+}
+
+// PUT UpdateUsebydate V2
+// Updates the use-by date for one or more packages at the specified Facility.
+// 
+//   Permissions Required:
+//   - View Packages
+//   - Create/Submit/Discontinue Packages
+func (c *MetrcClient) PackagesUpdateUsebydateV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/packages/v2/usebydate", queryParams, body)
+}
+
+// POST Create V1
+// Permissions Required:
+//   - ManagePatientsCheckIns
+func (c *MetrcClient) PatientCheckInsCreateV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/patient-checkins/v1", queryParams, body)
+}
+
+// POST Create V2
+// Records patient check-ins for a specified Facility.
+// 
+//   Permissions Required:
+//   - ManagePatientsCheckIns
+func (c *MetrcClient) PatientCheckInsCreateV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/patient-checkins/v2", queryParams, body)
+}
+
+// DELETE Delete V1
+// Permissions Required:
+//   - ManagePatientsCheckIns
+func (c *MetrcClient) PatientCheckInsDeleteV1(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("DELETE", "/patient-checkins/v1/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// DELETE Delete V2
+// Archives a Patient Check-In, identified by its Id, for a specified Facility.
+// 
+//   Permissions Required:
+//   - ManagePatientsCheckIns
+func (c *MetrcClient) PatientCheckInsDeleteV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("DELETE", "/patient-checkins/v2/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET GetAll V1
+// Permissions Required:
+//   - ManagePatientsCheckIns
+func (c *MetrcClient) PatientCheckInsGetAllV1(checkindateend string, checkindatestart string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if checkindateend != "" {
+		queryParams["checkinDateEnd"] = checkindateend
+	}
+	if checkindatestart != "" {
+		queryParams["checkinDateStart"] = checkindatestart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/patient-checkins/v1", queryParams, nil)
+}
+
+// GET GetAll V2
+// Retrieves a list of patient check-ins for a specified Facility.
+// 
+//   Permissions Required:
+//   - ManagePatientsCheckIns
+func (c *MetrcClient) PatientCheckInsGetAllV2(checkindateend string, checkindatestart string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if checkindateend != "" {
+		queryParams["checkinDateEnd"] = checkindateend
+	}
+	if checkindatestart != "" {
+		queryParams["checkinDateStart"] = checkindatestart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/patient-checkins/v2", queryParams, nil)
+}
+
+// GET GetLocations V1
+// Permissions Required:
+//   - None
+func (c *MetrcClient) PatientCheckInsGetLocationsV1(no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/patient-checkins/v1/locations", queryParams, nil)
+}
+
+// GET GetLocations V2
+// Retrieves a list of Patient Check-In locations.
+// 
+//   Permissions Required:
+//   - None
+func (c *MetrcClient) PatientCheckInsGetLocationsV2(no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/patient-checkins/v2/locations", queryParams, nil)
+}
+
+// PUT Update V1
+// Permissions Required:
+//   - ManagePatientsCheckIns
+func (c *MetrcClient) PatientCheckInsUpdateV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/patient-checkins/v1", queryParams, body)
+}
+
+// PUT Update V2
+// Updates patient check-ins for a specified Facility.
+// 
+//   Permissions Required:
+//   - ManagePatientsCheckIns
+func (c *MetrcClient) PatientCheckInsUpdateV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/patient-checkins/v2", queryParams, body)
+}
+
+// GET GetActive V1
+// Permissions Required:
+//   - None
+func (c *MetrcClient) UnitsOfMeasureGetActiveV1(no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/unitsofmeasure/v1/active", queryParams, nil)
+}
+
+// GET GetActive V2
+// Retrieves all active units of measure.
+// 
+//   Permissions Required:
+//   - None
+func (c *MetrcClient) UnitsOfMeasureGetActiveV2(no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/unitsofmeasure/v2/active", queryParams, nil)
+}
+
+// GET GetInactive V2
+// Retrieves all inactive units of measure.
+// 
+//   Permissions Required:
+//   - None
+func (c *MetrcClient) UnitsOfMeasureGetInactiveV2(no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/unitsofmeasure/v2/inactive", queryParams, nil)
+}
+
+// GET GetAll V2
+// Retrieves all available waste methods.
+// 
+//   Permissions Required:
+//   - None
+func (c *MetrcClient) WasteMethodsGetAllV2(no string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if no != "" {
+		queryParams["No"] = no
+	}
+	return c.send("GET", "/wastemethods/v2", queryParams, nil)
+}
+
+// GET GetAll V1
+// Permissions Required:
+//   - Manage Employees
+func (c *MetrcClient) EmployeesGetAllV1(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/employees/v1", queryParams, nil)
+}
+
+// GET GetAll V2
+// Retrieves a list of employees for a specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Employees
+//   - View Employees
+func (c *MetrcClient) EmployeesGetAllV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/employees/v2", queryParams, nil)
+}
+
+// GET GetPermissions V2
+// Retrieves the permissions of a specified Employee, identified by their Employee License Number, for a given Facility.
+// 
+//   Permissions Required:
+//   - Manage Employees
+func (c *MetrcClient) EmployeesGetPermissionsV2(employeelicensenumber string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if employeelicensenumber != "" {
+		queryParams["employeeLicenseNumber"] = employeelicensenumber
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/employees/v2/permissions", queryParams, nil)
+}
+
+// POST Create V1
+// NOTE: To include a photo with an item, first use POST /items/v1/photo to POST the photo, and then use the returned ID in the request body in this endpoint.
+// 
+//   Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsCreateV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/items/v1/create", queryParams, body)
+}
+
+// POST Create V2
+// Creates one or more new products for the specified Facility. NOTE: To include a photo with an item, first use POST /items/v2/photo to POST the photo, and then use the returned Id in the request body in this endpoint.
+// 
+//   Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsCreateV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/items/v2", queryParams, body)
+}
+
+// POST CreateBrand V2
+// Creates one or more new item brands for the specified Facility identified by the License Number.
+// 
+//   Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsCreateBrandV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/items/v2/brand", queryParams, body)
+}
+
+// POST CreateFile V2
+// Uploads one or more image or PDF files for products, labels, packaging, or documents at the specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsCreateFileV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/items/v2/file", queryParams, body)
+}
+
+// POST CreatePhoto V1
+// This endpoint allows only BMP, GIF, JPG, and PNG files and uploaded files can be no more than 5 MB in size.
+// 
+//   Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsCreatePhotoV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/items/v1/photo", queryParams, body)
+}
+
+// POST CreatePhoto V2
+// This endpoint allows only BMP, GIF, JPG, and PNG files and uploaded files can be no more than 5 MB in size.
+// 
+//   Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsCreatePhotoV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/items/v2/photo", queryParams, body)
+}
+
+// POST CreateUpdate V1
+// Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsCreateUpdateV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/items/v1/update", queryParams, body)
+}
+
+// DELETE Delete V1
+// Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsDeleteV1(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("DELETE", "/items/v1/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// DELETE Delete V2
+// Archives the specified Product by Id for the given Facility License Number.
+// 
+//   Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsDeleteV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("DELETE", "/items/v2/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// DELETE DeleteBrand V2
+// Archives the specified Item Brand by Id for the given Facility License Number.
+// 
+//   Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsDeleteBrandV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("DELETE", "/items/v2/brand/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET Get V1
+// Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsGetV1(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/items/v1/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET Get V2
+// Retrieves detailed information about a specific Item by Id.
+// 
+//   Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsGetV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/items/v2/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET GetActive V1
+// Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsGetActiveV1(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/items/v1/active", queryParams, nil)
+}
+
+// GET GetActive V2
+// Returns a list of active items for the specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsGetActiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/items/v2/active", queryParams, nil)
+}
+
+// GET GetBrands V1
+// Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsGetBrandsV1(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/items/v1/brands", queryParams, nil)
+}
+
+// GET GetBrands V2
+// Retrieves a list of active item brands for the specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsGetBrandsV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/items/v2/brands", queryParams, nil)
+}
+
+// GET GetCategories V1
+// Permissions Required:
+//   - None
+func (c *MetrcClient) ItemsGetCategoriesV1(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/items/v1/categories", queryParams, nil)
+}
+
+// GET GetCategories V2
+// Retrieves a list of item categories.
+// 
+//   Permissions Required:
+//   - None
+func (c *MetrcClient) ItemsGetCategoriesV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/items/v2/categories", queryParams, nil)
+}
+
+// GET GetFile V2
+// Retrieves a file by its Id for the specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsGetFileV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/items/v2/file/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET GetInactive V1
+// Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsGetInactiveV1(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/items/v1/inactive", queryParams, nil)
+}
+
+// GET GetInactive V2
+// Retrieves a list of inactive items for the specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsGetInactiveV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/items/v2/inactive", queryParams, nil)
+}
+
+// GET GetPhoto V1
+// Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsGetPhotoV1(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/items/v1/photo/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET GetPhoto V2
+// Retrieves an image by its Id for the specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsGetPhotoV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/items/v2/photo/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// PUT Update V2
+// Updates one or more existing products for the specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsUpdateV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/items/v2", queryParams, body)
+}
+
+// PUT UpdateBrand V2
+// Updates one or more existing item brands for the specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Items
+func (c *MetrcClient) ItemsUpdateBrandV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/items/v2/brand", queryParams, body)
+}
+
+// POST Create V1
+// Permissions Required:
+//   - Manage Locations
+func (c *MetrcClient) LocationsCreateV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/locations/v1/create", queryParams, body)
+}
+
+// POST Create V2
+// Creates new locations for a specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Locations
+func (c *MetrcClient) LocationsCreateV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/locations/v2", queryParams, body)
+}
+
+// POST CreateUpdate V1
+// Permissions Required:
+//   - Manage Locations
+func (c *MetrcClient) LocationsCreateUpdateV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/locations/v1/update", queryParams, body)
+}
+
+// DELETE Delete V1
+// Permissions Required:
+//   - Manage Locations
+func (c *MetrcClient) LocationsDeleteV1(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("DELETE", "/locations/v1/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// DELETE Delete V2
+// Archives a specified Location, identified by its Id, for a Facility.
+// 
+//   Permissions Required:
+//   - Manage Locations
+func (c *MetrcClient) LocationsDeleteV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("DELETE", "/locations/v2/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET Get V1
+// Permissions Required:
+//   - Manage Locations
+func (c *MetrcClient) LocationsGetV1(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/locations/v1/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET Get V2
+// Retrieves a Location by its Id.
+// 
+//   Permissions Required:
+//   - Manage Locations
+func (c *MetrcClient) LocationsGetV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/locations/v2/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET GetActive V1
+// Permissions Required:
+//   - Manage Locations
+func (c *MetrcClient) LocationsGetActiveV1(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/locations/v1/active", queryParams, nil)
+}
+
+// GET GetActive V2
+// Retrieves a list of active locations for a specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Locations
+func (c *MetrcClient) LocationsGetActiveV2(lastmodifiedend string, lastmodifiedstart string, licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if lastmodifiedend != "" {
+		queryParams["lastModifiedEnd"] = lastmodifiedend
+	}
+	if lastmodifiedstart != "" {
+		queryParams["lastModifiedStart"] = lastmodifiedstart
+	}
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/locations/v2/active", queryParams, nil)
+}
+
+// GET GetInactive V2
+// Retrieves a list of inactive locations for a specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Locations
+func (c *MetrcClient) LocationsGetInactiveV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/locations/v2/inactive", queryParams, nil)
+}
+
+// GET GetTypes V1
+// Permissions Required:
+//   - Manage Locations
+func (c *MetrcClient) LocationsGetTypesV1(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/locations/v1/types", queryParams, nil)
+}
+
+// GET GetTypes V2
+// Retrieves a list of active location types for a specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Locations
+func (c *MetrcClient) LocationsGetTypesV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/locations/v2/types", queryParams, nil)
+}
+
+// PUT Update V2
+// Updates existing locations for a specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Locations
+func (c *MetrcClient) LocationsUpdateV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/locations/v2", queryParams, body)
+}
+
+// POST Create V2
+// Adds new patients to a specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Patients
+func (c *MetrcClient) PatientsCreateV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/patients/v2", queryParams, body)
+}
+
+// POST CreateAdd V1
+// Permissions Required:
+//   - Manage Patients
+func (c *MetrcClient) PatientsCreateAddV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/patients/v1/add", queryParams, body)
+}
+
+// POST CreateUpdate V1
+// Permissions Required:
+//   - Manage Patients
+func (c *MetrcClient) PatientsCreateUpdateV1(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("POST", "/patients/v1/update", queryParams, body)
+}
+
+// DELETE Delete V1
+// Permissions Required:
+//   - Manage Patients
+func (c *MetrcClient) PatientsDeleteV1(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("DELETE", "/patients/v1/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// DELETE Delete V2
+// Removes a Patient, identified by an Id, from a specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Patients
+func (c *MetrcClient) PatientsDeleteV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("DELETE", "/patients/v2/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET Get V1
+// Permissions Required:
+//   - Manage Patients
+func (c *MetrcClient) PatientsGetV1(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/patients/v1/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET Get V2
+// Retrieves a Patient by Id.
+// 
+//   Permissions Required:
+//   - Manage Patients
+func (c *MetrcClient) PatientsGetV2(id string, licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/patients/v2/"+url.QueryEscape(id)+"", queryParams, nil)
+}
+
+// GET GetActive V1
+// Permissions Required:
+//   - Manage Patients
+func (c *MetrcClient) PatientsGetActiveV1(licensenumber string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("GET", "/patients/v1/active", queryParams, nil)
+}
+
+// GET GetActive V2
+// Retrieves a list of active patients for a specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Patients
+func (c *MetrcClient) PatientsGetActiveV2(licensenumber string, pagenumber string, pagesize string) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	if pagenumber != "" {
+		queryParams["pageNumber"] = pagenumber
+	}
+	if pagesize != "" {
+		queryParams["pageSize"] = pagesize
+	}
+	return c.send("GET", "/patients/v2/active", queryParams, nil)
+}
+
+// PUT Update V2
+// Updates Patient information for a specified Facility.
+// 
+//   Permissions Required:
+//   - Manage Patients
+func (c *MetrcClient) PatientsUpdateV2(licensenumber string, body interface{}) (interface{}, error) {
+	queryParams := make(map[string]string)
+	if licensenumber != "" {
+		queryParams["licenseNumber"] = licensenumber
+	}
+	return c.send("PUT", "/patients/v2", queryParams, body)
 }
 

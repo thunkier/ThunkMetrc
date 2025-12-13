@@ -1,11 +1,15 @@
 [package]
 name = "thunkmetrc"
-version = "0.2.0"
+version = "0.2.2"
 edition = "2021"
 description = "High-level generic Metrc SDK"
+license = "MIT"
+repository = "https://github.com/thunkmetrc/sdks"
+keywords = ["thunkmetrc", "cannabis", "compliance", "api", "sdk"]
+categories = ["api-bindings", "web-programming::http-client"]
 
 [dependencies]
-thunkmetrc-wrapper = { path = "../wrapper", version = "0.2.0" }
+thunkmetrc-wrapper = { path = "../wrapper", version = "0.2.2" }
 chrono = { version = "0.4", features = ["serde"] }
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
