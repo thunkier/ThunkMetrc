@@ -1,0 +1,11 @@
+from .paginated_response import PaginatedResponse
+{{- range .Models }}
+from .{{ .Name | ToSnakeCase }} import {{ .Name }}
+{{- end }}
+
+__all__ = [
+    "PaginatedResponse",
+{{- range .Models }}
+    "{{ .Name }}",
+{{- end }}
+]

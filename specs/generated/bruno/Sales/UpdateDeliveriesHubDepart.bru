@@ -1,0 +1,44 @@
+meta {
+  name: UpdateDeliveriesHubDepart
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/sales/v2/deliveries/hub/depart
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 1
+  },
+  {
+    "Id": 2
+  }
+]
+}
+
+docs {
+  Processes the departure of hub sales deliveries for a Facility using the provided License Number and delivery data.
+
+  Permissions Required:
+  - Manage Sales Delivery Hub
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to update hub delivery departures.
+
+  Example Response:
+  No response
+}

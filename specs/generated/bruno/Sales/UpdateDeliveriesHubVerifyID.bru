@@ -1,0 +1,46 @@
+meta {
+  name: UpdateDeliveriesHubVerifyID
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/sales/v2/deliveries/hub/verifyID
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 1,
+    "PaymentType": "Cash"
+  },
+  {
+    "Id": 2,
+    "PaymentType": "Electronic"
+  }
+]
+}
+
+docs {
+  Verifies identification for a list of hub sales deliveries using the provided License Number and delivery data.
+
+  Permissions Required:
+  - Manage Sales Delivery Hub
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to update hub delivery Id's.
+
+  Example Response:
+  No response
+}

@@ -1,0 +1,46 @@
+meta {
+  name: UpdateSublocations
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/sublocations/v2
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 1,
+    "Name": "Room 1A Sublocation"
+  },
+  {
+    "Id": 2,
+    "Name": "Table 2B Sublocation"
+  }
+]
+}
+
+docs {
+  Updates existing sublocation records for a specified Facility.
+
+  Permissions Required:
+  - Manage Locations
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to update the list of sublocations.
+
+  Example Response:
+  No response
+}

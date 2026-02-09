@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlantBatchesPlantBatchesGrowthPhaseRequest",
+  "type": "object",
+  "properties": {
+    "Count": {
+      "type": "integer"
+    },
+    "GrowthDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "GrowthPhase": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "NewLocation": {
+      "type": "string"
+    },
+    "NewSublocation": {
+      "type": "string"
+    },
+    "PatientLicenseNumber": {
+      "type": "string"
+    },
+    "StartingTag": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "Count",
+    "GrowthDate",
+    "GrowthPhase",
+    "Name",
+    "NewLocation",
+    "NewSublocation",
+    "PatientLicenseNumber",
+    "StartingTag"
+  ]
+}

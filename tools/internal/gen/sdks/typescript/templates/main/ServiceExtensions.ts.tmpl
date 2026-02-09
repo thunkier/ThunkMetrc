@@ -1,0 +1,155 @@
+
+import { {{ .Service.Name | CleanName | ToPascalCase }}Service } from "../services/{{ .Service.Name | CleanName | ToPascalCase }}Service";
+import { MetrcClient } from "../client";
+import { AxiosResponse } from "axios";
+
+// Helper for time window calculation
+function getTimeWindow(lastKnownSync?: Date, bufferMinutes: number = 5): { start: string, end: string } {
+    const end = new Date();
+    let start = new Date(end.getTime() - 24 * 60 * 60 * 1000); // 24h ago default
+    if (lastKnownSync) {
+        start = new Date(lastKnownSync.getTime() - bufferMinutes * 60000);
+    }
+    return {
+        start: start.toISOString(),
+        end: end.toISOString()
+    };
+}
+
+export class {{ .Service.Name | CleanName | ToPascalCase }}Extensions {
+    private service: {{ .Service.Name | CleanName | ToPascalCase }}Service;
+
+    constructor(client: MetrcClient) {
+        this.service = new {{ .Service.Name | CleanName | ToPascalCase }}Service(client);
+    }
+
+{{- $service := .Service }}
+{{- range .Service.Operations }}
+{{- if HasPagination . }}
+    /**
+     * Iterator for {{ FormatMethodName .Name $service.Name | ToPascalCase }}.
+     */
+    async *iterate{{ FormatMethodName .Name $service.Name | ToPascalCase }}(
+        {{- range .PathParams }}
+        {{ . }}: string,
+        {{- end }}
+        {{- range .QueryParams }}
+        {{- if and (ne .Name "pageNumber") (ne .Name "page") }}
+        {{ .Name | TrimSuffix "optional" }}?: string,
+        {{- end }}
+        {{- end }}
+        // ... body? TS client gen usually handles args specifically.
+        // We will assume standard args order: Path, Query, Body.
+        // For iteration we skip page.
+    ): AsyncGenerator<any, void, unknown> { // TODO: Type 'any' properly
+        let page = 1;
+        while (true) {
+            const response = await this.service.{{ FormatMethodName .Name $service.Name }}(
+                {{- range .PathParams }}{{ . }}, {{- end }}
+                {{- range .QueryParams }}
+                {{- if and (ne .Name "pageNumber") (ne .Name "page") }}
+                {{ .Name | TrimSuffix "optional" }},
+                {{- end }}
+                {{- end }}
+                // Pass page
+                page
+            );
+
+            if (!response.data || response.data.length === 0) {
+                break;
+            }
+
+            for (const item of response.data) {
+                yield item;
+            }
+
+            if (response.data.length < 20) { // Default page size assumption or check metadata if available
+                break;
+            }
+            page++;
+        }
+    }
+{{- end }}
+
+{{- if IsTimeWindowed . }}
+    /**
+     * Syncs {{ FormatMethodName .Name $service.Name | ToPascalCase }} data for a specific time window.
+     */
+    async sync{{ FormatMethodName .Name $service.Name | ToPascalCase }}(
+        lastKnownSync?: Date,
+        bufferMinutes: number = 5,
+        {{- range .PathParams }}{{ . }}: string, {{- end }}
+        {{- range .QueryParams }}
+        {{- if and (ne .Name "lastModifiedStart") (ne .Name "lastModifiedEnd") (ne .Name "pageNumber") (ne .Name "page") }}
+        {{ .Name | TrimSuffix "optional" }}?: string,
+        {{- end }}
+        {{- end }}
+    ): Promise<any[]> {
+        const { start, end } = getTimeWindow(lastKnownSync, bufferMinutes);
+        const results: any[] = [];
+        // Iterate with calculated start/end
+        for await (const item of this.iterate{{ FormatMethodName .Name $service.Name | ToPascalCase }}(
+            {{- range .PathParams }}{{ . }}, {{- end }}
+            {{- range .QueryParams }}
+            {{- if eq .Name "lastModifiedStart" }}
+            start,
+            {{- else if eq .Name "lastModifiedEnd" }}
+            end,
+            {{- else if and (ne .Name "pageNumber") (ne .Name "page") }}
+            {{ .Name | TrimSuffix "optional" }},
+            {{- end }}
+            {{- end }}
+        )) {
+            results.push(item);
+        }
+        return results;
+    }
+
+    /**
+     * Parallel Sync for {{ FormatMethodName .Name $service.Name | ToPascalCase }} across multiple clients/targets.
+     * @param targets Array of { client: MetrcClient, licenseNumber: string }
+     */
+    static async sync{{ FormatMethodName .Name $service.Name | ToPascalCase }}Parallel(
+        targets: { client: MetrcClient, licenseNumber: string }[],
+        lastKnownSync?: Date,
+        bufferMinutes: number = 5,
+        concurrencyLimit: number = 20,
+        {{- range .QueryParams }}
+        {{- if and (ne .Name "lastModifiedStart") (ne .Name "lastModifiedEnd") (ne .Name "pageNumber") (ne .Name "page") (ne .Name "licenseNumber") }}
+        {{ .Name | TrimSuffix "optional" }}?: string,
+        {{- end }}
+        {{- end }}
+    ): Promise<Map<string, any[]>> { // returns Map<LicenseNumber, Items[]>
+        const { start, end } = getTimeWindow(lastKnownSync, bufferMinutes);
+        const results = new Map<string, any[]>();
+        
+        // Simple chunking for concurrency
+        const chunk = (arr: any[], size: number) => Array.from({ length: Math.ceil(arr.length / size) }, (v, i) => arr.slice(i * size, i * size + size));
+        const batches = chunk(targets, concurrencyLimit);
+
+        for (const batch of batches) {
+            await Promise.all(batch.map(async (target) => {
+                const ext = new {{ $service.Name | CleanName | ToPascalCase }}Extensions(target.client);
+                const items = await ext.sync{{ FormatMethodName .Name $service.Name | ToPascalCase }}(
+                     lastKnownSync, bufferMinutes,
+                     // Path params? Parallel sync usually implies licenseNumber is the main differentiator.
+                     // If path params exist, they must be passed in? Or parallel might not support complex path params easily without target specific config.
+                     // For now, assuming standard license-based sync.
+                     {{- range .PathParams }}
+                     // TODO: Handle path params in parallel sync
+                     {{- end }}
+                     // Query Params
+                     {{- range .QueryParams }}
+                     {{- if and (ne .Name "lastModifiedStart") (ne .Name "lastModifiedEnd") (ne .Name "pageNumber") (ne .Name "page") (ne .Name "licenseNumber") }}
+                     {{ .Name | TrimSuffix "optional" }},
+                     {{- end }}
+                     {{- end }}
+                );
+                results.set(target.licenseNumber, items);
+            }));
+        }
+        return results;
+    }
+{{- end }}
+{{- end }}
+}

@@ -1,0 +1,36 @@
+meta {
+  name: GetSublocationsById
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/sublocations/v2/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a Sublocation by its Id, with an optional license number.
+
+  Permissions Required:
+  - Manage Locations
+
+  Parameters:
+  - licenseNumber (Required): If specified, the Sublocation will be validated against the specified License Number. If not specified, the Sublocation will be validated against all of the User's current Facilities. Please note that if the Sublocation is not valid for the specified License Number, a 401 Unauthorized status will be returned.
+
+  Example Response:
+  {
+    "Id": 1,
+    "Name": "Harvest Sublocation"
+  }
+}

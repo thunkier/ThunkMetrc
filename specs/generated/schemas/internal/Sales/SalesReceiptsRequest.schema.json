@@ -1,0 +1,163 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SalesSalesReceiptsRequest",
+  "type": "object",
+  "properties": {
+    "CaregiverLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ExternalReceiptNumber": {
+      "type": "string"
+    },
+    "IdentificationMethod": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PatientLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PatientRegistrationLocationId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "SalesCustomerType": {
+      "type": "string"
+    },
+    "SalesDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Transactions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "CityTax": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "CountyTax": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "DiscountAmount": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ExciseTax": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "InvoiceNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "MunicipalTax": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "PackageLabel": {
+            "type": "string"
+          },
+          "Price": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "QrCodes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "Quantity": {
+            "type": "number"
+          },
+          "SalesTax": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "SubTotal": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "TotalAmount": {
+            "type": "number"
+          },
+          "UnitOfMeasure": {
+            "type": "string"
+          },
+          "UnitThcContent": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "UnitThcContentUnitOfMeasure": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "UnitThcPercent": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "UnitWeight": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "UnitWeightUnitOfMeasure": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "PackageLabel",
+          "Quantity",
+          "TotalAmount",
+          "UnitOfMeasure"
+        ]
+      }
+    }
+  },
+  "required": [
+    "ExternalReceiptNumber",
+    "SalesCustomerType",
+    "SalesDateTime",
+    "Transactions"
+  ]
+}

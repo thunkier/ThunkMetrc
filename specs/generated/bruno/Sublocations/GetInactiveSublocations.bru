@@ -1,0 +1,55 @@
+meta {
+  name: GetInactiveSublocations
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/sublocations/v2/inactive
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  pageNumber: 
+  pageSize: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of inactive sublocations for the specified Facility.
+
+  Permissions Required:
+  - Manage Locations
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to return the list of inactive sublocations.
+  - pageNumber (Optional): The number of the data page from which to return data.
+  - pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20.
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 1,
+        "Name": "Harvest Sublocation"
+      },
+      {
+        "Id": 2,
+        "Name": "Plants Sublocation"
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

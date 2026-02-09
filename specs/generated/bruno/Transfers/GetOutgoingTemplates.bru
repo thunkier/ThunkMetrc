@@ -1,0 +1,101 @@
+meta {
+  name: GetOutgoingTemplates
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/transfers/v2/templates/outgoing
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  lastModifiedStart: 
+  lastModifiedEnd: 
+  pageNumber: 
+  pageSize: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of transfer templates for a Facility, optionally filtered by last modified date range.
+
+  Permissions Required:
+  - Manage Transfer Templates
+  - View Transfer Templates
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to return outgoing shipment templates.
+  - lastModifiedStart (Optional): The last modified start timestamp
+  - lastModifiedEnd (Optional): The last modified end timestamp
+  - pageNumber (Optional): The number of the data page from which to return data.
+  - pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20.
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 1,
+        "ManifestNumber": null,
+        "InvoiceNumber": null,
+        "ShipmentLicenseType": 0,
+        "ShipperFacilityLicenseNumber": "123-ABC",
+        "ShipperFacilityName": "Lofty Med-Cultivation B",
+        "Name": "Template 1",
+        "TransporterFacilityLicenseNumber": "123-BCD",
+        "TransporterFacilityName": "Lofty Med-Dispensary",
+        "DriverName": "X",
+        "DriverOccupationalLicenseNumber": "",
+        "DriverVehicleLicenseNumber": "",
+        "VehicleMake": "X",
+        "VehicleModel": "X",
+        "VehicleLicensePlateNumber": "X",
+        "DeliveryCount": 1,
+        "ReceivedDeliveryCount": 0,
+        "PackageCount": 7,
+        "ReceivedPackageCount": 0,
+        "ContainsPlantPackage": false,
+        "ContainsProductPackage": false,
+        "ContainsTradeSample": false,
+        "ContainsDonation": false,
+        "ContainsTestingSample": false,
+        "ContainsProductRequiresRemediation": false,
+        "ContainsRemediatedProductPackage": false,
+        "IsVoided": false,
+        "CreatedDateTime": "2016-10-10T08:20:45-08:00",
+        "CreatedByUserName": null,
+        "LastModified": "0001-01-01T00:00:00+00:00",
+        "DeliveryId": 0,
+        "RecipientFacilityLicenseNumber": null,
+        "RecipientFacilityName": null,
+        "ShipmentTypeName": null,
+        "ShipmentTransactionType": null,
+        "EstimatedDepartureDateTime": "0001-01-01T00:00:00.000",
+        "ActualDepartureDateTime": null,
+        "EstimatedArrivalDateTime": "0001-01-01T00:00:00.000",
+        "ActualArrivalDateTime": null,
+        "DeliveryPackageCount": 0,
+        "DeliveryReceivedPackageCount": 0,
+        "ReceivedDateTime": null,
+        "EstimatedReturnDepartureDateTime": null,
+        "ActualReturnDepartureDateTime": null,
+        "EstimatedReturnArrivalDateTime": null,
+        "ActualReturnArrivalDateTime": null,
+        "OriginatingTemplateId": null
+      }
+    ],
+    "Total": 1,
+    "TotalRecords": 1,
+    "PageSize": 1,
+    "RecordsOnPage": 1,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

@@ -1,107 +1,99 @@
-# C# / .NET Integration Guide
+# C# SDK Guide
 
-## 📦 Installation
+## Packages
 
-We assume you are using `.NET 8` or later.
-
-### Wrapper (Recommended)
-This package includes the type-safe wrapper, models, and rate limiter.
 ```bash
+dotnet add package ThunkMetrc.Client
 dotnet add package ThunkMetrc.Wrapper
-```
-
-### High-Level Utilities (Optional)
-This package includes `ActivePackagesInventorySync` and other helpers.
-```bash
+# Optional high-level helpers
 dotnet add package ThunkMetrc
 ```
 
----
+Targets `net8.0`.
 
-## 🚀 Getting Started
+## Recommended Setup (Wrapper)
 
-### 1. Initialize the Client
-The `MetrcClient` is the low-level HTTP client. Usually you instantiate this once per user-session (since it holds the User API Key).
+```csharp
+using ThunkMetrc.Wrapper;
+
+var limiterConfig = new RateLimiterConfig
+{
+    Enabled = true,
+    MaxGetPerSecondIntegrator = 150,
+    MaxConcurrentGetIntegrator = 30
+};
+
+using var factory = new MetrcFactory(limiterConfig);
+
+var wrapper = factory.Create(
+    "https://sandbox-api-or.metrc.com",
+    "vendor_key",
+    "user_key"
+);
+
+var facilities = await wrapper.Facilities.GetFacilities();
+Console.WriteLine($"Facilities: {facilities.Count}");
+```
+
+## Raw Client (When You Need Untyped Responses)
 
 ```csharp
 using ThunkMetrc.Client;
 
 var client = new MetrcClient(
-    baseUrl: "https://sandbox-api-or.metrc.com", 
-    vendorKey: "your_vendor_key", 
-    userKey: "user_api_key"
+    "https://sandbox-api-or.metrc.com",
+    "vendor_key",
+    "user_key"
 );
+
+object rawFacilities = await client.GetFacilities();
 ```
 
-### 2. Create the Wrapper
-Wrap the client to get strong typing and rate limiting.
+## Pagination Pattern
+
+The wrapper exposes paginated endpoints directly. Iterate pages explicitly:
 
 ```csharp
-using ThunkMetrc.Wrapper;
+using ThunkMetrc.Wrapper.Models;
 
-var wrapper = new MetrcWrapper(client);
-```
+var allPackages = new List<PackagesPackage>();
+var page = 1;
 
-### 3. Make Requests
-All methods are `async` and return strongly-typed models.
-
-```csharp
-try 
+while (true)
 {
-    var deliveries = await wrapper.TransfersGetIncomingV2(
+    var response = await wrapper.Packages.GetActivePackages(
         licenseNumber: "C12-0000001-LIC",
-        lastModifiedStart: DateTime.UtcNow.AddDays(-1).ToString("o")
+        pageNumber: page.ToString(),
+        pageSize: "20"
     );
-    
-    foreach (var delivery in deliveries)
+
+    if (response?.Data == null || response.Data.Count == 0)
     {
-        Console.WriteLine($"Delivery: {delivery.Id}");
+        break;
     }
-}
-catch (MetrcException ex)
-{
-    Console.WriteLine($"Metrc Error: {ex.Message}");
+
+    allPackages.AddRange(response.Data);
+    page++;
 }
 ```
 
----
+## High-Level Helpers (`ThunkMetrc`)
 
-## 🛡️ Rate Limiting
-
-The Rate Limiter is **disabled by default**. To enable it:
+The `ThunkMetrc` package adds extension helpers (sync windows, parallel helpers, iterators).
 
 ```csharp
-var config = new RateLimiterConfig 
-{
-    Enabled = true,
-    MaxGetPerSecondPerFacility = 50,
-    MaxConcurrentGetPerFacility = 10
-};
+using ThunkMetrc.Extensions;
 
-var wrapper = new MetrcWrapper(client, config);
-```
-
-### How it works
-*   **Automatic Retries**: If Metrc returns a `429 Too Many Requests`, the wrapper will automatically wait (with exponential backoff) and retry.
-*   **Concurrency Control**: It uses a Semaphore to ensure you don't exceed `MaxConcurrentGetPerFacility` active requests.
-
----
-
-## 🛠️ High-Level Features (`ThunkMetrc`)
-
-If you installed the `ThunkMetrc` package, you can use advanced workflows.
-
-### Inventory Sync
-Synchronize all active packages for a license, handling pagination automatically (pages of 20).
-
-```csharp
-using ThunkMetrc;
-
-var thunk = new ThunkMetrc.ThunkMetrc(wrapper);
-
-var packages = await thunk.ActivePackagesInventorySyncAsync(
-    licenseNumber: "C12-0000001-LIC",
-    lastKnownSync: DateTime.UtcNow.AddHours(-24),
-    bufferMinutes: 20
+var packages = await wrapper.Packages.SyncGetActivePackages(
+    lastKnownSync: DateTimeOffset.UtcNow.AddHours(-2),
+    bufferMinutes: 5,
+    licenseNumber: "C12-0000001-LIC"
 );
+```
+
+## Build Locally
+
+```bash
+task build:csharp
+task test:csharp
 ```

@@ -1,0 +1,82 @@
+meta {
+  name: UpdateAdditivesTemplates
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/additivestemplates/v2
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 201,
+    "Name": "Additive 1",
+    "AdditiveType": "Fertilizer",
+    "ApplicationDevice": "Sprayer",
+    "EpaRegistrationNumber": "123456",
+    "Note": "This is a note",
+    "ProductSupplier": "Supplier",
+    "ProductTradeName": "Trade Name",
+    "RestrictiveEntryIntervalQuantityDescription": "1",
+    "RestrictiveEntryIntervalTimeDescription": "1 day",
+    "ActiveIngredients": [
+      {
+        "Name": "Ingredient 1 1",
+        "Percentage": 1.1
+      },
+      {
+        "Name": "Ingredient 1 2",
+        "Percentage": 1.2
+      }
+    ]
+  },
+  {
+    "Id": 202,
+    "Name": "Additive 2",
+    "AdditiveType": "Pesticide",
+    "ApplicationDevice": "Dropper",
+    "EpaRegistrationNumber": "654321",
+    "Note": "This is a note",
+    "ProductSupplier": "Supplier",
+    "ProductTradeName": "Trade Name",
+    "RestrictiveEntryIntervalQuantityDescription": "2",
+    "RestrictiveEntryIntervalTimeDescription": "2 days",
+    "ActiveIngredients": [
+      {
+        "Name": "Ingredient 2 1",
+        "Percentage": 2.1
+      },
+      {
+        "Name": "Ingredient 2 2",
+        "Percentage": 2.2
+      }
+    ]
+  }
+]
+}
+
+docs {
+  Updates existing additive templates for a specified Facility.
+
+  Permissions Required:
+  - Manage Additives
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to update the list of additives.
+
+  Example Response:
+  No response
+}

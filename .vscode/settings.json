@@ -1,6 +1,6 @@
 {
     "java.project.sourcePaths": [
-        "sdks/java"
+        "sdks/thunkmetrc-java"
     ],
     "java.configuration.updateBuildConfiguration": "interactive"
 }

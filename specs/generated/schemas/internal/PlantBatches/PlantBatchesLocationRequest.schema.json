@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlantBatchesPlantBatchesLocationRequest",
+  "type": "object",
+  "properties": {
+    "Location": {
+      "type": "string"
+    },
+    "MoveDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Sublocation": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "Location",
+    "MoveDate",
+    "Name",
+    "Sublocation"
+  ]
+}

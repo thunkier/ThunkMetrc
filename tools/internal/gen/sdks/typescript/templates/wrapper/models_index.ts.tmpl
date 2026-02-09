@@ -1,0 +1,4 @@
+export { PaginatedResponse } from './PaginatedResponse';
+{{- range .Models }}
+export { {{ .Name }} } from './{{ .Name }}';
+{{- end }}

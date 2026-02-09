@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProcessingJobJobTypesAttribute",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": "integer"
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "Id",
+    "LastModified",
+    "Name"
+  ]
+}

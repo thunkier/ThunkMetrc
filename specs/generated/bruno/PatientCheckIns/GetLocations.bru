@@ -1,0 +1,28 @@
+meta {
+  name: GetLocations
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/patient-checkins/v2/locations
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of Patient Check-In locations.
+
+  Example Response:
+  [
+    {
+      "Id": 4,
+      "Name": "District of Columbia"
+    }
+  ]
+}

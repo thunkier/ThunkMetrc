@@ -1,0 +1,45 @@
+meta {
+  name: FinishedgoodFlag
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/packages/v2/finishedgood/flag
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Label": "ABCDEF012345670000010041"
+  },
+  {
+    "Label": "ABCDEF012345670000010042"
+  }
+]
+}
+
+docs {
+  Flags one or more Packages at the specified Facility as Finished Goods.
+
+  Permissions Required:
+  - View Packages
+  - Manage Packages Inventory
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to flag finished goods.
+
+  Example Response:
+  No response
+}

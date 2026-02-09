@@ -1,0 +1,33 @@
+meta {
+  name: DeleteStrainsById
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/strains/v2/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Archives an existing strain record for a Facility
+
+  Permissions Required:
+  - Manage Strains
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which Strain to delete.
+
+  Example Response:
+  No response
+}

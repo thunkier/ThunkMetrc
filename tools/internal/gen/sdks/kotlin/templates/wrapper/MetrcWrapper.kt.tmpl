@@ -1,0 +1,39 @@
+package io.github.thunkier.thunkmetrc.wrapper
+
+import io.github.thunkier.thunkmetrc.client.MetrcClient
+import io.github.thunkier.thunkmetrc.wrapper.services.*
+
+/**
+ * Metrc Wrapper with rate limiting.
+ * Organized by services matching the API groups.
+ */
+class MetrcWrapper(
+    private val client: MetrcClient,
+    val rateLimiter: MetrcRateLimiter
+) {
+    /**
+     * Constructor with default config.
+     * @param client MetrcClient instance
+     */
+    constructor(client: MetrcClient) : this(client, MetrcRateLimiter())
+
+    /**
+     * Constructor with custom config.
+     * @param client MetrcClient instance
+     * @param config RateLimiter configuration
+     */
+    constructor(client: MetrcClient, config: RateLimiterConfig) : this(client, MetrcRateLimiter(config))
+
+    /**
+     * Convenience constructor that creates both client and wrapper.
+     * @param baseUrl Metrc API base URL
+     * @param vendorKey Vendor API key
+     * @param userKey User API key
+     */
+    constructor(baseUrl: String, vendorKey: String, userKey: String) : this(MetrcClient(baseUrl, vendorKey, userKey))
+
+{{- range .Services }}
+{{- $svcName := ToPascalCase .Name }}
+    val {{ ToCamelCase $svcName }} = {{ $svcName }}Service(client, rateLimiter)
+{{- end }}
+}

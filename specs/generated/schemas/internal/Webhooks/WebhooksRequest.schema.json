@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WebhooksWebhooksRequest",
+  "type": "object",
+  "properties": {
+    "errorResponseJsonTemplate": {
+      "type": "string"
+    },
+    "facilityLicenseNumbers": {
+      "type": "string"
+    },
+    "objectType": {
+      "type": "string"
+    },
+    "serverPublicKeyFingerprint": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "template": {
+      "type": "string"
+    },
+    "tpiApiKey": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "userApiKey": {
+      "type": "string"
+    },
+    "verb": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "errorResponseJsonTemplate",
+    "facilityLicenseNumbers",
+    "objectType",
+    "serverPublicKeyFingerprint",
+    "status",
+    "template",
+    "tpiApiKey",
+    "url",
+    "userApiKey",
+    "verb"
+  ]
+}

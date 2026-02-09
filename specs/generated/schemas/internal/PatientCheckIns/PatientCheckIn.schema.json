@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PatientCheckIn",
+  "type": "object",
+  "properties": {
+    "CheckInDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "CheckInLocationId": {
+      "type": "integer"
+    },
+    "CheckInLocationName": {
+      "type": "string"
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "PatientLicenseNumber": {
+      "type": "string"
+    },
+    "RegistrationExpiryDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "RegistrationStartDate": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "required": [
+    "CheckInDate",
+    "CheckInLocationId",
+    "CheckInLocationName",
+    "Id",
+    "PatientLicenseNumber",
+    "RegistrationExpiryDate",
+    "RegistrationStartDate"
+  ]
+}

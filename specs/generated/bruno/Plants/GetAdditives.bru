@@ -1,0 +1,68 @@
+meta {
+  name: GetAdditives
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/plants/v2/additives
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  lastModifiedStart: 
+  lastModifiedEnd: 
+  pageNumber: 
+  pageSize: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves additive records applied to plants at a specified Facility.
+
+  Permissions Required:
+  - View/Manage Plants Additives
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to retrieve plant additives.
+  - lastModifiedStart (Optional): The last modified start timestamp
+  - lastModifiedEnd (Optional): The last modified end timestamp
+  - pageNumber (Optional): The number of the data page from which to return data.
+  - pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20.
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "AdditiveTypeName": null,
+        "ProductTradeName": "Round-Down",
+        "EpaRegistrationNumber": null,
+        "ProductSupplier": "MonSanta",
+        "ApplicationDevice": "Spray",
+        "AmountUnitOfMeasure": "Gallons",
+        "TotalAmountApplied": 5.0,
+        "PlantBatchId": null,
+        "PlantBatchName": null,
+        "PlantCount": 83,
+        "RestrictiveEntryIntervalQuantityDescription": null,
+        "RestrictiveEntryIntervalTimeDescription": null,
+        "Rate": null,
+        "Volume": null,
+        "Note": null
+      }
+    ],
+    "Total": 1,
+    "TotalRecords": 1,
+    "PageSize": 1,
+    "RecordsOnPage": 1,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

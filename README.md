@@ -1,171 +1,126 @@
-# ThunkMetrc: Universal Metrc API Client
+# ThunkMetrc
 
-**ThunkMetrc** makes integrating with the **Metrc Track & Trace** system effortless. We provide a unified, auto-generated suite of **API Clients** and **Type-Safe Wrappers** for every major programming language.
+ThunkMetrc is a generator-driven SDK platform for the Metrc API. This repository contains the scraping/spec pipeline, schema generation, internal tooling models, and publishable SDKs for C#, Go, TypeScript, Python, Java, Kotlin, and Rust.
 
-Stop manually typing HTTP requests or debugging JSON serialization. Our libraries give you:
-*   **Two Layers of Control**:
-    *   **Core Client**: A lightweight, generic HTTP client for raw API access.
-    *   **Wrapper**: A fully type-safe layer with generated models and helper methods.
-*   **Multi-Language Support**: Native packages for **C#, Go, TypeScript, Python, Java, Kotlin, and Rust**.
-*   **Consistency**: A single API surface across all languages, generated from a unified Bruno specification.
-*   **Rate Limiting**: Built-in, configurable rate limiter to gracefully handle Metrc's API limits (429s) and concurrent request throttling.
+## Developer Navigation
+- [Quick Start](#quick-start)
+- [SDK Package Matrix](#sdk-package-matrix)
+- [Generation Pipeline](#generation-pipeline)
+- [Live Scrape Workflow](#live-scrape-workflow)
+- [Publishing Workflow](#publishing-workflow)
+- [Language Guides](#language-guides)
+- [Core Docs](#core-docs)
 
-> **Recommendation**: use the **Wrapper** packages for most applications to get strong typing and model validation. Use the **Client** packages if you need raw access or custom serialization.
+## Quick Start
 
-Whether you're building a POS system, an ERP, or a compliance tool, ThunkMetrc is the best way to get your code talking to Metrc.
+Recommended pattern:
+1. Use the language-specific `wrapper` package for typed API calls.
+2. Use the `client` package only when you want raw request/response control.
+3. Use the high-level `thunkmetrc` package for convenience sync/helpers where available.
 
-## 🚀 Quick Start (Wrappers)
+TypeScript wrapper example:
 
-Install the wrapper for your language for the best developer experience:
+```ts
+import { MetrcClient } from '@thunkier/thunkmetrc-client';
+import { MetrcWrapper } from '@thunkier/thunkmetrc-wrapper';
 
-*   **NuGet**: `dotnet add package ThunkMetrc.Wrapper`
-*   **npm**: `npm install @thunkier/thunkmetrc-wrapper`
-*   **PyPI**: `pip install thunkmetrc-wrapper`
-*   **Go**: `go get github.com/thunkier/ThunkMetrc/sdks/go/wrapper`
-*   **Cargo**: `cargo add thunkmetrc-wrapper`
-*   **Java/Kotlin**: Add via Maven/Gradle (Artifact: `com.thunkmetrc:wrapper`)
+const client = new MetrcClient({
+  baseUrl: 'https://sandbox-api-or.metrc.com',
+  vendorKey: process.env.METRC_VENDOR_KEY!,
+  userKey: process.env.METRC_USER_KEY!,
+});
 
-### Authentication
-All wrappers require an instance of the underlying client. Authentication is handled by the client.
-
-### Rate Limiting
-The wrappers include a built-in rate limiter (token bucket + semaphore) that handles **429 retries** and **concurrency limits**. It is **disabled by default**.
-
-**Enable it in your code:**
-*   **C#**: `var wrapper = new MetrcWrapper(client); // Configure via MetrcRateLimiter`
-*   **TypeScript**: `wrapper.rateLimiter.config.enabled = true;`
-*   **Go**: `wrapper.RateLimiter.Config.Enabled = true`
-*   **Python**: `wrapper = MetrcWrapper(client, RateLimiterConfig(enabled=True))`
-
-### Default Limits
-*   `MaxGetPerSecondPerFacility`: 50.0
-*   `MaxGetPerSecondIntegrator`: 150.0
-*   `MaxConcurrentGetPerFacility`: 10
-*   `MaxConcurrentGetIntegrator`: 30
-*   **Enabled**: `false` (default)
-
-### Usage Examples
-
-#### C# / .NET 8 (Wrapper)
-```csharp
-using ThunkMetrc.Client;
-using ThunkMetrc.Wrapper;
-
-// 1. Initialize the Core Client
-var client = new MetrcClient("https://sandbox-api-or.metrc.com", "vendor_key", "user_key");
-
-// 2. Wrap it for Type Safety
-var wrapper = new MetrcWrapper(client);
-
-// 3. Call the API with strong types (Models are generated!)
-var delivery = await wrapper.SalesGetDeliveryV1("12345");
-```
-
-#### TypeScript (Wrapper)
-```typescript
-import { MetrcClient, MetrcWrapper } from '@thunkier/thunkmetrc-wrapper';
-
-const client = new MetrcClient("https://sandbox-api-or.metrc.com", "vendor_key", "user_key");
 const wrapper = new MetrcWrapper(client);
-
-// Fully verified types for request bodies and response handling
-const delivery = await wrapper.salesGetDeliveryV1("12345");
+const facilities = await wrapper.facilities.getFacilities();
+console.log(`Facilities: ${facilities.length}`);
 ```
 
-#### Python (Wrapper)
-```python
-from thunkmetrc.wrapper import MetrcClient, MetrcWrapper
+## SDK Package Matrix
 
-client = MetrcClient("https://sandbox-api-or.metrc.com", "vendor_key", "user_key")
-wrapper = MetrcWrapper(client)
+| Language | Client | Wrapper (recommended) | High-level package |
+| --- | --- | --- | --- |
+| C# | `ThunkMetrc.Client` | `ThunkMetrc.Wrapper` | `ThunkMetrc` |
+| Go | `github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/client` | `github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/wrapper` | `github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/thunkmetrc` |
+| TypeScript | `@thunkier/thunkmetrc-client` | `@thunkier/thunkmetrc-wrapper` | `@thunkier/thunkmetrc` |
+| Python | `thunkmetrc-client` | `thunkmetrc-wrapper` | `thunkmetrc` |
+| Java | `io.github.thunkier:thunkmetrc-client` | `io.github.thunkier:thunkmetrc-wrapper` | `io.github.thunkier:thunkmetrc` |
+| Kotlin | `io.github.thunkier:thunkmetrc-kotlin-client` | `io.github.thunkier:thunkmetrc-kotlin-wrapper` | `io.github.thunkier:thunkmetrc-kotlin` |
+| Rust | `thunkmetrc-client` | `thunkmetrc-wrapper` | `thunkmetrc` |
 
-# Methods use generated data classes
-delivery = wrapper.sales_get_delivery_v1("12345")
+Note: Go module paths now live under `sdks/thunkmetrc-go/...`.
+
+## Generation Pipeline
+
+The end-to-end flow is:
+1. Live scrape source docs into `specs/source/scraped/postman/`.
+2. Build normalized Bruno specs in `specs/generated/bruno/`.
+3. Generate schemas in `specs/generated/schemas/`.
+4. Generate internal tooling assets.
+5. Generate SDKs under `sdks/thunkmetrc-*`.
+
+Most-used commands:
+
+```bash
+task gen:spec
+task gen:schema
+task gen:internal
+task gen:sdks
+task build:all
+task test:all
 ```
 
-#### Go (Wrapper)
-```go
-import "github.com/thunkier/ThunkMetrc/sdks/go/wrapper"
+## Live Scrape Workflow
 
-// New convenience constructor
-w := wrapper.NewClient("https://sandbox-api-or.metrc.com", "vendor_key", "user_key")
+`task gen:spec` proxies to `tools gen specs` and supports scraper controls.
 
-// Use structs for requests
-resp, err := w.SalesGetDeliveryV1("12345")
+Examples:
+
+```bash
+# Scrape selected states only
+task gen:spec -- --states=ca,co,or
+
+# Tune HTTP behavior
+task gen:spec -- --states=ca --timeout-seconds=60 --max-retries=4 --retry-backoff-ms=800
+
+# Regenerate from existing local scrape files
+task gen:spec -- -skip-scrape
 ```
 
----
+Available knobs:
+- `-states`
+- `-concurrency`
+- `-timeout-seconds`
+- `-max-retries`
+- `-retry-backoff-ms`
+- `-user-agent`
+- `-skip-scrape`
 
-## Roadmap & ToDo
+## Publishing Workflow
 
-We are actively improving the SDKs. The next major milestones are:
+Publishing is handled by `.github/workflows/publish-sdks.yml`.
 
-### SDK Improvements
-- [ ] **Implement Response Models**: Ensure all API responses are strongly typed in the wrappers.
-- [ ] **Error Handling**: Add custom exception types for Metrc-specific errors (validation, license, quota).
-- [ ] **Retry Policies**: Configurable exponential backoff for transient failures.
-- [ ] **Logging Integration**: Structured logging hooks for debugging and auditing.
-- [ ] **Batch Request Utilities**: Helper methods for bulk operations with automatic chunking.
+Trigger modes:
+- Tag push matching `v*`
+- Manual `workflow_dispatch`
 
-### High-Level Utilities (`thunkmetrc`)
-- [ ] **Multi-Facility Sync**: Sync data across multiple facilities in a single call.
-- [ ] **Multi-State Operations**: Chain requests across state-specific Metrc endpoints.
-- [ ] **Inventory Reconciliation**: Compare local inventory with Metrc and generate diff reports.
-- [ ] **Package History Tracker**: Fetch full lifecycle of a package from source to sale.
+Each publish job regenerates codegen outputs before publishing language packages.
 
-### Developer Experience
-- [ ] **Mock Server**: Local mock server for development and testing without sandbox access.
-- [ ] **Webhook Integration**: Helpers for processing Metrc webhook events.
+## Language Guides
 
+- [C#](docs/languages/csharp.md)
+- [Go](docs/languages/go.md)
+- [TypeScript](docs/languages/typescript.md)
+- [Python](docs/languages/python.md)
+- [Java](docs/languages/java.md)
+- [Kotlin](docs/languages/kotlin.md)
+- [Rust](docs/languages/rust.md)
 
----
+## Core Docs
 
-## 📦 High-Level Package (`thunkmetrc`)
+- [Configuration](docs/CONFIGURATION.md)
+- [Development](docs/DEVELOPMENT.md)
+- [API Coverage](docs/API_COVERAGE.md)
 
-We provide a **High-Level Package** that aggregates the Wrapper and Client, and includes powerful utility functions for common workflows.
+## License
 
-**Install:**
-*   **NuGet**: `dotnet add package ThunkMetrc`
-*   **npm**: `npm install @thunkier/thunkmetrc`
-*   **PyPI**: `pip install thunkmetrc`
-*   **Go**: `go get github.com/thunkier/ThunkMetrc/sdks/go/thunkmetrc`
-*   **Java**: `io.github.thunkier:thunkmetrc`
-*   **Kotlin**: `io.github.thunkier:thunkmetrc-kotlin`
-
-### Features
-*   **`ActivePackagesInventorySync`**: Efficiently syncs all active packages for a facility, handling time windows, pagination (limit 20), and date formatting automatically.
-
----
-
-## 🛠️ Prerequisites
-
-To develop or run the automation tools, you need:
-
-*   **[Go](https://go.dev/)** (1.23+)
-*   **[Task](https://taskfile.dev/)** (Build tool)
-
----
-
-## 📚 Documentation
-
-### Language Guides
-*   **[C# / .NET](docs/languages/csharp.md)**
-*   **[TypeScript / Node.js](docs/languages/typescript.md)**
-*   **[Go](docs/languages/go.md)**
-*   **[Python](docs/languages/python.md)**
-*   **[Java](docs/languages/java.md)**
-*   **[Kotlin](docs/languages/kotlin.md)**
-*   **[Rust](docs/languages/rust.md)**
-
-### Core Documentation
-*   **[Configuration](docs/CONFIGURATION.md)**: `config.json`, Sanitization Rules, and Permission Overrides.
-*   **[Development & Architecture](docs/DEVELOPMENT.md)**: Repo structure, Generators, Debugging, and Taskfile commands.
-
----
-
-## ⚖️ License
-
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
-
-For third-party dependencies and attributions, see the [NOTICE](NOTICE) file.
-
+MIT. See [LICENSE](LICENSE).

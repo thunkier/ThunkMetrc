@@ -1,0 +1,34 @@
+meta {
+  name: DeletePackagesById
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/packages/v2/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Discontinues a Package at a specific Facility.
+
+  Permissions Required:
+  - View Packages
+  - Create/Submit/Discontinue Packages
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to discontinue.
+
+  Example Response:
+  No response
+}

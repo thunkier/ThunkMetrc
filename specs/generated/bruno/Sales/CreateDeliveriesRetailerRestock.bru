@@ -1,0 +1,69 @@
+meta {
+  name: CreateDeliveriesRetailerRestock
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/sales/v2/deliveries/retailer/restock
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "RetailerDeliveryId": 1,
+    "DateTime": "2017-04-04T10:10:19.000",
+    "EstimatedDepartureDateTime": "2017-04-04T11:00:00.000",
+    "Destinations": null,
+    "Packages": [
+      {
+        "PackageLabel": "ABCDEF012345670000000001",
+        "Quantity": 1.0,
+        "UnitOfMeasure": "Ounces",
+        "TotalPrice": 9.99,
+        "RemoveCurrentPackage": false
+      },
+      {
+        "PackageLabel": "ABCDEF012345670000000002",
+        "Quantity": 1.0,
+        "UnitOfMeasure": "Ounces",
+        "TotalPrice": 9.99,
+        "RemoveCurrentPackage": true
+      }
+    ]
+  }
+]
+}
+
+docs {
+  Records restock deliveries for retailer facilities using the provided License Number. Please note: The DateTime field must be the actual date and time of the transaction without the time zone. This date/time must already be in the same time zone as the Facility recording the sales. For example, if the Facility is in Pacific Time, then this time must be in Pacific Standard (or Daylight Savings) Time and not in UTC.
+
+  Permissions Required:
+  - External Sources(ThirdPartyVendorV2)/Sales Deliveries(Write)
+  - Industry/Facility Type/Retailer Delivery
+  - Industry/Facility Type/Consumer Sales Delivery or Industry/Facility Type/Patient Sales Delivery
+  - WebApi Sales Deliveries Read Write State (All or WriteOnly)
+  - Manage Retailer Delivery
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to record restock retailer deliveries.
+
+  Example Response:
+  {
+    "Ids": [
+      1
+    ],
+    "Warnings": null
+  }
+}

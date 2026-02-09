@@ -1,0 +1,58 @@
+meta {
+  name: GetInactiveStrains
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/strains/v2/inactive
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  pageNumber: 
+  pageSize: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of inactive strains for the current Facility, optionally filtered by last modified date range.
+
+  Permissions Required:
+  - Manage Strains
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to return the list of inactive strains.
+  - pageNumber (Optional): The number of the data page from which to return data.
+  - pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20.
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 201,
+        "Name": "Spring Hill Kush",
+        "TestingStatus": "ThirdParty",
+        "ThcLevel": null,
+        "CbdLevel": null,
+        "IndicaPercentage": 60.0,
+        "SativaPercentage": 40.0,
+        "IsUsed": false,
+        "Genetics": "60% Indica / 40% Sativa"
+      }
+    ],
+    "Total": 1,
+    "TotalRecords": 1,
+    "PageSize": 1,
+    "RecordsOnPage": 1,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

@@ -1,0 +1,39 @@
+meta {
+  name: GetPermissions
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/employees/v2/permissions
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  employeeLicenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves the permissions of a specified Employee, identified by their Employee License Number, for a given Facility.
+
+  Permissions Required:
+  - Manage Employees
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility under which to get the Employee.
+  - employeeLicenseNumber (Required): The License Number of the Employee under which to get the Permission.
+
+  Example Response:
+  [
+    "view immature plants",
+    "view packages",
+    "view plants"
+  ]
+}

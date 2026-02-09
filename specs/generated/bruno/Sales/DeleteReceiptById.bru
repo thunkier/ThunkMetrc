@@ -1,0 +1,33 @@
+meta {
+  name: DeleteReceiptById
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/sales/v2/receipts/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Archives a sales receipt for a Facility using the provided License Number and receipt Id.
+
+  Permissions Required:
+  - Manage Sales
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to archive receipt.
+
+  Example Response:
+  No response
+}

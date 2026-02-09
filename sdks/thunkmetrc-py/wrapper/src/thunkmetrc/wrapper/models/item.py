@@ -1,0 +1,74 @@
+from typing import TypedDict, List, Optional, Any, Generic, TypeVar, TYPE_CHECKING
+from typing_extensions import TypedDict
+
+if TYPE_CHECKING:
+    from . import *
+
+class Item(TypedDict, total=False):
+    AdministrationMethod: str
+    Allergens: str
+    ApprovalStatus: str
+    ApprovalStatusDateTime: str
+    DefaultLabTestingState: str
+    Description: str
+    GlobalProductName: str
+    GlobalProductNumber: str
+    HasExpirationDate: bool
+    HasSellByDate: bool
+    HasUseByDate: bool
+    Id: int
+    IsExpirationDateRequired: bool
+    IsSellByDateRequired: bool
+    IsUseByDateRequired: bool
+    IsUsed: bool
+    ItemBrandId: int
+    ItemBrandName: str
+    LabTestBatchNames: List[Any]
+    LabelImages: List[Any]
+    LabelPhotoDescription: str
+    Name: str
+    NumberOfDoses: str
+    PackagingImages: List[Any]
+    PackagingPhotoDescription: str
+    ProcessingJobCategoryName: str
+    ProcessingJobTypeName: str
+    ProductBrandName: str
+    ProductCategoryName: str
+    ProductCategoryType: str
+    ProductImages: List[Any]
+    ProductPDFDocuments: List[Any]
+    ProductPhotoDescription: str
+    PublicIngredients: str
+    QuantityType: str
+    ServingSize: str
+    StrainId: int
+    StrainName: str
+    UnitCbdAContent: float
+    UnitCbdAContentDose: float
+    UnitCbdAContentDoseUnitOfMeasureName: str
+    UnitCbdAContentUnitOfMeasureName: str
+    UnitCbdAPercent: float
+    UnitCbdContent: float
+    UnitCbdContentDose: float
+    UnitCbdContentDoseUnitOfMeasureName: str
+    UnitCbdContentUnitOfMeasureName: str
+    UnitCbdPercent: float
+    UnitOfMeasureName: str
+    UnitQuantity: float
+    UnitQuantityUnitOfMeasureName: str
+    UnitThcAContent: float
+    UnitThcAContentDose: float
+    UnitThcAContentDoseUnitOfMeasureId: int
+    UnitThcAContentDoseUnitOfMeasureName: str
+    UnitThcAContentUnitOfMeasureName: str
+    UnitThcAPercent: float
+    UnitThcContent: float
+    UnitThcContentDose: float
+    UnitThcContentDoseUnitOfMeasureId: int
+    UnitThcContentDoseUnitOfMeasureName: str
+    UnitThcContentUnitOfMeasureName: str
+    UnitThcPercent: float
+    UnitVolume: float
+    UnitVolumeUnitOfMeasureName: str
+    UnitWeight: float
+    UnitWeightUnitOfMeasureName: str

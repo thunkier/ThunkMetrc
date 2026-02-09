@@ -1,0 +1,45 @@
+meta {
+  name: UpdateResultsRelease
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/labtests/v2/results/release
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "PackageLabel": "ABCDEF012345670000010041"
+  },
+  {
+    "PackageLabel": "ABCDEF012345670000010042"
+  }
+]
+}
+
+docs {
+  Releases Lab Test results for one or more packages.
+
+  Permissions Required:
+  - View Packages
+  - Manage Packages Inventory
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility releasing the Lab Test results.
+
+  Example Response:
+  No response
+}

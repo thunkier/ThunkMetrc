@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProcessingJobAdjustProcessingJobRequest",
+  "type": "object",
+  "properties": {
+    "AdjustmentDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "AdjustmentNote": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "AdjustmentReason": {
+      "type": "string"
+    },
+    "CountUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "Packages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Label": {
+            "type": "string"
+          },
+          "Quantity": {
+            "type": "number"
+          },
+          "UnitOfMeasure": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Label",
+          "Quantity",
+          "UnitOfMeasure"
+        ]
+      }
+    },
+    "VolumeUnitOfMeasureName": {
+      "type": "string"
+    },
+    "WeightUnitOfMeasureName": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "AdjustmentDate",
+    "AdjustmentReason",
+    "Id",
+    "Packages",
+    "VolumeUnitOfMeasureName",
+    "WeightUnitOfMeasureName"
+  ]
+}

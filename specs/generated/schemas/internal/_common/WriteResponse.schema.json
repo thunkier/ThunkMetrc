@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WriteResponse",
+  "type": "object",
+  "properties": {
+    "Ids": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "Warnings": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "Ids"
+  ]
+}

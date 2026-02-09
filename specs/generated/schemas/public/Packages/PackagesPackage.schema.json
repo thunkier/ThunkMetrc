@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PackagesPackagesPackage",
+  "type": "object",
+  "properties": {
+    "ActualDepartureDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ExternalId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "GrossUnitOfWeightAbbreviation": {
+      "type": "string"
+    },
+    "GrossWeight": {
+      "type": "number"
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "ItemStrainName": {
+      "type": "string"
+    },
+    "LabTestingStateName": {
+      "type": "string"
+    },
+    "ManifestNumber": {
+      "type": "string"
+    },
+    "PackageId": {
+      "type": "integer"
+    },
+    "PackageLabel": {
+      "type": "string"
+    },
+    "ProcessingJobTypeName": {
+      "type": "string"
+    },
+    "ProductCategoryName": {
+      "type": "string"
+    },
+    "ProductName": {
+      "type": "string"
+    },
+    "ReceivedDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ReceivedQuantity": {
+      "type": "number"
+    },
+    "ReceivedUnitOfMeasureAbbreviation": {
+      "type": "string"
+    },
+    "ReceiverWholesalePrice": {
+      "type": "number"
+    },
+    "RecipientFacilityLicenseNumber": {
+      "type": "string"
+    },
+    "RecipientFacilityName": {
+      "type": "string"
+    },
+    "ShipmentPackageStateName": {
+      "type": "string"
+    },
+    "ShippedQuantity": {
+      "type": "number"
+    },
+    "ShippedUnitOfMeasureAbbreviation": {
+      "type": "string"
+    },
+    "ShipperWholesalePrice": {
+      "type": "number"
+    },
+    "SourceHarvestNames": {
+      "type": "string"
+    },
+    "SourcePackageLabels": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "ActualDepartureDateTime",
+    "GrossUnitOfWeightAbbreviation",
+    "GrossWeight",
+    "Id",
+    "ItemStrainName",
+    "LabTestingStateName",
+    "ManifestNumber",
+    "PackageId",
+    "PackageLabel",
+    "ProcessingJobTypeName",
+    "ProductCategoryName",
+    "ProductName",
+    "ReceivedDateTime",
+    "ReceivedQuantity",
+    "ReceivedUnitOfMeasureAbbreviation",
+    "ReceiverWholesalePrice",
+    "RecipientFacilityLicenseNumber",
+    "RecipientFacilityName",
+    "ShipmentPackageStateName",
+    "ShippedQuantity",
+    "ShippedUnitOfMeasureAbbreviation",
+    "ShipperWholesalePrice",
+    "SourceHarvestNames",
+    "SourcePackageLabels"
+  ]
+}

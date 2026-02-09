@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TagsStaged",
+  "type": "object",
+  "properties": {
+    "CommissionedDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "DetachedDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "FacilityId": {
+      "type": "integer"
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "IsArchived": {
+      "type": "boolean"
+    },
+    "IsStaged": {
+      "type": "boolean"
+    },
+    "IsUsed": {
+      "type": "boolean"
+    },
+    "Label": {
+      "type": "string"
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "MaxGroupSize": {
+      "type": "integer"
+    },
+    "ProductLabel": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "QrCount": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "StatusName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "TagInventoryTypeName": {
+      "type": "string"
+    },
+    "TagTypeId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "TagTypeName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "UsedDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "FacilityId",
+    "Id",
+    "IsArchived",
+    "IsStaged",
+    "IsUsed",
+    "Label",
+    "LastModified",
+    "MaxGroupSize",
+    "TagInventoryTypeName"
+  ]
+}

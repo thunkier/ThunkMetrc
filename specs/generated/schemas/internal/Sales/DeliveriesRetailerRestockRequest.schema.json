@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SalesDeliveriesRetailerRestockRequest",
+  "type": "object",
+  "properties": {
+    "DateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Destinations": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "EstimatedDepartureDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Packages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "PackageLabel": {
+            "type": "string"
+          },
+          "Quantity": {
+            "type": "number"
+          },
+          "RemoveCurrentPackage": {
+            "type": "boolean"
+          },
+          "TotalPrice": {
+            "type": "number"
+          },
+          "UnitOfMeasure": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "PackageLabel",
+          "Quantity",
+          "RemoveCurrentPackage",
+          "TotalPrice",
+          "UnitOfMeasure"
+        ]
+      }
+    },
+    "RetailerDeliveryId": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "DateTime",
+    "EstimatedDepartureDateTime",
+    "Packages",
+    "RetailerDeliveryId"
+  ]
+}

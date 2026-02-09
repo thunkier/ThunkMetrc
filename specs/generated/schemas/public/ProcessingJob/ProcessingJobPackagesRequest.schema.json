@@ -1,0 +1,141 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProcessingJobProcessingJobPackagesRequest",
+  "type": "object",
+  "properties": {
+    "ExpirationDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "FinishDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "FinishNote": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "FinishProcessingJob": {
+      "type": "boolean"
+    },
+    "IsFinishedGood": {
+      "type": "boolean"
+    },
+    "Item": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "JobName": {
+      "type": "string"
+    },
+    "Location": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PackageDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PatientLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ProductionBatchNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Quantity": {
+      "type": "number"
+    },
+    "SellByDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Sublocation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Tag": {
+      "type": "string"
+    },
+    "UnitOfMeasure": {
+      "type": "string"
+    },
+    "UseByDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "WasteCountQuantity": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "WasteCountUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "WasteVolumeQuantity": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "WasteVolumeUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "WasteWeightQuantity": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "WasteWeightUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "FinishProcessingJob",
+    "IsFinishedGood",
+    "JobName",
+    "Quantity",
+    "Tag",
+    "UnitOfMeasure"
+  ]
+}

@@ -1,0 +1,15 @@
+package io.github.thunkier.thunkmetrc.wrapper.models;
+import com.fasterxml.jackson.annotation.JsonProperty;public class LocationsType {
+    @JsonProperty("ForHarvests")
+    public Boolean forHarvests;
+    @JsonProperty("ForPackages")
+    public Boolean forPackages;
+    @JsonProperty("ForPlantBatches")
+    public Boolean forPlantBatches;
+    @JsonProperty("ForPlants")
+    public Boolean forPlants;
+    @JsonProperty("Id")
+    public Integer id;
+    @JsonProperty("Name")
+    public String name;
+}

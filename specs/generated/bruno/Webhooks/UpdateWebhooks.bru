@@ -1,0 +1,35 @@
+meta {
+  name: UpdateWebhooks
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/webhooks/v2
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+{
+  "objectType": "",
+  "url": "",
+  "verb": "",
+  "status": "",
+  "userApiKey": "",
+  "tpiApiKey": "",
+  "serverPublicKeyFingerprint": "",
+  "template": "",
+  "errorResponseJsonTemplate": "",
+  "facilityLicenseNumbers": ""
+}
+}
+
+docs {
+  
+}

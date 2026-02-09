@@ -1,0 +1,47 @@
+meta {
+  name: UpdateItem
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/packages/v2/item
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Label": "ABCDEF012345670000010041",
+    "Item": "Shake"
+  },
+  {
+    "Label": "ABCDEF012345670000010042",
+    "Item": "Shake"
+  }
+]
+}
+
+docs {
+  Updates the associated Item for one or more packages at the specified Facility.
+
+  Permissions Required:
+  - View Packages
+  - Create/Submit/Discontinue Packages
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to update list of changed items.
+
+  Example Response:
+  No response
+}

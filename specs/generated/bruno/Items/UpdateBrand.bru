@@ -1,0 +1,46 @@
+meta {
+  name: UpdateBrand
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/items/v2/brand
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 1,
+    "Name": "Premium"
+  },
+  {
+    "Id": 2,
+    "Name": "Consumer"
+  }
+]
+}
+
+docs {
+  Updates one or more existing item brands for the specified Facility.
+
+  Permissions Required:
+  - Manage Items
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for the Item Brand updates.
+
+  Example Response:
+  No response
+}

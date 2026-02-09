@@ -1,0 +1,69 @@
+meta {
+  name: GetPlantsWaste
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/plants/v2/waste
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  pageNumber: 
+  pageSize: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of recorded plant waste events for a specific Facility.
+
+  Permissions Required:
+  - View Plants Waste
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to return the list of waste plants.
+  - pageNumber (Optional): The number of the data page from which to return data.
+  - pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20.
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "PlantWasteNumber": "0000003501",
+        "WasteMethodName": "Compost",
+        "WasteWeight": 10.0,
+        "WasteUnitOfMeasureName": "Grams",
+        "WasteReasonName": "Plant not growing",
+        "PlantBatchId": null,
+        "PlantBatchName": null,
+        "PlantCount": 130,
+        "WasteDate": "2026-02-07"
+      },
+      {
+        "PlantWasteNumber": "0000002901",
+        "WasteMethodName": "Compost",
+        "WasteWeight": 100.0,
+        "WasteUnitOfMeasureName": "Grams",
+        "WasteReasonName": "Plant not growing",
+        "PlantBatchId": null,
+        "PlantBatchName": null,
+        "PlantCount": 1,
+        "WasteDate": "2026-02-07"
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

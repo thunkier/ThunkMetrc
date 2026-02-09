@@ -1,0 +1,61 @@
+meta {
+  name: UpdateRestoreHarvestedPlants
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/harvests/v2/restore/harvestedplants
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "HarvestId": 1,
+    "PlantTags": [
+      "ABCDEF012345670000010100",
+      "ABCDEF012345670000010101",
+      "ABCDEF012345670000010102"
+    ]
+  },
+  {
+    "HarvestId": 2,
+    "PlantTags": [
+      "ABCDEF012345670000010200",
+      "ABCDEF012345670000010201",
+      "ABCDEF012345670000010202"
+    ]
+  }
+]
+}
+
+docs {
+  Restores previously harvested plants to their original state for the specified Facility.
+
+  Permissions Required:
+  - View Harvests
+  - Finish/Discontinue Harvests
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to return the list of harvests restored.
+
+  Example Response:
+  {
+    "Ids": [
+      1,
+      2
+    ],
+    "Warnings": null
+  }
+}

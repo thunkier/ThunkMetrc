@@ -1,0 +1,20 @@
+meta {
+  name: UpdateDisableBySubscriptionId
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/webhooks/v2/disable/{subscriptionId}
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+}

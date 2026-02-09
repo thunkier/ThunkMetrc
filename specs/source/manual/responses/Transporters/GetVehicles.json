@@ -1,0 +1,188 @@
+{
+    "Data": [
+        {
+            "Id": 582101,
+            "FacilityId": 207601,
+            "Make": "2019 Nissan",
+            "Model": "NV200 VAN #7",
+            "LicensePlateNumber": "240 QFD",
+            "IsArchived": false,
+            "LastModified": "2025-04-14T18:13:02+00:00"
+        },
+        {
+            "Id": 510801,
+            "FacilityId": 207601,
+            "Make": "2021 Nissan",
+            "Model": "NV200 VAN #6",
+            "LicensePlateNumber": "320 PXP",
+            "IsArchived": false,
+            "LastModified": "2025-04-14T18:12:50+00:00"
+        },
+        {
+            "Id": 236601,
+            "FacilityId": 207601,
+            "Make": "BMW",
+            "Model": "M5",
+            "LicensePlateNumber": "9X-5930",
+            "IsArchived": false,
+            "LastModified": "2022-11-22T23:08:13+00:00"
+        },
+        {
+            "Id": 293903,
+            "FacilityId": 207601,
+            "Make": "Chevy",
+            "Model": "Silverado",
+            "LicensePlateNumber": "GGHK",
+            "IsArchived": false,
+            "LastModified": "2023-04-18T21:06:44+00:00"
+        },
+        {
+            "Id": 17901,
+            "FacilityId": 207601,
+            "Make": "Ford",
+            "Model": "Transit Connect #2",
+            "LicensePlateNumber": "070 MYU",
+            "IsArchived": false,
+            "LastModified": "2025-04-14T18:12:11+00:00"
+        },
+        {
+            "Id": 272702,
+            "FacilityId": 207601,
+            "Make": "Ford",
+            "Model": "Transit Connect #3",
+            "LicensePlateNumber": "723 NZX",
+            "IsArchived": false,
+            "LastModified": "2025-04-14T18:11:25+00:00"
+        },
+        {
+            "Id": 17803,
+            "FacilityId": 207601,
+            "Make": "Ford",
+            "Model": "Transit Connect #8",
+            "LicensePlateNumber": "068 MYU",
+            "IsArchived": false,
+            "LastModified": "2025-04-14T18:12:20+00:00"
+        },
+        {
+            "Id": 320015,
+            "FacilityId": 207601,
+            "Make": "Ford",
+            "Model": "Transit Van #1",
+            "LicensePlateNumber": "447PHC",
+            "IsArchived": false,
+            "LastModified": "2023-07-31T20:31:20+00:00"
+        },
+        {
+            "Id": 3212,
+            "FacilityId": 207601,
+            "Make": "Honda",
+            "Model": "Element",
+            "LicensePlateNumber": "318 KPN",
+            "IsArchived": false,
+            "LastModified": "2021-07-07T10:26:14-07:00"
+        },
+        {
+            "Id": 423301,
+            "FacilityId": 207601,
+            "Make": "Jeep",
+            "Model": "2020 Wrangler",
+            "LicensePlateNumber": "849MDM",
+            "IsArchived": false,
+            "LastModified": "2024-03-13T19:24:01+00:00"
+        },
+        {
+            "Id": 469601,
+            "FacilityId": 207601,
+            "Make": "LEXUS",
+            "Model": "NX350H",
+            "LicensePlateNumber": "A2624188",
+            "IsArchived": false,
+            "LastModified": "2024-07-04T17:39:11+00:00"
+        },
+        {
+            "Id": 238002,
+            "FacilityId": 207601,
+            "Make": "Lexus",
+            "Model": "RX 400h",
+            "LicensePlateNumber": "SB26356",
+            "IsArchived": false,
+            "LastModified": "2022-11-28T22:02:03+00:00"
+        },
+        {
+            "Id": 294202,
+            "FacilityId": 207601,
+            "Make": "Mercedes",
+            "Model": "Sprinter",
+            "LicensePlateNumber": "564 NVW",
+            "IsArchived": false,
+            "LastModified": "2024-07-18T15:58:14+00:00"
+        },
+        {
+            "Id": 1813,
+            "FacilityId": 207601,
+            "Make": "Nissan",
+            "Model": "NV200 #4",
+            "LicensePlateNumber": "715 MXG",
+            "IsArchived": false,
+            "LastModified": "2025-04-14T18:11:42+00:00"
+        },
+        {
+            "Id": 510701,
+            "FacilityId": 207601,
+            "Make": "Nissan",
+            "Model": "NV200 #5",
+            "LicensePlateNumber": "116 PZV",
+            "IsArchived": false,
+            "LastModified": "2025-04-14T18:12:35+00:00"
+        },
+        {
+            "Id": 2404,
+            "FacilityId": 207601,
+            "Make": "Ram",
+            "Model": "2500",
+            "LicensePlateNumber": "TB21419",
+            "IsArchived": false,
+            "LastModified": "2021-07-06T16:04:48-07:00"
+        },
+        {
+            "Id": 661501,
+            "FacilityId": 207601,
+            "Make": "Subaru",
+            "Model": "Impreza",
+            "LicensePlateNumber": "231 JWC",
+            "IsArchived": false,
+            "LastModified": "2025-11-20T21:36:46+00:00"
+        },
+        {
+            "Id": 439802,
+            "FacilityId": 207601,
+            "Make": "Subaru",
+            "Model": "Legacy",
+            "LicensePlateNumber": "UNQ 870",
+            "IsArchived": false,
+            "LastModified": "2024-04-24T15:39:25+00:00"
+        },
+        {
+            "Id": 156401,
+            "FacilityId": 207601,
+            "Make": "TBD",
+            "Model": "TBD",
+            "LicensePlateNumber": "TBD",
+            "IsArchived": false,
+            "LastModified": "2022-05-23T10:27:37-07:00"
+        },
+        {
+            "Id": 22610,
+            "FacilityId": 207601,
+            "Make": "Toyota",
+            "Model": "2021 Rav4 LE #A",
+            "LicensePlateNumber": "926 MZX",
+            "IsArchived": false,
+            "LastModified": "2022-03-24T09:43:57-07:00"
+        }
+    ],
+    "Total": 25,
+    "PageSize": 20,
+    "Page": 1,
+    "TotalPages": 1
+}

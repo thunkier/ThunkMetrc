@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlantBatchesPlantBatchesType",
+  "type": "object",
+  "properties": {
+    "CanBeCloned": {
+      "type": "boolean"
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "CanBeCloned",
+    "Id",
+    "LastModified",
+    "Name"
+  ]
+}

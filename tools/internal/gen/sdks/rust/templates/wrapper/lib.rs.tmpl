@@ -1,0 +1,49 @@
+pub use thunkmetrc_client::MetrcClient;
+use std::sync::Arc;
+mod ratelimiter;
+pub use ratelimiter::RateLimiterConfig;
+pub use ratelimiter::MetrcRateLimiter;
+
+pub mod models;
+pub mod utils;
+pub mod services;
+
+{{- range .Services }}
+{{- $safeName := .Name | CleanName | ToSnakeCase }}
+{{- $pascalName := .Name | CleanName | ToPascalCase }}
+use services::{{ $safeName }}_service::{{ $pascalName }}Service;
+{{- end }}
+
+pub struct MetrcWrapper {
+{{- range .Services }}
+    pub {{ .Name | CleanName | ToSnakeCase }}: {{ .Name | CleanName | ToPascalCase }}Service,
+{{- end }}
+}
+
+impl MetrcWrapper {
+    pub fn new(client: MetrcClient) -> Self {
+        let rate_limiter = Arc::new(MetrcRateLimiter::new(Some(RateLimiterConfig::default())));
+        MetrcWrapper {
+        {{- range .Services }}
+            {{ .Name | CleanName | ToSnakeCase }}: {{ .Name | CleanName | ToPascalCase }}Service::new(client.clone(), rate_limiter.clone()),
+        {{- end }}
+        }
+    }
+
+    pub fn new_with_config(client: MetrcClient, config: RateLimiterConfig) -> Self {
+        let rate_limiter = Arc::new(MetrcRateLimiter::new(Some(config)));
+        MetrcWrapper {
+        {{- range .Services }}
+            {{ .Name | CleanName | ToSnakeCase }}: {{ .Name | CleanName | ToPascalCase }}Service::new(client.clone(), rate_limiter.clone()),
+        {{- end }}
+        }
+    }
+    pub fn new_with_limiter(client: MetrcClient, rate_limiter: Arc<MetrcRateLimiter>) -> Self {
+        MetrcWrapper {
+        {{- range .Services }}
+            {{ .Name | CleanName | ToSnakeCase }}: {{ .Name | CleanName | ToPascalCase }}Service::new(client.clone(), rate_limiter.clone()),
+        {{- end }}
+        }
+    }
+}
+

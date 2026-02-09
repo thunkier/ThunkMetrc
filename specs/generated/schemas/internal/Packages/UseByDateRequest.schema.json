@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PackagesUseByDateRequest",
+  "type": "object",
+  "properties": {
+    "ExpirationDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "Label": {
+      "type": "string"
+    },
+    "SellByDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "UseByDate": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "required": [
+    "ExpirationDate",
+    "Label",
+    "SellByDate",
+    "UseByDate"
+  ]
+}

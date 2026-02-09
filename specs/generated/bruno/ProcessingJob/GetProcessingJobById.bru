@@ -1,0 +1,70 @@
+meta {
+  name: GetProcessingJobById
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/processing/v2/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a ProcessingJob by Id.
+
+  Permissions Required:
+  - Manage Processing Job
+
+  Parameters:
+  - licenseNumber (Required): If specified, the processing job will be validated against the specified License Number. If not specified, the processing job will be validated against all of the User's current Facilities. Please note that if the processing job is not valid for the specified License Number, a 401 Unauthorized status will be returned.
+
+  Example Response:
+  {
+    "Id": 1,
+    "Name": "brownies",
+    "Number": "MN001",
+    "JobTypeId": 1,
+    "JobTypeName": null,
+    "StartDate": "2026-02-07",
+    "TotalCount": 0.0,
+    "CountUnitOfMeasureId": 1,
+    "CountUnitOfMeasureName": "Each",
+    "CountUnitOfMeasureAbbreviation": null,
+    "TotalVolume": 8.0,
+    "VolumeUnitOfMeasureId": 7,
+    "VolumeUnitOfMeasureName": "Fluid Ounces",
+    "VolumeUnitOfMeasureAbbreviation": null,
+    "TotalWeight": 1.0,
+    "WeightUnitOfMeasureId": 2,
+    "WeightUnitOfMeasureName": "Ounces",
+    "WeightUnitOfMeasureAbbreviation": null,
+    "TotalCountWaste": null,
+    "WasteCountUnitOfMeasureId": null,
+    "WasteCountUnitOfMeasureName": null,
+    "WasteCountUnitOfMeasureAbbreviation": null,
+    "TotalVolumeWaste": null,
+    "WasteVolumeUnitOfMeasureId": null,
+    "WasteVolumeUnitOfMeasureName": null,
+    "WasteVolumeUnitOfMeasureAbbreviation": null,
+    "TotalWeightWaste": null,
+    "WasteWeightUnitOfMeasureId": null,
+    "WasteWeightUnitOfMeasureName": null,
+    "WasteWeightUnitOfMeasureAbbreviation": null,
+    "Packages": [],
+    "IsFinished": false,
+    "FinishNote": null,
+    "FinishedDate": null,
+    "TotalUnitOfMeasureId": 2,
+    "TotalQuantity": 1.0
+  }
+}

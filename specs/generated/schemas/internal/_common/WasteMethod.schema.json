@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WasteMethod",
+  "type": "object",
+  "properties": {
+    "ForPlants": {
+      "type": "boolean"
+    },
+    "ForProductDestruction": {
+      "type": "boolean"
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "ForPlants",
+    "ForProductDestruction",
+    "LastModified",
+    "Name"
+  ]
+}

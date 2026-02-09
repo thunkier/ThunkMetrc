@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RetailIdPackagesInfo",
+  "type": "object",
+  "properties": {
+    "Packages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "EstimatedBalance": {
+            "type": "integer"
+          },
+          "HasQrs": {
+            "type": "boolean"
+          },
+          "IssuanceId": {
+            "type": "string"
+          },
+          "Issuances": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "CreatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "LabelQuantity": {
+                  "type": "number"
+                },
+                "LabelSet": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "CreatedAt",
+                "LabelQuantity",
+                "LabelSet"
+              ]
+            }
+          },
+          "QrCount": {
+            "type": "integer"
+          },
+          "RequiresVerification": {
+            "type": "boolean"
+          },
+          "SiblingCount": {
+            "type": "integer"
+          },
+          "Tag": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "EstimatedBalance",
+          "HasQrs",
+          "IssuanceId",
+          "Issuances",
+          "QrCount",
+          "RequiresVerification",
+          "SiblingCount",
+          "Tag"
+        ]
+      }
+    }
+  },
+  "required": [
+    "Packages"
+  ]
+}

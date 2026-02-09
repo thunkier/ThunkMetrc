@@ -1,0 +1,27 @@
+using System;
+using ThunkMetrc.Client;
+using ThunkMetrc.Wrapper.Services;
+using Microsoft.Extensions.Logging;
+
+namespace ThunkMetrc.Wrapper
+{
+    public class MetrcWrapper
+    {
+        public MetrcClient Client { get; }
+        public IMetrcRateLimiter RateLimiter { get; }
+
+        public MetrcWrapper(MetrcClient client, IMetrcRateLimiter? rateLimiter = null, RateLimiterConfig? config = null, ILogger? logger = null)
+        {
+            Client = client;
+            RateLimiter = rateLimiter ?? new MetrcRateLimiter(config, logger);
+            
+            {{- range .Services }}
+            {{ .Name | CleanName | ToPascalCase }} = new {{ .Name | CleanName | ToPascalCase }}Service(Client, RateLimiter);
+            {{- end }}
+        }
+
+        {{- range .Services }}
+        public {{ .Name | CleanName | ToPascalCase }}Service {{ .Name | CleanName | ToPascalCase }} { get; }
+        {{- end }}
+    }
+}

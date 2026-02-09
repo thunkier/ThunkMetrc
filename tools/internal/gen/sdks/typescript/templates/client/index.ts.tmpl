@@ -1,0 +1,97 @@
+import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+
+export interface Logger {
+  debug(message: string): void;
+  info(message: string): void;
+  warn(message: string): void;
+  error(message: string): void;
+}
+
+export class MetrcError extends Error {
+  constructor(
+    public statusCode: number,
+    public message: string,
+    public validationErrors: string[] = []
+  ) {
+    super(`API Error ${statusCode}: ${message}`);
+    this.name = 'MetrcError';
+  }
+}
+
+export interface MetrcClientConfig {
+  baseUrl: string;
+  vendorKey: string;
+  userKey: string;
+  timeout?: number;
+  userAgent?: string;
+  logger?: Logger;
+}
+
+export class MetrcClient {
+  private client: AxiosInstance;
+  private logger?: Logger;
+
+  constructor(config: MetrcClientConfig) {
+    this.logger = config.logger;
+    this.client = axios.create({
+      baseURL: config.baseUrl,
+      timeout: config.timeout || 100000,
+      auth: {
+        username: config.vendorKey,
+        password: config.userKey
+      },
+      headers: {
+        'User-Agent': config.userAgent || 'ThunkMetrc/0.1 TypeScript'
+      }
+    });
+
+    // Add logging interceptor
+    this.client.interceptors.request.use(req => {
+      this.logger?.debug(`Sending Request: ${req.method?.toUpperCase()} ${req.url}`);
+      return req;
+    });
+
+    // Add error handling interceptor
+    this.client.interceptors.response.use(
+      res => res,
+      (error: AxiosError<any>) => {
+        const status = error.response?.status || 500;
+        this.logger?.warn(`API Error Response: ${status}`);
+
+        const data = error.response?.data;
+        if (data && (data.Message || data.ValidationErrors)) {
+            throw new MetrcError(status, data.Message || 'Unknown Error', data.ValidationErrors || []);
+        }
+        throw error;
+      }
+    );
+  }
+
+{{- range .Services }}
+  {{- $serviceName := .Name | CleanName | ToPascalCase }}
+  {{- range .Operations }}
+  {{- $methodName := .Name | CleanName | ToPascalCase }}
+  /**
+{{ range Split (CleanDocs .Description) "\n" }}   * {{ . }}
+{{ end }}   * {{ .Method }} {{ .Name }}
+   */
+  public async {{ FormatMethodName $methodName $serviceName }}<TResponse = any, TBody = any>({{ FormatParams . }}): Promise<TResponse> {
+    const query = new URLSearchParams();
+    {{- range .QueryParams }}
+    {{- $pName := .Name | TrimSuffix "optional" }}
+    if ({{ $pName }} !== undefined) query.append('{{ $pName }}', String({{ $pName }}));
+    {{- end }}
+    const queryStr = query.toString();
+    const fullUrl = queryStr ? `{{ FormatUrl . }}?${queryStr}` : `{{ FormatUrl . }}`;
+    {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+    const { data } = await this.client.{{ .Method | ToLower }}<TResponse>(fullUrl, body);
+    {{- else }}
+    const { data } = await this.client.{{ .Method | ToLower }}<TResponse>(fullUrl, { data: body });
+    {{- end }}
+    return data;
+  }
+
+  {{- end }}
+{{- end }}
+}
+

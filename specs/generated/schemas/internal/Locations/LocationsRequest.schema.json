@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LocationsLocationsRequest",
+  "type": "object",
+  "properties": {
+    "LocationTypeName": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "LocationTypeName",
+    "Name"
+  ]
+}

@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Version>{{.Version}}</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>{{.PackageId}}</PackageId>
+    <Authors>ThunkMetrc</Authors>
+    <Description>{{.Description}}</Description>
+    <RepositoryUrl>https://github.com/thunkier/thunkmetrc</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>{{.Tags}}</PackageTags>
+  </PropertyGroup>
+
+  {{- if .Dependencies }}
+  <ItemGroup>
+    {{- range .Dependencies }}
+    <PackageReference Include="{{.Name}}" Version="{{.Version}}" />
+    {{- end }}
+  </ItemGroup>
+  {{- end }}
+
+  {{- if .ProjectReferences }}
+  <ItemGroup>
+    {{- range .ProjectReferences }}
+    <ProjectReference Include="{{.}}" />
+    {{- end }}
+  </ItemGroup>
+  {{- end }}
+
+</Project>

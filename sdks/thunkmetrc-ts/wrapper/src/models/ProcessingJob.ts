@@ -1,0 +1,39 @@
+
+export interface ProcessingJob {
+    CountUnitOfMeasureAbbreviation?: string;
+    CountUnitOfMeasureId?: number;
+    CountUnitOfMeasureName?: string;
+    FinishNote?: string;
+    FinishedDate?: string;
+    Id?: number;
+    IsFinished?: boolean;
+    JobTypeId?: number;
+    JobTypeName?: string;
+    Name?: string;
+    Number?: string;
+    Packages?: any[];
+    StartDate?: string;
+    TotalCount?: number;
+    TotalCountWaste?: string;
+    TotalQuantity?: number;
+    TotalUnitOfMeasureId?: number;
+    TotalVolume?: number;
+    TotalVolumeWaste?: string;
+    TotalWeight?: number;
+    TotalWeightWaste?: string;
+    VolumeUnitOfMeasureAbbreviation?: string;
+    VolumeUnitOfMeasureId?: number;
+    VolumeUnitOfMeasureName?: string;
+    WasteCountUnitOfMeasureAbbreviation?: string;
+    WasteCountUnitOfMeasureId?: number;
+    WasteCountUnitOfMeasureName?: string;
+    WasteVolumeUnitOfMeasureAbbreviation?: string;
+    WasteVolumeUnitOfMeasureId?: number;
+    WasteVolumeUnitOfMeasureName?: string;
+    WasteWeightUnitOfMeasureAbbreviation?: string;
+    WasteWeightUnitOfMeasureId?: number;
+    WasteWeightUnitOfMeasureName?: string;
+    WeightUnitOfMeasureAbbreviation?: string;
+    WeightUnitOfMeasureId?: number;
+    WeightUnitOfMeasureName?: string;
+}

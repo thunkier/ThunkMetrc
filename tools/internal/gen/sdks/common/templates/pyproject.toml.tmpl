@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "thunkmetrc-{{ if .IsWrapper }}wrapper{{ else }}client{{ end }}"
+version = "{{ .Version }}"
+description = "{{ .Description }}"
+readme = "README.md"
+requires-python = "{{ or (index .Deps "python.python_requires") ">=3.10" }}"
+license = "MIT"
+authors = [
+  { name = "ThunkMetrc", email = "dev@thunkmetrc.com" },
+]
+{{- if not .IsWrapper }}
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+{{- end }}
+dependencies = [
+{{- if .IsWrapper }}
+    "thunkmetrc-client=={{ .Version }}",
+{{- else }}
+    "httpx{{ or (index .Deps "python.client.httpx") ">=0.24.0" }}",
+{{- end }}
+]
+{{- if not .IsWrapper }}
+
+[project.urls]
+Documentation = "https://github.com/thunkier/thunkmetrc#readme"
+Issues = "https://github.com/thunkier/thunkmetrc/issues"
+Source = "https://github.com/thunkier/thunkmetrc"
+{{- end }}
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/thunkmetrc"]

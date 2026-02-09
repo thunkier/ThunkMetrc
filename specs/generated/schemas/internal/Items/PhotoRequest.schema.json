@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ItemsPhotoRequest",
+  "type": "object",
+  "properties": {
+    "EncodedImageBase64": {
+      "type": "string"
+    },
+    "FileName": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "EncodedImageBase64",
+    "FileName"
+  ]
+}

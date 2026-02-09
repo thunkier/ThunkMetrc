@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SalesInactiveDeliveriesRetailer",
+  "type": "object",
+  "properties": {
+    "AcceptedDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ActualDepartureDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "AllowFullEdit": {
+      "type": "boolean"
+    },
+    "CompletedDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "DateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Destinations": {
+      "type": "array"
+    },
+    "Direction": {
+      "type": "string"
+    },
+    "DriverEmployeeId": {
+      "type": "string"
+    },
+    "DriverName": {
+      "type": "string"
+    },
+    "DriversLicenseNumber": {
+      "type": "string"
+    },
+    "EstimatedDepartureDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "FacilityLicenseNumber": {
+      "type": "string"
+    },
+    "FacilityName": {
+      "type": "string"
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Leg": {
+      "type": "integer"
+    },
+    "Packages": {
+      "type": "array"
+    },
+    "RecordedByUserName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "RecordedDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "RestockDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "RetailerDeliveryNumber": {
+      "type": "string"
+    },
+    "RetailerDeliveryState": {
+      "type": "string"
+    },
+    "TotalPackages": {
+      "type": "integer"
+    },
+    "TotalPrice": {
+      "type": "integer"
+    },
+    "TotalPriceSold": {
+      "type": "integer"
+    },
+    "VehicleInfo": {
+      "type": "string"
+    },
+    "VehicleLicensePlateNumber": {
+      "type": "string"
+    },
+    "VehicleMake": {
+      "type": "string"
+    },
+    "VehicleModel": {
+      "type": "string"
+    },
+    "VoidedDate": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "required": [
+    "AllowFullEdit",
+    "DateTime",
+    "Destinations",
+    "Direction",
+    "DriverEmployeeId",
+    "DriverName",
+    "DriversLicenseNumber",
+    "EstimatedDepartureDateTime",
+    "FacilityLicenseNumber",
+    "FacilityName",
+    "Id",
+    "LastModified",
+    "Leg",
+    "Packages",
+    "RecordedDateTime",
+    "RetailerDeliveryNumber",
+    "RetailerDeliveryState",
+    "TotalPackages",
+    "TotalPrice",
+    "TotalPriceSold",
+    "VehicleInfo",
+    "VehicleLicensePlateNumber",
+    "VehicleMake",
+    "VehicleModel",
+    "VoidedDate"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LabTestsRecordRequest",
+  "type": "object",
+  "properties": {
+    "DocumentFileBase64": {
+      "type": "string"
+    },
+    "DocumentFileName": {
+      "type": "string"
+    },
+    "Label": {
+      "type": "string"
+    },
+    "ResultDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "LabTestTypeName": {
+            "type": "string"
+          },
+          "Notes": {
+            "type": "string"
+          },
+          "Passed": {
+            "type": "boolean"
+          },
+          "Quantity": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "LabTestTypeName",
+          "Notes",
+          "Passed",
+          "Quantity"
+        ]
+      }
+    }
+  },
+  "required": [
+    "DocumentFileBase64",
+    "DocumentFileName",
+    "Label",
+    "ResultDate",
+    "Results"
+  ]
+}

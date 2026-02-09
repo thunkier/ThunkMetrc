@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Strain",
+  "type": "object",
+  "properties": {
+    "CbdLevel": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Genetics": {
+      "type": "string"
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "IndicaPercentage": {
+      "type": "integer"
+    },
+    "IsUsed": {
+      "type": "boolean"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "SativaPercentage": {
+      "type": "integer"
+    },
+    "TestingStatus": {
+      "type": "string"
+    },
+    "ThcLevel": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "Genetics",
+    "Id",
+    "IndicaPercentage",
+    "IsUsed",
+    "Name",
+    "SativaPercentage",
+    "TestingStatus"
+  ]
+}

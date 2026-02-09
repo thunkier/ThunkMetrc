@@ -1,0 +1,48 @@
+
+import type { TransfersHubShipmentTransporterDetailsItem } from './TransfersHubShipmentTransporterDetailsItem';
+export interface Hub {
+    ActualArrivalDateTime?: string;
+    ActualDepartureDateTime?: string;
+    ActualReturnArrivalDateTime?: string;
+    ActualReturnDepartureDateTime?: string;
+    CreatedByUserName?: string;
+    CreatedDateTime?: string;
+    DeliveryCount?: number;
+    DeliveryId?: number;
+    DeliveryPackageCount?: number;
+    DeliveryReceivedPackageCount?: number;
+    DriverName?: string;
+    DriverOccupationalLicenseNumber?: string;
+    DriverVehicleLicenseNumber?: string;
+    EstimatedArrivalDateTime?: string;
+    EstimatedDepartureDateTime?: string;
+    EstimatedReturnArrivalDateTime?: string;
+    EstimatedReturnDepartureDateTime?: string;
+    Id?: number;
+    IsLayover?: boolean;
+    IsVoided?: boolean;
+    LastModified?: string;
+    ManifestNumber?: string;
+    PackageCount?: number;
+    ReceivedDateTime?: string;
+    ReceivedDeliveryCount?: number;
+    ReceivedPackageCount?: number;
+    RecipientFacilityLicenseNumber?: string;
+    RecipientFacilityName?: string;
+    RejectedPackagesReturned?: boolean;
+    ShipmentTransactionType?: number;
+    ShipmentTransporterDetails?: TransfersHubShipmentTransporterDetailsItem[];
+    ShipmentTypeName?: string;
+    ShipperFacilityLicenseNumber?: string;
+    ShipperFacilityName?: string;
+    TransporterAcceptedDateTime?: string;
+    TransporterActualArrivalDateTime?: string;
+    TransporterActualDepartureDateTime?: string;
+    TransporterEstimatedArrivalDateTime?: string;
+    TransporterEstimatedDepartureDateTime?: string;
+    TransporterFacilityLicenseNumber?: string;
+    TransporterFacilityName?: string;
+    VehicleLicensePlateNumber?: string;
+    VehicleMake?: string;
+    VehicleModel?: string;
+}

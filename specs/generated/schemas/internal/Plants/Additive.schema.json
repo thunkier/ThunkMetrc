@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlantsAdditive",
+  "type": "object",
+  "properties": {
+    "AdditiveTypeName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "AmountUnitOfMeasure": {
+      "type": "string"
+    },
+    "ApplicationDevice": {
+      "type": "string"
+    },
+    "EpaRegistrationNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PlantBatchId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "PlantBatchName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PlantCount": {
+      "type": "integer"
+    },
+    "ProductSupplier": {
+      "type": "string"
+    },
+    "ProductTradeName": {
+      "type": "string"
+    },
+    "Rate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "RestrictiveEntryIntervalQuantityDescription": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "RestrictiveEntryIntervalTimeDescription": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "TotalAmountApplied": {
+      "type": "integer"
+    },
+    "Volume": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "AmountUnitOfMeasure",
+    "ApplicationDevice",
+    "PlantCount",
+    "ProductSupplier",
+    "ProductTradeName",
+    "TotalAmountApplied"
+  ]
+}

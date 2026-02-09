@@ -1,0 +1,40 @@
+
+export interface SalesDeliveryRetailerPackagesItem {
+    ArchivedDate?: string;
+    CompletedDateTime?: string;
+    IsOnInvestigationHold?: boolean;
+    IsOnInvestigationRecall?: boolean;
+    IsOnRecall?: boolean;
+    IsOnRecallCombined?: boolean;
+    ItemServingSize?: string;
+    ItemStrainName?: string;
+    ItemSupplyDurationDays?: number;
+    ItemUnitCbdContent?: number;
+    ItemUnitCbdContentDose?: number;
+    ItemUnitCbdContentDoseUnitOfMeasureName?: string;
+    ItemUnitCbdContentUnitOfMeasureName?: string;
+    ItemUnitCbdPercent?: number;
+    ItemUnitQuantity?: number;
+    ItemUnitQuantityUnitOfMeasureName?: string;
+    ItemUnitThcContent?: number;
+    ItemUnitThcContentDose?: number;
+    ItemUnitThcContentDoseUnitOfMeasureName?: string;
+    ItemUnitThcContentUnitOfMeasureName?: string;
+    ItemUnitThcPercent?: number;
+    ItemUnitVolume?: number;
+    ItemUnitVolumeUnitOfMeasureName?: string;
+    ItemUnitWeight?: number;
+    ItemUnitWeightUnitOfMeasureName?: string;
+    LastModified?: string;
+    PackageId?: number;
+    PackageLabel?: string;
+    ProductCategoryName?: string;
+    ProductName?: string;
+    Quantity?: number;
+    RecordedByUserName?: string;
+    RecordedDateTime?: string;
+    RetailerDeliveryState?: string;
+    TotalPrice?: number;
+    UnitOfMeasureAbbreviation?: string;
+    UnitOfMeasureName?: string;
+}

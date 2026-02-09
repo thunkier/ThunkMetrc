@@ -1,0 +1,33 @@
+meta {
+  name: GetGrowthPhases
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/plants/v2/growthphases
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves the list of growth phases supported by a specified Facility.
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to return the list of available Plant Growth Phases.
+
+  Example Response:
+  [
+    "Vegetative",
+    "Flowering"
+  ]
+}

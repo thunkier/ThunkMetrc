@@ -1,0 +1,66 @@
+package io.github.thunkier.thunkmetrc.client;
+
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+
+public class {{ .Name | ToPascalCase }}Client {
+    private final MetrcClient client;
+
+    public {{ .Name | ToPascalCase }}Client(MetrcClient client) {
+        this.client = client;
+    }
+
+{{- $svcName := $.Name }}
+{{- $safeGroup := ToPascalCase (CleanName .Name) }}
+{{- range .Operations }}
+{{- $methodName := ToPascalCase (CleanName .Name) }}
+{{- $javaMethodName := FormatMethodName $methodName $safeGroup }}
+    /**
+{{- if .Description }}
+{{ range Split (CleanDocs .Description) "\n" }}     * {{ . }}
+{{ end }}{{- end }}     * {{ .Method }} {{ .Name }}
+     {{- range .PathParams }}
+     * @param {{ SafeJavaField . }} Path parameter
+     {{- end }}
+     {{- range .QueryParams }}
+     * @param {{ SafeJavaField (TrimSuffix "optional" .Name) }} Query parameter
+     {{- end }}
+     {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+     * @param body Request body
+     {{- end }}
+     * @throws IOException If request fails
+     * @return Response object
+     */
+    public Object {{ $javaMethodName }}(
+        {{- $args := list -}}
+        {{- range .PathParams }}
+            {{- $args = append $args (printf "String %s" (SafeJavaField .)) -}}
+        {{- end }}
+        {{- range .QueryParams }}
+            {{- $name := TrimSuffix "optional" .Name }}
+            {{- $args = append $args (printf "String %s" (SafeJavaField $name)) -}}
+        {{- end }}
+        {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+            {{- $args = append $args "Object body" -}}
+        {{- end }}
+        {{ join $args ", " }}
+    ) throws IOException {
+        StringBuilder path = new StringBuilder("{{ FormatUrl . }}");
+        StringBuilder query = new StringBuilder();
+        {{- range .QueryParams }}
+        {{- $name := TrimSuffix "optional" .Name }}
+        {{- $javaParamName := ToCamelCase $name }}
+        if ({{ $javaParamName }} != null) {
+            if (query.length() > 0) query.append("&");
+            query.append("{{ $name }}=").append(URLEncoder.encode({{ $javaParamName }}, StandardCharsets.UTF_8));
+        }
+        {{- end }}
+        if (query.length() > 0) path.append("?").append(query);
+
+        return client.send("{{ .Method }}", path.toString(), {{ if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}body{{ else }}null{{ end }});
+    }
+{{ end }}
+}
+

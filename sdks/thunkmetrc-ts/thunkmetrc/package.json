@@ -1,0 +1,24 @@
+{
+  "name": "@thunkier/thunkmetrc",
+  "version": "0.3.0",
+  "description": "High-level ThunkMetrc TypeScript SDK",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@thunkier/thunkmetrc-wrapper": "file:../wrapper",
+    "p-limit": "^3.1.0"
+  },
+  "devDependencies": {
+    "@thunkier/thunkmetrc-client": "file:../client",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.0.0",
+    "dotenv": "^16.3.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TransfersTransfersType",
+  "type": "object",
+  "properties": {
+    "BypassApproval": {
+      "type": "boolean"
+    },
+    "ExternalIncomingCanRecordExternalIdentifier": {
+      "type": "boolean"
+    },
+    "ExternalIncomingExternalIdentifierRequired": {
+      "type": "boolean"
+    },
+    "ExternalOutgoingCanRecordExternalIdentifier": {
+      "type": "boolean"
+    },
+    "ExternalOutgoingExternalIdentifierRequired": {
+      "type": "boolean"
+    },
+    "ForExternalIncomingShipments": {
+      "type": "boolean"
+    },
+    "ForExternalOutgoingShipments": {
+      "type": "boolean"
+    },
+    "ForLicensedShipments": {
+      "type": "boolean"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "RequiresDestinationGrossWeight": {
+      "type": "boolean"
+    },
+    "RequiresInvoiceNumber": {
+      "type": "boolean"
+    },
+    "RequiresPDFDocument": {
+      "type": "boolean"
+    },
+    "RequiresPackagesGrossWeight": {
+      "type": "boolean"
+    },
+    "TransactionType": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "BypassApproval",
+    "ExternalIncomingCanRecordExternalIdentifier",
+    "ExternalIncomingExternalIdentifierRequired",
+    "ExternalOutgoingCanRecordExternalIdentifier",
+    "ExternalOutgoingExternalIdentifierRequired",
+    "ForExternalIncomingShipments",
+    "ForExternalOutgoingShipments",
+    "ForLicensedShipments",
+    "Name",
+    "RequiresDestinationGrossWeight",
+    "RequiresInvoiceNumber",
+    "RequiresPDFDocument",
+    "RequiresPackagesGrossWeight",
+    "TransactionType"
+  ]
+}

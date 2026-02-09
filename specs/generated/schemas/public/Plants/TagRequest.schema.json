@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlantsTagRequest",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "Label": {
+      "type": "string"
+    },
+    "NewTag": {
+      "type": "string"
+    },
+    "ReplaceDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "TagId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "Label",
+    "NewTag",
+    "ReplaceDate"
+  ]
+}

@@ -1,0 +1,46 @@
+meta {
+  name: GetSourceHarvestById
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/packages/v2/{id}/source/harvests
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves the source harvests for a Package by its Id.
+
+  Permissions Required:
+  - View Package Source Harvests
+
+  Parameters:
+  - licenseNumber (Required): If specified, the Package will be validated against the specified License Number. If not specified, the Package will be validated against all of the User's current Facilities. Please note that if the Package is not valid for the specified License Number, a 401 Unauthorized status will be returned.
+
+  Example Response:
+  [
+    {
+      "HarvestedByFacilityLicenseNumber": "4a-X0001",
+      "HarvestedByFacilityName": "AK LOFTY ESTABLISHMENT, LLC",
+      "Name": "2021-08-16-Harvest Location-M",
+      "HarvestStartDate": "2014-11-19"
+    },
+    {
+      "HarvestedByFacilityLicenseNumber": "4a-X0002",
+      "HarvestedByFacilityName": "AK LOFTY LLC",
+      "Name": "2021-08-16-Harvest Location-J",
+      "HarvestStartDate": "2020-08-25"
+    }
+  ]
+}

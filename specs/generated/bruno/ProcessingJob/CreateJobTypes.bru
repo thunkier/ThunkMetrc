@@ -1,0 +1,54 @@
+meta {
+  name: CreateJobTypes
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/processing/v2/jobtypes
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Name": "Infuse Brownies",
+    "Description": "Turn Buds into Brownies",
+    "Category": "Processing",
+    "ProcessingSteps": "Extract THC and Bake",
+    "Attributes": [
+      "Infuse",
+      "Cooking",
+      "Food"
+    ]
+  }
+]
+}
+
+docs {
+  Creates new processing job types for a Facility, including name, category, description, steps, and attributes.
+
+  Permissions Required:
+  - Manage Processing Job
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility of the Job Type.
+
+  Example Response:
+  {
+    "Ids": [
+      1
+    ],
+    "Warnings": null
+  }
+}

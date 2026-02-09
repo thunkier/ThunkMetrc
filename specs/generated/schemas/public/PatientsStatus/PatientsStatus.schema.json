@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PatientsStatus",
+  "type": "object",
+  "properties": {
+    "Active": {
+      "type": "boolean"
+    },
+    "ConcentrateOuncesAllowed": {
+      "type": "integer"
+    },
+    "ConcentrateOuncesAvailable": {
+      "type": "integer"
+    },
+    "ConcentrateOuncesPurchased": {
+      "type": "integer"
+    },
+    "FlowerOuncesAllowed": {
+      "type": "integer"
+    },
+    "FlowerOuncesAvailable": {
+      "type": "integer"
+    },
+    "FlowerOuncesPurchased": {
+      "type": "integer"
+    },
+    "IdentificationMethod": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "InfusedOuncesAllowed": {
+      "type": "integer"
+    },
+    "InfusedOuncesAvailable": {
+      "type": "integer"
+    },
+    "InfusedOuncesPurchased": {
+      "type": "integer"
+    },
+    "PatientLicenseExpirationDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "PatientLicenseNumber": {
+      "type": "string"
+    },
+    "PatientRegistrationStartDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "PurchaseAmountDays": {
+      "type": "integer"
+    },
+    "RegistrationNumber": {
+      "type": "string"
+    },
+    "ThcOuncesAllowed": {
+      "type": "integer"
+    },
+    "ThcOuncesAvailable": {
+      "type": "integer"
+    },
+    "ThcOuncesPurchased": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "Active",
+    "ConcentrateOuncesAllowed",
+    "ConcentrateOuncesAvailable",
+    "ConcentrateOuncesPurchased",
+    "FlowerOuncesAllowed",
+    "FlowerOuncesAvailable",
+    "FlowerOuncesPurchased",
+    "InfusedOuncesAllowed",
+    "InfusedOuncesAvailable",
+    "InfusedOuncesPurchased",
+    "PatientLicenseExpirationDate",
+    "PatientLicenseNumber",
+    "PatientRegistrationStartDate",
+    "PurchaseAmountDays",
+    "RegistrationNumber",
+    "ThcOuncesAllowed",
+    "ThcOuncesAvailable",
+    "ThcOuncesPurchased"
+  ]
+}

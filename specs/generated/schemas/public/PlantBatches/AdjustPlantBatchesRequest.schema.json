@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlantBatchesAdjustPlantBatchesRequest",
+  "type": "object",
+  "properties": {
+    "AdjustmentDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "AdjustmentReason": {
+      "type": "string"
+    },
+    "PlantBatchName": {
+      "type": "string"
+    },
+    "Quantity": {
+      "type": "number"
+    },
+    "ReasonNote": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "AdjustmentDate",
+    "AdjustmentReason",
+    "PlantBatchName",
+    "Quantity"
+  ]
+}

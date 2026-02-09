@@ -1,0 +1,29 @@
+meta {
+  name: GetCustomerTypes
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/sales/v2/customertypes
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Returns a list of customer types.
+
+  Example Response:
+  [
+    "Consumer",
+    "Patient",
+    "Caregiver",
+    "ExternalPatient",
+    "NonResidentConsumer"
+  ]
+}

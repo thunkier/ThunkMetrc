@@ -1,89 +1,117 @@
-# Go Integration Guide
+# Go SDK Guide
 
-## 📦 Installation
+## Modules
 
 ```bash
-# Wrapper
-go get github.com/thunkier/ThunkMetrc/sdks/go/wrapper
-
-# High-Level Utilities
-go get github.com/thunkier/ThunkMetrc/sdks/go/thunkmetrc
+go get github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/client
+go get github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/wrapper
+# Optional high-level helpers
+go get github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/thunkmetrc
 ```
 
----
+Note: the Go modules use `sdks/thunkmetrc-go/...` paths.
 
-## 🚀 Getting Started
-
-### 1. Initialize
+## Recommended Setup (Wrapper + Factory)
 
 ```go
 package main
 
 import (
+    "context"
     "fmt"
-    "github.com/thunkier/ThunkMetrc/sdks/go/client"
-    "github.com/thunkier/ThunkMetrc/sdks/go/wrapper"
+    "time"
+
+    "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/client"
+    "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/wrapper"
+    wrapperservices "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/wrapper/services"
 )
 
 func main() {
-    // 1. Create Core Client
-    c := client.New(
-        "https://sandbox-api-or.metrc.com", 
-        "vendor_key", 
+    cfg := wrapperservices.DefaultConfig()
+    cfg.Enabled = true
+
+    factory := wrapper.NewFactory(
+        cfg,
+        client.WithTimeout(45*time.Second),
+    )
+
+    w := factory.GetWrapper(
+        "https://sandbox-api-or.metrc.com",
+        "vendor_key",
         "user_key",
     )
 
-    // 2. Wrap it
-    w := wrapper.New(c)
-
-    // 3. Make Request
-    // Note: Use pointers for optional string arguments
-    license := "C12-0000001-LIC"
-    resp, err := w.TransfersGetIncomingV2(nil, nil, &license, nil, nil)
+    facilities, err := w.Facilities.GetFacilities(context.Background())
     if err != nil {
         panic(err)
     }
 
-    fmt.Printf("Status: %d\n", resp.StatusCode)
+    fmt.Printf("Facilities: %d\n", len(facilities))
 }
 ```
 
----
+## Pagination Pattern
 
-## 🛡️ Rate Limiting
-
-The rate limiter configuration is embedded in the wrapper struct.
+Wrapper services expose paginated calls directly. Iterate pages explicitly:
 
 ```go
-w := wrapper.New(c)
+import (
+    "context"
+    "strconv"
 
-// Enable Rate Limiter
-w.RateLimiter.Config.Enabled = true
-w.RateLimiter.Config.MaxGetPerSecondPerFacility = 50.0
-```
+    "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/wrapper"
+    "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/wrapper/models"
+)
 
----
+func loadAllActivePackages(ctx context.Context, w *wrapper.MetrcWrapper, license string) ([]*models.PackagesPackage, error) {
+    all := make([]*models.PackagesPackage, 0)
 
-## 🛠️ High-Level Features (`thunkmetrc`)
-
-### Inventory Sync
-
-```go
-import "github.com/thunkier/ThunkMetrc/sdks/go/thunkmetrc"
-
-func main() {
-    // ... setup wrapper w ...
-
-    thunk := thunkmetrc.New(w)
-    
-    packages, err := thunk.ActivePackagesInventorySync(
-        "C12-0000001-LIC",
-        time.Now().Add(-24 * time.Hour), // lastKnownSync
-        10,                              // bufferMinutes
-    )
-    
-    if err != nil {
-        panic(err)
+    for page := 1; ; page++ {
+        resp, err := w.Packages.GetActivePackages(
+            ctx,
+            "", // lastModifiedEnd
+            "", // lastModifiedStart
+            license,
+            strconv.Itoa(page),
+            "20",
+        )
+        if err != nil {
+            return nil, err
+        }
+        if len(resp.Data) == 0 {
+            break
+        }
+        all = append(all, resp.Data...)
     }
+
+    return all, nil
 }
+```
+
+## High-Level Helpers (`thunkmetrc`)
+
+The high-level package provides generated sync/iteration utilities in `extensions`.
+
+```go
+import (
+    "context"
+
+    "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/thunkmetrc/extensions"
+)
+
+packages, err := extensions.SyncGetActivePackages(
+    context.Background(),
+    w.Packages,
+    nil, // lastKnownSync
+    5,   // bufferMinutes
+    "C12-0000001-LIC",
+    "20",
+)
+```
+
+## Build Locally
+
+```bash
+task build:go
+task test:go
 ```

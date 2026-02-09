@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlantBatchesPlantBatchesAdditivesUsingTemplateRequest",
+  "type": "object",
+  "properties": {
+    "ActualDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "AdditivesTemplateName": {
+      "type": "string"
+    },
+    "PlantBatchName": {
+      "type": "string"
+    },
+    "Rate": {
+      "type": "string"
+    },
+    "TotalAmountApplied": {
+      "type": "integer"
+    },
+    "TotalAmountUnitOfMeasure": {
+      "type": "string"
+    },
+    "Volume": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "ActualDate",
+    "AdditivesTemplateName",
+    "PlantBatchName",
+    "Rate",
+    "TotalAmountApplied",
+    "TotalAmountUnitOfMeasure",
+    "Volume"
+  ]
+}

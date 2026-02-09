@@ -1,0 +1,47 @@
+meta {
+  name: FinishPackages
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/packages/v2/finish
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Label": "ABCDEF012345670000010041",
+    "ActualDate": "2015-12-15"
+  },
+  {
+    "Label": "ABCDEF012345670000010042",
+    "ActualDate": "2015-12-15"
+  }
+]
+}
+
+docs {
+  Updates a list of packages as finished for a specific Facility.
+
+  Permissions Required:
+  - View Packages
+  - Manage Packages Inventory
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to update the list of finish packages.
+
+  Example Response:
+  No response
+}

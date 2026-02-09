@@ -1,0 +1,113 @@
+meta {
+  name: GetActivePlantBatches
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/plantbatches/v2/active
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  lastModifiedStart: 
+  lastModifiedEnd: 
+  pageNumber: 
+  pageSize: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of active plant batches for the specified Facility, optionally filtered by last modified date.
+
+  Permissions Required:
+  - View Immature Plants
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to return the list of active plant batches.
+  - lastModifiedStart (Optional): The last modified start timestamp
+  - lastModifiedEnd (Optional): The last modified end timestamp
+  - pageNumber (Optional): The number of the data page from which to return data.
+  - pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20.
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 5,
+        "Name": "Demo Plant Batch 1",
+        "PlantBatchTypeId": 1,
+        "PlantBatchTypeName": "Seed",
+        "LocationId": null,
+        "LocationName": null,
+        "LocationTypeName": null,
+        "StrainId": 1,
+        "StrainName": "Spring Hill Kush",
+        "SublocationId": null,
+        "SublocationName": null,
+        "PatientLicenseNumber": null,
+        "UntrackedCount": 80,
+        "TrackedCount": 10,
+        "PackagedCount": 0,
+        "DestroyedCount": 40,
+        "SourcePackageId": null,
+        "SourcePackageLabel": null,
+        "SourcePlantId": null,
+        "SourcePlantLabel": null,
+        "SourcePlantBatchIds": [],
+        "SourcePlantBatchNames": null,
+        "MultiPlantBatch": false,
+        "PlantedDate": "2014-10-10",
+        "LastModified": "0001-01-01T00:00:00+00:00",
+        "IsOnHold": false,
+        "IsOnInvestigation": false,
+        "IsOnInvestigationHold": false,
+        "IsOnInvestigationRecall": false
+      },
+      {
+        "Id": 6,
+        "Name": "Demo Plant Batch 2",
+        "PlantBatchTypeId": 2,
+        "PlantBatchTypeName": "Clone",
+        "LocationId": null,
+        "LocationName": null,
+        "LocationTypeName": null,
+        "StrainId": 1,
+        "StrainName": "Spring Hill Kush",
+        "SublocationId": null,
+        "SublocationName": null,
+        "PatientLicenseNumber": null,
+        "UntrackedCount": 50,
+        "TrackedCount": 20,
+        "PackagedCount": 0,
+        "DestroyedCount": 70,
+        "SourcePackageId": null,
+        "SourcePackageLabel": null,
+        "SourcePlantId": null,
+        "SourcePlantLabel": null,
+        "SourcePlantBatchIds": [],
+        "SourcePlantBatchNames": null,
+        "MultiPlantBatch": false,
+        "PlantedDate": "2014-10-10",
+        "LastModified": "0001-01-01T00:00:00+00:00",
+        "IsOnHold": false,
+        "IsOnInvestigation": false,
+        "IsOnInvestigationHold": false,
+        "IsOnInvestigationRecall": false
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

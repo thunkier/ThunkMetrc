@@ -1,0 +1,44 @@
+meta {
+  name: CreateMerge
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/retailid/v2/merge
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+{
+  "packageLabels": [
+    "ABCDEF012345670000010051",
+    "ABCDEF012345670000010052"
+  ]
+}
+}
+
+docs {
+  Merge and adjust one source to one target Package. First Package detected will be processed as target Package. This requires an action reason with name containing the 'Merge' word and setup with 'Package adjustment' area.
+
+  Permissions Required:
+  - External Sources(ThirdPartyVendorV2)/Retail ID(Write)
+  - WebApi Retail ID Read Write State (All or WriteOnly)
+  - Key Value Settings/Retail ID Merge Packages Enabled
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility.
+
+  Example Response:
+  No response
+}

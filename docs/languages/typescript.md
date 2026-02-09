@@ -1,90 +1,94 @@
-# TypeScript / Node.js Integration Guide
+# TypeScript SDK Guide
 
-## 📦 Installation
+## Packages
 
-Compatible with Node.js 18+ and modern browsers (bundlers required).
-
-### Wrapper (Recommended)
 ```bash
+npm install @thunkier/thunkmetrc-client
 npm install @thunkier/thunkmetrc-wrapper
-```
-
-### High-Level Utilities (Optional)
-```bash
+# Optional high-level helpers
 npm install @thunkier/thunkmetrc
 ```
 
----
+Requires modern Node.js (18+ recommended).
 
-## 🚀 Getting Started
+## Recommended Setup (Wrapper)
 
-### 1. Initialize
-We export everything from the wrapper package for convenience.
+```ts
+import { MetrcClient } from '@thunkier/thunkmetrc-client';
+import { MetrcWrapper } from '@thunkier/thunkmetrc-wrapper';
 
-```typescript
-import { MetrcClient, MetrcWrapper } from '@thunkier/thunkmetrc-wrapper';
+const client = new MetrcClient({
+  baseUrl: 'https://sandbox-api-or.metrc.com',
+  vendorKey: process.env.METRC_VENDOR_KEY!,
+  userKey: process.env.METRC_USER_KEY!,
+});
 
-const client = new MetrcClient(
-    "https://sandbox-api-or.metrc.com", 
-    "your_vendor_key", 
-    "user_api_key"
-);
-
-// Basic wrapper
 const wrapper = new MetrcWrapper(client);
+const facilities = await wrapper.facilities.getFacilities();
+console.log(`Facilities: ${facilities.length}`);
 ```
 
-### 2. Make Requests
-Parameters are named arguments (object destructuring) or standard arguments depending on the generated signature.
+## Raw Client
 
-```typescript
-try {
-    const deliveries = await wrapper.transfersGetIncomingV2(
-        "2023-01-01T00:00:00Z", // lastModifiedEnd
-        "2023-01-02T00:00:00Z", // lastModifiedStart
-        "C12-0000001-LIC"       // licenseNumber
-    );
-    
-    console.log(deliveries);
-} catch (error) {
-    console.error("Metrc Error:", error);
+```ts
+import { MetrcClient } from '@thunkier/thunkmetrc-client';
+
+const client = new MetrcClient({
+  baseUrl: 'https://sandbox-api-or.metrc.com',
+  vendorKey: process.env.METRC_VENDOR_KEY!,
+  userKey: process.env.METRC_USER_KEY!,
+});
+
+const facilities = await client.getFacilities();
+```
+
+## Pagination Pattern
+
+Use explicit page loops for paginated endpoints:
+
+```ts
+const allPackages: any[] = [];
+let page = 1;
+
+for (;;) {
+  const response = await wrapper.packages.getActivePackages(
+    undefined,
+    undefined,
+    undefined,
+    'C12-0000001-LIC',
+    page,
+    '20'
+  );
+
+  const data = response?.Data ?? [];
+  if (data.length === 0) {
+    break;
+  }
+
+  allPackages.push(...data);
+  page += 1;
 }
 ```
 
----
+## High-Level Helpers (`@thunkier/thunkmetrc`)
 
-## 🛡️ Rate Limiting
+`@thunkier/thunkmetrc` provides helper workflows such as `activePackagesInventorySync`.
 
-The Rate Limiter is **disabled by default**. To enable it, access the `rateLimiter` property on the wrapper.
+```ts
+import { activePackagesInventorySync } from '@thunkier/thunkmetrc';
 
-```typescript
-// Enable with defaults
-wrapper.rateLimiter.config.enabled = true;
+const result = await activePackagesInventorySync(
+  [{ licenseNumber: 'C12-0000001-LIC', wrapper }],
+  new Date(Date.now() - 60 * 60 * 1000),
+  5
+);
 
-// Or customize
-wrapper.rateLimiter.config = {
-    enabled: true,
-    maxGetPerSecondPerFacility: 50,
-    maxConcurrentGetPerFacility: 10,
-    // ...other options
-};
+const packages = result.get('C12-0000001-LIC') ?? [];
 ```
 
----
+## Build Locally
 
-## 🛠️ High-Level Features (`@thunkier/thunkmetrc`)
-
-### Inventory Sync
-Efficiently fetch all active packages.
-
-```typescript
-import { ThunkMetrc } from '@thunkier/thunkmetrc';
-
-const thunk = new ThunkMetrc(wrapper);
-
-const packages = await thunk.activePackagesInventorySync(
-    "C12-0000001-LIC",
-    new Date("2023-01-01"), // lastKnownSync
-    15                      // bufferMinutes
-);
+```bash
+task build:typescript
+task test:typescript
 ```

@@ -1,0 +1,70 @@
+package io.github.thunkier.thunkmetrc.wrapper;
+
+import io.github.thunkier.thunkmetrc.client.MetrcClient;
+import io.github.thunkier.thunkmetrc.wrapper.services.*;
+
+/**
+ * Metrc Wrapper with rate limiting.
+ * Organized by services matching the API groups.
+ */
+public class MetrcWrapper {
+
+    private final MetrcRateLimiter rateLimiter;
+
+    public MetrcRateLimiter getRateLimiter() {
+        return rateLimiter;
+    }
+
+{{- range .Services }}
+{{- $svcName := ToPascalCase (CleanName .Name) }}
+    private final {{ $svcName }}Service {{ ToCamelCase $svcName }};
+{{- end }}
+
+    /**
+     * Constructor with default config.
+     * @param client MetrcClient instance
+     */
+    public MetrcWrapper(MetrcClient client) {
+        this(client, new MetrcRateLimiter.Config());
+    }
+
+    /**
+     * Convenience constructor that creates both client and wrapper.
+     * @param baseUrl Metrc API base URL
+     * @param vendorKey Vendor API key
+     * @param userKey User API key
+     */
+    public MetrcWrapper(String baseUrl, String vendorKey, String userKey) {
+        this(new MetrcClient(baseUrl, vendorKey, userKey));
+    }
+
+    /**
+     * Constructor with custom config.
+     * @param client MetrcClient instance
+     * @param config RateLimiter configuration
+     */
+    public MetrcWrapper(MetrcClient client, MetrcRateLimiter.Config config) {
+        this(client, new MetrcRateLimiter(config));
+    }
+
+    /**
+     * Constructor with shared rate limiter.
+     * @param client MetrcClient instance
+     * @param rateLimiter Shared MetrcRateLimiter instance
+     */
+    public MetrcWrapper(MetrcClient client, MetrcRateLimiter rateLimiter) {
+        this.rateLimiter = rateLimiter;
+
+    {{- range .Services }}
+    {{- $svcName := ToPascalCase (CleanName .Name) }}
+        this.{{ ToCamelCase $svcName }} = new {{ $svcName }}Service(client, rateLimiter);
+    {{- end }}
+    }
+
+{{- range .Services }}
+{{- $svcName := ToPascalCase (CleanName .Name) }}
+    public {{ $svcName }}Service {{ ToCamelCase $svcName }}() {
+        return this.{{ ToCamelCase $svcName }};
+    }
+{{- end }}
+}

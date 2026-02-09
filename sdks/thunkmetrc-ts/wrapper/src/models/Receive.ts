@@ -1,0 +1,10 @@
+
+export interface Receive {
+    ChildTag?: string;
+    Eaches?: string[];
+    LabelSource?: string;
+    QrCount?: number;
+    Ranges?: number[][];
+    RequiresVerification?: boolean;
+    SiblingTags?: string[];
+}

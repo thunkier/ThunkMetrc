@@ -1,0 +1,33 @@
+from typing import List, Optional, Any, TypeVar, Generic
+from typing_extensions import TypedDict
+
+T = TypeVar("T")
+
+class PaginatedResponse(TypedDict, total=False, Generic[T]):
+    Total: Optional[int]
+    PageSize: Optional[int]
+    Current: Optional[int]
+    Next: Optional[int]
+    Previous: Optional[int]
+    Data: List[T]
+
+{{- define "GeneratePyModel" -}}
+{{- $model := . -}}
+{{- range $model.NestedTypes -}}
+{{ template "GeneratePyModel" . }}
+{{- end -}}
+
+class {{ $model.Name }}(TypedDict, total=False):
+{{- if not $model.Properties }}
+    pass
+{{- else -}}
+{{- range $model.Properties }}
+    {{ .Name }}: {{ ToPythonType .Type }}
+{{- end }}
+{{- end }}
+
+{{- end -}}
+
+{{ range .ResponseModels }}
+{{ template "GeneratePyModel" . }}
+{{ end }}

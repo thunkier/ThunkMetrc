@@ -1,0 +1,70 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using ThunkMetrc.Client;
+using Microsoft.Extensions.Logging;
+using System.Text.Json;
+using System.Threading;
+using System.Runtime.CompilerServices;
+using ThunkMetrc.Wrapper;
+using ThunkMetrc.Wrapper.Models;
+using File = ThunkMetrc.Wrapper.Models.File;
+
+namespace ThunkMetrc.Wrapper.Services
+{
+    public class {{ .Service.Name | ToPascalCase }}Service(MetrcClient client, IMetrcRateLimiter rateLimiter)
+    {
+        private readonly MetrcClient _client = client;
+        private readonly IMetrcRateLimiter _rateLimiter = rateLimiter;
+
+{{- $safeGroup := ToPascalCase (CleanName .Service.Name) }}
+
+{{- range .Service.Operations }}
+{{- $methodName := ToPascalCase (CleanName .Name) }}
+{{- $finalName := FormatMethodName $methodName $safeGroup }}
+{{- if .BodySchema }}
+{{- $opName := .Name | CleanName | ToPascalCase }}
+{{- $reqClassName := printf "%s%sRequest" $safeGroup $opName }}
+{{- end }}
+{{- $isVoid := IsVoid .Method }}
+{{- $returnType := ResolveResponseType . }}
+{{- $iteratorItemType := GetIteratorItemType . }}
+{{- $reqType := "object?" }}
+{{- if (and (or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH")) .BodySchema) }}
+{{- $baseName := printf "%s%sRequest" $safeGroup (ToPascalCase (CleanName .Name)) }}
+{{- if eq .BodySchema.Type "array" }}
+{{- $reqType = printf "List<%s>?" $baseName }}
+{{- else }}
+{{- $reqType = printf "%s?" $baseName }}
+{{- end }}
+{{- end }}
+        /// <summary>
+{{ range Split (CleanDocs .Description) "\n" }}        /// {{ . }}
+{{ end }}        /// </summary>
+        {{ WrapperParamsDocs . }}
+        /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
+        public async Task{{ if not $isVoid }}<{{ $returnType }}>{{ end }} {{ $finalName }}({{ WrapperSignatureArgs . $reqType }}CancellationToken cancellationToken = default)
+        {
+            {{- $facilityArg := "null" }}
+            {{- range .PathParams }}{{ if eq (CleanName .) "LicenseNumber" }}{{ $facilityArg = . }}{{ end }}{{ end }}
+            {{- $isGet := "false" }}{{ if eq .Method "GET" }}{{ $isGet = "true" }}{{ end }}
+
+            {{- if $isVoid }}
+            await _rateLimiter.ExecuteAsync<object?>({{ $facilityArg }}, {{ $isGet }}, async () => { await _client.{{ $finalName }}({{ ClientCallArgs . }}); return null; }, cancellationToken);
+            {{- else }}
+            var result = await _rateLimiter.ExecuteAsync<object>({{ $facilityArg }}, {{ $isGet }}, () => _client.{{ $finalName }}({{ ClientCallArgs . }}), cancellationToken);
+            if (result is JsonElement json)
+            {
+                {{- if or (eq $returnType "object") (eq $returnType "object?") }}
+                return json;
+                {{- else }}
+                return json.Deserialize<{{ $returnType }}>() ?? throw new InvalidOperationException("Failed to deserialize response");
+                {{- end }}
+            }
+            throw new InvalidOperationException("Unexpected response type");
+            {{- end }}
+        }
+{{- end }}
+    }
+}
+

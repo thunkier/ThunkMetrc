@@ -1,0 +1,39 @@
+meta {
+  name: GetDriverById
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/transporters/v2/drivers/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a Driver by its Id, with an optional license number. Please note: The {id} parameter above represents a Driver Id.
+
+  Permissions Required:
+  - Transporters
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to return a Driver.
+
+  Example Response:
+  {
+    "Id": 1,
+    "FacilityId": 1,
+    "EmployeeId": "1234",
+    "Name": "Jim Bob",
+    "DriversLicenseNumber": "ABC1234"
+  }
+}

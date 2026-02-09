@@ -1,0 +1,33 @@
+meta {
+  name: DeleteDriverById
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/transporters/v2/drivers/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Archives a Driver record for a Facility.  Please note: The {id} parameter above represents a Driver Id.
+
+  Permissions Required:
+  - Manage Transporters
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to archive a Driver.
+
+  Example Response:
+  No response
+}

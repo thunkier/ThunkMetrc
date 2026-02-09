@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StrainsStrainsRequest",
+  "type": "object",
+  "properties": {
+    "CbdLevel": {
+      "type": "number"
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "IndicaPercentage": {
+      "type": "integer"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "SativaPercentage": {
+      "type": "integer"
+    },
+    "TestingStatus": {
+      "type": "string"
+    },
+    "ThcLevel": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "CbdLevel",
+    "Id",
+    "IndicaPercentage",
+    "Name",
+    "SativaPercentage",
+    "TestingStatus",
+    "ThcLevel"
+  ]
+}

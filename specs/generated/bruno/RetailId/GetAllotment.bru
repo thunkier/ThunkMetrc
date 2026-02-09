@@ -1,0 +1,39 @@
+meta {
+  name: GetAllotment
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/retailid/v2/allotment
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves the available Retail Item ID quota for a facility.
+
+  Permissions Required:
+  - Download Product Labels
+  - Manage Product Labels
+  - Manage Tag Orders
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to retrieve available Retail Item ID quota.
+
+  Example Response:
+  {
+    "FacilityId": 1,
+    "Allotment": 50000,
+    "FacilityLicenseNumber": "123-ABC"
+  }
+}

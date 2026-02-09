@@ -1,0 +1,48 @@
+package wrapper
+
+import (
+	"log/slog"
+
+	"github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/client"
+	"github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/wrapper/services"
+)
+
+type MetrcWrapper struct {
+	Client      *client.MetrcClient
+	RateLimiter services.RateLimiter
+
+{{- range .Services }}
+	{{- $name := ToPascalCase (CleanName .Name) }}
+	{{- if ne $name "" }}
+	{{ $name }} *services.{{ $name }}Service
+	{{- end }}
+{{- end }}
+}
+
+func New(c *client.MetrcClient) *MetrcWrapper {
+	rl := services.NewRateLimiter(services.DefaultConfig(), c.Logger)
+	return NewWithLimiter(c, rl)
+}
+
+func NewMetrcWrapper(baseUrl string, accessKey string, logger *slog.Logger) *MetrcWrapper {
+	c := client.New(baseUrl, accessKey, "")
+	rl := services.NewRateLimiter(services.DefaultConfig(), logger)
+
+	return NewWithLimiter(c, rl)
+}
+
+func NewWithLimiter(client *client.MetrcClient, rateLimiter services.RateLimiter) *MetrcWrapper {
+	return &MetrcWrapper{
+		Client:      client,
+		RateLimiter: rateLimiter,
+{{- range .Services }}
+	{{- $name := ToPascalCase (CleanName .Name) }}
+	{{- if ne $name "" }}
+			{{ $name}}: &services.{{ $name  }}Service{Client: client, RateLimiter: rateLimiter},
+	{{- end }}
+{{- end }}
+	}
+}
+
+
+

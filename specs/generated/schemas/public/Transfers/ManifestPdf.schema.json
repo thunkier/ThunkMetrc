@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TransfersManifestPdf",
+  "type": "object",
+  "properties": {
+    "ContentType": {
+      "type": "string"
+    },
+    "FileContents": {
+      "type": "string"
+    },
+    "FileDownloadName": {
+      "type": "string"
+    },
+    "HttpStatusCode": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "ContentType",
+    "FileContents",
+    "FileDownloadName",
+    "HttpStatusCode"
+  ]
+}

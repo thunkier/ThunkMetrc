@@ -1,0 +1,18 @@
+from typing import TypedDict, List, Optional, Any, Generic, TypeVar, TYPE_CHECKING
+from typing_extensions import TypedDict
+
+if TYPE_CHECKING:
+    from . import *
+
+class UpdateOutgoingTemplatesRequest(TypedDict, total=False):
+    Destinations: List[Any]
+    DriverLicenseNumber: str
+    DriverName: str
+    DriverOccupationalLicenseNumber: str
+    Name: str
+    PhoneNumberForQuestions: str
+    TransferTemplateId: int
+    TransporterFacilityLicenseNumber: str
+    VehicleLicensePlateNumber: str
+    VehicleMake: str
+    VehicleModel: str

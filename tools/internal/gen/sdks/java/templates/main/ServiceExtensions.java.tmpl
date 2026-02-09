@@ -1,0 +1,228 @@
+package io.github.thunkier.thunkmetrc;
+
+import io.github.thunkier.thunkmetrc.client.MetrcClient;
+import io.github.thunkier.thunkmetrc.wrapper.MetrcExtensions;
+import io.github.thunkier.thunkmetrc.wrapper.MetrcRateLimiter;
+import io.github.thunkier.thunkmetrc.wrapper.models.*;
+import io.github.thunkier.thunkmetrc.wrapper.services.{{ .Name }}Service;
+
+import java.util.*;
+import java.util.concurrent.*;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
+public class {{ .Name }}Extensions {
+
+{{- $svcName := .Name }}
+{{- range .Service.Operations }}
+{{- if HasPagination . }}
+{{- $methodName := ToPascalCase (CleanName .Name) }}
+{{- $javaMethodName := FormatMethodName $methodName $svcName }}
+{{- $retType := GetReturnType . }}
+{{- $itemType := $retType }}
+{{- /* Parse generic type from PaginatedResponse<Type> or List<Type> */ -}}
+{{- if Contains $retType "PaginatedResponse<" }}
+    {{- $itemType = TrimPrefix "PaginatedResponse<" $retType }}
+    {{- $itemType = TrimSuffix ">" $itemType }}
+{{- else if Contains $retType "List<" }}
+    {{- $itemType = TrimPrefix "List<" $retType }}
+    {{- $itemType = TrimSuffix ">" $itemType }}
+{{- end }}
+
+{{- /* Resolve Request Class Name logic (duplicated from implementation) */ -}}
+{{- $reqClassName := "" }}
+{{- $isList := false }}
+{{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+    {{- if .BodySchema }}
+        {{- $baseReqName := printf "%s%sRequest" $svcName $methodName }}
+        {{- if eq .BodySchema.Type "array" }}
+             {{- $reqClassName = printf "%sItem" $baseReqName }}
+             {{- $isList = true }}
+        {{- else }}
+             {{- $reqClassName = $baseReqName }}
+        {{- end }}
+    {{- end }}
+{{- end }}
+
+    /**
+     * Iterator for {{ $javaMethodName }}.
+     * Returns an Iterable that fetches pages lazily and yields items.
+     */
+    @SuppressWarnings("unchecked")
+    public static Iterable<{{ $itemType }}> iterate{{ ToPascalCase $javaMethodName }}(
+        {{ $svcName }}Service service,
+        {{- $args := list -}}
+        {{- range .PathParams }}
+            {{- $args = append $args (printf "String %s" (SafeJavaField .)) -}}
+        {{- end }}
+        {{- range .QueryParams }}
+            {{- $name := TrimSuffix "optional" .Name }}
+            {{- if ne $name "pageNumber" }}
+                {{- $args = append $args (printf "String %s" (SafeJavaField $name)) -}}
+            {{- end }}
+        {{- end }}
+        {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+            {{- if .BodySchema }}
+                {{- if $isList }}
+                     {{- $args = append $args (printf "List<%s> body" $reqClassName) }}
+                {{- else }}
+                     {{- $args = append $args (printf "%s body" $reqClassName) }}
+                {{- end }}
+            {{- else }}
+                {{- $args = append $args "Object body" }}
+            {{- end }}
+        {{- end }}
+        {{ join $args ", " }}
+    ) {
+        {{- /* Determine Facility Logic */ -}}
+        {{- $facilityArg := "null" -}}
+        {{- range .PathParams -}}
+            {{- if eq (CleanName .) "licenseNumber" -}}
+                {{- $facilityArg = (SafeJavaField .) -}}
+            {{- end -}}
+        {{- end -}}
+        
+        return MetrcExtensions.iteratePages(page -> {
+            try {
+                Object res = service.{{ $javaMethodName }}(
+                    {{- $callArgs := list }}
+                    {{- range .PathParams }}
+                        {{- $callArgs = append $callArgs (SafeJavaField .) }}
+                    {{- end }}
+                    {{- range .QueryParams }}
+                        {{- $paramName := TrimSuffix "optional" .Name }}
+                        {{- if eq $paramName "pageNumber" }}
+                            {{- $callArgs = append $callArgs "String.valueOf(page)" }}
+                        {{- else }}
+                            {{- $callArgs = append $callArgs (SafeJavaField $paramName) }}
+                        {{- end }}
+                    {{- end }}
+                    {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+                        {{- $callArgs = append $callArgs "body" }}
+                    {{- end }}
+                    {{ join $callArgs ", " }}
+                );
+
+                if (res instanceof PaginatedResponse) {
+                    return (PaginatedResponse) res;
+                } else if (res instanceof List) {
+                    PaginatedResponse pr = new PaginatedResponse();
+                    pr.Data = (List) res;
+                    return pr;
+                }
+                return null;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+{{- end }}
+
+{{- if IsTimeWindowed . }}
+{{- $methodName := ToPascalCase (CleanName .Name) }}
+{{- $javaMethodName := FormatMethodName $methodName $svcName }}
+{{- $retType := GetReturnType . }}
+{{- $itemType := $retType }}
+{{- if Contains $retType "PaginatedResponse<" }}
+    {{- $itemType = TrimPrefix "PaginatedResponse<" $retType }}
+    {{- $itemType = TrimSuffix ">" $itemType }}
+{{- else if Contains $retType "List<" }}
+    {{- $itemType = TrimPrefix "List<" $retType }}
+    {{- $itemType = TrimSuffix ">" $itemType }}
+{{- end }}
+
+    /**
+     * Sync items for {{ $javaMethodName }}.
+     * Retrieves all items updated within the specified time window.
+     * @param service The service instance
+     * @param lastKnownSync Last known sync timestamp (uses 1 day ago if null)
+     * @param bufferMinutes Buffer to subtract from lastKnownSync to catch overlaps
+     * @return List of items updated since the sync window start
+     */
+    public static List<{{ $itemType }}> sync{{ ToPascalCase $javaMethodName }}(
+        {{ $svcName }}Service service,
+        OffsetDateTime lastKnownSync,
+        int bufferMinutes
+        {{- $syncArgs := list -}}
+        {{- range .PathParams }}{{ $syncArgs = append $syncArgs (printf ", String %s" (SafeJavaField .)) }}{{ end }}
+        {{- range .QueryParams }}
+        {{- $name := TrimSuffix "optional" .Name }}
+        {{- if and (ne $name "lastModifiedStart") (ne $name "lastModifiedEnd") (ne $name "pageNumber") }}
+        {{- $syncArgs = append $syncArgs (printf ", String %s" (SafeJavaField $name)) }}
+        {{- end }}
+        {{- end }}
+        {{ join $syncArgs "" }}
+    ) {
+        OffsetDateTime end = OffsetDateTime.now();
+        OffsetDateTime start = end.minusDays(1);
+        if (lastKnownSync != null) {
+            start = lastKnownSync.minusMinutes(bufferMinutes);
+        }
+        
+        String startStr = start.format(DateTimeFormatter.ISO_INSTANT);
+        String endStr = end.format(DateTimeFormatter.ISO_INSTANT);
+        
+        List<{{ $itemType }}> results = new ArrayList<>();
+        {{- $callSyncArgs := list }}
+        {{- range .PathParams }}{{ $callSyncArgs = append $callSyncArgs (SafeJavaField .) }}{{ end }}
+        {{- range .QueryParams }}
+        {{- $name := TrimSuffix "optional" .Name }}
+        {{- if eq $name "lastModifiedStart" }}{{ $callSyncArgs = append $callSyncArgs "startStr" }}
+        {{- else if eq $name "lastModifiedEnd" }}{{ $callSyncArgs = append $callSyncArgs "endStr" }}
+        {{- else if ne $name "pageNumber" }}{{ $callSyncArgs = append $callSyncArgs (SafeJavaField $name) }}
+        {{- end }}
+        {{- end }}
+
+        for ({{ $itemType }} item : iterate{{ ToPascalCase $javaMethodName }}(service, {{ join $callSyncArgs ", " }})) {
+            results.add(item);
+        }
+        return results;
+    }
+
+    /**
+     * Sync items in parallel across multiple facilities for {{ $javaMethodName }}.
+     * @param targets List of client/license pairs to sync
+     * @param lastKnownSync Last known sync timestamp
+     * @param bufferMinutes Buffer to subtract from lastKnownSync
+     * @param concurrencyLimit Maximum number of concurrent sync operations
+     * @return Map of license number to list of synced items
+     */
+    public static Map<String, List<{{ $itemType }}>> sync{{ ToPascalCase $javaMethodName }}Parallel(
+        List<MetrcExtensions.SyncTarget<MetrcClient>> targets,
+        OffsetDateTime lastKnownSync,
+        int bufferMinutes,
+        int concurrencyLimit
+        {{- $parArgs := list -}}
+        {{- range .QueryParams }}
+        {{- $name := TrimSuffix "optional" .Name }}
+        {{- if and (ne $name "lastModifiedStart") (ne $name "lastModifiedEnd") (ne $name "pageNumber") (ne $name "licenseNumber") }}
+        {{- $parArgs = append $parArgs (printf ", String %s" (SafeJavaField $name)) }}
+        {{- end }}
+        {{- end }}
+        {{ join $parArgs "" }}
+    ) {
+        return MetrcExtensions.syncParallel(targets, concurrencyLimit, (client, limiter, license) -> {
+            {{ $svcName }}Service svc = new {{ $svcName }}Service(client, limiter);
+            return sync{{ ToPascalCase $javaMethodName }}(
+                svc,
+                lastKnownSync, bufferMinutes,
+                {{- $callParArgs := list }}
+                {{- range .PathParams }}
+                {{- if eq (CleanName .) "licenseNumber" }}{{ $callParArgs = append $callParArgs "license" }}{{ else }}{{ $callParArgs = append $callParArgs "\"\"" }}{{ end }}
+                {{- end }}
+                {{- range .QueryParams }}
+                {{- $p := SafeJavaField (TrimSuffix "optional" .Name) }}
+                {{- if eq $p "licenseNumber" }}{{ $callParArgs = append $callParArgs "license" }}
+                {{- else if and (ne $p "lastModifiedStart") (ne $p "lastModifiedEnd") (ne $p "pageNumber") }}
+                {{ $callParArgs = append $callParArgs $p }}
+                {{- end }}
+                {{- end }}
+                {{ join $callParArgs ", " }}
+            );
+        });
+    }
+{{- end }}
+{{- end }}
+}
+

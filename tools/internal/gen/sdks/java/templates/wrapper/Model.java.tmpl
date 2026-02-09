@@ -1,0 +1,32 @@
+package io.github.thunkier.thunkmetrc.wrapper.models;
+
+{{- $hasList := false -}}
+{{- range .Model.Properties }}{{ if eq .Type.Kind "array" }}{{ $hasList = true }}{{ end }}{{ end -}}
+{{- range .Model.NestedTypes }}{{ range .Properties }}{{ if eq .Type.Kind "array" }}{{ $hasList = true }}{{ end }}{{ end }}{{ end -}}
+{{- if $hasList }}import java.util.List;{{ end }}
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+{{- define "GenerateJavaModel" -}}
+{{- $model := . -}}
+{{- range $model.NestedTypes -}}
+{{ template "GenerateJavaModel" . }}
+{{- end -}}
+
+public static class {{ $model.Name }} {
+    {{- range $model.Properties }}
+    @JsonProperty("{{ .Name }}")
+    public {{ ToJavaType .Type }} {{ SafeJavaField .Name }};
+    {{- end }}
+}
+{{- end -}}
+
+public class {{ .Model.Name }} {
+    {{- range .Model.Properties }}
+    @JsonProperty("{{ .Name }}")
+    public {{ ToJavaType .Type }} {{ SafeJavaField .Name }};
+    {{- end }}
+
+    {{- range .Model.NestedTypes }}
+    {{ template "GenerateJavaModel" . }}
+    {{- end }}
+}

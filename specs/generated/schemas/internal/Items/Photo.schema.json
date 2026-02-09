@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ItemsPhoto",
+  "type": "object",
+  "properties": {
+    "ContentType": {
+      "type": "string"
+    },
+    "FileContents": {
+      "type": "string"
+    },
+    "FileDownloadName": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "ContentType",
+    "FileContents",
+    "FileDownloadName"
+  ]
+}

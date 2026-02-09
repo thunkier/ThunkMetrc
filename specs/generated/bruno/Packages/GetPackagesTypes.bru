@@ -1,0 +1,30 @@
+meta {
+  name: GetPackagesTypes
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/packages/v2/types
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of available Package types.
+
+  Example Response:
+  [
+    "Product",
+    "ImmaturePlant",
+    "VegetativePlant",
+    "PlantWaste",
+    "HarvestWaste",
+    "MotherPlant"
+  ]
+}

@@ -1,0 +1,51 @@
+meta {
+  name: UpdatePlantBatchesLocation
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/plantbatches/v2/location
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Name": "AK-47 Clone 1/31/2017",
+    "Location": "Plants Location",
+    "Sublocation": "Plants Sublocation",
+    "MoveDate": "2015-12-15"
+  },
+  {
+    "Name": "Metrc Bliss 5/30/2018",
+    "Location": "Plants Location",
+    "Sublocation": "Plants Sublocation",
+    "MoveDate": "2018-01-05"
+  }
+]
+}
+
+docs {
+  Moves one or more plant batches to new locations with in a specified Facility.
+
+  Permissions Required:
+  - View Immature Plants
+  - Manage Immature Plants
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to change the Location of the Plant Batch.
+
+  Example Response:
+  No response
+}

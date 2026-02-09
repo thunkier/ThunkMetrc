@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CaregiversStatus",
+  "type": "object",
+  "properties": {
+    "Active": {
+      "type": "boolean"
+    },
+    "CaregiverLicenseNumber": {
+      "type": "string"
+    },
+    "Patients": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "Active",
+    "CaregiverLicenseNumber",
+    "Patients"
+  ]
+}

@@ -1,0 +1,144 @@
+meta {
+  name: CreateIncomingExternal
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/transfers/v2/external/incoming
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "ShipperLicenseNumber": "123-ABC",
+    "ShipperName": "Lofty Med-Cultivation B",
+    "ShipperMainPhoneNumber": "123-456-7890",
+    "ShipperAddress1": "123 Real Street",
+    "ShipperAddress2": null,
+    "ShipperAddressCity": "Somewhere",
+    "ShipperAddressState": "CO",
+    "ShipperAddressPostalCode": null,
+    "TransporterFacilityLicenseNumber": null,
+    "DriverOccupationalLicenseNumber": null,
+    "DriverName": null,
+    "DriverLicenseNumber": null,
+    "PhoneNumberForQuestions": null,
+    "VehicleMake": null,
+    "VehicleModel": null,
+    "VehicleLicensePlateNumber": null,
+    "Destinations": [
+      {
+        "RecipientLicenseNumber": "123-XYZ",
+        "InvoiceNumber": "INV-001-0236521",
+        "TransferTypeName": "Transfer",
+        "PlannedRoute": "I will drive down the road to the place.",
+        "EstimatedDepartureDateTime": "2018-03-06T09:15:00.000",
+        "EstimatedArrivalDateTime": "2018-03-06T12:24:00.000",
+        "GrossWeight": null,
+        "GrossUnitOfWeightId": null,
+        "Transporters": [
+          {
+            "TransporterFacilityLicenseNumber": "123-ABC",
+            "DriverOccupationalLicenseNumber": "50",
+            "DriverName": "X",
+            "DriverLicenseNumber": "5",
+            "DriverLayoverLeg": "FromAndToLayover",
+            "PhoneNumberForQuestions": "18005555555",
+            "VehicleMake": "X",
+            "VehicleModel": "X",
+            "VehicleLicensePlateNumber": "X",
+            "IsLayover": false,
+            "EstimatedDepartureDateTime": "2018-03-06T12:00:00.000",
+            "EstimatedArrivalDateTime": "2018-03-06T21:00:00.000",
+            "TransporterDetails": [
+              {
+                "DriverOccupationalLicenseNumber": "50",
+                "DriverName": "X",
+                "DriverLicenseNumber": "5",
+                "DriverLayoverLeg": "FromLayover",
+                "VehicleMake": "X",
+                "VehicleModel": "X",
+                "VehicleLicensePlateNumber": "X"
+              }
+            ]
+          }
+        ],
+        "Packages": [
+          {
+            "ItemName": "Buds",
+            "Quantity": 10.0,
+            "UnitOfMeasureName": "Ounces",
+            "PackagedDate": "2018-02-04T00:00:00Z",
+            "ExpirationDate": null,
+            "SellByDate": null,
+            "UseByDate": null,
+            "GrossWeight": 20.1,
+            "GrossUnitOfWeightName": "Grams",
+            "WholesalePrice": null,
+            "ExternalId": "123456789",
+            "IsFinishedGood": false
+          },
+          {
+            "ItemName": "Buds",
+            "Quantity": 9.5,
+            "UnitOfMeasureName": "Ounces",
+            "PackagedDate": "2018-03-06T00:00:00Z",
+            "ExpirationDate": null,
+            "SellByDate": null,
+            "UseByDate": null,
+            "GrossWeight": 30.7,
+            "GrossUnitOfWeightName": "Milligrams",
+            "WholesalePrice": null,
+            "ExternalId": null,
+            "IsFinishedGood": false
+          },
+          {
+            "ItemName": "Buds",
+            "Quantity": 8.5,
+            "UnitOfMeasureName": "Ounces",
+            "PackagedDate": "2018-03-06T00:00:00Z",
+            "ExpirationDate": null,
+            "SellByDate": null,
+            "UseByDate": null,
+            "GrossWeight": 30.7,
+            "GrossUnitOfWeightName": "Milligrams",
+            "WholesalePrice": null,
+            "ExternalId": "010203040506",
+            "IsFinishedGood": true
+          }
+        ]
+      }
+    ]
+  }
+]
+}
+
+docs {
+  Creates external incoming shipment plans for a Facility.
+
+  Permissions Required:
+  - Manage Transfers
+
+  Parameters:
+  - licenseNumber (Required): The License Number for which to create a Shipment Plan.
+
+  Example Response:
+  {
+    "Ids": [
+      1
+    ],
+    "Warnings": null
+  }
+}

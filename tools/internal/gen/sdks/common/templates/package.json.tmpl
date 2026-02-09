@@ -1,0 +1,46 @@
+{
+  "name": "@thunkier/thunkmetrc-{{ if .IsWrapper }}wrapper{{ else }}client{{ end }}",
+  "version": "{{ .Version }}",
+  "description": "{{ .Description }}",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+{{- if not .IsWrapper }}
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thunkier/thunkmetrc.git"
+  },
+  "keywords": [
+    "thunkmetrc",
+    "cannabis",
+    "compliance",
+    "api",
+    "sdk"
+  ],
+  "author": "ThunkMetrc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thunkier/thunkmetrc/issues"
+  },
+  "homepage": "https://github.com/thunkier/thunkmetrc#readme",
+{{- end }}
+  "dependencies": {
+{{- if .IsWrapper }}
+    "@thunkier/thunkmetrc-client": "file:../client"
+{{- else }}
+    "axios": "{{ or (index .Deps "typescript.client.axios") "^1.6.0" }}"
+{{- end }}
+  },
+  "devDependencies": {
+    "typescript": "{{ or (index .Deps "typescript.typescript") "^5.0.0" }}"
+  }
+}

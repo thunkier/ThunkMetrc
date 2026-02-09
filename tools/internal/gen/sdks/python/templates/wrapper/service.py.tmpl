@@ -1,0 +1,95 @@
+from typing import Any, Optional, List, AsyncGenerator
+from thunkmetrc.client import MetrcClient
+from ..ratelimiter import MetrcRateLimiter
+from ..models import *
+from ..utils import iterate_pages, deserialize_page
+
+class {{ .Service.Name | ToPascalCase }}Service:
+    def __init__(self, client: MetrcClient, limiter: MetrcRateLimiter):
+        self.client = client
+        self.limiter = limiter
+
+{{- $safeGroupCamel := ToPascalCase (CleanName .Service.Name) }}
+{{- $safeGroupSnake := ToSnakeCase (CleanName .Service.Name) }}
+{{- range .Service.Operations }}
+{{- $methodPascal := ToPascalCase (CleanName .Name) }}
+{{- $pyMethodName := FormatMethodName $methodPascal $safeGroupCamel }}
+
+{{- /* Prepare Arguments */ -}}
+{{- $args := list }}
+{{- range .PathParams }}
+    {{- $args = append $args (printf "%s: str" (ToSnakeCase .)) }}
+{{- end }}
+
+{{- $bodyArg := "None" }}
+{{- $bodyType := "Any" }}
+{{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+    {{- if .BodySchema }}
+        {{- $opName := .Name | CleanName | ToPascalCase }}
+        {{- $reqClassName := printf "%s%sRequest" $safeGroupCamel $opName }}
+        {{- if eq .BodySchema.Type "array" }}
+             {{- $bodyType = printf "List['%sItem']" $reqClassName }}
+             {{- /* Logic to handle arrays of objects - check if item type is object */ -}}
+             {{- if and .BodySchema.Items (eq .BodySchema.Items.Type "object") }}
+                 {{- $bodyType = printf "List['%s']" $reqClassName }}
+             {{- end }}
+        {{- else }}
+             {{- $bodyType = printf "'%s'" $reqClassName }}
+        {{- end }}
+        {{- $args = append $args (printf "body: Optional[%s] = None" $bodyType) }}
+        {{- $bodyArg = "body" }}
+    {{- else }}
+        {{- $args = append $args "body: Any = None" }}
+        {{- $bodyArg = "body" }}
+    {{- end }}
+{{- else }}
+    {{- $args = append $args "body: Any = None" }}
+    {{- $bodyArg = "body" }}
+{{- end }}
+
+{{- range .QueryParams }}
+    {{- $paramName := .Name | TrimSuffix "optional" }}
+    {{- $argName := $paramName | ToSnakeCase }}
+    {{- $args = append $args (printf "%s: Optional[str] = None" $argName) }}
+{{- end }}
+
+    async def {{ $pyMethodName }}(self, {{ join $args ", " }}) -> {{ GetReturnType . }}:
+        """
+{{- if .Description }}
+{{ range Split (CleanDocs .Description) "\n" }}        {{ . }}
+{{ end }}{{- end }}        {{ .Method }} {{ .Path }}
+        Parameters:
+        {{- range .PathParams }}
+        - {{ . | ToSnakeCase }} (str): Path parameter {{ . }}
+        {{- end }}
+        {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+        - body ({{ $bodyType }}): Request body
+        {{- end }}
+        {{- range .QueryParams }}
+        - {{ .Name | TrimSuffix "optional" | ToSnakeCase }} (str, optional): {{ if .Description }}{{ .Description }}{{ else }}Filter by {{ .Name }}{{ end }}
+        {{- end }}
+        """
+        async def op():
+            return await self.client.{{ $safeGroupSnake }}.{{ $pyMethodName }}(
+                {{- range .PathParams }}{{ ToSnakeCase . }}, {{ end -}}
+                body={{ $bodyArg }},
+                {{- range .QueryParams }}
+                {{- $paramName := .Name | TrimSuffix "optional" }}
+                {{- $argName := $paramName | ToSnakeCase }}
+                {{ $argName }}={{ $argName }},
+                {{- end }}
+            )
+
+        {{- /* Determine Facility Logic */ -}}
+        {{- $facilityArg := "None" }}
+        {{- range .PathParams }}
+            {{- if eq (CleanName .) "licenseNumber" }}
+                {{- $facilityArg = (ToSnakeCase .) }}
+            {{- end }}
+        {{- end }}
+        {{- $isGet := "False" }}
+        {{- if eq .Method "GET" }}{{ $isGet = "True" }}{{ end }}
+        return await self.limiter.execute({{ $facilityArg }}, {{ $isGet }}, op)
+
+{{- end }}
+

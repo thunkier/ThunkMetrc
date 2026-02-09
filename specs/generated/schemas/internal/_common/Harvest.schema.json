@@ -1,0 +1,147 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Harvest",
+  "type": "object",
+  "properties": {
+    "ArchivedDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "CurrentWeight": {
+      "type": "number"
+    },
+    "DryingLocationId": {
+      "type": "integer"
+    },
+    "DryingLocationName": {
+      "type": "string"
+    },
+    "DryingLocationTypeName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "DryingSublocationId": {
+      "type": "integer"
+    },
+    "DryingSublocationName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "FinishedDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "HarvestStartDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "HarvestType": {
+      "type": "string"
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "IsOnHold": {
+      "type": "boolean"
+    },
+    "IsOnInvestigation": {
+      "type": "boolean"
+    },
+    "IsOnInvestigationHold": {
+      "type": "boolean"
+    },
+    "IsOnInvestigationRecall": {
+      "type": "boolean"
+    },
+    "LabTestingState": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "LabTestingStateDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "PackageCount": {
+      "type": "integer"
+    },
+    "PatientLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PlantCount": {
+      "type": "integer"
+    },
+    "SourceStrainCount": {
+      "type": "integer"
+    },
+    "SourceStrainNames": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Strains": {
+      "type": "array"
+    },
+    "TotalPackagedWeight": {
+      "type": "number"
+    },
+    "TotalRestoredWeight": {
+      "type": "number"
+    },
+    "TotalWasteWeight": {
+      "type": "number"
+    },
+    "TotalWetWeight": {
+      "type": "number"
+    },
+    "UnitOfWeightName": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "CurrentWeight",
+    "DryingLocationId",
+    "DryingLocationName",
+    "DryingSublocationId",
+    "HarvestStartDate",
+    "HarvestType",
+    "Id",
+    "IsOnHold",
+    "IsOnInvestigation",
+    "IsOnInvestigationHold",
+    "IsOnInvestigationRecall",
+    "LastModified",
+    "Name",
+    "PackageCount",
+    "PlantCount",
+    "SourceStrainCount",
+    "Strains",
+    "TotalPackagedWeight",
+    "TotalRestoredWeight",
+    "TotalWasteWeight",
+    "TotalWetWeight",
+    "UnitOfWeightName"
+  ]
+}

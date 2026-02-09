@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TransfersTemplateDelivery",
+  "type": "object",
+  "properties": {
+    "ActualArrivalDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ActualDepartureDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ActualReturnArrivalDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ActualReturnDepartureDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "DeliveryNumber": {
+      "type": "integer"
+    },
+    "DeliveryPackageCount": {
+      "type": "integer"
+    },
+    "DeliveryReceivedPackageCount": {
+      "type": "integer"
+    },
+    "EstimatedArrivalDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "EstimatedDepartureDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "EstimatedReturnArrivalDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "EstimatedReturnDepartureDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "GrossUnitOfWeightId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "GrossUnitOfWeightName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "GrossWeight": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "InvoiceNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ManifestNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PDFDocumentFileSystemId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "PlannedRoute": {
+      "type": "string"
+    },
+    "ReceivedDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "RecipientFacilityLicenseNumber": {
+      "type": "string"
+    },
+    "RecipientFacilityName": {
+      "type": "string"
+    },
+    "RejectedPackagesReturned": {
+      "type": "boolean"
+    },
+    "ShipmentTransactionType": {
+      "type": "string"
+    },
+    "ShipmentTypeName": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "DeliveryNumber",
+    "DeliveryPackageCount",
+    "DeliveryReceivedPackageCount",
+    "EstimatedArrivalDateTime",
+    "EstimatedDepartureDateTime",
+    "Id",
+    "PlannedRoute",
+    "ReceivedDateTime",
+    "RecipientFacilityLicenseNumber",
+    "RecipientFacilityName",
+    "RejectedPackagesReturned",
+    "ShipmentTransactionType",
+    "ShipmentTypeName"
+  ]
+}

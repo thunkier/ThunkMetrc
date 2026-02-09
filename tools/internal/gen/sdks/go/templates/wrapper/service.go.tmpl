@@ -1,0 +1,106 @@
+package services
+
+import (
+	"context"
+
+{{- $needsJson := false }}
+{{- $needsFmt := false }}
+{{- $needsModels := false }}
+{{- range .Operations }}
+    {{- $retType := GetReturnType . }}
+    {{- if ne $retType "interface{}" }}
+        {{- $needsJson = true }}
+        {{- $needsFmt = true }}
+        {{- $needsModels = true }}
+    {{- end }}
+    {{- if .BodySchema }}
+        {{- $needsModels = true }}
+    {{- end }}
+    {{- range .QueryParams }}
+        {{- if Contains .Name "pageNumber" }}
+            {{- $needsModels = true }}
+        {{- end }}
+    {{- end }}
+{{- end }}
+
+{{- if $needsJson }}
+	"encoding/json"
+{{- end }}
+{{- if $needsFmt }}
+	"fmt"
+{{- end }}
+
+	"github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/client"
+
+{{- if $needsModels }}
+	"github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/wrapper/models"
+{{- end }}
+)
+
+type {{ .Name }}Service struct {
+	Client      *client.MetrcClient
+	RateLimiter RateLimiter
+}
+
+{{ $safeGroup := ToPascalCase (CleanName .Name) }}
+
+{{- range .Operations }}
+{{- $methodName := ToPascalCase (CleanName .Name) }}
+{{- $goMethodName := FormatMethodName $methodName $safeGroup }}
+// {{ .Method }} {{ .Path }}
+{{ range Split (CleanDocs .Description) "\n" }}// {{ . }}
+{{ end -}}
+// Parameters:
+{{- range .PathParams }}
+// - {{ . }} (path param)
+{{- end }}
+{{- range .QueryParams }}
+// - {{ TrimSuffix "optional" .Name }} (optional): {{ if .Description }}{{ .Description }}{{ else }}Filter by {{ .Name }}{{ end }}
+{{- end }}
+{{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+// - body (request body)
+{{- end }}
+{{- $args := list }}
+    {{- range .PathParams }}{{ $args = append $args (printf "%s string" (ToCamelCase .)) }}{{ end }}
+    {{- if .BodySchema }}
+        {{ $args = append $args (printf "body %s" (GetBodyType $safeGroup .Name)) }}
+    {{- else if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+        {{ $args = append $args "body interface{}" }}
+    {{- end }}
+    {{- range .QueryParams }}{{ $name := TrimSuffix "optional" .Name }}{{ $args = append $args (printf "%s string" (ToCamelCase $name)) }}{{ end }}
+{{- $retType := GetReturnType . }}
+func (s *{{ $.Name }}Service) {{ $goMethodName }}(ctx context.Context, {{ join $args ", " }}) ({{ $retType }}, error) {
+    {{- $facilityArg := "\"\"" }}
+    {{- range .PathParams }}{{ if eq (CleanName .) "LicenseNumber" }}{{ $facilityArg = ToCamelCase . }}{{ end }}{{ end }}
+    {{- $isGet := "false" }}{{ if eq .Method "GET" }}{{ $isGet = "true" }}{{ end }}
+
+    res, err := s.RateLimiter.Execute(ctx, {{ $facilityArg }}, {{ $isGet }}, func() (interface{}, error) {
+    {{- $callArgs := list }}
+    {{- $callArgs = append $callArgs "ctx" }}
+    {{- range .PathParams }}{{ $callArgs = append $callArgs (ToCamelCase .) }}{{ end }}
+    {{- range .QueryParams }}{{ $callArgs = append $callArgs (ToCamelCase (TrimSuffix "optional" .Name)) }}{{ end }}
+    {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}{{ $callArgs = append $callArgs "body" }}{{ end }}
+        return s.Client.{{ $goMethodName }}({{ join $callArgs ", " }})
+    })
+    if err != nil {
+        return nil, err
+    }
+
+    {{ if eq $retType "interface{}" }}
+    return res, nil
+    {{ else }}
+    var typed {{ $retType }}
+    bytes, err := json.Marshal(res)
+    if err != nil {
+        return nil, fmt.Errorf("failed to marshal response for type conversion: %w", err)
+    }
+    if err := json.Unmarshal(bytes, &typed); err != nil {
+        return nil, fmt.Errorf("failed to unmarshal to {{ $retType }}: %w", err)
+    }
+    return typed, nil
+    {{ end }}
+}
+
+{{- end }}
+
+

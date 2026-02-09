@@ -1,0 +1,26 @@
+{{- define "GenerateModelIR" -}}
+{{- $indent := .Indent -}}
+{{- $innerIndent := printf "%s    " $indent -}}
+{{ $indent }}public class {{ .Model.Name }}
+{{ $indent }}{
+{{- $className := .Model.Name -}}
+{{- range .Model.Properties }}
+{{ $innerIndent }}[global::System.Text.Json.Serialization.JsonPropertyName("{{ .JSONName }}")]
+{{- $propName := .Name }}
+{{- if eq $propName $className }}
+{{- $propName = printf "%sProperty" $propName }}
+{{- end }}
+{{ $innerIndent }}public {{ if .IsRequired }}required {{ end }}{{ .Type.ToCSharp }}{{ if and (not .IsRequired) (not .Type.IsNullable) }}?{{ end }} {{ $propName }} { get; set; }
+{{- end }}
+{{- range .Model.NestedTypes }}
+{{ template "GenerateModelIR" (dict "Model" . "Indent" $innerIndent) }}
+{{- end }}
+{{ $indent }}}
+{{- end -}}
+using System;
+using System.Collections.Generic;
+
+namespace ThunkMetrc.Wrapper.Models
+{
+{{ template "GenerateModelIR" (dict "Model" .Model "Indent" "    ") }}
+}

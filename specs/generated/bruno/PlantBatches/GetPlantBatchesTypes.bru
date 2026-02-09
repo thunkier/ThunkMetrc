@@ -1,0 +1,54 @@
+meta {
+  name: GetPlantBatchesTypes
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/plantbatches/v2/types
+  body: json
+  auth: basic
+}
+
+params:query {
+  pageNumber: 
+  pageSize: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of plant batch types.
+
+  Parameters:
+  - pageNumber (Optional): The number of the data page from which to return data.
+  - pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20.
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 1,
+        "Name": "Seed",
+        "CanBeCloned": true,
+        "LastModified": "2021-11-19T00:00:00+00:00"
+      },
+      {
+        "Id": 2,
+        "Name": "Clone",
+        "CanBeCloned": false,
+        "LastModified": "2021-11-19T00:00:00+00:00"
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

@@ -1,0 +1,61 @@
+meta {
+  name: CreateAdjustPackages
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/packages/v2/adjust
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Label": "ABCDEF012345670000010041",
+    "Quantity": -2.0,
+    "UnitOfMeasure": "Ounces",
+    "AdjustmentReason": "Drying",
+    "AdjustmentDate": "2015-12-15",
+    "ReasonNote": null
+  },
+  {
+    "Label": "ABCDEF012345670000010042",
+    "Quantity": 1.0,
+    "UnitOfMeasure": "Ounces",
+    "AdjustmentReason": "Scale Variance",
+    "AdjustmentDate": "2015-12-15",
+    "ReasonNote": "We are obtaining a new certified scale"
+  }
+]
+}
+
+docs {
+  Records a list of adjustments for packages at a specific Facility.
+
+  Permissions Required:
+  - View Packages
+  - Manage Packages Inventory
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to record the list of adjustments.
+
+  Example Response:
+  {
+    "Ids": [
+      1,
+      2
+    ],
+    "Warnings": null
+  }
+}

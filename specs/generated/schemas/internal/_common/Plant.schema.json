@@ -1,0 +1,202 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Plant",
+  "type": "object",
+  "properties": {
+    "ClonedCount": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "DescendedCount": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "DestroyedByUserName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "DestroyedDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "DestroyedNote": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "FloweringDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "GroupTagTypeMax": {
+      "type": "integer"
+    },
+    "GrowthPhase": {
+      "type": "string"
+    },
+    "HarvestCount": {
+      "type": "integer"
+    },
+    "HarvestId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "HarvestedDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "HarvestedUnitOfWeightAbbreviation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "HarvestedUnitOfWeightName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "HarvestedWetWeight": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "IsOnHold": {
+      "type": "boolean"
+    },
+    "IsOnInvestigation": {
+      "type": "boolean"
+    },
+    "IsOnInvestigationHold": {
+      "type": "boolean"
+    },
+    "IsOnInvestigationRecall": {
+      "type": "boolean"
+    },
+    "Label": {
+      "type": "string"
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "LocationId": {
+      "type": "integer"
+    },
+    "LocationName": {
+      "type": "string"
+    },
+    "LocationTypeName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "MotherPlantDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PatientLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PlantBatchId": {
+      "type": "integer"
+    },
+    "PlantBatchName": {
+      "type": "string"
+    },
+    "PlantBatchTypeId": {
+      "type": "integer"
+    },
+    "PlantBatchTypeName": {
+      "type": "string"
+    },
+    "PlantedDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "State": {
+      "type": "string"
+    },
+    "StrainId": {
+      "type": "integer"
+    },
+    "StrainName": {
+      "type": "string"
+    },
+    "SublocationId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "SublocationName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "SurvivedCount": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "TagTypeMax": {
+      "type": "integer"
+    },
+    "VegetativeDate": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "required": [
+    "GroupTagTypeMax",
+    "GrowthPhase",
+    "HarvestCount",
+    "Id",
+    "IsOnHold",
+    "IsOnInvestigation",
+    "IsOnInvestigationHold",
+    "IsOnInvestigationRecall",
+    "Label",
+    "LastModified",
+    "LocationId",
+    "LocationName",
+    "PlantBatchId",
+    "PlantBatchName",
+    "PlantBatchTypeId",
+    "PlantBatchTypeName",
+    "PlantedDate",
+    "State",
+    "StrainId",
+    "StrainName",
+    "TagTypeMax",
+    "VegetativeDate"
+  ]
+}

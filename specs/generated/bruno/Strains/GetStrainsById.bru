@@ -1,0 +1,43 @@
+meta {
+  name: GetStrainsById
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/strains/v2/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a Strain record by its Id, with an optional license number.
+
+  Permissions Required:
+  - Manage Strains
+
+  Parameters:
+  - licenseNumber (Required): If specified, the Strain will be validated against the specified License Number. If not specified, the Strain will be validated against all of the User's current Facilities. Please note that if the Strain is not valid for the specified License Number, a 401 Unauthorized status will be returned.
+
+  Example Response:
+  {
+    "Id": 201,
+    "Name": "Spring Hill Kush",
+    "TestingStatus": "ThirdParty",
+    "ThcLevel": null,
+    "CbdLevel": null,
+    "IndicaPercentage": 60.0,
+    "SativaPercentage": 40.0,
+    "IsUsed": false,
+    "Genetics": "60% Indica / 40% Sativa"
+  }
+}

@@ -1,0 +1,12 @@
+package io.github.thunkier.thunkmetrc.wrapper.models
+
+import com.fasterxml.jackson.annotation.JsonProperty
+
+
+{{ $model := .Model }}
+data class {{ $model.Name }}(
+    {{- range $i, $prop := $model.Properties }}
+    @JsonProperty("{{ $prop.Name }}")
+    val {{ SafeKotlinField $prop.Name }}: {{ ToKotlinType $prop.Type }}? = null{{ if ne (add $i 1) (len $model.Properties) }},{{ end }}
+    {{- end }}
+)

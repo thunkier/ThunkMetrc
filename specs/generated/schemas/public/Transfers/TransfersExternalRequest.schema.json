@@ -1,0 +1,310 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TransfersTransfersExternalRequest",
+  "type": "object",
+  "properties": {
+    "Destinations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "EstimatedArrivalDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "EstimatedDepartureDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "GrossUnitOfWeightId": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "GrossWeight": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "InvoiceNumber": {
+            "type": "string"
+          },
+          "Packages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ExpirationDate": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "ExternalId": {
+                  "type": "string"
+                },
+                "GrossUnitOfWeightName": {
+                  "type": "string"
+                },
+                "GrossWeight": {
+                  "type": "number"
+                },
+                "IsFinishedGood": {
+                  "type": "boolean"
+                },
+                "ItemName": {
+                  "type": "string"
+                },
+                "PackagedDate": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "Quantity": {
+                  "type": "number"
+                },
+                "SellByDate": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "UnitOfMeasureName": {
+                  "type": "string"
+                },
+                "UseByDate": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "WholesalePrice": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "ExternalId",
+                "GrossUnitOfWeightName",
+                "GrossWeight",
+                "IsFinishedGood",
+                "ItemName",
+                "PackagedDate",
+                "Quantity",
+                "UnitOfMeasureName"
+              ]
+            }
+          },
+          "PlannedRoute": {
+            "type": "string"
+          },
+          "RecipientLicenseNumber": {
+            "type": "string"
+          },
+          "TransferTypeName": {
+            "type": "string"
+          },
+          "Transporters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "DriverLayoverLeg": {
+                  "type": "string"
+                },
+                "DriverLicenseNumber": {
+                  "type": "string"
+                },
+                "DriverName": {
+                  "type": "string"
+                },
+                "DriverOccupationalLicenseNumber": {
+                  "type": "string"
+                },
+                "EstimatedArrivalDateTime": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "EstimatedDepartureDateTime": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "IsLayover": {
+                  "type": "boolean"
+                },
+                "PhoneNumberForQuestions": {
+                  "type": "string"
+                },
+                "TransporterDetails": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "DriverLayoverLeg": {
+                        "type": "string"
+                      },
+                      "DriverLicenseNumber": {
+                        "type": "string"
+                      },
+                      "DriverName": {
+                        "type": "string"
+                      },
+                      "DriverOccupationalLicenseNumber": {
+                        "type": "string"
+                      },
+                      "VehicleLicensePlateNumber": {
+                        "type": "string"
+                      },
+                      "VehicleMake": {
+                        "type": "string"
+                      },
+                      "VehicleModel": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "DriverLayoverLeg",
+                      "DriverLicenseNumber",
+                      "DriverName",
+                      "DriverOccupationalLicenseNumber",
+                      "VehicleLicensePlateNumber",
+                      "VehicleMake",
+                      "VehicleModel"
+                    ]
+                  }
+                },
+                "TransporterFacilityLicenseNumber": {
+                  "type": "string"
+                },
+                "VehicleLicensePlateNumber": {
+                  "type": "string"
+                },
+                "VehicleMake": {
+                  "type": "string"
+                },
+                "VehicleModel": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "DriverLayoverLeg",
+                "DriverLicenseNumber",
+                "DriverName",
+                "DriverOccupationalLicenseNumber",
+                "EstimatedArrivalDateTime",
+                "EstimatedDepartureDateTime",
+                "IsLayover",
+                "PhoneNumberForQuestions",
+                "TransporterDetails",
+                "TransporterFacilityLicenseNumber",
+                "VehicleLicensePlateNumber",
+                "VehicleMake",
+                "VehicleModel"
+              ]
+            }
+          }
+        },
+        "required": [
+          "EstimatedArrivalDateTime",
+          "EstimatedDepartureDateTime",
+          "InvoiceNumber",
+          "Packages",
+          "PlannedRoute",
+          "RecipientLicenseNumber",
+          "TransferTypeName",
+          "Transporters"
+        ]
+      }
+    },
+    "DriverLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "DriverName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "DriverOccupationalLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PhoneNumberForQuestions": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ShipperAddress1": {
+      "type": "string"
+    },
+    "ShipperAddress2": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ShipperAddressCity": {
+      "type": "string"
+    },
+    "ShipperAddressPostalCode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ShipperAddressState": {
+      "type": "string"
+    },
+    "ShipperLicenseNumber": {
+      "type": "string"
+    },
+    "ShipperMainPhoneNumber": {
+      "type": "string"
+    },
+    "ShipperName": {
+      "type": "string"
+    },
+    "TransporterFacilityLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "VehicleLicensePlateNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "VehicleMake": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "VehicleModel": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "Destinations",
+    "ShipperAddress1",
+    "ShipperAddressCity",
+    "ShipperAddressState",
+    "ShipperLicenseNumber",
+    "ShipperMainPhoneNumber",
+    "ShipperName"
+  ]
+}

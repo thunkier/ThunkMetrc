@@ -1,84 +1,93 @@
-# Rust Integration Guide
+# Rust SDK Guide
 
-## 📦 Installation
+## Crates
 
 ```bash
+cargo add thunkmetrc-client
 cargo add thunkmetrc-wrapper
-cargo add thunkmetrc # High-level
+# Optional high-level helpers
+cargo add thunkmetrc
 ```
 
----
-
-## 🚀 Getting Started
-
-### 1. Initialize
+## Recommended Setup (Wrapper)
 
 ```rust
 use thunkmetrc_client::MetrcClient;
-use thunkmetrc_wrapper::MetrcWrapper;
-
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let client = MetrcClient::new(
-        "https://sandbox-api-or.metrc.com", 
-        "vendor_key", 
-        "user_key"
-    );
-
-    let wrapper = MetrcWrapper::new(client);
-
-    // ...
-    Ok(())
-}
-```
-
-### 2. Make Requests
-Use `Some(...)` for optional parameters or `None`.
-
-```rust
-let result = wrapper.transfers_get_incoming_v2(
-    None, // last_modified_end
-    None, // last_modified_start
-    Some("C12-0000001-LIC".to_string()),
-    None, // page
-    None  // page_size
-).await?;
-
-println!("{:?}", result);
-```
-
----
-
-## 🛡️ Rate Limiting
-
-Rate limiting config is passed via `RateLimiterConfig`.
-
-```rust
 use thunkmetrc_wrapper::{MetrcWrapper, RateLimiterConfig};
 
-let config = RateLimiterConfig {
+let client = MetrcClient::new(
+    "https://sandbox-api-or.metrc.com",
+    "vendor_key",
+    "user_key",
+);
+
+let limiter = RateLimiterConfig {
     enabled: true,
-    max_get_per_second_per_facility: 50.0,
     ..Default::default()
 };
 
-let wrapper = MetrcWrapper::new_with_config(client, config);
+let wrapper = MetrcWrapper::new_with_config(client, limiter);
 ```
 
----
-
-## 🛠️ High-Level Features (`thunkmetrc`)
-
-### Inventory Sync
+Fetch facilities:
 
 ```rust
-use thunkmetrc::active_packages_inventory_sync;
-use chrono::{Utc, Duration};
+if let Some(facilities) = wrapper.facilities.get_facilities(None).await? {
+    println!("Facilities: {}", facilities.len());
+}
+```
 
-let packages = active_packages_inventory_sync(
-    &wrapper,
-    "C12-0000001-LIC",
-    Utc::now() - Duration::hours(24),
-    15
-).await?;
+## Pagination Pattern
+
+```rust
+let license = "C12-0000001-LIC";
+let mut all = Vec::new();
+let mut page = 1;
+
+loop {
+    let response = wrapper
+        .packages
+        .get_active_packages(
+            None, // last_modified_end
+            None, // last_modified_start
+            Some(license.to_string()),
+            Some(page.to_string()),
+            Some("20".to_string()),
+            None,
+        )
+        .await?;
+
+    let Some(response) = response else { break; };
+    let data = response.data.unwrap_or_default();
+
+    if data.is_empty() {
+        break;
+    }
+
+    all.extend(data);
+    page += 1;
+}
+```
+
+## High-Level Helpers (`thunkmetrc`)
+
+```rust
+use chrono::{Duration, Utc};
+use thunkmetrc::ThunkMetrc;
+
+let thunk = ThunkMetrc::new(&wrapper);
+let packages = thunk
+    .active_packages_inventory_sync(
+        "C12-0000001-LIC",
+        Some(Utc::now() - Duration::hours(1)),
+        5,
+    )
+    .await?;
+```
+
+## Build Locally
+
+```bash
+task build:rust
+task test:rust
 ```

@@ -1,0 +1,1950 @@
+[
+  {
+    "name": "CreateAdditivesTemplates",
+    "group": "AdditivesTemplates",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/additivestemplates/v2",
+    "Permissions": [
+      "Manage Additives",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record the list of additives."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "CreateHarvestPackagesTesting",
+    "group": "Harvests",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/harvests/v2/packages/testing",
+    "Permissions": [
+      "View Harvests",
+      "Manage Harvests",
+      "View Packages",
+      "Create/Submit/Discontinue Packages",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the list of harvests packages."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "CreateIntegratorSetup",
+    "group": "Sandbox",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/sandbox/v2/integrator/setup",
+    "Permissions": null,
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreateItemFile",
+    "group": "Items",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/items/v2/file",
+    "Permissions": [
+      "Manage Items",
+      "Parameters:",
+      "licenseNumber (Required):"
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreateItemPhoto",
+    "group": "Items",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/items/v2/photo",
+    "Permissions": [
+      "Manage Items",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to add an image."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreateLabTestRecord",
+    "group": "LabTests",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/labtests/v2/record",
+    "Permissions": [
+      "View Packages",
+      "Manage Packages Inventory",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility recording the Lab Test."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "CreatePackagePlantings",
+    "group": "Packages",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/packages/v2/plantings",
+    "Permissions": [
+      "View Immature Plants",
+      "Manage Immature Plants",
+      "View Packages",
+      "Manage Packages Inventory",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record the list of new plantings."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreatePackageTesting",
+    "group": "Packages",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/packages/v2/testing",
+    "Permissions": [
+      "View Packages",
+      "Create/Submit/Discontinue Packages",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record the list of new packages for testing."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreatePackages",
+    "group": "Packages",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/packages/v2",
+    "Permissions": [
+      "View Packages",
+      "Create/Submit/Discontinue Packages",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record the list of new packages."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreatePatientCheckIns",
+    "group": "PatientCheckIns",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/patient-checkins/v2",
+    "Permissions": [
+      "ManagePatientsCheckIns",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record the list of Patient check-ins."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreatePatients",
+    "group": "Patients",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/patients/v2",
+    "Permissions": [
+      "Manage Patients",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record the list of patients."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "CreatePlantAdditives",
+    "group": "Plants",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/plants/v2/additives",
+    "Permissions": [
+      "Manage Plants Additives",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record Plant additives."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreatePlantAdditivesByLocation",
+    "group": "Plants",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/plants/v2/additives/bylocation",
+    "Permissions": [
+      "Manage Plants",
+      "Manage Plants Additives",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record Plant additives."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreatePlantAdditivesByLocationUsingTemplate",
+    "group": "Plants",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/plants/v2/additives/bylocation/usingtemplate",
+    "Permissions": [
+      "Manage Plants Additives",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record Plant additives."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreatePlantAdditivesUsingTemplate",
+    "group": "Plants",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/plants/v2/additives/usingtemplate",
+    "Permissions": [
+      "Manage Plants Additives",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record Plant additives."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreatePlantBatchAdditives",
+    "group": "PlantBatches",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/plantbatches/v2/additives",
+    "Permissions": [
+      "Manage Plants Additives",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record plant additives."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreatePlantBatchAdditivesUsingTemplate",
+    "group": "PlantBatches",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/plantbatches/v2/additives/usingtemplate",
+    "Permissions": [
+      "Manage Plants Additives",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record plant additives."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreatePlantBatchAdjust",
+    "group": "PlantBatches",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/plantbatches/v2/adjust",
+    "Permissions": [
+      "View Immature Plants",
+      "Manage Immature Plants Inventory",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record adjustments."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "CreatePlantBatchPackages",
+    "group": "PlantBatches",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/plantbatches/v2/packages",
+    "Permissions": [
+      "View Immature Plants",
+      "Manage Immature Plants Inventory",
+      "View Packages",
+      "Create/Submit/Discontinue Packages",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to create a package from the Plant Batch."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreatePlantBatchPackagesFromMotherPlant",
+    "group": "PlantBatches",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/plantbatches/v2/packages/frommotherplant",
+    "Permissions": [
+      "View Immature Plants",
+      "Manage Immature Plants Inventory",
+      "View Packages",
+      "Create/Submit/Discontinue Packages",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to create packages from a mother plant."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreatePlantBatchSplit",
+    "group": "PlantBatches",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/plantbatches/v2/split",
+    "Permissions": [
+      "View Immature Plants",
+      "Manage Immature Plants Inventory",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to split the plant batches."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "CreatePlantBatchWaste",
+    "group": "PlantBatches",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/plantbatches/v2/waste",
+    "Permissions": [
+      "Manage Plants Waste",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record waste of the Plant Batch."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "CreatePlantManicure",
+    "group": "Plants",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/plants/v2/manicure",
+    "Permissions": [
+      "View Veg/Flower Plants",
+      "Manicure/Harvest Veg/Flower Plants",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record the list of plants manicured."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "CreatePlantPlantBatchPackages",
+    "group": "Plants",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/plants/v2/plantbatch/packages",
+    "Permissions": [
+      "View Immature Plants",
+      "Manage Immature Plants Inventory",
+      "View Veg/Flower Plants",
+      "Manage Veg/Flower Plants Inventory",
+      "View Packages",
+      "Create/Submit/Discontinue Packages",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record the list of Plant Batch packages."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreatePlantPlantings",
+    "group": "Plants",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/plants/v2/plantings",
+    "Permissions": [
+      "View Immature Plants",
+      "Manage Immature Plants Inventory",
+      "View Veg/Flower Plants",
+      "Manage Veg/Flower Plants Inventory",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record the list of plant batches."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreateProcessingJobAdjust",
+    "group": "ProcessingJob",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/processing/v2/adjust",
+    "Permissions": [
+      "Manage Processing Job",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility to adjust the Processing Job."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "CreateProcessingJobCreatePackages",
+    "group": "ProcessingJob",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/processing/v2/createpackages",
+    "Permissions": [
+      "Manage Processing Job",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to create the packages."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "CreateRetailIdAssociate",
+    "group": "RetailId",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/retailid/v2/associate",
+    "Permissions": [
+      "External Sources(ThirdPartyVendorV2)/Retail ID(Write)",
+      "WebApi Retail ID Read Write State (All or WriteOnly)",
+      "Industry/View Packages",
+      "One of the following: Industry/Facility Type/Can Receive Associate Product Label, Licensee/Receive Associate Product Label or Admin/Employees/Packages Page/Product Labels(Manage)",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to associate the packages and QR codes provided."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreateRetailIdGenerate",
+    "group": "RetailId",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/retailid/v2/generate",
+    "Permissions": [
+      "External Sources(ThirdPartyVendorV2)/Retail ID(Write)",
+      "WebApi Retail ID Read Write State (All or WriteOnly)",
+      "Industry/View Packages",
+      "One of the following: Industry/Facility Type/Can Download Product Label, Licensee/Download Product Label or Admin/Employees/Packages Page/Product Labels(Manage)",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to associate the packages and QR codes provided."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreateRetailIdMerge",
+    "group": "RetailId",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/retailid/v2/merge",
+    "Permissions": [
+      "External Sources(ThirdPartyVendorV2)/Retail ID(Write)",
+      "WebApi Retail ID Read Write State (All or WriteOnly)",
+      "Key Value Settings/Retail ID Merge Packages Enabled",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreateRetailIdPackagesInfo",
+    "group": "RetailId",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/retailid/v2/packages/info",
+    "Permissions": [
+      "External Sources(ThirdPartyVendorV2)/Retail ID(Write)",
+      "WebApi Retail ID Read Write State (All or WriteOnly)",
+      "Industry/View Packages",
+      "Admin/Employees/Packages Page/Product Labels(Manage)",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility"
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreateSaleDeliveries",
+    "group": "Sales",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/sales/v2/deliveries",
+    "Permissions": [
+      "External Sources(ThirdPartyVendorV2)/Sales Deliveries(Write)",
+      "Industry/Facility Type/Consumer Sales Delivery or Industry/Facility Type/Patient Sales Delivery",
+      "WebApi Sales Deliveries Read Write State (All or WriteOnly)",
+      "WebApi Retail ID Read Write State (All or WriteOnly) - Required for RID only.",
+      "External Sources(ThirdPartyVendorV2)/Retail ID(Write) - Required for RID only.",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record deliveries."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "CreateSaleDeliveriesRetailer",
+    "group": "Sales",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/sales/v2/deliveries/retailer/sale",
+    "Permissions": [
+      "External Sources(ThirdPartyVendorV2)/Sales Deliveries(Write)",
+      "Industry/Facility Type/Retailer Delivery",
+      "Industry/Facility Type/Consumer Sales Delivery or Industry/Facility Type/Patient Sales Delivery",
+      "WebApi Sales Deliveries Read Write State (All or WriteOnly)",
+      "WebApi Retail ID Read Write State (All or WriteOnly) - Required for RID only.",
+      "External Sources(ThirdPartyVendorV2)/Retail ID(Write) - Required for RID only.",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record sale from retailer delivery."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "CreateSaleDeliveriesRetailerDepart",
+    "group": "Sales",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/sales/v2/deliveries/retailer/depart",
+    "Permissions": [
+      "External Sources(ThirdPartyVendorV2)/Sales Deliveries(Write)",
+      "Industry/Facility Type/Retailer Delivery",
+      "Industry/Facility Type/Consumer Sales Delivery or Industry/Facility Type/Patient Sales Delivery",
+      "WebApi Sales Deliveries Read Write State (All or WriteOnly)",
+      "Manage Retailer Delivery",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record depart delivery."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "CreateSaleDeliveriesRetailerEnd",
+    "group": "Sales",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/sales/v2/deliveries/retailer/end",
+    "Permissions": [
+      "External Sources(ThirdPartyVendorV2)/Sales Deliveries(Write)",
+      "Industry/Facility Type/Retailer Delivery",
+      "Industry/Facility Type/Consumer Sales Delivery or Industry/Facility Type/Patient Sales Delivery",
+      "WebApi Sales Deliveries Read Write State (All or WriteOnly)",
+      "Manage Retailer Delivery",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record end retailer deliveries."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "CreateSaleDeliveriesRetailerRestock",
+    "group": "Sales",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/sales/v2/deliveries/retailer/restock",
+    "Permissions": [
+      "External Sources(ThirdPartyVendorV2)/Sales Deliveries(Write)",
+      "Industry/Facility Type/Retailer Delivery",
+      "Industry/Facility Type/Consumer Sales Delivery or Industry/Facility Type/Patient Sales Delivery",
+      "WebApi Sales Deliveries Read Write State (All or WriteOnly)",
+      "Manage Retailer Delivery",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record restock retailer deliveries."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreateSaleReceipts",
+    "group": "Sales",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/sales/v2/receipts",
+    "Permissions": [
+      "External Sources(ThirdPartyVendorV2)/Sales (Write)",
+      "Industry/Facility Type/Consumer Sales or Industry/Facility Type/Patient Sales or Industry/Facility Type/External Patient Sales or Industry/Facility Type/Caregiver Sales",
+      "Industry/Facility Type/Advanced Sales",
+      "WebApi Sales Read Write State (All or WriteOnly)",
+      "WebApi Retail ID Read Write State (All or WriteOnly) - Required for RID only.",
+      "External Sources(ThirdPartyVendorV2)/Retail ID(Write) - Required for RID only.",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record receipts."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreateTransferExternalIncoming",
+    "group": "Transfers",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/transfers/v2/external/incoming",
+    "Permissions": [
+      "Manage Transfers",
+      "Parameters:",
+      "licenseNumber (Required): The License Number for which to create a Shipment Plan."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreateTransferHubArrive",
+    "group": "Transfers",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/transfers/v2/hub/arrive",
+    "Permissions": [
+      "Manage Transfer Hub",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to arrive the transfer."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreateTransferHubCheckin",
+    "group": "Transfers",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/transfers/v2/hub/checkin",
+    "Permissions": [
+      "Manage Transfer Hub",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to arrive the transfer."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreateTransferHubCheckout",
+    "group": "Transfers",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/transfers/v2/hub/checkout",
+    "Permissions": [
+      "Manage Transfer Hub",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to arrive the transfer."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreateTransferHubDepart",
+    "group": "Transfers",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/transfers/v2/hub/depart",
+    "Permissions": [
+      "Manage Transfer Hub",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to depart the transfer."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "CreateTransferTemplatesOutgoing",
+    "group": "Transfers",
+    "Method": "POST",
+    "URL": "{{baseUrl}}/transfers/v2/templates/outgoing",
+    "Permissions": [
+      "Manage Transfer Templates",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to create a Shipment Template."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "DeleteItemsById",
+    "group": "Items",
+    "Method": "DELETE",
+    "URL": "{{baseUrl}}/items/v2/{id}",
+    "Permissions": [
+      "Manage Items",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for the Item to delete."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "DeletePackagesById",
+    "group": "Packages",
+    "Method": "DELETE",
+    "URL": "{{baseUrl}}/packages/v2/{id}",
+    "Permissions": [
+      "View Packages",
+      "Create/Submit/Discontinue Packages",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to discontinue."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "DeletePatientCheckInsById",
+    "group": "PatientCheckIns",
+    "Method": "DELETE",
+    "URL": "{{baseUrl}}/patient-checkins/v2/{id}",
+    "Permissions": [
+      "ManagePatientsCheckIns",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to archive Patient check-in."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "DeletePatientsById",
+    "group": "Patients",
+    "Method": "DELETE",
+    "URL": "{{baseUrl}}/patients/v2/{id}",
+    "Permissions": [
+      "Manage Patients",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to delete the Patient."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "DeletePlantBatches",
+    "group": "PlantBatches",
+    "Method": "DELETE",
+    "URL": "{{baseUrl}}/plantbatches/v2",
+    "Permissions": [
+      "View Immature Plants",
+      "Destroy Immature Plants",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to destroy the Plant Batch."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "DeletePlants",
+    "group": "Plants",
+    "Method": "DELETE",
+    "URL": "{{baseUrl}}/plants/v2",
+    "Permissions": [
+      "View Veg/Flower Plants",
+      "Destroy Veg/Flower Plants",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility that intends to destroy the plants."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "DeleteProcessingJobById",
+    "group": "ProcessingJob",
+    "Method": "DELETE",
+    "URL": "{{baseUrl}}/processing/v2/{id}",
+    "Permissions": [
+      "Manage Processing Job",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility of the Processing Job."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "DeleteProcessingJobTypeById",
+    "group": "ProcessingJob",
+    "Method": "DELETE",
+    "URL": "{{baseUrl}}/processing/v2/jobtypes/{id}",
+    "Permissions": [
+      "Manage Processing Job",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility of the Processing Job Type."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "DeleteSaleDeliveryById",
+    "group": "Sales",
+    "Method": "DELETE",
+    "URL": "{{baseUrl}}/sales/v2/deliveries/{id}",
+    "Permissions": [
+      "Manage Sales Delivery",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to void delivery."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "DeleteSaleDeliveryRetailerById",
+    "group": "Sales",
+    "Method": "DELETE",
+    "URL": "{{baseUrl}}/sales/v2/deliveries/retailer/{id}",
+    "Permissions": [
+      "External Sources(ThirdPartyVendorV2)/Sales Deliveries(Write)",
+      "Industry/Facility Type/Retailer Delivery",
+      "Industry/Facility Type/Consumer Sales Delivery or Industry/Facility Type/Patient Sales Delivery",
+      "WebApi Sales Deliveries Read Write State (All or WriteOnly)",
+      "Manage Retailer Delivery",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to void retailer delivery."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "DeleteSaleReceiptById",
+    "group": "Sales",
+    "Method": "DELETE",
+    "URL": "{{baseUrl}}/sales/v2/receipts/{id}",
+    "Permissions": [
+      "Manage Sales",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to archive receipt."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "DeleteTransferExternalIncomingById",
+    "group": "Transfers",
+    "Method": "DELETE",
+    "URL": "{{baseUrl}}/transfers/v2/external/incoming/{id}",
+    "Permissions": [
+      "Manage Transfers",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to void the Transfer."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "DeleteTransferTemplateOutgoingById",
+    "group": "Transfers",
+    "Method": "DELETE",
+    "URL": "{{baseUrl}}/transfers/v2/templates/outgoing/{id}",
+    "Permissions": [
+      "Manage Transfer Templates",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to archive the template."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "DeleteWebhooksBySubscriptionId",
+    "group": "Webhooks",
+    "Method": "DELETE",
+    "URL": "{{baseUrl}}/webhooks/v2/{subscriptionId}",
+    "Permissions": null,
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetActiveAdditivesTemplates",
+    "group": "AdditivesTemplates",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/additivestemplates/v2/active",
+    "Permissions": [
+      "Manage Additives",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the list of active additives.",
+      "lastModifiedStart (Optional): The last modified start timestamp",
+      "lastModifiedEnd (Optional): The last modified end timestamp",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetActiveProcessingJobTypes",
+    "group": "ProcessingJob",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/processing/v2/jobtypes/active",
+    "Permissions": [
+      "Manage Processing Job",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the list of active processing job types.",
+      "lastModifiedStart (Optional): The last modified start timestamp",
+      "lastModifiedEnd (Optional): The last modified end timestamp",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetActiveSaleDeliveriesRetailer",
+    "group": "Sales",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/sales/v2/deliveries/retailer/active",
+    "Permissions": [
+      "View Retailer Delivery",
+      "Manage Retailer Delivery",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return active retailer deliveries.",
+      "lastModifiedStart (Optional): The last modified start timestamp.",
+      "lastModifiedEnd (Optional): The last modified end timestamp.",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetActiveUnitsOfMeasure",
+    "group": "UnitsOfMeasure",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/unitsofmeasure/v2/active",
+    "Permissions": null,
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetAdditivesTemplatesById",
+    "group": "AdditivesTemplates",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/additivestemplates/v2/{id}",
+    "Permissions": [
+      "Manage Additives",
+      "Parameters:",
+      "licenseNumber (Required): If specified, the Additive will be validated against the specified License Number. If not specified, the Additive will be validated against all of the User's current Facilities. Please note that if the Additive is not valid for the specified License Number, a 401 Unauthorized status will be returned."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetCaregiversStatusByCaregiverLicenseNumber",
+    "group": "CaregiversStatus",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/caregivers/v2/status/{caregiverLicenseNumber}",
+    "Permissions": [
+      "Lookup Caregivers",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility under which to get the Caregiver status."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetEmployees",
+    "group": "Employees",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/employees/v2",
+    "Permissions": [
+      "Manage Employees",
+      "View Employees",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility under which to get the employees.",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetInactiveAdditivesTemplates",
+    "group": "AdditivesTemplates",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/additivestemplates/v2/inactive",
+    "Permissions": [
+      "Manage Additives",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the list of inactive additives.",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetInactivePlantBatches",
+    "group": "PlantBatches",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/plantbatches/v2/inactive",
+    "Permissions": [
+      "View Immature Plants",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the list of inactive plant batches.",
+      "lastModifiedStart (Optional): The last modified start timestamp",
+      "lastModifiedEnd (Optional): The last modified end timestamp",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetInactivePlantMother",
+    "group": "Plants",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/plants/v2/mother/inactive",
+    "Permissions": [
+      "View Mother Plants",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the list of inactive mother plants.",
+      "lastModifiedStart (Optional): The last modified start timestamp",
+      "lastModifiedEnd (Optional): The last modified end timestamp",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetInactivePlants",
+    "group": "Plants",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/plants/v2/inactive",
+    "Permissions": [
+      "View Veg/Flower Plants",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the list of inactive plants.",
+      "lastModifiedStart (Optional): The last modified start timestamp",
+      "lastModifiedEnd (Optional): The last modified end timestamp",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetInactiveProcessingJob",
+    "group": "ProcessingJob",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/processing/v2/inactive",
+    "Permissions": [
+      "Manage Processing Job",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the list of inactive processing jobs.",
+      "lastModifiedStart (Optional): The last modified start timestamp",
+      "lastModifiedEnd (Optional): The last modified end timestamp",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetInactiveProcessingJobTypes",
+    "group": "ProcessingJob",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/processing/v2/jobtypes/inactive",
+    "Permissions": [
+      "Manage Processing Job",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the list of inactive processing job types.",
+      "lastModifiedStart (Optional): The last modified start timestamp",
+      "lastModifiedEnd (Optional): The last modified end timestamp",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetInactiveSaleDeliveriesRetailer",
+    "group": "Sales",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/sales/v2/deliveries/retailer/inactive",
+    "Permissions": [
+      "View Retailer Delivery",
+      "Manage Retailer Delivery",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return inactive retailer deliveries.",
+      "lastModifiedStart (Optional): The last modified start timestamp.",
+      "lastModifiedEnd (Optional): The last modified end timestamp.",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetInactiveUnitsOfMeasure",
+    "group": "UnitsOfMeasure",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/unitsofmeasure/v2/inactive",
+    "Permissions": null,
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetItemFileById",
+    "group": "Items",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/items/v2/file/{id}",
+    "Permissions": [
+      "Manage Items",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the file."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetItemPhotoById",
+    "group": "Items",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/items/v2/photo/{id}",
+    "Permissions": [
+      "Manage Items",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the image."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetLabTestDocumentById",
+    "group": "LabTests",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/labtests/v2/labtestdocument/{id}",
+    "Permissions": [
+      "View Packages",
+      "Manage Packages Inventory",
+      "Parameters:",
+      "licenseNumber (Required): LabTestDocumentFileId"
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetLabTestResults",
+    "group": "LabTests",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/labtests/v2/results",
+    "Permissions": [
+      "View Packages",
+      "Manage Packages Inventory",
+      "Parameters:",
+      "packageId (Required):",
+      "licenseNumber (Required):",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetOnHoldPlantMother",
+    "group": "Plants",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/plants/v2/mother/onhold",
+    "Permissions": [
+      "View Mother Plants",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the list of mother plants on hold.",
+      "lastModifiedStart (Optional): The last modified start timestamp",
+      "lastModifiedEnd (Optional): The last modified end timestamp",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetOnHoldPlants",
+    "group": "Plants",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/plants/v2/onhold",
+    "Permissions": [
+      "View Veg/Flower Plants",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the list of plants on hold.",
+      "lastModifiedStart (Optional): The last modified start timestamp",
+      "lastModifiedEnd (Optional): The last modified end timestamp",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetPatientCheckInLocations",
+    "group": "PatientCheckIns",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/patient-checkins/v2/locations",
+    "Permissions": null,
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetPatientCheckIns",
+    "group": "PatientCheckIns",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/patient-checkins/v2",
+    "Permissions": [
+      "ManagePatientsCheckIns",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the list of Patient check-ins.",
+      "checkinDateStart (Optional): The last modified start timestamp",
+      "checkinDateEnd (Optional): The last modified end timestamp"
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetPatientsById",
+    "group": "Patients",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/patients/v2/{id}",
+    "Permissions": [
+      "Manage Patients",
+      "Parameters:",
+      "licenseNumber (Required): If specified, the Patient will be validated against the specified License Number. If not specified, the Patient will be validated against all of the User's current Facilities. Please note that if the Patient is not valid for the specified License Number, a 401 Unauthorized status will be returned."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetPatientsStatusesByPatientLicenseNumber",
+    "group": "PatientsStatus",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/patients/v2/statuses/{patientLicenseNumber}",
+    "Permissions": [
+      "Lookup Patients",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility under which to get the Patient Status."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetPermissions",
+    "group": "Employees",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/employees/v2/permissions",
+    "Permissions": [
+      "Manage Employees",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility under which to get the Employee.",
+      "employeeLicenseNumber (Required): The License Number of the Employee under which to get the Permission."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetPlantBatchTypes",
+    "group": "PlantBatches",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/plantbatches/v2/types",
+    "Permissions": null,
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetPlantBatchWaste",
+    "group": "PlantBatches",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/plantbatches/v2/waste",
+    "Permissions": [
+      "View Plants Waste",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the list of waste plants.",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetPlantBatchWasteReasons",
+    "group": "PlantBatches",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/plantbatches/v2/waste/reasons",
+    "Permissions": null,
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetPlantBatchesById",
+    "group": "PlantBatches",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/plantbatches/v2/{id}",
+    "Permissions": [
+      "View Immature Plants",
+      "Parameters:",
+      "licenseNumber (Required): If specified, the Plant Batch will be validated against the specified License Number. If not specified, the Plant Batch will be validated against all of the User's current Facilities. Please note that if the Plant Batch is not valid for the specified License Number, a 401 Unauthorized status will be returned."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetPlantWasteById",
+    "group": "Plants",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/plants/v2/waste/{id}/plant",
+    "Permissions": [
+      "View Plants Waste",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the list of waste plants.",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetPlantWastePackageById",
+    "group": "Plants",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/plants/v2/waste/{id}/package",
+    "Permissions": [
+      "View Plants Waste",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the list of waste plants.",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetProcessingJobById",
+    "group": "ProcessingJob",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/processing/v2/{id}",
+    "Permissions": [
+      "Manage Processing Job",
+      "Parameters:",
+      "licenseNumber (Required): If specified, the processing job will be validated against the specified License Number. If not specified, the processing job will be validated against all of the User's current Facilities. Please note that if the processing job is not valid for the specified License Number, a 401 Unauthorized status will be returned."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetReceiveByLabel",
+    "group": "RetailId",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/retailid/v2/receive/{label}",
+    "Permissions": [
+      "External Sources(ThirdPartyVendorV2)/Manage RetailId",
+      "WebApi Retail ID Read Write State (All or ReadOnly)",
+      "Industry/View Packages",
+      "One of the following: Industry/Facility Type/Can Receive Associate Product Label, Licensee/Receive Associate Product Label or Admin/Employees/Packages Page/Product Labels(View or Manage)",
+      "Parameters:",
+      "licenseNumber (Required): If specified, the Package will be validated against the specified License Number. If not specified, the Package will be validated against all of the User's current Facilities."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetReceiveQrByShortCode",
+    "group": "RetailId",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/retailid/v2/receive/qr/{shortCode}",
+    "Permissions": [
+      "External Sources(ThirdPartyVendorV2)/Manage RetailId",
+      "WebApi Retail ID Read Write State (All or ReadOnly)",
+      "Industry/View Packages",
+      "One of the following: Industry/Facility Type/Can Receive Associate Product Label, Licensee/Receive Associate Product Label or Admin/Employees/Packages Page/Product Labels(View or Manage)",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility"
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetRetailIdAllotment",
+    "group": "RetailId",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/retailid/v2/allotment",
+    "Permissions": [
+      "Download Product Labels",
+      "Manage Product Labels",
+      "Manage Tag Orders",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to retrieve available Retail Item ID quota."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetSaleDeliveryById",
+    "group": "Sales",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/sales/v2/deliveries/{id}",
+    "Permissions": [
+      "View Sales Delivery",
+      "Manage Sales Delivery",
+      "Parameters:",
+      "licenseNumber (Required): If specified, the Sales Delivery will be validated against the specified License Number. If not specified, the Sales Delivery will be validated against all of the User's current Facilities. Please note that if the Sales Delivery is not valid for the specified License Number, a 401 Unauthorized status will be returned."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetSaleDeliveryRetailerById",
+    "group": "Sales",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/sales/v2/deliveries/retailer/{id}",
+    "Permissions": [
+      "View Retailer Delivery",
+      "Manage Retailer Delivery",
+      "Parameters:",
+      "licenseNumber (Required): If specified, the Sales Delivery will be validated against the specified License Number. If not specified, the Sales Delivery will be validated against all of the User's current Facilities. Please note that if the Sales Delivery is not valid for the specified License Number, a 401 Unauthorized status will be returned."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetSalePatientRegistrationLocations",
+    "group": "Sales",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/sales/v2/patientregistration/locations",
+    "Permissions": null,
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetSaleReceiptById",
+    "group": "Sales",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/sales/v2/receipts/{id}",
+    "Permissions": [
+      "View Sales",
+      "Manage Sales",
+      "Parameters:",
+      "licenseNumber (Required): If specified, the Sales Receipt will be validated against the specified License Number. If not specified, the Sales Receipt will be validated against all of the User's current Facilities. Please note that if the Sales Receipt is not valid for the specified License Number, a 401 Unauthorized status will be returned."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetSaleReceiptsExternalByExternalNumber",
+    "group": "Sales",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/sales/v2/receipts/external/{externalNumber}",
+    "Permissions": [
+      "View Sales",
+      "Manage Sales",
+      "Parameters:",
+      "licenseNumber (Required): If specified, the External Sales Receipt Number will be validated against the specified License Number. If not specified, the External Sales Receipt Number will be validated against all of the User's current Facilities. Please note that if the External Sales Receipt Number is not valid for the specified License Number, a 401 Unauthorized status will be returned."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetTagStaged",
+    "group": "Tags",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/tags/v2/staged",
+    "Permissions": [
+      "Manage Tags",
+      "RetailId.AllowPackageStaging Key Value enabled",
+      "Parameters:",
+      "licenseNumber (Required): The License Number for which to return staged tags."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetTransferDeliveriesPackagesStates",
+    "group": "Transfers",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/transfers/v2/deliveries/packages/states",
+    "Permissions": null,
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetTransferDeliveryById",
+    "group": "Transfers",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/transfers/v2/{id}/deliveries",
+    "Permissions": [
+      "Manage Transfers",
+      "View Transfers",
+      "Parameters:",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetTransferDeliveryPackageById",
+    "group": "Transfers",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/transfers/v2/deliveries/{id}/packages",
+    "Permissions": [
+      "Manage Transfers",
+      "View Transfers",
+      "Parameters:",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetTransferDeliveryPackageRequiredlabtestbatchById",
+    "group": "Transfers",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/transfers/v2/deliveries/package/{id}/requiredlabtestbatches",
+    "Permissions": [
+      "Manage Transfers",
+      "View Transfers",
+      "Parameters:",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetTransferDeliveryPackageWholesaleById",
+    "group": "Transfers",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/transfers/v2/deliveries/{id}/packages/wholesale",
+    "Permissions": [
+      "Manage Transfers",
+      "View Transfers",
+      "Parameters:",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetTransferDeliveryTransporterById",
+    "group": "Transfers",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/transfers/v2/deliveries/{id}/transporters",
+    "Permissions": [
+      "Manage Transfers",
+      "View Transfers",
+      "Parameters:",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetTransferDeliveryTransporterDetailById",
+    "group": "Transfers",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/transfers/v2/deliveries/{id}/transporters/details",
+    "Permissions": [
+      "Manage Transfers",
+      "View Transfers",
+      "Parameters:",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetTransferHub",
+    "group": "Transfers",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/transfers/v2/hub",
+    "Permissions": [
+      "Manage Transfers",
+      "View Transfers",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return shipment plans.",
+      "lastModifiedStart (Optional): The last modified start timestamp. If specified, also specifying any of the estimated arrival date parameters will result in an error.",
+      "lastModifiedEnd (Optional): The last modified end timestamp. If specified, also specifying any of the estimated arrival date parameters will result in an error.",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetTransferManifestHtmlById",
+    "group": "Transfers",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/transfers/v2/manifest/{id}/html",
+    "Permissions": [
+      "Manage Transfers",
+      "View Transfers",
+      "Parameters:",
+      "licenseNumber (Required):"
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetTransferTemplateOutgoingDeliveryById",
+    "group": "Transfers",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/transfers/v2/templates/outgoing/{id}/deliveries",
+    "Permissions": [
+      "Manage Transfer Templates",
+      "View Transfer Templates",
+      "Parameters:",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetTransferTemplateOutgoingDeliveryPackageById",
+    "group": "Transfers",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/transfers/v2/templates/outgoing/deliveries/{id}/packages",
+    "Permissions": [
+      "Manage Transfer Templates",
+      "View Transfer Templates",
+      "Parameters:",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetTransferTemplateOutgoingDeliveryTransporterById",
+    "group": "Transfers",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/transfers/v2/templates/outgoing/deliveries/{id}/transporters",
+    "Permissions": [
+      "Manage Transfer Templates",
+      "View Transfer Templates",
+      "Parameters:",
+      "pageNumber (Optional): The number of the data page from which to return data.",
+      "pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetTransferTemplateOutgoingDeliveryTransporterDetailById",
+    "group": "Transfers",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/transfers/v2/templates/outgoing/deliveries/{id}/transporters/details",
+    "Permissions": [
+      "Manage Transfer Templates",
+      "View Transfer Templates"
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "GetWasteMethods",
+    "group": "WasteMethods",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/wastemethods/v2",
+    "Permissions": null,
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "GetWebhooks",
+    "group": "Webhooks",
+    "Method": "GET",
+    "URL": "{{baseUrl}}/webhooks/v2",
+    "Permissions": null,
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "UpdateAdditivesTemplates",
+    "group": "AdditivesTemplates",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/additivestemplates/v2",
+    "Permissions": [
+      "Manage Additives",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update the list of additives."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "UpdateDisableBySubscriptionId",
+    "group": "Webhooks",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/webhooks/v2/disable/{subscriptionId}",
+    "Permissions": null,
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdateEnableBySubscriptionId",
+    "group": "Webhooks",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/webhooks/v2/enable/{subscriptionId}",
+    "Permissions": null,
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdateHarvestRename",
+    "group": "Harvests",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/harvests/v2/rename",
+    "Permissions": [
+      "View Harvests",
+      "Manage Harvests",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the list of renamed harvests."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "UpdateItemBrand",
+    "group": "Items",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/items/v2/brand",
+    "Permissions": [
+      "Manage Items",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for the Item Brand updates."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdateLabTestDocument",
+    "group": "LabTests",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/labtests/v2/labtestdocument",
+    "Permissions": [
+      "View Packages",
+      "Manage Packages Inventory",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility updating the Lab Test document."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "UpdateLabTestResultsRelease",
+    "group": "LabTests",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/labtests/v2/results/release",
+    "Permissions": [
+      "View Packages",
+      "Manage Packages Inventory",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility releasing the Lab Test results."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "UpdatePackageAdjust",
+    "group": "Packages",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/packages/v2/adjust",
+    "Permissions": [
+      "View Packages",
+      "Manage Packages Inventory",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to record the list of adjustments."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdatePackageDecontaminate",
+    "group": "Packages",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/packages/v2/decontaminate",
+    "Permissions": [
+      "View Packages",
+      "Manage Packages Inventory",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update the list of product decontaminations."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdatePackageLabtestsRequired",
+    "group": "Packages",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/packages/v2/labtests/required",
+    "Permissions": [
+      "View Packages",
+      "Create/Submit/Discontinue Packages",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update the list of required lab test batches."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdatePackageRemediate",
+    "group": "Packages",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/packages/v2/remediate",
+    "Permissions": [
+      "View Packages",
+      "Manage Packages Inventory",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update the list of product remediations."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdatePatientCheckIns",
+    "group": "PatientCheckIns",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/patient-checkins/v2",
+    "Permissions": [
+      "ManagePatientsCheckIns",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update the list of Patient check-ins."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdatePatients",
+    "group": "Patients",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/patients/v2",
+    "Permissions": [
+      "Manage Patients",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update the list of patients."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "UpdatePlantBatchLocation",
+    "group": "PlantBatches",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/plantbatches/v2/location",
+    "Permissions": [
+      "View Immature Plants",
+      "Manage Immature Plants",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to change the Location of the Plant Batch."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "UpdatePlantBatchName",
+    "group": "PlantBatches",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/plantbatches/v2/name",
+    "Permissions": [
+      "View Veg/Flower Plants",
+      "Manage Veg/Flower Plants Inventory",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to rename the Plant Batch."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "UpdatePlantBatchStrain",
+    "group": "PlantBatches",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/plantbatches/v2/strain",
+    "Permissions": [
+      "View Veg/Flower Plants",
+      "Manage Veg/Flower Plants Inventory",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to change the Strain of the Plant Batch."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "UpdatePlantBatchTag",
+    "group": "PlantBatches",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/plantbatches/v2/tag",
+    "Permissions": [
+      "View Veg/Flower Plants",
+      "Manage Veg/Flower Plants Inventory",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to replace Plant Batch tags."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdatePlantMerge",
+    "group": "Plants",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/plants/v2/merge",
+    "Permissions": [
+      "View Veg/Flower Plants",
+      "Manicure/Harvest Veg/Flower Plants",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update the list of plants merged."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdatePlantSplit",
+    "group": "Plants",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/plants/v2/split",
+    "Permissions": [
+      "View Plant",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update Plant splits."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdatePlantTag",
+    "group": "Plants",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/plants/v2/tag",
+    "Permissions": [
+      "View Veg/Flower Plants",
+      "Manage Veg/Flower Plants Inventory",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to upate the list of Plant tags."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdateProcessingJobFinish",
+    "group": "ProcessingJob",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/processing/v2/finish",
+    "Permissions": [
+      "Manage Processing Job",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility to finish the Processing Job."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "UpdateProcessingJobTypes",
+    "group": "ProcessingJob",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/processing/v2/jobtypes",
+    "Permissions": [
+      "Manage Processing Job",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update the processing job types."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "UpdateProcessingJobUnfinish",
+    "group": "ProcessingJob",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/processing/v2/unfinish",
+    "Permissions": [
+      "Manage Processing Job",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility to unfinish the Processing Job."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "UpdateRestoreHarvestedPlants",
+    "group": "Harvests",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/harvests/v2/restore/harvestedplants",
+    "Permissions": [
+      "View Harvests",
+      "Finish/Discontinue Harvests",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to return the list of harvests restored."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdateSaleDeliveries",
+    "group": "Sales",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/sales/v2/deliveries",
+    "Permissions": [
+      "Manage Sales Delivery",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update deliveries."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "UpdateSaleDeliveriesComplete",
+    "group": "Sales",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/sales/v2/deliveries/complete",
+    "Permissions": [
+      "Manage Sales Delivery",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update deliveries completed."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdateSaleDeliveriesHub",
+    "group": "Sales",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/sales/v2/deliveries/hub",
+    "Permissions": [
+      "Manage Sales Delivery, Manage Sales Delivery Hub",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update hub transporters."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "UpdateSaleDeliveriesHubAccept",
+    "group": "Sales",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/sales/v2/deliveries/hub/accept",
+    "Permissions": [
+      "Manage Sales Delivery Hub",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update hub deliveries accepted."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdateSaleDeliveriesHubDepart",
+    "group": "Sales",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/sales/v2/deliveries/hub/depart",
+    "Permissions": [
+      "Manage Sales Delivery Hub",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update hub delivery departures."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "UpdateSaleDeliveriesHubVerifyID",
+    "group": "Sales",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/sales/v2/deliveries/hub/verifyID",
+    "Permissions": [
+      "Manage Sales Delivery Hub",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update hub delivery Id's."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdateSaleDeliveriesRetailer",
+    "group": "Sales",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/sales/v2/deliveries/retailer",
+    "Permissions": [
+      "External Sources(ThirdPartyVendorV2)/Sales Deliveries(Write)",
+      "Industry/Facility Type/Retailer Delivery",
+      "Industry/Facility Type/Consumer Sales Delivery or Industry/Facility Type/Patient Sales Delivery",
+      "WebApi Sales Deliveries Read Write State (All or WriteOnly)",
+      "WebApi Retail ID Read Write State (All or WriteOnly) - Required for RID only.",
+      "External Sources(ThirdPartyVendorV2)/Retail ID(Write) - Required for RID only.",
+      "Manage Retailer Delivery",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update retailer deliveries."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdateSaleReceipts",
+    "group": "Sales",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/sales/v2/receipts",
+    "Permissions": [
+      "Manage Sales",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update receipts."
+    ],
+    "reason": "Skipped (Runtime Logic/Config)"
+  },
+  {
+    "name": "UpdateSaleReceiptsUnfinalize",
+    "group": "Sales",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/sales/v2/receipts/unfinalize",
+    "Permissions": [
+      "Manage Sales",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update unfinalized receipts."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdateTransferExternalIncoming",
+    "group": "Transfers",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/transfers/v2/external/incoming",
+    "Permissions": [
+      "Manage Transfers",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update external incoming shipment plans."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdateTransferTemplatesOutgoing",
+    "group": "Transfers",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/transfers/v2/templates/outgoing",
+    "Permissions": [
+      "Manage Transfer Templates",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update shipment plan templates."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdateTransporterDrivers",
+    "group": "Transporters",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/transporters/v2/drivers",
+    "Permissions": [
+      "Manage Transporters",
+      "Parameters:",
+      "licenseNumber (Required): The License Number of the Facility for which to update the list of drivers."
+    ],
+    "reason": "Not implemented in workflows"
+  },
+  {
+    "name": "UpdateWebhooks",
+    "group": "Webhooks",
+    "Method": "PUT",
+    "URL": "{{baseUrl}}/webhooks/v2",
+    "Permissions": null,
+    "reason": "Not implemented in workflows"
+  }
+]

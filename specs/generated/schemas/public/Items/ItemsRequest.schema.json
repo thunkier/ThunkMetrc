@@ -1,0 +1,285 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ItemsItemsRequest",
+  "type": "object",
+  "properties": {
+    "AdministrationMethod": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Allergens": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "GlobalProductName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "ItemBrand": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ItemCategory": {
+      "type": "string"
+    },
+    "ItemIngredients": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "LabelImageFileSystemIds": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "LabelPhotoDescription": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Name": {
+      "type": "string"
+    },
+    "NumberOfDoses": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PackagingImageFileSystemIds": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PackagingPhotoDescription": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ProcessingJobCategoryName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ProcessingJobTypeName": {
+      "type": "string"
+    },
+    "ProductImageFileSystemIds": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ProductPDFFileSystemIds": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ProductPhotoDescription": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PublicIngredients": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ServingSize": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Strain": {
+      "type": "string"
+    },
+    "SupplyDurationDays": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "UnitCbdAContent": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "UnitCbdAContentDose": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "UnitCbdAContentDoseUnitOfMeasure": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "UnitCbdAContentUnitOfMeasure": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "UnitCbdAPercent": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "UnitCbdContent": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "UnitCbdContentDose": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "UnitCbdContentDoseUnitOfMeasure": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "UnitCbdContentUnitOfMeasure": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "UnitCbdPercent": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "UnitOfMeasure": {
+      "type": "string"
+    },
+    "UnitThcAContent": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "UnitThcAContentDose": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "UnitThcAContentDoseUnitOfMeasure": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "UnitThcAContentUnitOfMeasure": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "UnitThcAPercent": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "UnitThcContent": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "UnitThcContentDose": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "UnitThcContentDoseUnitOfMeasure": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "UnitThcContentUnitOfMeasure": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "UnitThcPercent": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "UnitVolume": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "UnitVolumeUnitOfMeasure": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "UnitWeight": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "UnitWeightUnitOfMeasure": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "Id",
+    "ItemCategory",
+    "Name",
+    "ProcessingJobTypeName",
+    "Strain",
+    "UnitOfMeasure"
+  ]
+}

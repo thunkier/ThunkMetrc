@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/sdks/csharp/tests/tests.csproj",
+                "${workspaceFolder}/sdks/thunkmetrc-cs/ThunkMetrc.Test/ThunkMetrc.Test.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary;ForceNoAlign"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/sdks/csharp/tests/tests.csproj",
+                "${workspaceFolder}/sdks/thunkmetrc-cs/ThunkMetrc.Test/ThunkMetrc.Test.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary;ForceNoAlign"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/sdks/csharp/tests/tests.csproj"
+                "${workspaceFolder}/sdks/thunkmetrc-cs/ThunkMetrc.Test/ThunkMetrc.Test.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

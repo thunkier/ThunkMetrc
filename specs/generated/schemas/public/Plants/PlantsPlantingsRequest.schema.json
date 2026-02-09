@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlantsPlantsPlantingsRequest",
+  "type": "object",
+  "properties": {
+    "ActualDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "LocationName": {
+      "type": "string"
+    },
+    "PatientLicenseNumber": {
+      "type": "string"
+    },
+    "PlantBatchName": {
+      "type": "string"
+    },
+    "PlantBatchType": {
+      "type": "string"
+    },
+    "PlantCount": {
+      "type": "integer"
+    },
+    "PlantLabel": {
+      "type": "string"
+    },
+    "StrainName": {
+      "type": "string"
+    },
+    "SublocationName": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "ActualDate",
+    "LocationName",
+    "PatientLicenseNumber",
+    "PlantBatchName",
+    "PlantBatchType",
+    "PlantCount",
+    "PlantLabel",
+    "StrainName",
+    "SublocationName"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProcessingJobFinishProcessingJobRequest",
+  "type": "object",
+  "properties": {
+    "FinishDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "FinishNote": {
+      "type": "string"
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "TotalCountWaste": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "TotalVolumeWaste": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "TotalWeightWaste": {
+      "type": "integer"
+    },
+    "WasteCountUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "WasteVolumeUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "WasteWeightUnitOfMeasureName": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "FinishDate",
+    "FinishNote",
+    "Id",
+    "TotalWeightWaste",
+    "WasteWeightUnitOfMeasureName"
+  ]
+}

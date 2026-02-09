@@ -1,0 +1,33 @@
+meta {
+  name: DeleteItemsById
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/items/v2/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Archives the specified Product by Id for the given Facility License Number.
+
+  Permissions Required:
+  - Manage Items
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for the Item to delete.
+
+  Example Response:
+  No response
+}

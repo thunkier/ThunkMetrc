@@ -1,0 +1,77 @@
+meta {
+  name: GetAdjustments
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/packages/v2/adjustments
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  pageNumber: 
+  pageSize: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves the Package Adjustments for a Facility
+
+  Permissions Required:
+  - View Packages
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to return the list of Package Adjustments.
+  - pageNumber (Optional): The number of the data page from which to return data.
+  - pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20.
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "PackageId": 101,
+        "PackageLabel": "ABCDEF012345670000010042",
+        "ItemName": "Bud/Flower",
+        "ItemCategoryName": "Buds",
+        "AdjustmentQuantity": -0.5,
+        "AdjustmentUnitOfMeasureName": "Grams",
+        "AdjustmentUnitOfMeasureAbbreviation": "g",
+        "AdjustmentReasonName": "Plant not growing",
+        "AdjustmentNote": "",
+        "AdjustmentDate": "2024-01-15T09:30:00Z",
+        "PackagedDate": "2024-01-15T09:30:00Z",
+        "AdjustedByUserName": "Store Manager",
+        "PackageLabTestResultExpirationDateTime": null
+      },
+      {
+        "PackageId": 101,
+        "PackageLabel": "ABCDEF012345670000010111",
+        "ItemName": "InfusedEdible",
+        "ItemCategoryName": "Edible",
+        "AdjustmentQuantity": -2.0,
+        "AdjustmentUnitOfMeasureName": "Each",
+        "AdjustmentUnitOfMeasureAbbreviation": "ea",
+        "AdjustmentReasonName": "Spoilage",
+        "AdjustmentNote": "Cooler stopped working",
+        "AdjustmentDate": "2024-01-20T10:30:00Z",
+        "PackagedDate": "2024-01-20T10:30:00Z",
+        "AdjustedByUserName": "Store Manager",
+        "PackageLabTestResultExpirationDateTime": "2024-03-15T11:00:00-08:00"
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

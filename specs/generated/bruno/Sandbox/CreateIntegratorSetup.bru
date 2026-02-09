@@ -1,0 +1,27 @@
+meta {
+  name: CreateIntegratorSetup
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/sandbox/v2/integrator/setup
+  body: json
+  auth: basic
+}
+
+params:query {
+  userKey: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  This endpoint is used to handle the setup of an external integrator for sandbox environments. It processes a request to create a new sandbox user for integration based on an external source's API key. It checks whether the API key is valid, manages the user creation process, and returns an appropriate status based on the current state of the request.
+
+  Parameters:
+  - userKey (Optional): An existing user key to reuse for integrator setup. Provide this if you already have a user key that you want to continue using. If you don't already have a user key, or you would like a new one, do not provide a value.
+}

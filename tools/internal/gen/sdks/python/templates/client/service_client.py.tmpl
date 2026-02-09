@@ -1,0 +1,37 @@
+from typing import Any, Optional, Dict, List, Union
+import urllib.parse
+
+class {{ .Name }}Client:
+    def __init__(self, client):
+        self.client = client
+
+{{- $groupPascal := .Name | CleanName | ToPascalCase }}
+{{- range .Operations }}
+{{- $methodPascal := .Name | CleanName | ToPascalCase }}
+    def {{ FormatMethodName $methodPascal $groupPascal }}({{ FormatParams . }}) -> Any:
+        """
+{{ range Split (CleanDocs .Description) "\n" }}        {{ . }}
+{{ end }}        {{ .Method }} {{ .Name }}
+        Parameters:
+        {{- range .PathParams }}
+        - {{ . | ToSnakeCase }} (str): Path parameter {{ . }}
+        {{- end }}
+        {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+        - body (Any): Request body
+        {{- end }}
+        {{- range .QueryParams }}
+        - {{ .Name | TrimSuffix "optional" | ToSnakeCase }} (str, optional): {{ if .Description }}{{ .Description }}{{ else }}Filter by {{ .Name }}{{ end }}
+        {{- end }}
+        """
+        query_params = {}
+        {{- range .QueryParams }}
+        {{- $paramName := .Name | TrimSuffix "optional" }}
+        {{- $snakeParam := $paramName | ToSnakeCase }}
+        if {{ $snakeParam }} is not None:
+            query_params["{{ $paramName }}"] = {{ $snakeParam }}
+        {{- end }}
+        path = f"{{ FormatUrl . }}"
+        return self.client._send("{{ .Method }}", path, body, query_params)
+
+{{- end }}
+

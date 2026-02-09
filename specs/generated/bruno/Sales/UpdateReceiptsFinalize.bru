@@ -1,0 +1,44 @@
+meta {
+  name: UpdateReceiptsFinalize
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/sales/v2/receipts/finalize
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 1
+  },
+  {
+    "Id": 2
+  }
+]
+}
+
+docs {
+  Finalizes a list of sales receipts for a Facility using the provided License Number and receipt data.
+
+  Permissions Required:
+  - Manage Sales
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to update finalized receipts.
+
+  Example Response:
+  No response
+}

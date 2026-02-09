@@ -1,0 +1,33 @@
+meta {
+  name: DeleteSublocationsById
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/sublocations/v2/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Archives an existing Sublocation record for a Facility.
+
+  Permissions Required:
+  - Manage Locations
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to delete the list of sublocations.
+
+  Example Response:
+  No response
+}

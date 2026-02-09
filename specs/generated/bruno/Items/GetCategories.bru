@@ -1,0 +1,238 @@
+meta {
+  name: GetCategories
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/items/v2/categories
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  pageNumber: 
+  pageSize: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of item categories.
+
+  Parameters:
+  - licenseNumber (Required): If specified, the categories will be retrieved for the specified License Number. If not specified, all item categories will be returned.
+  - pageNumber (Optional): The number of the data page from which to return data.
+  - pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20.
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Name": "Buds",
+        "ProductCategoryType": "Buds",
+        "QuantityType": "WeightBased",
+        "RequiresStrain": true,
+        "RequiresItemBrand": false,
+        "RequiresAdministrationMethod": false,
+        "RequiresUnitCbdPercent": false,
+        "RequiresUnitCbdContent": false,
+        "RequiresUnitCbdContentDose": false,
+        "RequiresUnitCbdAPercent": false,
+        "RequiresUnitCbdAContent": false,
+        "RequiresUnitCbdAContentDose": false,
+        "RequiresUnitThcPercent": false,
+        "RequiresUnitThcContent": false,
+        "RequiresUnitThcContentDose": false,
+        "RequiresUnitThcAPercent": false,
+        "RequiresUnitThcAContent": false,
+        "RequiresUnitThcAContentDose": false,
+        "RequiresUnitVolume": false,
+        "RequiresUnitWeight": false,
+        "RequiresServingSize": false,
+        "RequiresSupplyDurationDays": false,
+        "RequiresNumberOfDoses": false,
+        "RequiresPublicIngredients": false,
+        "RequiresDescription": false,
+        "RequiresAllergens": false,
+        "RequiresProductPhotos": 0,
+        "RequiresProductPhotoDescription": false,
+        "RequiresLabelPhotos": 0,
+        "RequiresLabelPhotoDescription": false,
+        "RequiresPackagingPhotos": 0,
+        "RequiresPackagingPhotoDescription": false,
+        "CanContainSeeds": true,
+        "CanBeRemediated": true,
+        "CanBeDecontaminated": false,
+        "CanBeDestroyed": false,
+        "MinConsecutiveSourcesForRTA": null,
+        "MinDaysForRTA": null,
+        "MaxDaysForRecoveryAfterFailure": null,
+        "MaxDaystoReachMinSources": null,
+        "MinNewPassesInRecoveryWindow": null,
+        "MaxDaysToMaintainRTA": null,
+        "MaxRepackageDistanceFromSource": null,
+        "MaxDaysWithoutTestedSource": null,
+        "RequiresProductPDFDocuments": 0,
+        "LabTestBatchNames": [
+          "LB Name"
+        ]
+      },
+      {
+        "Name": "Immature Plants",
+        "ProductCategoryType": "Plants",
+        "QuantityType": "CountBased",
+        "RequiresStrain": true,
+        "RequiresItemBrand": false,
+        "RequiresAdministrationMethod": false,
+        "RequiresUnitCbdPercent": false,
+        "RequiresUnitCbdContent": false,
+        "RequiresUnitCbdContentDose": false,
+        "RequiresUnitCbdAPercent": false,
+        "RequiresUnitCbdAContent": false,
+        "RequiresUnitCbdAContentDose": false,
+        "RequiresUnitThcPercent": false,
+        "RequiresUnitThcContent": false,
+        "RequiresUnitThcContentDose": false,
+        "RequiresUnitThcAPercent": false,
+        "RequiresUnitThcAContent": false,
+        "RequiresUnitThcAContentDose": false,
+        "RequiresUnitVolume": false,
+        "RequiresUnitWeight": false,
+        "RequiresServingSize": false,
+        "RequiresSupplyDurationDays": false,
+        "RequiresNumberOfDoses": false,
+        "RequiresPublicIngredients": false,
+        "RequiresDescription": false,
+        "RequiresAllergens": false,
+        "RequiresProductPhotos": 0,
+        "RequiresProductPhotoDescription": false,
+        "RequiresLabelPhotos": 0,
+        "RequiresLabelPhotoDescription": false,
+        "RequiresPackagingPhotos": 0,
+        "RequiresPackagingPhotoDescription": false,
+        "CanContainSeeds": true,
+        "CanBeRemediated": false,
+        "CanBeDecontaminated": false,
+        "CanBeDestroyed": false,
+        "MinConsecutiveSourcesForRTA": null,
+        "MinDaysForRTA": null,
+        "MaxDaysForRecoveryAfterFailure": null,
+        "MaxDaystoReachMinSources": null,
+        "MinNewPassesInRecoveryWindow": null,
+        "MaxDaysToMaintainRTA": null,
+        "MaxRepackageDistanceFromSource": null,
+        "MaxDaysWithoutTestedSource": null,
+        "RequiresProductPDFDocuments": 0,
+        "LabTestBatchNames": []
+      },
+      {
+        "Name": "Infused",
+        "ProductCategoryType": "InfusedEdible",
+        "QuantityType": "CountBased",
+        "RequiresStrain": false,
+        "RequiresItemBrand": false,
+        "RequiresAdministrationMethod": false,
+        "RequiresUnitCbdPercent": false,
+        "RequiresUnitCbdContent": false,
+        "RequiresUnitCbdContentDose": false,
+        "RequiresUnitCbdAPercent": false,
+        "RequiresUnitCbdAContent": false,
+        "RequiresUnitCbdAContentDose": false,
+        "RequiresUnitThcPercent": false,
+        "RequiresUnitThcContent": true,
+        "RequiresUnitThcContentDose": false,
+        "RequiresUnitThcAPercent": false,
+        "RequiresUnitThcAContent": false,
+        "RequiresUnitThcAContentDose": false,
+        "RequiresUnitVolume": false,
+        "RequiresUnitWeight": true,
+        "RequiresServingSize": false,
+        "RequiresSupplyDurationDays": false,
+        "RequiresNumberOfDoses": false,
+        "RequiresPublicIngredients": false,
+        "RequiresDescription": false,
+        "RequiresAllergens": false,
+        "RequiresProductPhotos": 0,
+        "RequiresProductPhotoDescription": false,
+        "RequiresLabelPhotos": 0,
+        "RequiresLabelPhotoDescription": false,
+        "RequiresPackagingPhotos": 0,
+        "RequiresPackagingPhotoDescription": false,
+        "CanContainSeeds": false,
+        "CanBeRemediated": true,
+        "CanBeDecontaminated": false,
+        "CanBeDestroyed": false,
+        "MinConsecutiveSourcesForRTA": null,
+        "MinDaysForRTA": null,
+        "MaxDaysForRecoveryAfterFailure": null,
+        "MaxDaystoReachMinSources": null,
+        "MinNewPassesInRecoveryWindow": null,
+        "MaxDaysToMaintainRTA": null,
+        "MaxRepackageDistanceFromSource": null,
+        "MaxDaysWithoutTestedSource": null,
+        "RequiresProductPDFDocuments": 0,
+        "LabTestBatchNames": []
+      },
+      {
+        "Name": "Infused Liquid",
+        "ProductCategoryType": "InfusedEdible",
+        "QuantityType": "CountBased",
+        "RequiresStrain": false,
+        "RequiresItemBrand": false,
+        "RequiresAdministrationMethod": false,
+        "RequiresUnitCbdPercent": false,
+        "RequiresUnitCbdContent": false,
+        "RequiresUnitCbdContentDose": false,
+        "RequiresUnitCbdAPercent": false,
+        "RequiresUnitCbdAContent": false,
+        "RequiresUnitCbdAContentDose": false,
+        "RequiresUnitThcPercent": false,
+        "RequiresUnitThcContent": true,
+        "RequiresUnitThcContentDose": false,
+        "RequiresUnitThcAPercent": false,
+        "RequiresUnitThcAContent": false,
+        "RequiresUnitThcAContentDose": false,
+        "RequiresUnitVolume": true,
+        "RequiresUnitWeight": false,
+        "RequiresServingSize": false,
+        "RequiresSupplyDurationDays": false,
+        "RequiresNumberOfDoses": false,
+        "RequiresPublicIngredients": false,
+        "RequiresDescription": false,
+        "RequiresAllergens": false,
+        "RequiresProductPhotos": 0,
+        "RequiresProductPhotoDescription": false,
+        "RequiresLabelPhotos": 0,
+        "RequiresLabelPhotoDescription": false,
+        "RequiresPackagingPhotos": 0,
+        "RequiresPackagingPhotoDescription": false,
+        "CanContainSeeds": false,
+        "CanBeRemediated": true,
+        "CanBeDecontaminated": false,
+        "CanBeDestroyed": false,
+        "MinConsecutiveSourcesForRTA": null,
+        "MinDaysForRTA": null,
+        "MaxDaysForRecoveryAfterFailure": null,
+        "MaxDaystoReachMinSources": null,
+        "MinNewPassesInRecoveryWindow": null,
+        "MaxDaysToMaintainRTA": null,
+        "MaxRepackageDistanceFromSource": null,
+        "MaxDaysWithoutTestedSource": null,
+        "RequiresProductPDFDocuments": 0,
+        "LabTestBatchNames": []
+      }
+    ],
+    "Total": 4,
+    "TotalRecords": 4,
+    "PageSize": 4,
+    "RecordsOnPage": 4,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

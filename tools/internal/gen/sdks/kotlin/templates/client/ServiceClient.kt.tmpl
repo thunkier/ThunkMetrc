@@ -1,0 +1,51 @@
+package io.github.thunkier.thunkmetrc.client
+
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
+
+class {{ .Name | ToPascalCase }}Client(private val client: MetrcClient) {
+{{- $svcName := $.Name }}
+{{- $safeGroup := ToPascalCase (CleanName .Name) }}
+
+{{- range .Operations }}
+{{- $methodName := ToPascalCase (CleanName .Name) }}
+{{- $ktMethodName := FormatMethodName $methodName $safeGroup }}
+    /**
+{{- if .Description }}
+{{ range Split (CleanDocs .Description) "\n" }}     * {{ . }}
+{{ end }}{{- end }}     * {{ .Method }} {{ .Name }}
+{{- range .PathParams }}
+     * @param {{ ToCamelCase . }} Path parameter
+{{- end }}
+{{- range .QueryParams }}
+     * @param {{ ToCamelCase (TrimSuffix "optional" .Name) }} Query parameter
+{{- end }}
+{{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+     * @param body Request body
+{{- end }}
+     * @throws IOException If request fails
+     * @return Response object
+     */
+    fun {{ $ktMethodName }}(
+        {{- range .PathParams }}{{ ToCamelCase . }}: String, {{ end }}
+        {{- range .QueryParams }}{{ $name := TrimSuffix "optional" .Name }}{{ ToCamelCase $name }}: String? = null, {{ end }}
+        {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}body: Any? = null{{ end -}}
+    ): Any? {
+        val path = StringBuilder("{{ FormatUrl . }}")
+        val query = ArrayList<String>()
+        {{- range .QueryParams }}
+        {{- $name := TrimSuffix "optional" .Name }}
+        {{- $ktParamName := ToCamelCase $name }}
+        if ({{ $ktParamName }} != null) {
+            query.add("{{ $name }}=${URLEncoder.encode({{ $ktParamName }}, StandardCharsets.UTF_8)}")
+        }
+        {{- end }}
+        if (query.isNotEmpty()) {
+            path.append("?").append(query.joinToString("&"))
+        }
+
+        return client.send<Any>("{{ .Method }}", path.toString(), {{ if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}body{{ else }}null{{ end }})
+    }
+{{ end }}
+}
+

@@ -1,0 +1,51 @@
+meta {
+  name: GetWasteTypes
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/harvests/v2/waste/types
+  body: json
+  auth: basic
+}
+
+params:query {
+  pageNumber: 
+  pageSize: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of Waste types for harvests.
+
+  Parameters:
+  - pageNumber (Optional): The number of the data page from which to return data.
+  - pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20.
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Name": "Plant Material"
+      },
+      {
+        "Name": "Fibrous"
+      },
+      {
+        "Name": "Root Ball"
+      }
+    ],
+    "Total": 3,
+    "TotalRecords": 3,
+    "PageSize": 3,
+    "RecordsOnPage": 3,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

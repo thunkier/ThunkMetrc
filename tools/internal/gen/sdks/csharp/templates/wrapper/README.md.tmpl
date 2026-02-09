@@ -1,0 +1,70 @@
+# ThunkMetrc C# Wrapper SDK
+
+Type-safe, rate-limited, async C# wrapper for the Metrc API.
+
+## 📦 Installation
+
+```bash
+dotnet add package ThunkMetrc.Wrapper --version {{ .Version }}
+dotnet add package ThunkMetrc.Client --version {{ .Version }}
+```
+
+## 🚀 Getting Started
+
+### 1. Initialize
+Use `MetrcFactory` to handle shared rate limiting effectively.
+
+```csharp
+using ThunkMetrc.Wrapper;
+using Microsoft.Extensions.Logging;
+
+// 1. Initialize factory (Singleton recommended)
+// Holds the shared RateLimiter (150 requests/sec integrator limit)
+using var factory = new MetrcFactory(
+    maxConcurrentRequests: 150,
+    logger: null
+);
+
+// 2. Create wrapper
+var metrc = factory.Create(
+    baseUrl: "https://sandbox-api-or.metrc.com",
+    vendorKey: "vendor_key",
+    userKey: "user_key"
+);
+```
+
+### 2. Make Requests
+All service methods are `async`.
+
+```csharp
+try {
+    var facilities = await metrc.Facilities.GetFacilitiesAsync();
+    foreach (var facility in facilities) {
+        Console.WriteLine($"Facility: {facility.License.Number}");
+    }
+} catch (Exception ex) {
+    Console.WriteLine($"Error: {ex.Message}");
+}
+```
+
+### 3. Pagination (IAsyncEnumerable)
+Use the `Iterate...` methods to stream pages comfortably.
+
+```csharp
+await foreach (var pkg in metrc.Packages.IterateGetActivePackagesAsync(
+    licenseNumber: "123-ABC-LICENSE",
+    lastModifiedStart: null,
+    lastModifiedEnd: null)) 
+{
+    Console.WriteLine($"Package: {pkg.Label}");
+}
+```
+
+## 🛡️ Rate Limiting
+The SDK uses `MetrcRateLimiter` to enforce:
+- **Integrator Limits**: Default 150/sec.
+- **Facility Limits**: Default 50/sec per facility.
+- **Backoff**: Exponential backoff on 429/500 errors.
+- **Retries**: Automatic retry logic properly handling `Retry-After`.
+
+Configuration is handled via the `MetrcFactory`.

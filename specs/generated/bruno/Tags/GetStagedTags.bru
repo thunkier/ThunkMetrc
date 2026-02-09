@@ -1,0 +1,87 @@
+meta {
+  name: GetStagedTags
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/tags/v2/staged
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Returns a list of staged tags. NOTE: This is a premium endpoint.
+
+  Permissions Required:
+  - Manage Tags
+  - RetailId.AllowPackageStaging Key Value enabled
+
+  Parameters:
+  - licenseNumber (Required): The License Number for which to return staged tags.
+
+  Example Response:
+  [
+    {
+      "Id": 101,
+      "TagTypeName": null,
+      "TagTypeId": null,
+      "TagInventoryTypeName": "MedicalPackage",
+      "MaxGroupSize": 0,
+      "FacilityId": 0,
+      "Label": "ABCDEF012345670000010001",
+      "StatusName": null,
+      "CommissionedDateTime": null,
+      "IsUsed": false,
+      "UsedDateTime": null,
+      "ProductLabel": null,
+      "DetachedDateTime": null,
+      "IsArchived": false,
+      "LastModified": "0001-01-01T00:00:00+00:00",
+      "IsStaged": false,
+      "QrCount": null
+    },
+    {
+      "Id": 102,
+      "TagTypeName": null,
+      "TagTypeId": null,
+      "TagInventoryTypeName": "MedicalPackage",
+      "MaxGroupSize": 0,
+      "FacilityId": 0,
+      "Label": "ABCDEF012345670000010002",
+      "StatusName": null,
+      "CommissionedDateTime": null,
+      "IsUsed": false,
+      "UsedDateTime": null,
+      "ProductLabel": {
+        "QrCount": 10,
+        "IsChildFromParentWithLabel": false,
+        "OriginalSourcePackageId": null,
+        "OriginalSourcePackageLabel": null,
+        "LabelSource": null,
+        "QrCodeRanges": [
+          [
+            0,
+            9
+          ]
+        ],
+        "LastLabelGenerationDate": null,
+        "IsActive": true
+      },
+      "DetachedDateTime": null,
+      "IsArchived": false,
+      "LastModified": "0001-01-01T00:00:00+00:00",
+      "IsStaged": true,
+      "QrCount": 10
+    }
+  ]
+}

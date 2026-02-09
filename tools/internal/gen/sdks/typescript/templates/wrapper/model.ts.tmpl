@@ -1,0 +1,15 @@
+{{- $model := .Model -}}
+{{- $modelName := $model.Name -}}
+{{- range .Imports }}
+import type { {{ . }} } from './{{ . }}';
+{{- end }}
+{{- if .Imports }}
+
+{{- end }}
+export interface {{ $modelName }} {
+{{- if $model.Properties }}
+    {{- range $model.Properties }}
+    {{ SafeTSField .Name }}?: {{ ToTSType .Type }};
+    {{- end }}
+{{- end }}
+}

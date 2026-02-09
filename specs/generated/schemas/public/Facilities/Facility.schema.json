@@ -1,0 +1,499 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Facility",
+  "type": "object",
+  "properties": {
+    "Alias": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "AllowTransferOfOnHoldPackages": {
+      "type": "boolean"
+    },
+    "AllowTransferOfOnRecallPackages": {
+      "type": "boolean"
+    },
+    "CredentialedDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "DisplayName": {
+      "type": "string"
+    },
+    "Email": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "FacilityId": {
+      "type": "integer"
+    },
+    "FacilityType": {
+      "type": "object",
+      "properties": {
+        "AdvancedSales": {
+          "type": "boolean"
+        },
+        "CanAccessCatalog": {
+          "type": "boolean"
+        },
+        "CanAdjustSourcePackagesWithPartials": {
+          "type": "boolean"
+        },
+        "CanAssignLocationsToPackages": {
+          "type": "boolean"
+        },
+        "CanAssignLocationsToPlantBatches": {
+          "type": "boolean"
+        },
+        "CanClonePlantBatches": {
+          "type": "boolean"
+        },
+        "CanCreateDerivedPackages": {
+          "type": "boolean"
+        },
+        "CanCreateImmaturePlantPackagesFromPlants": {
+          "type": "boolean"
+        },
+        "CanCreateOpeningBalancePackages": {
+          "type": "boolean"
+        },
+        "CanCreateOpeningBalancePlantBatches": {
+          "type": "boolean"
+        },
+        "CanCreatePartialPackages": {
+          "type": "boolean"
+        },
+        "CanCreateProcessValidationPackages": {
+          "type": "boolean"
+        },
+        "CanCreateTradeSamplePackages": {
+          "type": "boolean"
+        },
+        "CanDecontaminatePackagesWithFailedLabResults": {
+          "type": "boolean"
+        },
+        "CanDeliverSalesToConsumers": {
+          "type": "boolean"
+        },
+        "CanDeliverSalesToPatients": {
+          "type": "boolean"
+        },
+        "CanDestroyProduct": {
+          "type": "boolean"
+        },
+        "CanDonatePackages": {
+          "type": "boolean"
+        },
+        "CanDownloadProductLabel": {
+          "type": "boolean"
+        },
+        "CanGrowPlants": {
+          "type": "boolean"
+        },
+        "CanHaveMemberPatients": {
+          "type": "boolean"
+        },
+        "CanInfuseProducts": {
+          "type": "boolean"
+        },
+        "CanManageItemBrands": {
+          "type": "boolean"
+        },
+        "CanPackageVegetativePlants": {
+          "type": "boolean"
+        },
+        "CanPackageWaste": {
+          "type": "boolean"
+        },
+        "CanReceiveAssociateProductLabel": {
+          "type": "boolean"
+        },
+        "CanRecordProcessingJobs": {
+          "type": "boolean"
+        },
+        "CanRecordProductForDestruction": {
+          "type": "boolean"
+        },
+        "CanRemediatePackagesWithFailedLabResults": {
+          "type": "boolean"
+        },
+        "CanReportAdulteration": {
+          "type": "boolean"
+        },
+        "CanReportHarvestSchedules": {
+          "type": "boolean"
+        },
+        "CanReportOperationalExceptions": {
+          "type": "boolean"
+        },
+        "CanReportPatientCheckIns": {
+          "type": "boolean"
+        },
+        "CanReportPatientsAdverseResponses": {
+          "type": "boolean"
+        },
+        "CanReportStrainProperties": {
+          "type": "boolean"
+        },
+        "CanRequestProductDecontamination": {
+          "type": "boolean"
+        },
+        "CanRequestProductRemediation": {
+          "type": "boolean"
+        },
+        "CanRequireHarvestSampleLabTestBatches": {
+          "type": "boolean"
+        },
+        "CanRequirePackageSampleLabTestBatches": {
+          "type": "boolean"
+        },
+        "CanReturnPackageQuantity": {
+          "type": "boolean"
+        },
+        "CanSellToCaregivers": {
+          "type": "boolean"
+        },
+        "CanSellToConsumers": {
+          "type": "boolean"
+        },
+        "CanSellToExternalPatients": {
+          "type": "boolean"
+        },
+        "CanSellToPatients": {
+          "type": "boolean"
+        },
+        "CanSpecifyPatientSalesLimitExemption": {
+          "type": "boolean"
+        },
+        "CanSubmitHarvestsForTesting": {
+          "type": "boolean"
+        },
+        "CanSubmitPackagesForTesting": {
+          "type": "boolean"
+        },
+        "CanTagPlantBatches": {
+          "type": "boolean"
+        },
+        "CanTestPackages": {
+          "type": "boolean"
+        },
+        "CanTrackMotherPlantsAsGrowthPhase": {
+          "type": "boolean"
+        },
+        "CanTrackVegetativePlants": {
+          "type": "boolean"
+        },
+        "CanTransferFromExternalFacilities": {
+          "type": "boolean"
+        },
+        "CanUpdateLocationsOnPackages": {
+          "type": "boolean"
+        },
+        "CanUpdatePlantStrains": {
+          "type": "boolean"
+        },
+        "CanUseComplianceLabel": {
+          "type": "boolean"
+        },
+        "CanViewSourcePackages": {
+          "type": "boolean"
+        },
+        "DeliverySalesToNonResidentConsumer": {
+          "type": "boolean"
+        },
+        "EnableExternalIdentifier": {
+          "type": "boolean"
+        },
+        "EnableSublocations": {
+          "type": "boolean"
+        },
+        "IsHemp": {
+          "type": "boolean"
+        },
+        "IsMedical": {
+          "type": "boolean"
+        },
+        "IsRetail": {
+          "type": "boolean"
+        },
+        "IsSalesDeliveryHub": {
+          "type": "boolean"
+        },
+        "PackagesRequirePatientAffiliation": {
+          "type": "boolean"
+        },
+        "PlantBatchesCanContainMotherPlants": {
+          "type": "boolean"
+        },
+        "PlantsRequirePatientAffiliation": {
+          "type": "boolean"
+        },
+        "RestrictHarvestPlantRestoreTimeHours": {
+          "type": "integer"
+        },
+        "RestrictPlantBatchAdjustmentTimeHours": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "RestrictWholesalePriceEditDays": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "RetailSalesToNonResidentConsumer": {
+          "type": "boolean"
+        },
+        "RetailerDelivery": {
+          "type": "boolean"
+        },
+        "RetailerDeliveryAllowDonations": {
+          "type": "boolean"
+        },
+        "RetailerDeliveryAllowPartialPackages": {
+          "type": "boolean"
+        },
+        "RetailerDeliveryAllowTradeSamples": {
+          "type": "boolean"
+        },
+        "RetailerDeliveryRequirePrice": {
+          "type": "boolean"
+        },
+        "SalesDeliveryAllowAddress": {
+          "type": "boolean"
+        },
+        "SalesDeliveryAllowCity": {
+          "type": "boolean"
+        },
+        "SalesDeliveryAllowCounty": {
+          "type": "boolean"
+        },
+        "SalesDeliveryAllowPlannedRoute": {
+          "type": "boolean"
+        },
+        "SalesDeliveryAllowState": {
+          "type": "boolean"
+        },
+        "SalesDeliveryAllowZip": {
+          "type": "boolean"
+        },
+        "SalesDeliveryRequireConsumerId": {
+          "type": "boolean"
+        },
+        "SalesDeliveryRequirePatientNumber": {
+          "type": "boolean"
+        },
+        "SalesDeliveryRequireRecipientName": {
+          "type": "boolean"
+        },
+        "SalesDeliveryRequireZone": {
+          "type": "boolean"
+        },
+        "SalesRequireCaregiverNumber": {
+          "type": "boolean"
+        },
+        "SalesRequireCaregiverPatientNumber": {
+          "type": "boolean"
+        },
+        "SalesRequireExternalPatientIdentificationMethod": {
+          "type": "boolean"
+        },
+        "SalesRequireExternalPatientNumber": {
+          "type": "boolean"
+        },
+        "SalesRequirePatientNumber": {
+          "type": "boolean"
+        },
+        "TaxExemptReportingFeesFacilityType": {
+          "type": "boolean"
+        },
+        "TaxExemptTagOrdersFacilityType": {
+          "type": "boolean"
+        },
+        "TestsRequireLabSample": {
+          "type": "boolean"
+        },
+        "TotalMemberPatientsAllowed": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "AdvancedSales",
+        "CanAccessCatalog",
+        "CanAdjustSourcePackagesWithPartials",
+        "CanAssignLocationsToPackages",
+        "CanAssignLocationsToPlantBatches",
+        "CanClonePlantBatches",
+        "CanCreateDerivedPackages",
+        "CanCreateImmaturePlantPackagesFromPlants",
+        "CanCreateOpeningBalancePackages",
+        "CanCreateOpeningBalancePlantBatches",
+        "CanCreatePartialPackages",
+        "CanCreateProcessValidationPackages",
+        "CanCreateTradeSamplePackages",
+        "CanDecontaminatePackagesWithFailedLabResults",
+        "CanDeliverSalesToConsumers",
+        "CanDeliverSalesToPatients",
+        "CanDestroyProduct",
+        "CanDonatePackages",
+        "CanDownloadProductLabel",
+        "CanGrowPlants",
+        "CanHaveMemberPatients",
+        "CanInfuseProducts",
+        "CanManageItemBrands",
+        "CanPackageVegetativePlants",
+        "CanPackageWaste",
+        "CanReceiveAssociateProductLabel",
+        "CanRecordProcessingJobs",
+        "CanRecordProductForDestruction",
+        "CanRemediatePackagesWithFailedLabResults",
+        "CanReportAdulteration",
+        "CanReportHarvestSchedules",
+        "CanReportOperationalExceptions",
+        "CanReportPatientCheckIns",
+        "CanReportPatientsAdverseResponses",
+        "CanReportStrainProperties",
+        "CanRequestProductDecontamination",
+        "CanRequestProductRemediation",
+        "CanRequireHarvestSampleLabTestBatches",
+        "CanRequirePackageSampleLabTestBatches",
+        "CanReturnPackageQuantity",
+        "CanSellToCaregivers",
+        "CanSellToConsumers",
+        "CanSellToExternalPatients",
+        "CanSellToPatients",
+        "CanSpecifyPatientSalesLimitExemption",
+        "CanSubmitHarvestsForTesting",
+        "CanSubmitPackagesForTesting",
+        "CanTagPlantBatches",
+        "CanTestPackages",
+        "CanTrackMotherPlantsAsGrowthPhase",
+        "CanTrackVegetativePlants",
+        "CanTransferFromExternalFacilities",
+        "CanUpdateLocationsOnPackages",
+        "CanUpdatePlantStrains",
+        "CanUseComplianceLabel",
+        "CanViewSourcePackages",
+        "DeliverySalesToNonResidentConsumer",
+        "EnableExternalIdentifier",
+        "EnableSublocations",
+        "IsHemp",
+        "IsMedical",
+        "IsRetail",
+        "IsSalesDeliveryHub",
+        "PackagesRequirePatientAffiliation",
+        "PlantBatchesCanContainMotherPlants",
+        "PlantsRequirePatientAffiliation",
+        "RestrictHarvestPlantRestoreTimeHours",
+        "RetailSalesToNonResidentConsumer",
+        "RetailerDelivery",
+        "RetailerDeliveryAllowDonations",
+        "RetailerDeliveryAllowPartialPackages",
+        "RetailerDeliveryAllowTradeSamples",
+        "RetailerDeliveryRequirePrice",
+        "SalesDeliveryAllowAddress",
+        "SalesDeliveryAllowCity",
+        "SalesDeliveryAllowCounty",
+        "SalesDeliveryAllowPlannedRoute",
+        "SalesDeliveryAllowState",
+        "SalesDeliveryAllowZip",
+        "SalesDeliveryRequireConsumerId",
+        "SalesDeliveryRequirePatientNumber",
+        "SalesDeliveryRequireRecipientName",
+        "SalesDeliveryRequireZone",
+        "SalesRequireCaregiverNumber",
+        "SalesRequireCaregiverPatientNumber",
+        "SalesRequireExternalPatientIdentificationMethod",
+        "SalesRequireExternalPatientNumber",
+        "SalesRequirePatientNumber",
+        "TaxExemptReportingFeesFacilityType",
+        "TaxExemptTagOrdersFacilityType",
+        "TestsRequireLabSample"
+      ]
+    },
+    "HireDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "IsFinancialContact": {
+      "type": "boolean"
+    },
+    "IsManager": {
+      "type": "boolean"
+    },
+    "IsOwner": {
+      "type": "boolean"
+    },
+    "License": {
+      "type": "object",
+      "properties": {
+        "EmployeeLicenseNumber": {
+          "type": "string"
+        },
+        "EndDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "LicenseType": {
+          "type": "string"
+        },
+        "Number": {
+          "type": "string"
+        },
+        "StartDate": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": [
+        "EmployeeLicenseNumber",
+        "EndDate",
+        "LicenseType",
+        "Number",
+        "StartDate"
+      ]
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Occupations": {
+      "type": "array"
+    },
+    "SupportActivationDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "SupportExpirationDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "AllowTransferOfOnHoldPackages",
+    "AllowTransferOfOnRecallPackages",
+    "CredentialedDate",
+    "DisplayName",
+    "FacilityId",
+    "FacilityType",
+    "HireDate",
+    "IsFinancialContact",
+    "IsManager",
+    "IsOwner",
+    "License",
+    "Name",
+    "Occupations"
+  ]
+}

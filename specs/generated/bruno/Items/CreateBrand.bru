@@ -1,0 +1,50 @@
+meta {
+  name: CreateBrand
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/items/v2/brand
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Name": "Premium"
+  },
+  {
+    "Name": "Consumer"
+  }
+]
+}
+
+docs {
+  Creates one or more new item brands for the specified Facility identified by the License Number.
+
+  Permissions Required:
+  - Manage Items
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for the Item Brands to create.
+
+  Example Response:
+  {
+    "Ids": [
+      1,
+      2
+    ],
+    "Warnings": null
+  }
+}

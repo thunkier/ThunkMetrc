@@ -1,0 +1,30 @@
+meta {
+  name: GetPlantBatchesWasteReasons
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/plantbatches/v2/waste/reasons
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of valid waste reasons associated with immature plant batches for the specified Facility.
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to return a list of waste reasons.
+
+  Example Response:
+  No response
+}

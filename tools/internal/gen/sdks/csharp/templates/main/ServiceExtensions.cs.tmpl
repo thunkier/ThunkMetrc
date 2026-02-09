@@ -1,0 +1,123 @@
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
+using ThunkMetrc.Wrapper;
+using ThunkMetrc.Wrapper.Models;
+using ThunkMetrc.Wrapper.Services;
+
+namespace ThunkMetrc.Extensions;
+
+/// <summary>
+/// Extension methods for {{ .Service.Name | CleanName | ToPascalCase }}Service.
+/// </summary>
+public static class {{ .Service.Name | CleanName | ToPascalCase }}ServiceExtensions
+{
+{{- $service := .Service }}
+{{- range .Service.Operations }}
+{{- if HasPagination . }}
+{{- $responseType := ResolveType .ReturnSchema "" "" | Replace "?" "" }}
+{{- $itemType := GetIteratorItemType . }}
+    /// <summary>
+    /// Iterator for {{ FormatMethodName .Name $service.Name }}.
+{{ range Split (CleanDocs .Description) "\n" }}    /// {{ . }}
+{{ end }}    /// </summary>
+    {{ PaginationParamsDocs . }}
+    /// <param name="cancellationToken">Cancellation token.</param>
+    public static async IAsyncEnumerable<{{ $itemType }}> Iterate{{ FormatMethodName .Name $service.Name }}(
+        this {{ $service.Name | CleanName | ToPascalCase }}Service service,
+        {{ PaginationSignature . "" }}
+        [EnumeratorCancellation] CancellationToken cancellationToken = default)
+    {
+        int page = 1;
+        while (!cancellationToken.IsCancellationRequested)
+        {
+            var response = await service.{{ FormatMethodName .Name $service.Name }}(
+                {{ PaginationClientCall . }},
+                cancellationToken: cancellationToken
+            );
+
+            if (response?.Data == null || response.Data.Count == 0)
+            {
+                yield break;
+            }
+
+            foreach (var item in response.Data)
+            {
+                yield return item;
+            }
+
+            if (response.Data.Count < 20)
+            {
+                // Assuming default page size of 20 implies end of data
+            }
+            
+            page++;
+        }
+    }
+{{- end }}
+
+{{- if IsTimeWindowed . }}
+{{- $itemType := GetIteratorItemType . }}
+    /// <summary>
+    /// Syncs {{ FormatMethodName .Name $service.Name }} data for a specific time window.
+    /// Automatically handles iteration and pagination.
+    /// </summary>
+    /// <param name="lastKnownSync">Last sync time. Defaults to 24 hours ago.</param>
+    /// <param name="bufferMinutes">Buffer minutes (default 5).</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    public static async Task<List<{{ $itemType }}>> Sync{{ FormatMethodName .Name $service.Name }}(
+        this {{ $service.Name | CleanName | ToPascalCase }}Service service,
+        DateTimeOffset? lastKnownSync = null, int bufferMinutes = 5,
+        {{ TimeWindowSignature . }}
+        CancellationToken cancellationToken = default)
+    {
+        var (startStr, endStr) = MetrcExtensions.GetTimeWindow(lastKnownSync?.UtcDateTime, bufferMinutes);
+        var results = new List<{{ $itemType }}>();
+        await foreach (var item in service.Iterate{{ FormatMethodName .Name $service.Name }}(
+             {{ TimeWindowClientCall . "" }},
+             cancellationToken: cancellationToken))
+        {
+            results.Add(item);
+        }
+        return results;
+    }
+
+    /// <summary>
+    /// Parallel Sync for {{ FormatMethodName .Name $service.Name }} across multiple targets.
+    /// </summary>
+    /// <param name="targets">Targets to sync.</param>
+    /// <param name="lastKnownSync">Last sync time.</param>
+    /// <param name="bufferMinutes">Buffer minutes.</param>
+    /// <param name="concurrencyLimit">Max concurrency (default 20).</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    public static async Task<Dictionary<string, List<{{ $itemType }}>>> Sync{{ FormatMethodName .Name $service.Name }}Parallel(
+        this IEnumerable<global::ThunkMetrc.Wrapper.SynchronizationTarget> targets,
+        DateTimeOffset? lastKnownSync = null, int bufferMinutes = 5, int concurrencyLimit = 20,
+        {{ TimeWindowSignature . "licenseNumber" }}
+        CancellationToken cancellationToken = default)
+    {
+        var (startStr, endStr) = MetrcExtensions.GetTimeWindow(lastKnownSync?.UtcDateTime, bufferMinutes);
+        
+        return await MetrcExtensions.ParallelSyncAsync<{{ $itemType }}>(
+            targets,
+            concurrencyLimit,
+            async (target, ct) => 
+            {
+               var list = new List<{{ $itemType }}>();
+               await foreach (var item in target.Wrapper.{{ $service.Name | CleanName | ToPascalCase }}.Iterate{{ FormatMethodName .Name $service.Name }}(
+                   {{ TimeWindowClientCall . "target" }},
+                   cancellationToken: ct
+               ))
+               {
+                   list.Add(item);
+               }
+               return list;
+            },
+            cancellationToken
+        );
+    }
+{{- end }}
+{{- end }}
+}

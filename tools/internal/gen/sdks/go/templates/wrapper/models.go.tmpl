@@ -1,0 +1,19 @@
+package wrapper
+ 
+{{- range .Models }}
+ 
+type {{ .Name }} struct {
+    {{- range .Fields }}
+    {{ .Name }} {{ .Type }} {{ .Tag }}
+    {{- end }}
+}
+{{- end }}
+
+type PaginatedResponse[T any] struct {
+    Total    int `json:"Total,omitempty"`
+    PageSize int `json:"PageSize,omitempty"`
+    Current  int `json:"Current,omitempty"`
+    Next     int `json:"Next,omitempty"`
+    Previous int `json:"Previous,omitempty"`
+    Data     []T `json:"Data,omitempty"`
+}

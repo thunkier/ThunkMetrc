@@ -1,0 +1,55 @@
+meta {
+  name: GetReceiveQrByShortCode
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/retailid/v2/receive/qr/{shortCode}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Get a list of eaches (Retail ID QR code URL) and sibling tags based on given short code value (first segment in Retail ID QR code URL).
+
+  Permissions Required:
+  - External Sources(ThirdPartyVendorV2)/Manage RetailId
+  - WebApi Retail ID Read Write State (All or ReadOnly)
+  - Industry/View Packages
+  - One of the following: Industry/Facility Type/Can Receive Associate Product Label, Licensee/Receive Associate Product Label or Admin/Employees/Packages Page/Product Labels(View or Manage)
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility
+
+  Example Response:
+  {
+    "Eaches": [
+      "id.1a4.com/some_qr_code_id",
+      "id.1a4.com/some_qr_code_id",
+      "id.1a4.com/some_qr_code_id"
+    ],
+    "SiblingTags": [
+      "abcdef012345670000012358"
+    ],
+    "RequiresVerification": true,
+    "Ranges": [
+      [
+        1,
+        3
+      ]
+    ],
+    "QrCount": 3,
+    "ChildTag": "abcdef012345670000012358",
+    "LabelSource": "RetailId"
+  }
+}

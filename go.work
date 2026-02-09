@@ -1,0 +1,10 @@
+go 1.25.4
+
+use (
+	./probe
+	./mockserver
+	./sdks/thunkmetrc-go/client
+	./sdks/thunkmetrc-go/thunkmetrc
+	./sdks/thunkmetrc-go/wrapper
+	./tools
+)

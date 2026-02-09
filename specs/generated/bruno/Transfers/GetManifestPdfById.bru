@@ -1,0 +1,39 @@
+meta {
+  name: GetManifestPdfById
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/transfers/v2/manifest/{id}/pdf
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Get Transfer Manifest PDF for a given Transfer Id
+
+  Permissions Required:
+  - Manage Transfer Templates
+  - View Transfer Templates
+
+  Parameters:
+  - licenseNumber (Required): 
+
+  Example Response:
+  {
+    "FileContents": "iVBORw0KGgoAAAANSUhEUg...[truncated Base64 string]",
+    "ContentType": "application/octet-stream",
+    "FileDownloadName": "TransferManifestReport-1.pdf",
+    "HttpStatusCode": "OK"
+  }
+}

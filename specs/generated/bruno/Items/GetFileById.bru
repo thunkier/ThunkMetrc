@@ -1,0 +1,37 @@
+meta {
+  name: GetFileById
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/items/v2/file/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a file by its Id for the specified Facility.
+
+  Permissions Required:
+  - Manage Items
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to return the file.
+
+  Example Response:
+  {
+    "FileContents": "iVBORw0KGgoAAAANSUhEUg...[truncated Base64 string]",
+    "ContentType": "application/octet-stream",
+    "FileDownloadName": "gummies.png"
+  }
+}

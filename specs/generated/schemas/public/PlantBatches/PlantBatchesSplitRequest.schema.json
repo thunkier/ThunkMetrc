@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlantBatchesPlantBatchesSplitRequest",
+  "type": "object",
+  "properties": {
+    "ActualDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Count": {
+      "type": "integer"
+    },
+    "GroupName": {
+      "type": "string"
+    },
+    "Location": {
+      "type": "string"
+    },
+    "PatientLicenseNumber": {
+      "type": "string"
+    },
+    "PlantBatch": {
+      "type": "string"
+    },
+    "Strain": {
+      "type": "string"
+    },
+    "Sublocation": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "ActualDate",
+    "Count",
+    "GroupName",
+    "Location",
+    "PatientLicenseNumber",
+    "PlantBatch",
+    "Strain",
+    "Sublocation"
+  ]
+}

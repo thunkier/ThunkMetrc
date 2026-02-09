@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PatientsPatientsRequest",
+  "type": "object",
+  "properties": {
+    "ActualDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "ConcentrateOuncesAllowed": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "FlowerOuncesAllowed": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "HasSalesLimitExemption": {
+      "type": "boolean"
+    },
+    "InfusedOuncesAllowed": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "LicenseEffectiveEndDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "LicenseEffectiveStartDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "LicenseNumber": {
+      "type": "string"
+    },
+    "MaxConcentrateThcPercentAllowed": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "MaxFlowerThcPercentAllowed": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "NewLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "RecommendedPlants": {
+      "type": "integer"
+    },
+    "RecommendedSmokableQuantity": {
+      "type": "number"
+    },
+    "ThcOuncesAllowed": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "ActualDate",
+    "HasSalesLimitExemption",
+    "LicenseEffectiveEndDate",
+    "LicenseEffectiveStartDate",
+    "LicenseNumber",
+    "RecommendedPlants",
+    "RecommendedSmokableQuantity"
+  ]
+}

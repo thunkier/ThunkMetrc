@@ -1,0 +1,62 @@
+meta {
+  name: CreatePlantBatchesAdditivesUsingTemplate
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/plantbatches/v2/additives/usingtemplate
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "AdditivesTemplateName": "Additive Template 1",
+    "Rate": "5 Pounds",
+    "Volume": "1000 Sq. ft.",
+    "TotalAmountApplied": 5.0,
+    "TotalAmountUnitOfMeasure": "Gallons",
+    "PlantBatchName": "AK-47 Clone 1/31/2017",
+    "ActualDate": "2025-01-15"
+  },
+  {
+    "AdditivesTemplateName": "Additive Template 2",
+    "Rate": "4 Grams",
+    "Volume": "200 Yards",
+    "TotalAmountApplied": 5.0,
+    "TotalAmountUnitOfMeasure": "Gallons",
+    "PlantBatchName": "AK-47 Clone 1/31/2017",
+    "ActualDate": "2025-01-15"
+  }
+]
+}
+
+docs {
+  Records Additive usage for plant batches at a Facility using predefined additive templates.
+
+  Permissions Required:
+  - Manage Plants Additives
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to record plant additives.
+
+  Example Response:
+  {
+    "Ids": [
+      1,
+      2
+    ],
+    "Warnings": null
+  }
+}

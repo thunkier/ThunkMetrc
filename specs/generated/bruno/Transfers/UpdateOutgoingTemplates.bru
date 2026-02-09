@@ -1,0 +1,102 @@
+meta {
+  name: UpdateOutgoingTemplates
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/transfers/v2/templates/outgoing
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "TransferTemplateId": 1,
+    "Name": "Template 1",
+    "TransporterFacilityLicenseNumber": null,
+    "DriverOccupationalLicenseNumber": null,
+    "DriverName": null,
+    "DriverLicenseNumber": null,
+    "PhoneNumberForQuestions": null,
+    "VehicleMake": null,
+    "VehicleModel": null,
+    "VehicleLicensePlateNumber": null,
+    "Destinations": [
+      {
+        "TransferDestinationId": 0,
+        "RecipientLicenseNumber": "123-XYZ",
+        "InvoiceNumber": "INV-001-0236521",
+        "TransferTypeName": "Transfer",
+        "PlannedRoute": "I will drive down the road to the place.",
+        "EstimatedDepartureDateTime": "2018-03-06T09:15:00.000",
+        "EstimatedArrivalDateTime": "2018-03-06T12:24:00.000",
+        "Transporters": [
+          {
+            "TransporterFacilityLicenseNumber": "123-ABC",
+            "DriverOccupationalLicenseNumber": "50",
+            "DriverName": "X",
+            "DriverLicenseNumber": "5",
+            "DriverLayoverLeg": "FromAndToLayover",
+            "PhoneNumberForQuestions": "18005555555",
+            "VehicleMake": "X",
+            "VehicleModel": "X",
+            "VehicleLicensePlateNumber": "X",
+            "IsLayover": false,
+            "EstimatedDepartureDateTime": "2018-03-06T12:00:00.000",
+            "EstimatedArrivalDateTime": "2018-03-06T21:00:00.000",
+            "TransporterDetails": [
+              {
+                "DriverOccupationalLicenseNumber": "50",
+                "DriverName": "X",
+                "DriverLicenseNumber": "5",
+                "DriverLayoverLeg": "FromLayover",
+                "VehicleMake": "X",
+                "VehicleModel": "X",
+                "VehicleLicensePlateNumber": "X"
+              }
+            ]
+          }
+        ],
+        "Packages": [
+          {
+            "PackageLabel": "ABCDEF012345670000010026",
+            "WholesalePrice": null,
+            "GrossWeight": 20.5,
+            "GrossUnitOfWeightName": "Grams"
+          },
+          {
+            "PackageLabel": "ABCDEF012345670000010027",
+            "WholesalePrice": null,
+            "GrossWeight": 30.6,
+            "GrossUnitOfWeightName": "Milligrams"
+          }
+        ]
+      }
+    ]
+  }
+]
+}
+
+docs {
+  Updates existing transfer templates for a Facility.
+
+  Permissions Required:
+  - Manage Transfer Templates
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to update shipment plan templates.
+
+  Example Response:
+  No response
+}

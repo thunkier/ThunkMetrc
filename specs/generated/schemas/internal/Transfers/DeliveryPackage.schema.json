@@ -1,0 +1,377 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TransfersDeliveryPackage",
+  "type": "object",
+  "properties": {
+    "ContainsRemediatedProduct": {
+      "type": "boolean"
+    },
+    "ExpirationDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ExternalId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "GrossUnitOfWeightName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "IsDonation": {
+      "type": "boolean"
+    },
+    "IsTestingSample": {
+      "type": "boolean"
+    },
+    "IsTradeSample": {
+      "type": "boolean"
+    },
+    "IsTradeSamplePersistent": {
+      "type": "boolean"
+    },
+    "ItemBrandName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ItemCategoryName": {
+      "type": "string"
+    },
+    "ItemId": {
+      "type": "integer"
+    },
+    "ItemName": {
+      "type": "string"
+    },
+    "ItemServingSize": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ItemStrainName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ItemSupplyDurationDays": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "ItemUnitCbdAContent": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ItemUnitCbdAContentDose": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ItemUnitCbdAContentDoseUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ItemUnitCbdAContentUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ItemUnitCbdAPercent": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ItemUnitCbdContent": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ItemUnitCbdContentDose": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ItemUnitCbdContentDoseUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ItemUnitCbdContentUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ItemUnitCbdPercent": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ItemUnitQuantity": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ItemUnitQuantityUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ItemUnitThcAContent": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ItemUnitThcAContentDose": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ItemUnitThcAContentDoseUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ItemUnitThcAContentUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ItemUnitThcAPercent": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ItemUnitThcContent": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ItemUnitThcContentDose": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ItemUnitThcContentDoseUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ItemUnitThcContentUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ItemUnitThcPercent": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ItemUnitVolume": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ItemUnitVolumeUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ItemUnitWeight": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ItemUnitWeightUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "LabTestingState": {
+      "type": "string"
+    },
+    "PackageId": {
+      "type": "integer"
+    },
+    "PackageLabel": {
+      "type": "string"
+    },
+    "PackageType": {
+      "type": "string"
+    },
+    "PackagedDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ProductLabel": {
+      "type": "object",
+      "properties": {
+        "IsActive": {
+          "type": "boolean"
+        },
+        "IsChildFromParentWithLabel": {
+          "type": "boolean"
+        },
+        "IsDiscontinued": {
+          "type": "boolean"
+        },
+        "LastLabelGenerationDate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "PackageId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "QrCount": {
+          "type": "integer"
+        },
+        "TagId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "IsActive",
+        "IsChildFromParentWithLabel",
+        "IsDiscontinued",
+        "QrCount"
+      ]
+    },
+    "ProductRequiresRemediation": {
+      "type": "boolean"
+    },
+    "ProductionBatchNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ReceivedQuantity": {
+      "type": "number"
+    },
+    "ReceivedUnitOfMeasureName": {
+      "type": "string"
+    },
+    "RemediationDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "SellByDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ShipmentPackageState": {
+      "type": "string"
+    },
+    "ShippedQuantity": {
+      "type": "number"
+    },
+    "ShippedUnitOfMeasureName": {
+      "type": "string"
+    },
+    "SourceHarvestNames": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "SourcePackageIsDonation": {
+      "type": "boolean"
+    },
+    "SourcePackageIsTradeSample": {
+      "type": "boolean"
+    },
+    "SourcePackageLabels": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "SourceProductionBatchNumbers": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "UseByDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "ContainsRemediatedProduct",
+    "IsDonation",
+    "IsTestingSample",
+    "IsTradeSample",
+    "IsTradeSamplePersistent",
+    "ItemCategoryName",
+    "ItemId",
+    "ItemName",
+    "LabTestingState",
+    "PackageId",
+    "PackageLabel",
+    "PackageType",
+    "ProductLabel",
+    "ProductRequiresRemediation",
+    "ReceivedQuantity",
+    "ReceivedUnitOfMeasureName",
+    "ShipmentPackageState",
+    "ShippedQuantity",
+    "ShippedUnitOfMeasureName",
+    "SourcePackageIsDonation",
+    "SourcePackageIsTradeSample"
+  ]
+}

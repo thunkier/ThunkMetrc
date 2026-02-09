@@ -1,0 +1,776 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PackagesInTransit",
+  "type": "object",
+  "properties": {
+    "ArchivedDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ContainsDecontaminatedProduct": {
+      "type": "boolean"
+    },
+    "ContainsRemediatedProduct": {
+      "type": "boolean"
+    },
+    "DecontaminationDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ExpirationDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ExternalId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "FinishedDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "InitialLabTestingState": {
+      "type": "string"
+    },
+    "IsDonation": {
+      "type": "boolean"
+    },
+    "IsDonationPersistent": {
+      "type": "boolean"
+    },
+    "IsFinished": {
+      "type": "boolean"
+    },
+    "IsFinishedGood": {
+      "type": "boolean"
+    },
+    "IsOnHold": {
+      "type": "boolean"
+    },
+    "IsOnHoldCombined": {
+      "type": "boolean"
+    },
+    "IsOnInvestigation": {
+      "type": "boolean"
+    },
+    "IsOnInvestigationHold": {
+      "type": "boolean"
+    },
+    "IsOnInvestigationRecall": {
+      "type": "boolean"
+    },
+    "IsOnRecall": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "IsOnRecallCombined": {
+      "type": "boolean"
+    },
+    "IsOnRetailerDelivery": {
+      "type": "boolean"
+    },
+    "IsProcessValidationTestingSample": {
+      "type": "boolean"
+    },
+    "IsProductionBatch": {
+      "type": "boolean"
+    },
+    "IsTestingSample": {
+      "type": "boolean"
+    },
+    "IsTradeSample": {
+      "type": "boolean"
+    },
+    "IsTradeSamplePersistent": {
+      "type": "boolean"
+    },
+    "Item": {
+      "type": "object",
+      "properties": {
+        "AdministrationMethod": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "Allergens": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ApprovalStatus": {
+          "type": "integer"
+        },
+        "ApprovalStatusDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "DefaultLabTestingState": {
+          "type": "integer"
+        },
+        "Description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "GlobalProductName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "GlobalProductNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "HasExpirationDate": {
+          "type": "boolean"
+        },
+        "HasSellByDate": {
+          "type": "boolean"
+        },
+        "HasUseByDate": {
+          "type": "boolean"
+        },
+        "Id": {
+          "type": "integer"
+        },
+        "IsExpirationDateRequired": {
+          "type": "boolean"
+        },
+        "IsSellByDateRequired": {
+          "type": "boolean"
+        },
+        "IsUseByDateRequired": {
+          "type": "boolean"
+        },
+        "IsUsed": {
+          "type": "boolean"
+        },
+        "ItemBrandId": {
+          "type": "integer"
+        },
+        "ItemBrandName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "LabTestBatchNames": {
+          "type": "array"
+        },
+        "LabelImages": {
+          "type": "array"
+        },
+        "LabelPhotoDescription": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "Name": {
+          "type": "string"
+        },
+        "NumberOfDoses": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "PackagingImages": {
+          "type": "array"
+        },
+        "PackagingPhotoDescription": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ProcessingJobCategoryName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ProcessingJobTypeName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ProductBrandName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ProductCategoryName": {
+          "type": "string"
+        },
+        "ProductCategoryType": {
+          "type": "integer"
+        },
+        "ProductImages": {
+          "type": "array"
+        },
+        "ProductPDFDocuments": {
+          "type": "array"
+        },
+        "ProductPhotoDescription": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "PublicIngredients": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "QuantityType": {
+          "type": "integer"
+        },
+        "ServingSize": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "StrainId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "StrainName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "UnitCbdAContent": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "UnitCbdAContentDose": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "UnitCbdAContentDoseUnitOfMeasureName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "UnitCbdAContentUnitOfMeasureName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "UnitCbdAPercent": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "UnitCbdContent": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "UnitCbdContentDose": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "UnitCbdContentDoseUnitOfMeasureName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "UnitCbdContentUnitOfMeasureName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "UnitCbdPercent": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "UnitOfMeasureName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "UnitQuantity": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "UnitQuantityUnitOfMeasureName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "UnitThcAContent": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "UnitThcAContentDose": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "UnitThcAContentDoseUnitOfMeasureId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "UnitThcAContentDoseUnitOfMeasureName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "UnitThcAContentUnitOfMeasureName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "UnitThcAPercent": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "UnitThcContent": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "UnitThcContentDose": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "UnitThcContentDoseUnitOfMeasureId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "UnitThcContentDoseUnitOfMeasureName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "UnitThcContentUnitOfMeasureName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "UnitThcPercent": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "UnitVolume": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "UnitVolumeUnitOfMeasureName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "UnitWeight": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "UnitWeightUnitOfMeasureName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "ApprovalStatus",
+        "ApprovalStatusDateTime",
+        "DefaultLabTestingState",
+        "HasExpirationDate",
+        "HasSellByDate",
+        "HasUseByDate",
+        "Id",
+        "IsExpirationDateRequired",
+        "IsSellByDateRequired",
+        "IsUseByDateRequired",
+        "IsUsed",
+        "ItemBrandId",
+        "LabTestBatchNames",
+        "LabelImages",
+        "Name",
+        "PackagingImages",
+        "ProductCategoryName",
+        "ProductCategoryType",
+        "ProductImages",
+        "ProductPDFDocuments",
+        "QuantityType"
+      ]
+    },
+    "ItemFromFacilityLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ItemFromFacilityName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "LabTestResultExpirationDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "LabTestStage": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "LabTestStageId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "LabTestingPerformedDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "LabTestingRecordedDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "LabTestingState": {
+      "type": "string"
+    },
+    "LabTestingStateDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "Label": {
+      "type": "string"
+    },
+    "LabelsLastGeneratedDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "LocationId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "LocationName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "LocationTypeName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "OriginalPackageQuantity": {
+      "type": "number"
+    },
+    "PackageForProductDestruction": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PackageType": {
+      "type": "string"
+    },
+    "PackagedDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "PatientLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ProductLabel": {
+      "type": "object",
+      "properties": {
+        "IsActive": {
+          "type": "boolean"
+        },
+        "IsChildFromParentWithLabel": {
+          "type": "boolean"
+        },
+        "LabelSource": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "LastLabelGenerationDate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "OriginalSourcePackageId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "OriginalSourcePackageLabel": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "QrCodeRanges": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "QrCount": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "IsActive",
+        "IsChildFromParentWithLabel",
+        "QrCount"
+      ]
+    },
+    "ProductRequiresDecontamination": {
+      "type": "boolean"
+    },
+    "ProductRequiresRemediation": {
+      "type": "boolean"
+    },
+    "ProductionBatchNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Quantity": {
+      "type": "number"
+    },
+    "ReceivedDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ReceivedFromFacilityLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ReceivedFromFacilityName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ReceivedFromManifestNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "RemediationDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "SellByDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "SourceHarvestCount": {
+      "type": "integer"
+    },
+    "SourceHarvestNames": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "SourcePackageCount": {
+      "type": "integer"
+    },
+    "SourcePackageIsDonation": {
+      "type": "boolean"
+    },
+    "SourcePackageIsTradeSample": {
+      "type": "boolean"
+    },
+    "SourcePackageLabels": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "SourceProcessingJobCount": {
+      "type": "integer"
+    },
+    "SourceProductionBatchNumbers": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "SublocationId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "SublocationName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "UnitOfMeasureAbbreviation": {
+      "type": "string"
+    },
+    "UnitOfMeasureName": {
+      "type": "string"
+    },
+    "UseByDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "ContainsDecontaminatedProduct",
+    "ContainsRemediatedProduct",
+    "FinishedDate",
+    "Id",
+    "InitialLabTestingState",
+    "IsDonation",
+    "IsDonationPersistent",
+    "IsFinished",
+    "IsFinishedGood",
+    "IsOnHold",
+    "IsOnHoldCombined",
+    "IsOnInvestigation",
+    "IsOnInvestigationHold",
+    "IsOnInvestigationRecall",
+    "IsOnRecallCombined",
+    "IsOnRetailerDelivery",
+    "IsProcessValidationTestingSample",
+    "IsProductionBatch",
+    "IsTestingSample",
+    "IsTradeSample",
+    "IsTradeSamplePersistent",
+    "Item",
+    "LabTestingState",
+    "LabTestingStateDate",
+    "Label",
+    "LastModified",
+    "OriginalPackageQuantity",
+    "PackageType",
+    "PackagedDate",
+    "ProductLabel",
+    "ProductRequiresDecontamination",
+    "ProductRequiresRemediation",
+    "Quantity",
+    "SourceHarvestCount",
+    "SourcePackageCount",
+    "SourcePackageIsDonation",
+    "SourcePackageIsTradeSample",
+    "SourceProcessingJobCount",
+    "UnitOfMeasureAbbreviation",
+    "UnitOfMeasureName"
+  ]
+}

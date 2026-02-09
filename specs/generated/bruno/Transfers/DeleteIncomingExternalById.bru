@@ -1,0 +1,33 @@
+meta {
+  name: DeleteIncomingExternalById
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/transfers/v2/external/incoming/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Voids an external incoming shipment plan for a Facility.
+
+  Permissions Required:
+  - Manage Transfers
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to void the Transfer.
+
+  Example Response:
+  No response
+}

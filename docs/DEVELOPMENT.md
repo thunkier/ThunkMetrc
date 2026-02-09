@@ -1,72 +1,63 @@
 # Development & Architecture
 
-## 📂 Repository Structure
+## Repository Structure
 
-*   **`sdks/`**: **Public Clients**. Auto-generated SDKs for external distribution.
-    *   `csharp/`, `go/`, `java/`, `kotlin/`, `python/`, `rust/`, `typescript/`.
-    *   Each SDK typically contains:
-        *   `client/`: Low-level HTTP client (generated).
-        *   `wrapper/`: Type-safe wrapper with optional rate limiting (generated).
-        *   `thunkmetrc/`: High-level utility package (hand-written).
-*   **`specs/`**: **Source of Truth**.
-    *   `metrc-bruno/`: Bruno API collection defining all endpoints.
-*   **`automation/`**: **Tools & Internal Runner**.
-    *   `cmd/specgen/`: **Doc Scraper**. Scrapes Metrc documentation -> Bruno Specs.
-    *   `cmd/sdkgen/`: **Public SDK Generator**. Builds `sdks/` from `specs/`.
-    *   `cmd/modelgen/`: **Internal Model Generator**. Generates Go structs for the runner.
-    *   `cmd/clientgen/`: **Internal Client Generator**. Builds the runner's internal client.
-    *   `cmd/bump/`: **Version Manager**. Bumps `VERSION` file and orchestrates updates.
-    *   `internal/runner/`: Internal automation logic for sandbox simulation.
+- `sdks/`: Public SDK outputs, grouped by language family.
+  - `sdks/thunkmetrc-cs`
+  - `sdks/thunkmetrc-go`
+  - `sdks/thunkmetrc-java`
+  - `sdks/thunkmetrc-kotlin`
+  - `sdks/thunkmetrc-py`
+  - `sdks/thunkmetrc-rs`
+  - `sdks/thunkmetrc-ts`
+- `specs/`: Spec source and generated artifacts.
+  - `specs/source/scraped/html`: HTML docs fetched from Metrc state sites.
+  - `specs/source/scraped/postman`: Postman collections fetched per state.
+  - `specs/generated/bruno`: Generated Bruno collection used by downstream generators.
+  - `specs/generated/schemas`: Generated response/request schemas and manifest.
+- `tools/`: Monorepo generator/analyzer CLI.
+  - `gen specs`: Scrape docs and generate Bruno files.
+  - `gen schemas`: Generate schema models from responses/docs.
+  - `gen internal`: Generate probe internal client/models.
+  - `gen sdks`: Generate public SDKs.
+- `probe/`: Integration runner against mock server or real Metrc.
+- `mockserver/`: Local mock API server.
 
----
+## Generation Flow
 
-## 🏗️ Architecture & Generators
+1. `task gen:spec`
+   - Reads scraped data from Metrc documentation.
+   - Writes Bruno files to `specs/generated/bruno`.
+2. `task gen:schema`
+   - Builds schema files and `manifest.json` under `specs/generated/schemas/public`.
+3. `task gen:internal`
+   - Uses Bruno + internal schemas to generate probe client/models.
+4. `task gen:sdks`
+   - Uses Bruno + manifest + versions to generate all language SDKs.
 
-The project uses a data-driven approach where the **Bruno Specs** (`specs/metrc-bruno`) act as the single source of truth.
+## Versioning
 
-1.  **Ingestion (`gen:spec`)**: `cmd/specgen` crawls Metrc documentation to update the Bruno specifications.
-2.  **Internal Client (`gen:internal-client`)**: `cmd/clientgen` builds a type-safe Go client for the automation runner.
-3.  **Public SDKs (`gen:sdks`)**: `cmd/sdkgen` builds standalone libraries for distribution.
+- `versions.yaml` is the source of truth for `sdk_version` and dependency versions used by generators.
 
-### Public SDK Conventions
-*   **Naming**: PascalCase (C#/Go), camelCase (TS/Java/Kotlin), snake_case (Python/Rust).
-*   **Singularization**: `GetDeliveries` -> `GetDelivery` for `GET /id` endpoints.
-*   **Authentication**: Unified `(baseUrl, vendorKey, userKey)` constructor.
-*   **Query Parameters**: Optional query parameters are handled consistently, sorted alphabetically and URL-encoded.
+## Common Commands
 
----
+- `task run`: Run probe workflow (dry-run by default).
+- `task setup-sandbox`: Setup/validate integrator sandbox user.
+- `task gen:all`: Run full generation pipeline (`spec -> internal -> sdks`).
+- `task build:all`: Build all SDKs.
+- `task test:all`: Run SDK test suites.
+- `task publish:all`: Generate and publish all SDK packages.
 
-## 🔧 Development & Debugging
+## Specgen Controls
 
-We use **Taskfile** to manage common operations.
+`tools gen specs` supports live-scrape controls:
 
-### Common Commands
+- `-skip-scrape`: Use local scraped files only.
+- `-states`: Comma-separated state codes (overrides config).
+- `-timeout-seconds`: HTTP timeout.
+- `-max-retries`: Request retries.
+- `-retry-backoff-ms`: Retry backoff.
+- `-concurrency`: Parallel state fetch workers.
+- `-user-agent`: Custom User-Agent string.
 
-| Command | Description |
-| :--- | :--- |
-| `task setup-sandbox` | Configure a new Integrator Sandbox User (requires `.env` with `METRC_VENDOR_API_KEY`). |
-| `task run` | Run the main automation runner (dry-run by default). |
-| `task gen:all` | Run all generation steps (Spec -> Internal -> SDKs). |
-| `task test` | Run integration tests for all SDKs (including high-level packages). |
-| `task publish:all` | Build and publish all SDK packages (`client`, `wrapper`, `thunkmetrc`). |
-
-### Verification Commands
-Use these commands to verify the generated code:
-*   **C#**: `dotnet build`
-*   **Go**: `go build`
-*   **Rust**: `cargo check`
-*   **TypeScript**: `npm run build`
-*   **Python**: `python -m py_compile`
-*   **Java/Kotlin**: `mvn clean install` (Requires JDK 21+).
-
-### Debugging the Runner
-
-To debug specific endpoint groups in the internal runner:
-
-1.  **Filter Groups**:
-    In `automation/internal/runner/workflow.go`, modify `ExecuteGroupWorkflow`:
-    ```go
-    isTarget := strings.Contains(groupName, "Additives")
-    ```
-2.  **Permission Overrides**:
-    See [Configuration](CONFIGURATION.md).
+These can also be configured in `config.json` under `Scraper`.

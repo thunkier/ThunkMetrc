@@ -1,0 +1,63 @@
+meta {
+  name: GetHarvestsWaste
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/harvests/v2/waste
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  harvestId: 
+  pageNumber: 
+  pageSize: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of Waste records for a specified Harvest, identified by its Harvest Id, within a Facility identified by its License Number.
+
+  Permissions Required:
+  - View Harvests
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to return the list of waste harvests.
+  - harvestId (Required): The harvestId is the unique identifier for each harvest.
+  - pageNumber (Optional): The number of the data page from which to return data.
+  - pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20.
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 1,
+        "WasteTypeName": "Plant Material",
+        "WasteWeight": 10.0,
+        "UnitOfWeightName": "Ounces",
+        "ActualDate": "2014-11-19"
+      },
+      {
+        "Id": 2,
+        "WasteTypeName": "Root Ball",
+        "WasteWeight": 15.0,
+        "UnitOfWeightName": "Ounces",
+        "ActualDate": "2014-11-19"
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

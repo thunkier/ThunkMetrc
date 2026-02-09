@@ -1,0 +1,26 @@
+
+export interface PaginatedResponse<T> {
+  Total?: number;
+  PageSize?: number;
+  Current?: number;
+  Next?: number;
+  Previous?: number;
+  Data?: T[];
+}
+
+{{- define "GenerateModel" -}}
+{{- $model := . -}}
+{{- range $model.NestedTypes -}}
+{{ template "GenerateModel" . }}
+{{- end -}}
+
+export interface {{ $model.Name }} {
+{{- range $model.Properties }}
+  {{ .Name }}?: {{ ToTSType .Type }};
+{{- end }}
+}
+{{- end -}}
+
+{{- range .Models -}}
+{{ template "GenerateModel" . }}
+{{- end -}}

@@ -1,0 +1,116 @@
+package io.github.thunkier.thunkmetrc.wrapper.services
+
+import io.github.thunkier.thunkmetrc.client.MetrcClient
+import io.github.thunkier.thunkmetrc.wrapper.MetrcRateLimiter
+import io.github.thunkier.thunkmetrc.wrapper.MetrcExtensions
+import io.github.thunkier.thunkmetrc.wrapper.models.*
+import kotlinx.coroutines.flow.Flow
+
+class {{ .Name }}Service(private val client: MetrcClient, private val rateLimiter: MetrcRateLimiter) {
+
+{{- $svcName := $.Name }}
+{{- range .Operations }}
+{{- $methodName := ToPascalCase (CleanName .Name) }}
+{{- $declaredName := FormatMethodName $methodName "" }}
+{{- $clientMethodName := FormatMethodName $methodName $svcName }}
+{{- /* Use root group for method name, but here we are in service class */ -}}
+
+{{- /* Request Model Name Resolution */ -}}
+{{- $reqClassName := "" }}
+{{- $isList := false }}
+{{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+    {{- if .BodySchema }}
+        {{- $baseReqName := printf "%s%sRequest" $svcName $methodName }}
+        {{- if eq .BodySchema.Type "array" }}
+             {{- $reqClassName = printf "%sItem" $baseReqName }}
+             {{- $isList = true }}
+        {{- else }}
+             {{- $reqClassName = $baseReqName }}
+        {{- end }}
+    {{- end }}
+{{- end }}
+
+{{- /* Prepare Args */ -}}
+{{- $args := list }}
+{{- range .PathParams }}
+    {{- $args = append $args (printf "%s: String" (SafeKotlinField .)) }}
+{{- end }}
+{{- range .QueryParams }}
+    {{- $argName := SafeKotlinField (TrimSuffix "optional" .Name) }}
+    {{- $args = append $args (printf "%s: String? = null" $argName) }}
+{{- end }}
+
+{{- /* Prepare Iterator Args (exclude pageNumber) */ -}}
+{{- $iterArgs := list }}
+{{- range .PathParams }}
+    {{- $iterArgs = append $iterArgs (printf "%s: String" (SafeKotlinField .)) }}
+{{- end }}
+{{- range .QueryParams }}
+    {{- $argName := SafeKotlinField (TrimSuffix "optional" .Name) }}
+    {{- if ne $argName "pageNumber" }}
+        {{- $iterArgs = append $iterArgs (printf "%s: String? = null" $argName) }}
+    {{- end }}
+{{- end }}
+
+{{- /* Body logic */ -}}
+{{- $callBodyArg := "null" }}
+{{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+    {{- if .BodySchema }}
+        {{- if $isList }}
+             {{- $args = append $args (printf "body: List<%s>" $reqClassName) }}
+             {{- $iterArgs = append $iterArgs (printf "body: List<%s>" $reqClassName) }}
+        {{- else }}
+             {{- $args = append $args (printf "body: %s" $reqClassName) }}
+             {{- $iterArgs = append $iterArgs (printf "body: %s" $reqClassName) }}
+        {{- end }}
+        {{- $callBodyArg = "body" }}
+    {{- else }}
+        {{- $args = append $args "body: Any? = null" }}
+        {{- $iterArgs = append $iterArgs "body: Any? = null" }}
+        {{- $callBodyArg = "body" }}
+    {{- end }}
+{{- end }}
+
+    /**
+{{- if .Description }}
+{{ range Split (CleanDocs .Description) "\n" }}     * {{ . }}
+{{ end }}{{- end }}     * {{ .Method }} {{ .Path }}
+{{- range .PathParams }}
+     * @param {{ SafeKotlinField . }} Path parameter
+{{- end }}
+{{- range .QueryParams }}
+     * @param {{ SafeKotlinField (TrimSuffix "optional" .Name) }} Query parameter
+{{- end }}
+{{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+     * @param body Request body
+{{- end }}
+     * @throws Exception If request fails
+     * @return Response object
+     */
+    suspend fun {{ $declaredName }}({{ join $args ", " }}): {{ GetReturnType . }}? {
+        return rateLimiter.execute(
+            {{- /* Facility Arg */ -}}
+            {{- $facilityArg := "null" -}}
+            {{- range .PathParams -}}
+                {{- if eq (CleanName .) "licenseNumber" -}}
+                    {{- $facilityArg = (SafeKotlinField .) -}}
+                {{- end -}}
+            {{- end -}}
+            {{ $facilityArg }},
+            {{- /* IsGet */ -}}
+            {{- if eq .Method "GET" }}true{{ else }}false{{ end }},
+        ) { 
+            client.{{ ToCamelCase $svcName }}.{{ $clientMethodName }}(
+                {{- range .PathParams }}{{ SafeKotlinField . }}, {{ end -}}
+                {{- range .QueryParams }}{{ SafeKotlinField (TrimSuffix "optional" .Name) }}, {{ end -}}
+                {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}{{ $callBodyArg }}{{ end -}}
+            ) 
+        } as? {{ GetReturnType . }}
+    }
+
+
+
+
+{{- end }}
+}
+

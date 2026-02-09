@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PackagesNoteRequest",
+  "type": "object",
+  "properties": {
+    "Note": {
+      "type": "string"
+    },
+    "PackageLabel": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "Note",
+    "PackageLabel"
+  ]
+}

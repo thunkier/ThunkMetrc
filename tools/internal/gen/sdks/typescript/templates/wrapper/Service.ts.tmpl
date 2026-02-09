@@ -1,0 +1,86 @@
+
+import { MetrcClient as InternalMetrcClient } from '@thunkier/thunkmetrc-client';
+import { MetrcRateLimiter } from '../RateLimiter';
+import { iteratePages } from '../Utils';
+import { 
+    PaginatedResponse,
+    {{- range .Imports }}
+    {{- if ne . "PaginatedResponse" }}
+    {{ . }},
+    {{- end }}
+    {{- end }}
+} from '../models';
+
+export class {{ .Service.Name }}Service {
+  constructor(private client: InternalMetrcClient, private rateLimiter: MetrcRateLimiter) {}
+
+{{- $safeGroupCamel := ToCamelCase (CleanName .Service.Name) }}
+{{- $safeGroup := ToPascalCase (CleanName .Service.Name) }}
+
+{{- range .Service.Operations }}
+{{- $methodPascal := ToPascalCase (CleanName .Name) }}
+{{- $tsMethodName := FormatMethodName $methodPascal $safeGroup }}
+
+{{- /* Prepare Arguments */ -}}
+{{- $args := list }}
+{{- range .PathParams }}
+    {{- $args = append $args (printf "%s: string" .) }}
+{{- end }}
+
+{{- $bodyArg := "undefined" }}
+{{- $bodyType := "any" }}
+
+{{- /* Body Param Logic */ -}}
+{{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+    {{- if .BodySchema }}
+        {{- $reqClassName := printf "%sRequest" (ToPascalCase (CleanName .Name)) }}
+        {{- if eq .BodySchema.Type "array" }}
+             {{- $bodyType = printf "%sItem[]" $reqClassName }}
+        {{- else }}
+             {{- $bodyType = $reqClassName }}
+        {{- end }}
+        {{- $args = append $args (printf "body: %s" $bodyType) }}
+        {{- $bodyArg = "body" }}
+    {{- else }}
+        {{- $args = append $args "body?: any" }}
+        {{- $bodyArg = "body" }}
+    {{- end }}
+{{- else }}
+    {{- $args = append $args "body?: any" }}
+    {{- $bodyArg = "body" }}
+{{- end }}
+
+{{- /* Query Params */ -}}
+{{- range .QueryParams }}
+    {{- $argName := TrimSuffix "optional" .Name }}
+    {{- $args = append $args (printf "%s?: %s" $argName (InferType $argName)) }}
+{{- end }}
+
+  /**
+{{ range Split (CleanDocs .Description) "\n" }}   * {{ . }}
+{{ end }}   * {{ .Method }} {{ .Name }}
+   */
+  public async {{ $tsMethodName }}({{ join $args ", " }}): Promise<{{ GetReturnType . }}> {
+    return this.rateLimiter.execute(
+        {{- /* Facility Arg Logic */ -}}
+        {{- $facilityArg := "null" -}}
+        {{- range .PathParams -}}
+            {{- if eq (CleanName .) "licenseNumber" -}}
+                {{- $facilityArg = . -}}
+            {{- end -}}
+        {{- end -}}
+        {{ $facilityArg }},
+        {{- /* IsGet Logic */ -}}
+        {{- if eq .Method "GET" }}true{{ else }}false{{ end }},
+        () => this.client.{{ $tsMethodName }}(
+            {{- range .PathParams }}{{ . }}, {{ end -}}
+            {{ $bodyArg }},
+            {{- range .QueryParams }}
+            {{- TrimSuffix "optional" .Name }},
+            {{- end }}
+        )
+    );
+  }
+{{- end }}
+}
+

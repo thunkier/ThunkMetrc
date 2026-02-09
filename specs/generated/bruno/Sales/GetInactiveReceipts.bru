@@ -1,0 +1,90 @@
+meta {
+  name: GetInactiveReceipts
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/sales/v2/receipts/inactive
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  lastModifiedStart: 
+  lastModifiedEnd: 
+  pageNumber: 
+  pageSize: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Returns a list of inactive sales receipts for a Facility, filtered by optional sales or last modified date ranges.
+
+  Permissions Required:
+  - View Sales
+  - Manage Sales
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to return the list of inactive receipts.
+  - lastModifiedStart (Optional): The last modified start timestamp. If specified, also specifying any of the sales date parameters will result in an error.
+  - lastModifiedEnd (Optional): The last modified end timestamp. If specified, also specifying any of the sales date parameters will result in an error.
+  - pageNumber (Optional): The number of the data page from which to return data.
+  - pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20.
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 1,
+        "ReceiptNumber": null,
+        "ExternalReceiptNumber": "ABC-123",
+        "SalesDateTime": "2016-01-01T17:35:45.000",
+        "SalesCustomerType": "Consumer",
+        "PatientLicenseNumber": null,
+        "CaregiverLicenseNumber": null,
+        "IdentificationMethod": null,
+        "PatientRegistrationLocationId": null,
+        "TotalPackages": 0,
+        "TotalPrice": 0.0,
+        "Transactions": [],
+        "IsFinal": false,
+        "ArchivedDate": null,
+        "RecordedDateTime": "0001-01-01T00:00:00+00:00",
+        "RecordedByUserName": null,
+        "LastModified": "0001-01-01T00:00:00+00:00"
+      },
+      {
+        "Id": 2,
+        "ReceiptNumber": null,
+        "ExternalReceiptNumber": "ABC-124",
+        "SalesDateTime": "2016-01-02T17:37:23.000",
+        "SalesCustomerType": "Consumer",
+        "PatientLicenseNumber": null,
+        "CaregiverLicenseNumber": null,
+        "IdentificationMethod": null,
+        "PatientRegistrationLocationId": null,
+        "TotalPackages": 0,
+        "TotalPrice": 0.0,
+        "Transactions": [],
+        "IsFinal": false,
+        "ArchivedDate": null,
+        "RecordedDateTime": "0001-01-01T00:00:00+00:00",
+        "RecordedByUserName": null,
+        "LastModified": "0001-01-01T00:00:00+00:00"
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

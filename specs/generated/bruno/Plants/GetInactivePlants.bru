@@ -1,0 +1,133 @@
+meta {
+  name: GetInactivePlants
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/plants/v2/inactive
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  lastModifiedStart: 
+  lastModifiedEnd: 
+  pageNumber: 
+  pageSize: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves inactive plants at a specified Facility.
+
+  Permissions Required:
+  - View Veg/Flower Plants
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to return the list of inactive plants.
+  - lastModifiedStart (Optional): The last modified start timestamp
+  - lastModifiedEnd (Optional): The last modified end timestamp
+  - pageNumber (Optional): The number of the data page from which to return data.
+  - pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20.
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 10021,
+        "Label": "ABCDEF012345670000010021",
+        "State": "Harvested",
+        "GrowthPhase": "Flowering",
+        "GroupTagTypeMax": 0,
+        "TagTypeMax": 0,
+        "PlantBatchId": 2,
+        "PlantBatchName": "Demo Plant Batch",
+        "PlantBatchTypeId": 2,
+        "PlantBatchTypeName": "Clone",
+        "StrainId": 1,
+        "StrainName": "Spring Hill Kush",
+        "LocationId": 2,
+        "LocationName": "Plants Location",
+        "LocationTypeName": null,
+        "SublocationId": null,
+        "SublocationName": null,
+        "PatientLicenseNumber": null,
+        "HarvestId": 2,
+        "HarvestedUnitOfWeightName": "Ounces",
+        "HarvestedUnitOfWeightAbbreviation": "oz",
+        "HarvestedWetWeight": 1.0,
+        "HarvestCount": 0,
+        "IsOnHold": false,
+        "IsOnInvestigation": false,
+        "IsOnInvestigationHold": false,
+        "IsOnInvestigationRecall": false,
+        "PlantedDate": "2014-10-10",
+        "VegetativeDate": "2014-10-20",
+        "FloweringDate": "2014-11-09",
+        "HarvestedDate": "2014-11-19",
+        "DestroyedDate": null,
+        "DestroyedNote": null,
+        "DestroyedByUserName": null,
+        "MotherPlantDate": null,
+        "ClonedCount": null,
+        "SurvivedCount": null,
+        "DescendedCount": null,
+        "LastModified": "0001-01-01T00:00:00+00:00"
+      },
+      {
+        "Id": 10022,
+        "Label": "ABCDEF012345670000010022",
+        "State": "Harvested",
+        "GrowthPhase": "Flowering",
+        "GroupTagTypeMax": 0,
+        "TagTypeMax": 0,
+        "PlantBatchId": 2,
+        "PlantBatchName": "Demo Plant Batch",
+        "PlantBatchTypeId": 2,
+        "PlantBatchTypeName": "Clone",
+        "StrainId": 1,
+        "StrainName": "Spring Hill Kush",
+        "LocationId": 2,
+        "LocationName": "Plants Location",
+        "LocationTypeName": null,
+        "SublocationId": null,
+        "SublocationName": null,
+        "PatientLicenseNumber": null,
+        "HarvestId": 2,
+        "HarvestedUnitOfWeightName": "Ounces",
+        "HarvestedUnitOfWeightAbbreviation": "oz",
+        "HarvestedWetWeight": 1.0,
+        "HarvestCount": 0,
+        "IsOnHold": false,
+        "IsOnInvestigation": false,
+        "IsOnInvestigationHold": false,
+        "IsOnInvestigationRecall": false,
+        "PlantedDate": "2014-10-10",
+        "VegetativeDate": "2014-10-20",
+        "FloweringDate": "2014-11-09",
+        "HarvestedDate": "2014-11-19",
+        "DestroyedDate": null,
+        "DestroyedNote": null,
+        "DestroyedByUserName": null,
+        "MotherPlantDate": null,
+        "ClonedCount": null,
+        "SurvivedCount": null,
+        "DescendedCount": null,
+        "LastModified": "0001-01-01T00:00:00+00:00"
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

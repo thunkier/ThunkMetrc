@@ -1,0 +1,262 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SalesSalesDeliveriesRetailerRequest",
+  "type": "object",
+  "properties": {
+    "DateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Destinations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ConsumerId": {
+            "type": "string"
+          },
+          "EstimatedArrivalDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "PatientLicenseNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "RecipientAddressCity": {
+            "type": "string"
+          },
+          "RecipientAddressCounty": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "RecipientAddressPostalCode": {
+            "type": "string"
+          },
+          "RecipientAddressState": {
+            "type": "string"
+          },
+          "RecipientAddressStreet1": {
+            "type": "string"
+          },
+          "RecipientAddressStreet2": {
+            "type": "string"
+          },
+          "RecipientName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "RecipientZoneId": {
+            "type": "string"
+          },
+          "SalesCustomerType": {
+            "type": "string"
+          },
+          "Transactions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "CityTax": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "CountyTax": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "DiscountAmount": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "ExciseTax": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "InvoiceNumber": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "MunicipalTax": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "PackageLabel": {
+                  "type": "string"
+                },
+                "Price": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "QrCodes": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "Quantity": {
+                  "type": "number"
+                },
+                "SalesTax": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "SubTotal": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "TotalAmount": {
+                  "type": "number"
+                },
+                "UnitOfMeasure": {
+                  "type": "string"
+                },
+                "UnitThcContent": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "UnitThcContentUnitOfMeasure": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "UnitThcPercent": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "UnitWeight": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "UnitWeightUnitOfMeasure": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "PackageLabel",
+                "Quantity",
+                "TotalAmount",
+                "UnitOfMeasure"
+              ]
+            }
+          }
+        },
+        "required": [
+          "ConsumerId",
+          "EstimatedArrivalDateTime",
+          "RecipientAddressCity",
+          "RecipientAddressPostalCode",
+          "RecipientAddressState",
+          "RecipientAddressStreet1",
+          "RecipientAddressStreet2",
+          "RecipientZoneId",
+          "SalesCustomerType",
+          "Transactions"
+        ]
+      }
+    },
+    "DriverEmployeeId": {
+      "type": "string"
+    },
+    "DriverName": {
+      "type": "string"
+    },
+    "DriversLicenseNumber": {
+      "type": "string"
+    },
+    "EstimatedDepartureDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Packages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "DateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "PackageLabel": {
+            "type": "string"
+          },
+          "Quantity": {
+            "type": "number"
+          },
+          "TotalPrice": {
+            "type": "number"
+          },
+          "UnitOfMeasure": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "DateTime",
+          "PackageLabel",
+          "Quantity",
+          "TotalPrice",
+          "UnitOfMeasure"
+        ]
+      }
+    },
+    "PhoneNumberForQuestions": {
+      "type": "string"
+    },
+    "VehicleLicensePlateNumber": {
+      "type": "string"
+    },
+    "VehicleMake": {
+      "type": "string"
+    },
+    "VehicleModel": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "DateTime",
+    "Destinations",
+    "DriverEmployeeId",
+    "DriverName",
+    "DriversLicenseNumber",
+    "EstimatedDepartureDateTime",
+    "Packages",
+    "PhoneNumberForQuestions",
+    "VehicleLicensePlateNumber",
+    "VehicleMake",
+    "VehicleModel"
+  ]
+}

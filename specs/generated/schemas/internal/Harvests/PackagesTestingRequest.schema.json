@@ -1,0 +1,169 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HarvestsPackagesTestingRequest",
+  "type": "object",
+  "properties": {
+    "ActualDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "DecontaminateProduct": {
+      "type": "boolean"
+    },
+    "DecontaminationDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "DecontaminationSteps": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ExpirationDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Ingredients": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "HarvestId": {
+            "type": "integer"
+          },
+          "HarvestName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "UnitOfWeight": {
+            "type": "string"
+          },
+          "Weight": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "HarvestId",
+          "UnitOfWeight",
+          "Weight"
+        ]
+      }
+    },
+    "IsDonation": {
+      "type": "boolean"
+    },
+    "IsProductionBatch": {
+      "type": "boolean"
+    },
+    "IsTradeSample": {
+      "type": "boolean"
+    },
+    "Item": {
+      "type": "string"
+    },
+    "LabTestStageId": {
+      "type": "integer"
+    },
+    "Location": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Note": {
+      "type": "string"
+    },
+    "PatientLicenseNumber": {
+      "type": "string"
+    },
+    "ProcessingJobTypeId": {
+      "type": "integer"
+    },
+    "ProductRequiresDecontamination": {
+      "type": "boolean"
+    },
+    "ProductRequiresRemediation": {
+      "type": "boolean"
+    },
+    "ProductionBatchNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "RemediateProduct": {
+      "type": "boolean"
+    },
+    "RemediationDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "RemediationMethodId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "RemediationSteps": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "RequiredLabTestBatches": {
+      "type": "array"
+    },
+    "SellByDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Sublocation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Tag": {
+      "type": "string"
+    },
+    "UnitOfWeight": {
+      "type": "string"
+    },
+    "UseByDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "ActualDate",
+    "DecontaminateProduct",
+    "Ingredients",
+    "IsDonation",
+    "IsProductionBatch",
+    "IsTradeSample",
+    "Item",
+    "LabTestStageId",
+    "Note",
+    "PatientLicenseNumber",
+    "ProcessingJobTypeId",
+    "ProductRequiresDecontamination",
+    "ProductRequiresRemediation",
+    "RemediateProduct",
+    "RequiredLabTestBatches",
+    "Tag",
+    "UnitOfWeight"
+  ]
+}

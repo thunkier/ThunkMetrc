@@ -1,0 +1,29 @@
+meta {
+  name: GetInactiveUnitsOfMeasure
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/unitsofmeasure/v2/inactive
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves all inactive units of measure.
+
+  Example Response:
+  [
+    {
+      "QuantityType": "WeightBased",
+      "Name": "Tonns",
+      "Abbreviation": "t"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LabTestsLabTestsType",
+  "type": "object",
+  "properties": {
+    "AlwaysPasses": {
+      "type": "boolean"
+    },
+    "DependencyMode": {
+      "type": "string"
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "InformationalOnly": {
+      "type": "boolean"
+    },
+    "LabTestResultExpirationDays": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "LabTestResultMaximum": {
+      "type": "integer"
+    },
+    "LabTestResultMinimum": {
+      "type": "integer"
+    },
+    "LabTestResultMode": {
+      "type": "string"
+    },
+    "MaxAllowedFailureCount": {
+      "type": "integer"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "RequiresTestResult": {
+      "type": "boolean"
+    },
+    "ResearchAndDevelopment": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "AlwaysPasses",
+    "DependencyMode",
+    "Id",
+    "InformationalOnly",
+    "LabTestResultMaximum",
+    "LabTestResultMinimum",
+    "LabTestResultMode",
+    "MaxAllowedFailureCount",
+    "Name",
+    "RequiresTestResult",
+    "ResearchAndDevelopment"
+  ]
+}

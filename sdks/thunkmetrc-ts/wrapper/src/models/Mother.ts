@@ -1,0 +1,42 @@
+
+export interface Mother {
+    ClonedCount?: number;
+    DescendedCount?: number;
+    DestroyedByUserName?: string;
+    DestroyedDate?: string;
+    DestroyedNote?: string;
+    FloweringDate?: string;
+    GroupTagTypeMax?: number;
+    GrowthPhase?: string;
+    HarvestCount?: number;
+    HarvestId?: number;
+    HarvestedDate?: string;
+    HarvestedUnitOfWeightAbbreviation?: string;
+    HarvestedUnitOfWeightName?: string;
+    HarvestedWetWeight?: number;
+    Id?: number;
+    IsOnHold?: boolean;
+    IsOnInvestigation?: boolean;
+    IsOnInvestigationHold?: boolean;
+    IsOnInvestigationRecall?: boolean;
+    Label?: string;
+    LastModified?: string;
+    LocationId?: number;
+    LocationName?: string;
+    LocationTypeName?: string;
+    MotherPlantDate?: string;
+    PatientLicenseNumber?: string;
+    PlantBatchId?: number;
+    PlantBatchName?: string;
+    PlantBatchTypeId?: number;
+    PlantBatchTypeName?: string;
+    PlantedDate?: string;
+    State?: string;
+    StrainId?: number;
+    StrainName?: string;
+    SublocationId?: number;
+    SublocationName?: string;
+    SurvivedCount?: number;
+    TagTypeMax?: number;
+    VegetativeDate?: string;
+}

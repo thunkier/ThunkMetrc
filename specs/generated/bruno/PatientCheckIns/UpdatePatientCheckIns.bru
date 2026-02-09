@@ -1,0 +1,46 @@
+meta {
+  name: UpdatePatientCheckIns
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/patient-checkins/v2
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 4,
+    "PatientLicenseNumber": "X100420",
+    "CheckInLocationId": 4,
+    "RegistrationStartDate": "2022-11-01",
+    "RegistrationExpiryDate": "2024-10-31",
+    "CheckInDate": "2022-11-06"
+  }
+]
+}
+
+docs {
+  Updates patient check-ins for a specified Facility.
+
+  Permissions Required:
+  - ManagePatientsCheckIns
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to update the list of Patient check-ins.
+
+  Example Response:
+  No response
+}

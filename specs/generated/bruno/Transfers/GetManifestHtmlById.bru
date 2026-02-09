@@ -1,0 +1,281 @@
+meta {
+  name: GetManifestHtmlById
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/transfers/v2/manifest/{id}/html
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Get Transfer Manifest HTML for a given Transfer Id. Please note: The {id} parameter above represents a Transfer Id.
+
+  Permissions Required:
+  - Manage Transfers
+  - View Transfers
+
+  Parameters:
+  - licenseNumber (Required): 
+
+  Example Response:
+  <!doctype html>
+  <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Transfer Manifest 0000000001</title>
+    <link href="/Public/stylesheets/report/transferManifest.css" rel="stylesheet" />
+  </head>
+  <body>
+    <button id="print" class="no-print">Print Manifest</button>
+  
+    <div class="article">
+      <!-- Header (from template_header) -->
+      <div class="header">
+        <table class="table-attach-bottom">
+          <tbody>
+            <tr>
+              <td style="width:20%">
+                <img alt="metrcLogo" style="width:1.25in" src="data:image/png;base64,iVBORw0K..." />
+              </td>
+              <td style="font-size:12pt;font-weight:bold;text-align:center;width:60%;vertical-align:middle">
+                <p>
+                  <span>METRC®</span><br />
+                  <span>MARIJUANA</span> <span style="text-decoration:underline">TRANSPORTATION</span> MANIFEST
+                </p>
+              </td>
+              <td style="width:20%"></td>
+            </tr>
+            <tr style="height:.425in">
+              <td colspan="3" style="background-color:#E4FFE4;font-size:8pt;text-align:center;vertical-align:middle">
+                <p>
+                  All sales transactions are to be completed prior to transportation of any MARIJUANA. The receiving entity may<br />
+                  reject product delivered, but amount delivered must be limited to amount agreed upon in prior sales transaction.
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table-bordered">
+          <tbody class="table-bordered-tbody">
+            <tr class="table-attach-bottom">
+              <td style="background-color:#E4FFE4;font-size:11pt;font-weight:bold;width:23.5%">Manifest No.</td>
+              <td style="font-size:11pt;font-weight:bold;text-align:center;width:32.5%">0000000001</td>
+              <td style="background-color:#E4FFE4;font-size:11pt;font-weight:bold;width:19%">Date Created</td>
+              <td style="font-size:11pt;text-align:center;width:25%">10/07/2025 2:13 PM</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- Destination (from template_body_destination) -->
+      <div class="body">
+        <table class="table-bordered table-attach">
+          <tbody class="table-bordered-tbody">
+            <tr>
+              <td style="font-size:8pt;font-weight:bold">Originating&nbsp;Entity</td>
+              <td colspan="2" style="font-size:8pt">AK LOFTY ESTABLISHMENT, LLC</td>
+              <td style="background-color:#f5f5f5;font-size:8pt;font-weight:bold;text-align:center">For Agency Use Only</td>
+            </tr>
+            <tr>
+              <td style="font-size:8pt;font-weight:bold">Originating License Number</td>
+              <td colspan="2" style="font-size:8pt">4a-X0001</td>
+              <td rowspan="2" style="background-color:#f5f5f5"></td>
+            </tr>
+            <tr>
+              <td style="font-size:8pt;font-weight:bold">Address&nbsp;of&nbsp;Originating&nbsp;Entity</td>
+              <td colspan="2" style="font-size:8pt">
+                550 West 7th Ave.<br />Suite 1600<br />Anchorage, AK 99501<br />County: Anchorage
+              </td>
+            </tr>
+            <tr>
+              <td style="font-size:8pt;font-weight:bold">Phone&nbsp;No.&nbsp;of&nbsp;Originating&nbsp;Entity</td>
+              <td style="font-size:8pt">+1-800-420-0246</td>
+              <td style="font-size:8pt;font-weight:bold"></td>
+              <td style="font-size:8pt;font-weight:bold"></td>
+            </tr>
+          </tbody>
+        </table>
+  
+        <table class="table-bordered table-attach">
+          <tbody class="table-bordered-tbody">
+            <tr>
+              <td colspan="4" style="font-weight:bold">Contact Phone No.&nbsp;for Inquiries: 123.456.7890</td>
+            </tr>
+            <tr style="height:.22in">
+              <td style="background-color:#E4FFE4;font-size:11pt;font-weight:bold;width:23.5%">1. Destination</td>
+              <td style="background-color:#E4FFE4;font-size:9pt;width:30%;vertical-align:middle">AK LOFTY ESTABLISHMENT, LLC</td>
+              <td style="background-color:#E4FFE4;font-size:11pt;font-weight:bold;width:28.5%">Destination Phone No.</td>
+              <td style="background-color:#E4FFE4;font-size:9pt;width:18%;vertical-align:middle">+1-800-420-0246</td>
+            </tr>
+            <tr>
+              <td style="font-size:8pt;font-weight:bold">Invoice Number</td>
+              <td colspan="3" style="font-size:8pt;text-align:left">Invoice 123</td>
+            </tr>
+            <tr>
+              <td style="font-size:8pt;font-weight:bold">Destination License Number</td>
+              <td style="font-size:8pt;text-align:left">3a-X0001</td>
+              <td style="font-size:8pt;font-weight:bold">Date&nbsp;and&nbsp;Approx.&nbsp;Time of Departure</td>
+              <td style="font-size:8pt;text-align:center">10/08/2025 12:13 PM</td>
+            </tr>
+            <tr>
+              <td rowspan="4" style="font-size:8pt;font-weight:bold">Address&nbsp;of&nbsp;Destination</td>
+              <td rowspan="4" style="font-size:8pt;text-align:left">
+                550 West 7th Ave.<br />Suite 1600<br />Anchorage, AK 99501<br />County: Anchorage
+              </td>
+              <td style="font-size:8pt;font-weight:bold"></td>
+              <td style="font-size:8pt;text-align:center"></td>
+            </tr>
+            <tr>
+              <td style="font-size:8pt;font-weight:bold">Date&nbsp;and&nbsp;Approx.&nbsp;Time of Arrival</td>
+              <td style="font-size:8pt;text-align:center">10/09/2025 12:13 AM</td>
+            </tr>
+            <tr>
+              <td style="font-size:8pt;font-weight:bold"></td>
+              <td style="font-size:8pt;text-align:center"></td>
+            </tr>
+            <tr>
+              <td style="font-size:8pt;font-weight:bold">Date/Time Received</td>
+              <td style="font-size:8pt;text-align:center"></td>
+            </tr>
+            <tr style="height:.8in">
+              <td colspan="2" style="font-size:8pt;font-weight:bold">
+                Route&nbsp;to&nbsp;be&nbsp;Traveled<br /><br />
+                <span style="font-weight:normal">I will use this route.</span>
+              </td>
+              <td colspan="2" style="background-color:#FFFFF0;font-size:8pt;font-weight:bold">
+                Notes:&nbsp;<span style="font-size:6pt;font-weight:bold">details for extenuating circumstances (e.g., road closure, flat tire, etc.)</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- Transporter (from template_body_transporter) -->
+      <div class="body">
+        <table class="table-bordered table-attach">
+          <tbody class="table-bordered-tbody">
+            <tr>
+              <td class="background-color-f1fff1" style="font-size:9pt;font-weight:bold">1. Outbound Transporter</td>
+              <td class="background-color-f1fff1" style="font-size:8pt;vertical-align:middle">AK LOFTY ESTABLISHMENT, LLC</td>
+              <td colspan="2" class="background-color-f1fff1" style="font-size:9pt;font-weight:bold;text-align:center">No Layover Scheduled</td>
+            </tr>
+            <tr>
+              <td style="font-size:8pt;font-weight:bold">Transporter&nbsp;License&nbsp;Number</td>
+              <td style="font-size:8pt">4a-X0001</td>
+              <td style="font-size:8pt;font-weight:bold">Date&nbsp;and&nbsp;Approx.&nbsp;Time of Check-In</td>
+              <td style="font-size:8pt;text-align:center"></td>
+            </tr>
+            <tr>
+              <td rowspan="3" style="font-size:8pt;font-weight:bold">Address of Transporter</td>
+              <td rowspan="3" style="font-size:8pt">
+                550 West 7th Ave.<br />Suite 1600<br />Anchorage, AK 99501<br />County: Anchorage
+              </td>
+              <td style="font-size:8pt;font-weight:bold"></td>
+              <td style="font-size:8pt;text-align:center"></td>
+            </tr>
+            <tr>
+              <td style="font-size:8pt;font-weight:bold">Date&nbsp;and&nbsp;Approx.&nbsp;Time of Check-Out</td>
+              <td style="font-size:8pt;text-align:center"></td>
+            </tr>
+            <tr>
+              <td style="font-size:8pt;font-weight:bold"></td>
+              <td style="font-size:8pt;text-align:center"></td>
+            </tr>
+            <tr>
+              <td colspan="4" style="font-weight:bold">
+                Contact Phone No.&nbsp;for Inquiries: <span style="font-weight:normal">123.456.7890</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- Transporter Details (from template_body_transporter_details) -->
+      <div class="body">
+        <table class="table-bordered table-attach">
+          <tbody class="table-bordered-tbody">
+            <tr>
+              <td class="background-color-f1fff1" style="font-size:8pt;font-weight:bold;width:23.5%">Name&nbsp;of&nbsp;Person&nbsp;Transporting</td>
+              <td class="background-color-f1fff1" style="font-size:8pt;width:30%">X</td>
+              <td class="background-color-f1fff1" style="font-size:8pt;font-weight:bold;width:28.5%">Employee ID of Driver</td>
+              <td class="background-color-f1fff1" style="font-size:8pt;width:18%">X</td>
+            </tr>
+            <tr>
+              <td style="font-size:8pt;font-weight:bold">State Driver's License No.</td>
+              <td style="font-size:8pt">X</td>
+              <td style="font-size:8pt;font-weight:bold">Signature of Person Transporting</td>
+              <td style="background-color:#FFFFF0"></td>
+            </tr>
+            <tr>
+              <td style="font-size:8pt;font-weight:bold">Make,&nbsp;Model,&nbsp;License&nbsp;Plate&nbsp;No.</td>
+              <td style="font-size:8pt">X X X</td>
+              <td style="font-size:8pt;font-weight:bold">Leg of Layover Trip</td>
+              <td style="font-size:8pt"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- Package (from template_body_package) -->
+      <div class="body">
+        <table class="table-bordered table-attach">
+          <tbody class="table-bordered-tbody">
+            <tr>
+              <td class="background-color-dcdcdc" style="font-size:9pt;font-weight:bold;width:23.5%">1. Package | <span style="font-weight:normal">Shipped</span></td>
+              <td class="background-color-dcdcdc" style="font-size:9pt;font-weight:bold;text-align:center;width:30%">Production Batch No.</td>
+              <td class="background-color-dcdcdc" style="font-size:9pt;font-weight:bold;text-align:center;width:33%">Item Name</td>
+              <td class="background-color-dcdcdc" style="font-size:9pt;font-weight:bold;text-align:center;width:13.5%">Quantity</td>
+            </tr>
+            <tr>
+              <td style="font-size:8pt;text-align:center">
+                ABCDEF000000010000011609<br />
+                Lab Test: NotSubmitted<br />
+                Contains Retail IDs: No
+              </td>
+              <td style="font-size:8pt"></td>
+              <td style="font-size:8pt">Buds - AK-47<br />(Bud/Flower)</td>
+              <td style="font-size:8pt">Shp: 14 g</td>
+            </tr>
+            <tr>
+              <td style="font-size:9pt;font-weight:bold">Item Details</td>
+              <td colspan="3" style="font-size:7pt">Strain: AK-47</td>
+            </tr>
+            <tr>
+              <td style="font-size:8pt;font-weight:bold">Source Harvest</td>
+              <td colspan="3" style="font-size:8pt">2025-08-18-Harvest Location-M</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- Footer (from template_footer) -->
+      <div class="footer">
+        <table>
+          <tfoot>
+            <tr style="height:.35in">
+              <td style="font-size:8pt;width:25%;vertical-align:bottom">10/15/2025 08:27:48 AM -04:00</td>
+              <td style="text-align:center;width:40%;vertical-align:bottom">Page 1 of 1</td>
+              <td style="font-size:8pt;text-align:right;width:25%;vertical-align:bottom">
+                Transfer Form (ll)<br />Metrc®&nbsp;Form&nbsp;rev. 2024-08.1
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  
+  </body>
+  </html>
+}

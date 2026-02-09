@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PackagesExternalidRequest",
+  "type": "object",
+  "properties": {
+    "ExternalId": {
+      "type": "string"
+    },
+    "PackageLabel": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "ExternalId",
+    "PackageLabel"
+  ]
+}

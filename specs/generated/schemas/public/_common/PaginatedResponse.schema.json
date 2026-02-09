@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PaginatedResponse",
+  "type": "object",
+  "properties": {
+    "CurrentPage": {
+      "type": "integer"
+    },
+    "Data": {
+      "description": "The array of items",
+      "type": "array"
+    },
+    "Page": {
+      "type": "integer"
+    },
+    "PageSize": {
+      "type": "integer"
+    },
+    "RecordsOnPage": {
+      "type": "integer"
+    },
+    "Total": {
+      "type": "integer"
+    },
+    "TotalPages": {
+      "type": "integer"
+    },
+    "TotalRecords": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "CurrentPage",
+    "Data",
+    "Page",
+    "PageSize",
+    "RecordsOnPage",
+    "Total",
+    "TotalPages",
+    "TotalRecords"
+  ]
+}

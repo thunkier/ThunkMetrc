@@ -1,0 +1,53 @@
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+namespace ThunkMetrc.Client
+{
+    public partial class MetrcClient
+    {
+{{- $svcName := .Name | CleanName | ToPascalCase }}
+{{- range .Operations }}
+{{- $opName := .Name | CleanName | ToPascalCase }}
+{{- $methodName := FormatMethodName $opName $svcName }}
+        /// <summary>
+{{ .Description | CleanDocs | FormatDocs }}
+        /// </summary>
+{{- $paramDocs := ParseParamDocs .Description }}
+{{- range .PathParams }}
+        /// <param name="{{ . }}">{{ index $paramDocs . | default . }}</param>
+{{- end }}
+{{- if (or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH")) }}
+        /// <param name="body">Request body.</param>
+{{- end }}
+{{- range .QueryParams }}
+{{- $pName := .Name | TrimSuffix "optional" }}
+        /// <param name="{{ $pName }}">{{ index $paramDocs $pName | default "Optional query parameter." }}</param>
+{{- end }}
+{{- if eq .Method "GET" }}
+        public async Task<object> {{ $methodName }}({{ FormatParams . }})
+        {
+            var queryParams = new Dictionary<string, string>();
+            {{- range .QueryParams }}
+            {{- $pName := .Name | TrimSuffix "optional" }}
+            if (!string.IsNullOrEmpty({{ $pName }})) queryParams["{{ $pName }}"] = {{ $pName }};
+            {{- end }}
+            return await SendAsync<object>(new HttpMethod("{{ .Method }}"), $"{{ FormatUrl . }}", {{ SendArgs . }}, queryParams);
+        }
+{{- else }}
+        public async Task {{ $methodName }}({{ FormatParams . }})
+        {
+            var queryParams = new Dictionary<string, string>();
+            {{- range .QueryParams }}
+            {{- $pName := .Name | TrimSuffix "optional" }}
+            if (!string.IsNullOrEmpty({{ $pName }})) queryParams["{{ $pName }}"] = {{ $pName }};
+            {{- end }}
+            await SendAsync(new HttpMethod("{{ .Method }}"), $"{{ FormatUrl . }}", {{ SendArgs . }}, queryParams);
+        }
+{{- end }}
+
+{{- end }}
+    }
+}
+

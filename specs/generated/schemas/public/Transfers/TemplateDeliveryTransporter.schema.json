@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TransfersTemplateDeliveryTransporter",
+  "type": "object",
+  "properties": {
+    "ShipmentDeliveryId": {
+      "type": "integer"
+    },
+    "TransporterDirection": {
+      "type": "string"
+    },
+    "TransporterFacilityLicenseNumber": {
+      "type": "string"
+    },
+    "TransporterFacilityName": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "ShipmentDeliveryId",
+    "TransporterDirection",
+    "TransporterFacilityLicenseNumber",
+    "TransporterFacilityName"
+  ]
+}

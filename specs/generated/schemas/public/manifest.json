@@ -1,0 +1,2340 @@
+{
+  "AdditivesTemplates/CreateAdditivesTemplates": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "AdditivesTemplatesRequest",
+    "requestSchemaFile": "AdditivesTemplates/AdditivesTemplatesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "AdditivesTemplates/GetActiveAdditivesTemplates": {
+    "responseType": "AdditivesTemplate",
+    "schemaFile": "_common/AdditivesTemplate.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "AdditivesTemplates/GetAdditivesTemplateById": {
+    "responseType": "AdditivesTemplate",
+    "schemaFile": "_common/AdditivesTemplate.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "AdditivesTemplates/GetAdditivesTemplatesById": {
+    "responseType": "AdditivesTemplate",
+    "schemaFile": "_common/AdditivesTemplate.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "AdditivesTemplates/GetInactiveAdditivesTemplates": {
+    "responseType": "AdditivesTemplate",
+    "schemaFile": "_common/AdditivesTemplate.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "AdditivesTemplates/UpdateAdditivesTemplates": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "AdditivesTemplatesRequest",
+    "requestSchemaFile": "AdditivesTemplates/AdditivesTemplatesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "CaregiversStatus/GetCaregiversStatusByCaregiverLicenseNumber": {
+    "responseType": "CaregiversStatus",
+    "schemaFile": "CaregiversStatus/CaregiversStatus.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Employees/GetEmployees": {
+    "responseType": "Employee",
+    "schemaFile": "Employees/Employee.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Employees/GetPermissions": {
+    "responseType": "",
+    "schemaFile": "",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Facilities/GetFacilities": {
+    "responseType": "Facility",
+    "schemaFile": "Facilities/Facility.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Harvests/CreateHarvestsPackages": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "HarvestsPackagesRequest",
+    "requestSchemaFile": "Harvests/HarvestsPackagesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Harvests/CreateHarvestsWaste": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "HarvestsWasteRequest",
+    "requestSchemaFile": "Harvests/HarvestsWasteRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Harvests/CreatePackagesTesting": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PackagesTestingRequest",
+    "requestSchemaFile": "Harvests/PackagesTestingRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Harvests/FinishHarvests": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "FinishHarvestsRequest",
+    "requestSchemaFile": "Harvests/FinishHarvestsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Harvests/GetActiveHarvests": {
+    "responseType": "Harvest",
+    "schemaFile": "_common/Harvest.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Harvests/GetHarvestById": {
+    "responseType": "Harvest",
+    "schemaFile": "_common/Harvest.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Harvests/GetHarvestsById": {
+    "responseType": "Harvest",
+    "schemaFile": "_common/Harvest.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Harvests/GetHarvestsWaste": {
+    "responseType": "HarvestsWaste",
+    "schemaFile": "Harvests/HarvestsWaste.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Harvests/GetInactiveHarvests": {
+    "responseType": "Harvest",
+    "schemaFile": "_common/Harvest.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Harvests/GetOnHoldHarvests": {
+    "responseType": "Harvest",
+    "schemaFile": "_common/Harvest.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Harvests/GetWasteTypes": {
+    "responseType": "WasteType",
+    "schemaFile": "Harvests/WasteType.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Harvests/UnfinishHarvests": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "UnfinishHarvestsRequest",
+    "requestSchemaFile": "Harvests/UnfinishHarvestsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Harvests/UpdateHarvestsLocation": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "HarvestsLocationRequest",
+    "requestSchemaFile": "Harvests/HarvestsLocationRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Harvests/UpdateRename": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "RenameRequest",
+    "requestSchemaFile": "Harvests/RenameRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Harvests/UpdateRestoreHarvestedPlants": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "RestoreHarvestedPlantsRequest",
+    "requestSchemaFile": "Harvests/RestoreHarvestedPlantsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Items/CreateBrand": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "ItemsBrandRequest",
+    "requestSchemaFile": "Items/ItemsBrandRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Items/CreateFile": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "FileRequest",
+    "requestSchemaFile": "Items/FileRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Items/CreateItems": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "ItemsRequest",
+    "requestSchemaFile": "Items/ItemsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Items/CreatePhoto": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PhotoRequest",
+    "requestSchemaFile": "Items/PhotoRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Items/GetActiveItems": {
+    "responseType": "Item",
+    "schemaFile": "_common/Item.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Items/GetBrands": {
+    "responseType": "Brand",
+    "schemaFile": "Items/Brand.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Items/GetCategories": {
+    "responseType": "Category",
+    "schemaFile": "Items/Category.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Items/GetFileById": {
+    "responseType": "File",
+    "schemaFile": "Items/File.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Items/GetInactiveItems": {
+    "responseType": "Item",
+    "schemaFile": "_common/Item.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Items/GetItemById": {
+    "responseType": "Item",
+    "schemaFile": "_common/Item.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Items/GetItemsById": {
+    "responseType": "Item",
+    "schemaFile": "_common/Item.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Items/GetPhotoById": {
+    "responseType": "Photo",
+    "schemaFile": "Items/Photo.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Items/UpdateBrand": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "ItemsBrandRequest",
+    "requestSchemaFile": "Items/ItemsBrandRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Items/UpdateItems": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "ItemsRequest",
+    "requestSchemaFile": "Items/ItemsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "LabTests/CreateRecord": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "RecordRequest",
+    "requestSchemaFile": "LabTests/RecordRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "LabTests/GetBatches": {
+    "responseType": "Batch",
+    "schemaFile": "LabTests/Batch.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "LabTests/GetLabTestsTypes": {
+    "responseType": "LabTestsType",
+    "schemaFile": "LabTests/LabTestsType.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "LabTests/GetResults": {
+    "responseType": "Result",
+    "schemaFile": "LabTests/Result.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "LabTests/GetStates": {
+    "responseType": "",
+    "schemaFile": "",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "LabTests/UpdateLabTestDocument": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "LabTestDocumentRequest",
+    "requestSchemaFile": "LabTests/LabTestDocumentRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "LabTests/UpdateResultsRelease": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "ResultsReleaseRequest",
+    "requestSchemaFile": "LabTests/ResultsReleaseRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Locations/CreateLocations": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "LocationsRequest",
+    "requestSchemaFile": "Locations/LocationsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Locations/GetActiveLocations": {
+    "responseType": "LocationsLocation",
+    "schemaFile": "Locations/LocationsLocation.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Locations/GetInactiveLocations": {
+    "responseType": "LocationsLocation",
+    "schemaFile": "Locations/LocationsLocation.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Locations/GetLocationById": {
+    "responseType": "LocationsLocation",
+    "schemaFile": "Locations/LocationsLocation.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Locations/GetLocationsById": {
+    "responseType": "LocationsLocation",
+    "schemaFile": "Locations/LocationsLocation.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Locations/GetLocationsTypes": {
+    "responseType": "LocationsType",
+    "schemaFile": "Locations/LocationsType.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Locations/UpdateLocations": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "LocationsRequest",
+    "requestSchemaFile": "Locations/LocationsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/CreateAdjustPackages": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "AdjustPackagesRequest",
+    "requestSchemaFile": "_common/AdjustPackagesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/CreatePackagesPackages": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PackagesPackagesRequest",
+    "requestSchemaFile": "Packages/PackagesPackagesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/CreatePackagesPlantings": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PackagesPlantingsRequest",
+    "requestSchemaFile": "Packages/PackagesPlantingsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/CreateTesting": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "TestingRequest",
+    "requestSchemaFile": "Packages/TestingRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/FinishPackages": {
+    "responseType": "",
+    "schemaFile": "",
+    "requestType": "FinishPackagesRequest",
+    "requestSchemaFile": "Packages/FinishPackagesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Packages/FinishedgoodFlag": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "FinishedgoodFlagRequest",
+    "requestSchemaFile": "Packages/FinishedgoodFlagRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/FinishedgoodUnflag": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "FinishedgoodUnflagRequest",
+    "requestSchemaFile": "Packages/FinishedgoodUnflagRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/GetActivePackages": {
+    "responseType": "PackagesPackage",
+    "schemaFile": "Packages/PackagesPackage.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Packages/GetAdjustReasons": {
+    "responseType": "AdjustReason",
+    "schemaFile": "Packages/AdjustReason.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Packages/GetAdjustments": {
+    "responseType": "Adjustment",
+    "schemaFile": "Packages/Adjustment.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Packages/GetInTransitPackages": {
+    "responseType": "InTransit",
+    "schemaFile": "Packages/InTransit.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Packages/GetInactivePackages": {
+    "responseType": "PackagesPackage",
+    "schemaFile": "Packages/PackagesPackage.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Packages/GetLabSamples": {
+    "responseType": "PackagesPackage",
+    "schemaFile": "Packages/PackagesPackage.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Packages/GetOnHoldPackages": {
+    "responseType": "PackagesPackage",
+    "schemaFile": "Packages/PackagesPackage.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Packages/GetPackageById": {
+    "responseType": "PackagesPackage",
+    "schemaFile": "Packages/PackagesPackage.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Packages/GetPackagesById": {
+    "responseType": "PackagesPackage",
+    "schemaFile": "Packages/PackagesPackage.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Packages/GetPackagesByLabel": {
+    "responseType": "PackagesPackage",
+    "schemaFile": "Packages/PackagesPackage.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Packages/GetPackagesTypes": {
+    "responseType": "",
+    "schemaFile": "",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Packages/GetSourceHarvestById": {
+    "responseType": "SourceHarvest",
+    "schemaFile": "Packages/SourceHarvest.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Packages/GetTransferred": {
+    "responseType": "PackagesPackage",
+    "schemaFile": "Packages/PackagesPackage.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Packages/UnfinishPackages": {
+    "responseType": "",
+    "schemaFile": "",
+    "requestType": "UnfinishPackagesRequest",
+    "requestSchemaFile": "Packages/UnfinishPackagesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Packages/UpdateAdjustPackages": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "AdjustPackagesRequest",
+    "requestSchemaFile": "_common/AdjustPackagesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/UpdateDecontaminate": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "DecontaminateRequest",
+    "requestSchemaFile": "Packages/DecontaminateRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/UpdateDonationFlag": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "DonationFlagRequest",
+    "requestSchemaFile": "Packages/DonationFlagRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/UpdateDonationUnflag": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "DonationUnflagRequest",
+    "requestSchemaFile": "Packages/DonationUnflagRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/UpdateExternalid": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "ExternalidRequest",
+    "requestSchemaFile": "Packages/ExternalidRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/UpdateItem": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "ItemRequest",
+    "requestSchemaFile": "Packages/ItemRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/UpdateLabtestsRequired": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "LabtestsRequiredRequest",
+    "requestSchemaFile": "Packages/LabtestsRequiredRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/UpdateNote": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "NoteRequest",
+    "requestSchemaFile": "Packages/NoteRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/UpdatePackagesLocation": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PackagesLocationRequest",
+    "requestSchemaFile": "Packages/PackagesLocationRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/UpdateRemediate": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "RemediateRequest",
+    "requestSchemaFile": "Packages/RemediateRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/UpdateTradeSampleFlag": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "TradeSampleFlagRequest",
+    "requestSchemaFile": "Packages/TradeSampleFlagRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/UpdateTradeSampleUnflag": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "TradeSampleUnflagRequest",
+    "requestSchemaFile": "Packages/TradeSampleUnflagRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Packages/UpdateUseByDate": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "UseByDateRequest",
+    "requestSchemaFile": "Packages/UseByDateRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "PatientCheckIns/CreatePatientCheckIns": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PatientCheckInsRequest",
+    "requestSchemaFile": "PatientCheckIns/PatientCheckInsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "PatientCheckIns/GetLocations": {
+    "responseType": "PatientCheckInsLocation",
+    "schemaFile": "PatientCheckIns/PatientCheckInsLocation.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "PatientCheckIns/GetPatientCheckIns": {
+    "responseType": "PatientCheckIn",
+    "schemaFile": "PatientCheckIns/PatientCheckIn.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "PatientCheckIns/UpdatePatientCheckIns": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PatientCheckInsRequest",
+    "requestSchemaFile": "PatientCheckIns/PatientCheckInsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Patients/CreatePatients": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PatientsRequest",
+    "requestSchemaFile": "Patients/PatientsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Patients/GetActivePatients": {
+    "responseType": "Patient",
+    "schemaFile": "_common/Patient.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Patients/GetPatientById": {
+    "responseType": "Patient",
+    "schemaFile": "_common/Patient.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Patients/GetPatientsById": {
+    "responseType": "Patient",
+    "schemaFile": "_common/Patient.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Patients/UpdatePatients": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PatientsRequest",
+    "requestSchemaFile": "Patients/PatientsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "PatientsStatus/GetPatientsStatusesByPatientLicenseNumber": {
+    "responseType": "PatientsStatus",
+    "schemaFile": "PatientsStatus/PatientsStatus.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "PlantBatches/CreateAdjustPlantBatches": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "AdjustPlantBatchesRequest",
+    "requestSchemaFile": "PlantBatches/AdjustPlantBatchesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "PlantBatches/CreateGrowthPhase": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantBatchesGrowthPhaseRequest",
+    "requestSchemaFile": "PlantBatches/PlantBatchesGrowthPhaseRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "PlantBatches/CreatePackagesFromMotherPlant": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PackagesFromMotherPlantRequest",
+    "requestSchemaFile": "PlantBatches/PackagesFromMotherPlantRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "PlantBatches/CreatePlantBatchesAdditives": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantBatchesAdditivesRequest",
+    "requestSchemaFile": "PlantBatches/PlantBatchesAdditivesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "PlantBatches/CreatePlantBatchesAdditivesUsingTemplate": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantBatchesAdditivesUsingTemplateRequest",
+    "requestSchemaFile": "PlantBatches/PlantBatchesAdditivesUsingTemplateRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "PlantBatches/CreatePlantBatchesPackages": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantBatchesPackagesRequest",
+    "requestSchemaFile": "PlantBatches/PlantBatchesPackagesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "PlantBatches/CreatePlantBatchesPlantings": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantBatchesPlantingsRequest",
+    "requestSchemaFile": "PlantBatches/PlantBatchesPlantingsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "PlantBatches/CreatePlantBatchesWaste": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantBatchesWasteRequest",
+    "requestSchemaFile": "PlantBatches/PlantBatchesWasteRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "PlantBatches/CreateSplit": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantBatchesSplitRequest",
+    "requestSchemaFile": "PlantBatches/PlantBatchesSplitRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "PlantBatches/DeletePlantBatches": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantBatchesRequest",
+    "requestSchemaFile": "PlantBatches/PlantBatchesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "PlantBatches/GetActivePlantBatches": {
+    "responseType": "PlantBatch",
+    "schemaFile": "_common/PlantBatch.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "PlantBatches/GetInactivePlantBatches": {
+    "responseType": "PlantBatch",
+    "schemaFile": "_common/PlantBatch.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "PlantBatches/GetPlantBatchById": {
+    "responseType": "PlantBatch",
+    "schemaFile": "_common/PlantBatch.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "PlantBatches/GetPlantBatchesById": {
+    "responseType": "PlantBatch",
+    "schemaFile": "_common/PlantBatch.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "PlantBatches/GetPlantBatchesTypes": {
+    "responseType": "PlantBatchesType",
+    "schemaFile": "PlantBatches/PlantBatchesType.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "PlantBatches/GetPlantBatchesWaste": {
+    "responseType": "PlantBatchesWaste",
+    "schemaFile": "PlantBatches/PlantBatchesWaste.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "PlantBatches/GetPlantBatchesWasteReasons": {
+    "responseType": "PlantBatchesWasteReason",
+    "schemaFile": "PlantBatches/PlantBatchesWasteReason.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "PlantBatches/UpdateName": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "NameRequest",
+    "requestSchemaFile": "PlantBatches/NameRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "PlantBatches/UpdatePlantBatchesLocation": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantBatchesLocationRequest",
+    "requestSchemaFile": "PlantBatches/PlantBatchesLocationRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "PlantBatches/UpdatePlantBatchesStrain": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantBatchesStrainRequest",
+    "requestSchemaFile": "PlantBatches/PlantBatchesStrainRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "PlantBatches/UpdatePlantBatchesTag": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantBatchesTagRequest",
+    "requestSchemaFile": "PlantBatches/PlantBatchesTagRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Plants/CreateAdditivesByLocation": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "AdditivesByLocationRequest",
+    "requestSchemaFile": "Plants/AdditivesByLocationRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Plants/CreateAdditivesByLocationUsingTemplate": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "AdditivesByLocationUsingTemplateRequest",
+    "requestSchemaFile": "Plants/AdditivesByLocationUsingTemplateRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Plants/CreateManicure": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "ManicureRequest",
+    "requestSchemaFile": "Plants/ManicureRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Plants/CreatePlantBatchPackages": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantBatchPackagesRequest",
+    "requestSchemaFile": "Plants/PlantBatchPackagesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Plants/CreatePlantsAdditives": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "AdditivesRequest",
+    "requestSchemaFile": "Plants/AdditivesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Plants/CreatePlantsAdditivesUsingTemplate": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "AdditivesUsingTemplateRequest",
+    "requestSchemaFile": "Plants/AdditivesUsingTemplateRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Plants/CreatePlantsPlantings": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantsPlantingsRequest",
+    "requestSchemaFile": "Plants/PlantsPlantingsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Plants/CreatePlantsWaste": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantsWasteRequest",
+    "requestSchemaFile": "Plants/PlantsWasteRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Plants/DeletePlants": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantsRequest",
+    "requestSchemaFile": "Plants/PlantsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Plants/GetAdditives": {
+    "responseType": "Additive",
+    "schemaFile": "Plants/Additive.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Plants/GetAdditivesTypes": {
+    "responseType": "",
+    "schemaFile": "",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Plants/GetFloweringPlants": {
+    "responseType": "Plant",
+    "schemaFile": "_common/Plant.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Plants/GetGrowthPhases": {
+    "responseType": "",
+    "schemaFile": "",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Plants/GetInactivePlants": {
+    "responseType": "Plant",
+    "schemaFile": "_common/Plant.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Plants/GetMotherInactivePlants": {
+    "responseType": "Mother",
+    "schemaFile": "_common/Mother.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Plants/GetMotherOnHoldPlants": {
+    "responseType": "Mother",
+    "schemaFile": "_common/Mother.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Plants/GetMotherPlants": {
+    "responseType": "Mother",
+    "schemaFile": "_common/Mother.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Plants/GetOnHoldPlants": {
+    "responseType": "Plant",
+    "schemaFile": "_common/Plant.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Plants/GetPlantById": {
+    "responseType": "Plant",
+    "schemaFile": "_common/Plant.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Plants/GetPlantsById": {
+    "responseType": "Plant",
+    "schemaFile": "_common/Plant.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Plants/GetPlantsByLabel": {
+    "responseType": "Plant",
+    "schemaFile": "_common/Plant.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Plants/GetPlantsWaste": {
+    "responseType": "PlantsWaste",
+    "schemaFile": "Plants/PlantsWaste.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Plants/GetPlantsWasteMethods": {
+    "responseType": "WasteMethod",
+    "schemaFile": "_common/WasteMethod.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Plants/GetPlantsWasteReasons": {
+    "responseType": "WasteReason",
+    "schemaFile": "Plants/WasteReason.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Plants/GetVegetativePlants": {
+    "responseType": "Plant",
+    "schemaFile": "_common/Plant.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Plants/GetWasteById": {
+    "responseType": "PlantsWaste",
+    "schemaFile": "Plants/PlantsWaste.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Plants/GetWastePackageById": {
+    "responseType": "WastePackage",
+    "schemaFile": "Plants/WastePackage.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Plants/UpdateAdjustPlants": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "AdjustPlantsRequest",
+    "requestSchemaFile": "Plants/AdjustPlantsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Plants/UpdateGrowthPhase": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantsGrowthPhaseRequest",
+    "requestSchemaFile": "Plants/PlantsGrowthPhaseRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Plants/UpdateHarvest": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "HarvestRequest",
+    "requestSchemaFile": "Plants/HarvestRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Plants/UpdateMerge": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantsMergeRequest",
+    "requestSchemaFile": "Plants/PlantsMergeRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Plants/UpdatePlantsLocation": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantsLocationRequest",
+    "requestSchemaFile": "Plants/PlantsLocationRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Plants/UpdatePlantsStrain": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "StrainRequest",
+    "requestSchemaFile": "Plants/StrainRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Plants/UpdatePlantsTag": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "TagRequest",
+    "requestSchemaFile": "Plants/TagRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Plants/UpdateSplit": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PlantsSplitRequest",
+    "requestSchemaFile": "Plants/PlantsSplitRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "ProcessingJob/CreateAdjustProcessingJob": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "AdjustProcessingJobRequest",
+    "requestSchemaFile": "ProcessingJob/AdjustProcessingJobRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "ProcessingJob/CreateJobTypes": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "ProcessingJobJobTypesRequest",
+    "requestSchemaFile": "ProcessingJob/ProcessingJobJobTypesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "ProcessingJob/CreateProcessingJobPackages": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "ProcessingJobPackagesRequest",
+    "requestSchemaFile": "ProcessingJob/ProcessingJobPackagesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "ProcessingJob/FinishProcessingJob": {
+    "responseType": "",
+    "schemaFile": "",
+    "requestType": "FinishProcessingJobRequest",
+    "requestSchemaFile": "ProcessingJob/FinishProcessingJobRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "ProcessingJob/GetActiveJobTypes": {
+    "responseType": "ActiveJobType",
+    "schemaFile": "ProcessingJob/ActiveJobType.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "ProcessingJob/GetActiveProcessingJob": {
+    "responseType": "ProcessingJob",
+    "schemaFile": "_common/ProcessingJob.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "ProcessingJob/GetInactiveJobTypes": {
+    "responseType": "InactiveJobType",
+    "schemaFile": "ProcessingJob/InactiveJobType.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "ProcessingJob/GetInactiveProcessingJob": {
+    "responseType": "ProcessingJob",
+    "schemaFile": "_common/ProcessingJob.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "ProcessingJob/GetJobTypeById": {
+    "responseType": "InactiveJobType",
+    "schemaFile": "ProcessingJob/InactiveJobType.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "ProcessingJob/GetJobTypesAttributes": {
+    "responseType": "JobTypesAttribute",
+    "schemaFile": "ProcessingJob/JobTypesAttribute.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "ProcessingJob/GetJobTypesCategories": {
+    "responseType": "JobTypesCategory",
+    "schemaFile": "ProcessingJob/JobTypesCategory.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "ProcessingJob/GetProcessingJobById": {
+    "responseType": "ProcessingJob",
+    "schemaFile": "_common/ProcessingJob.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "ProcessingJob/StartProcessingJob": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "StartProcessingJobRequest",
+    "requestSchemaFile": "ProcessingJob/StartProcessingJobRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "ProcessingJob/UnfinishProcessingJob": {
+    "responseType": "",
+    "schemaFile": "",
+    "requestType": "UnfinishProcessingJobRequest",
+    "requestSchemaFile": "ProcessingJob/UnfinishProcessingJobRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "ProcessingJob/UpdateJobTypes": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "ProcessingJobJobTypesRequest",
+    "requestSchemaFile": "ProcessingJob/ProcessingJobJobTypesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "RetailId/CreateAssociate": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "AssociateRequest",
+    "requestSchemaFile": "RetailId/AssociateRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "RetailId/CreateGenerate": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "GenerateRequest",
+    "requestSchemaFile": "RetailId/GenerateRequest.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "RetailId/CreateMerge": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "RetailIdMergeRequest",
+    "requestSchemaFile": "RetailId/RetailIdMergeRequest.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "RetailId/CreatePackagesInfo": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "PackagesInfoRequest",
+    "requestSchemaFile": "RetailId/PackagesInfoRequest.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "RetailId/GetAllotment": {
+    "responseType": "Allotment",
+    "schemaFile": "RetailId/Allotment.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "RetailId/GetReceiveByLabel": {
+    "responseType": "Receive",
+    "schemaFile": "RetailId/Receive.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "RetailId/GetReceiveQrByShortCode": {
+    "responseType": "ReceiveQrByShortCode",
+    "schemaFile": "RetailId/ReceiveQrByShortCode.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Sales/CreateDeliveries": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "SalesDeliveriesRequest",
+    "requestSchemaFile": "Sales/SalesDeliveriesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Sales/CreateDeliveriesRetailerDepart": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "DeliveriesRetailerDepartRequest",
+    "requestSchemaFile": "Sales/DeliveriesRetailerDepartRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Sales/CreateDeliveriesRetailerEnd": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "DeliveriesRetailerEndRequest",
+    "requestSchemaFile": "Sales/DeliveriesRetailerEndRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Sales/CreateDeliveriesRetailerRestock": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "DeliveriesRetailerRestockRequest",
+    "requestSchemaFile": "Sales/DeliveriesRetailerRestockRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Sales/CreateReceipts": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "SalesReceiptsRequest",
+    "requestSchemaFile": "Sales/SalesReceiptsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Sales/CreateSalesDeliveriesRetailer": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "SalesDeliveriesRetailerRequest",
+    "requestSchemaFile": "Sales/SalesDeliveriesRetailerRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Sales/GetActiveDeliveries": {
+    "responseType": "ActiveDelivery",
+    "schemaFile": "Sales/ActiveDelivery.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Sales/GetActiveDeliveriesRetailer": {
+    "responseType": "ActiveDeliveriesRetailer",
+    "schemaFile": "Sales/ActiveDeliveriesRetailer.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Sales/GetActiveReceipts": {
+    "responseType": "ActiveReceipt",
+    "schemaFile": "Sales/ActiveReceipt.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Sales/GetCounties": {
+    "responseType": "County",
+    "schemaFile": "Sales/County.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Sales/GetCustomerTypes": {
+    "responseType": "",
+    "schemaFile": "",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Sales/GetDeliveriesRetailerById": {
+    "responseType": "InactiveDeliveriesRetailer",
+    "schemaFile": "Sales/InactiveDeliveriesRetailer.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Sales/GetDeliveriesReturnReasons": {
+    "responseType": "DeliveriesReturnReason",
+    "schemaFile": "Sales/DeliveriesReturnReason.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Sales/GetDeliveryById": {
+    "responseType": "ActiveDelivery",
+    "schemaFile": "Sales/ActiveDelivery.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Sales/GetDeliveryRetailerById": {
+    "responseType": "DeliveryRetailer",
+    "schemaFile": "Sales/DeliveryRetailer.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Sales/GetInactiveDeliveries": {
+    "responseType": "InactiveDelivery",
+    "schemaFile": "Sales/InactiveDelivery.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Sales/GetInactiveDeliveriesRetailer": {
+    "responseType": "InactiveDeliveriesRetailer",
+    "schemaFile": "Sales/InactiveDeliveriesRetailer.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Sales/GetInactiveReceipts": {
+    "responseType": "InactiveReceipt",
+    "schemaFile": "Sales/InactiveReceipt.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Sales/GetPatientRegistrationLocations": {
+    "responseType": "PatientRegistrationLocation",
+    "schemaFile": "Sales/PatientRegistrationLocation.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Sales/GetPaymentTypes": {
+    "responseType": "",
+    "schemaFile": "",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Sales/GetReceiptById": {
+    "responseType": "ActiveReceipt",
+    "schemaFile": "Sales/ActiveReceipt.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Sales/GetReceiptsExternalByExternalNumber": {
+    "responseType": "ReceiptsExternalByExternalNumber",
+    "schemaFile": "Sales/ReceiptsExternalByExternalNumber.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Sales/GetSalesDeliveryById": {
+    "responseType": "SalesDelivery",
+    "schemaFile": "Sales/SalesDelivery.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Sales/UpdateDeliveries": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "SalesDeliveriesRequest",
+    "requestSchemaFile": "Sales/SalesDeliveriesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Sales/UpdateDeliveriesComplete": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "DeliveriesCompleteRequest",
+    "requestSchemaFile": "Sales/DeliveriesCompleteRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Sales/UpdateDeliveriesHub": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "DeliveriesHubRequest",
+    "requestSchemaFile": "Sales/DeliveriesHubRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Sales/UpdateDeliveriesHubAccept": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "DeliveriesHubAcceptRequest",
+    "requestSchemaFile": "Sales/DeliveriesHubAcceptRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Sales/UpdateDeliveriesHubDepart": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "DeliveriesHubDepartRequest",
+    "requestSchemaFile": "Sales/DeliveriesHubDepartRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Sales/UpdateDeliveriesHubVerifyID": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "DeliveriesHubVerifyIDRequest",
+    "requestSchemaFile": "Sales/DeliveriesHubVerifyIDRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Sales/UpdateDeliveriesRetailer": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "SalesDeliveriesRetailerRequest",
+    "requestSchemaFile": "Sales/SalesDeliveriesRetailerRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Sales/UpdateReceipts": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "SalesReceiptsRequest",
+    "requestSchemaFile": "Sales/SalesReceiptsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Sales/UpdateReceiptsFinalize": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "ReceiptsFinalizeRequest",
+    "requestSchemaFile": "Sales/ReceiptsFinalizeRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Sales/UpdateReceiptsUnfinalize": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "ReceiptsUnfinalizeRequest",
+    "requestSchemaFile": "Sales/ReceiptsUnfinalizeRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Strains/CreateStrains": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "StrainsRequest",
+    "requestSchemaFile": "Strains/StrainsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Strains/GetActiveStrains": {
+    "responseType": "Strain",
+    "schemaFile": "_common/Strain.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Strains/GetInactiveStrains": {
+    "responseType": "Strain",
+    "schemaFile": "_common/Strain.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Strains/GetStrainById": {
+    "responseType": "Strain",
+    "schemaFile": "_common/Strain.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Strains/GetStrainsById": {
+    "responseType": "Strain",
+    "schemaFile": "_common/Strain.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Strains/UpdateStrains": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "StrainsRequest",
+    "requestSchemaFile": "Strains/StrainsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Sublocations/CreateSublocations": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "SublocationsRequest",
+    "requestSchemaFile": "Sublocations/SublocationsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Sublocations/GetActiveSublocations": {
+    "responseType": "Sublocation",
+    "schemaFile": "_common/Sublocation.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Sublocations/GetInactiveSublocations": {
+    "responseType": "Sublocation",
+    "schemaFile": "_common/Sublocation.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Sublocations/GetSublocationById": {
+    "responseType": "Sublocation",
+    "schemaFile": "_common/Sublocation.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Sublocations/GetSublocationsById": {
+    "responseType": "Sublocation",
+    "schemaFile": "_common/Sublocation.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Sublocations/UpdateSublocations": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "SublocationsRequest",
+    "requestSchemaFile": "Sublocations/SublocationsRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Tags/GetAvailablePackage": {
+    "responseType": "Tag",
+    "schemaFile": "_common/Tag.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Tags/GetAvailablePlant": {
+    "responseType": "Tag",
+    "schemaFile": "_common/Tag.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Tags/GetStagedTags": {
+    "responseType": "Staged",
+    "schemaFile": "Tags/Staged.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Transfers/CreateHubArrive": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "HubArriveRequest",
+    "requestSchemaFile": "Transfers/HubArriveRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Transfers/CreateHubCheckin": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "HubCheckinRequest",
+    "requestSchemaFile": "Transfers/HubCheckinRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Transfers/CreateHubCheckout": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "HubCheckoutRequest",
+    "requestSchemaFile": "Transfers/HubCheckoutRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Transfers/CreateHubDepart": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "HubDepartRequest",
+    "requestSchemaFile": "Transfers/HubDepartRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Transfers/CreateIncomingExternal": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "TransfersExternalRequest",
+    "requestSchemaFile": "Transfers/TransfersExternalRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Transfers/CreateOutgoingTemplates": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "TransfersTemplatesRequest",
+    "requestSchemaFile": "Transfers/TransfersTemplatesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Transfers/GetDeliveriesPackagesStates": {
+    "responseType": "",
+    "schemaFile": "",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Transfers/GetDeliveryPackageById": {
+    "responseType": "DeliveryPackage",
+    "schemaFile": "Transfers/DeliveryPackage.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Transfers/GetDeliveryPackageRequiredlabtestbatchById": {
+    "responseType": "DeliveryPackageRequiredlabtestbatch",
+    "schemaFile": "Transfers/DeliveryPackageRequiredlabtestbatch.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Transfers/GetDeliveryPackageWholesaleById": {
+    "responseType": "DeliveryPackageWholesale",
+    "schemaFile": "Transfers/DeliveryPackageWholesale.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Transfers/GetDeliveryTransporterById": {
+    "responseType": "DeliveryTransporter",
+    "schemaFile": "Transfers/DeliveryTransporter.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Transfers/GetDeliveryTransporterDetailById": {
+    "responseType": "DeliveryTransporterDetail",
+    "schemaFile": "Transfers/DeliveryTransporterDetail.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Transfers/GetHub": {
+    "responseType": "Hub",
+    "schemaFile": "Transfers/Hub.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Transfers/GetIncomingTransfers": {
+    "responseType": "Transfer",
+    "schemaFile": "_common/Transfer.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Transfers/GetManifestPdfById": {
+    "responseType": "ManifestPdf",
+    "schemaFile": "Transfers/ManifestPdf.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Transfers/GetOutgoingTemplateDeliveryById": {
+    "responseType": "TemplateDelivery",
+    "schemaFile": "Transfers/TemplateDelivery.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Transfers/GetOutgoingTemplateDeliveryPackageById": {
+    "responseType": "TemplateDeliveryPackage",
+    "schemaFile": "Transfers/TemplateDeliveryPackage.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Transfers/GetOutgoingTemplateDeliveryTransporterById": {
+    "responseType": "TemplateDeliveryTransporter",
+    "schemaFile": "Transfers/TemplateDeliveryTransporter.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Transfers/GetOutgoingTemplateDeliveryTransporterDetailById": {
+    "responseType": "TemplateDeliveryTransporterDetail",
+    "schemaFile": "Transfers/TemplateDeliveryTransporterDetail.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Transfers/GetOutgoingTemplates": {
+    "responseType": "Template",
+    "schemaFile": "Transfers/Template.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Transfers/GetOutgoingTransfers": {
+    "responseType": "Transfer",
+    "schemaFile": "_common/Transfer.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Transfers/GetRejectedTransfers": {
+    "responseType": "Transfer",
+    "schemaFile": "_common/Transfer.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Transfers/GetTransfersDeliveryById": {
+    "responseType": "TransfersDelivery",
+    "schemaFile": "Transfers/TransfersDelivery.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Transfers/GetTransfersTypes": {
+    "responseType": "TransfersType",
+    "schemaFile": "Transfers/TransfersType.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Transfers/UpdateIncomingExternal": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "TransfersExternalRequest",
+    "requestSchemaFile": "Transfers/TransfersExternalRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Transfers/UpdateOutgoingTemplates": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "TransfersTemplatesRequest",
+    "requestSchemaFile": "Transfers/TransfersTemplatesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Transporters/CreateDrivers": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "TransportersDriversRequest",
+    "requestSchemaFile": "Transporters/TransportersDriversRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Transporters/CreateVehicles": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "TransportersVehiclesRequest",
+    "requestSchemaFile": "Transporters/TransportersVehiclesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Transporters/GetDriverById": {
+    "responseType": "TransportersDriver",
+    "schemaFile": "Transporters/TransportersDriver.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Transporters/GetDrivers": {
+    "responseType": "TransportersDriver",
+    "schemaFile": "Transporters/TransportersDriver.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Transporters/GetVehicleById": {
+    "responseType": "TransportersVehicle",
+    "schemaFile": "Transporters/TransportersVehicle.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Transporters/GetVehicles": {
+    "responseType": "TransportersVehicle",
+    "schemaFile": "Transporters/TransportersVehicle.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "Transporters/UpdateDrivers": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "TransportersDriversRequest",
+    "requestSchemaFile": "Transporters/TransportersDriversRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "Transporters/UpdateVehicles": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "TransportersVehiclesRequest",
+    "requestSchemaFile": "Transporters/TransportersVehiclesRequest.schema.json",
+    "isRequestArray": true,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  },
+  "UnitsOfMeasure/GetActiveUnitsOfMeasure": {
+    "responseType": "UnitOfMeasure",
+    "schemaFile": "_common/UnitOfMeasure.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "UnitsOfMeasure/GetInactiveUnitsOfMeasure": {
+    "responseType": "UnitOfMeasure",
+    "schemaFile": "_common/UnitOfMeasure.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": true,
+    "isWrite": false
+  },
+  "UnitsOfMeasure/GetUnitOfMeasureById": {
+    "responseType": "UnitOfMeasure",
+    "schemaFile": "_common/UnitOfMeasure.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "WasteMethods/GetWasteMethodsWasteMethods": {
+    "responseType": "WasteMethod",
+    "schemaFile": "_common/WasteMethod.schema.json",
+    "isRequestArray": false,
+    "isArray": true,
+    "isPaginated": false,
+    "isWrite": false
+  },
+  "Webhooks/UpdateWebhooks": {
+    "responseType": "WriteResponse",
+    "schemaFile": "_common/WriteResponse.schema.json",
+    "requestType": "WebhooksRequest",
+    "requestSchemaFile": "Webhooks/WebhooksRequest.schema.json",
+    "isRequestArray": false,
+    "isArray": false,
+    "isPaginated": false,
+    "isWrite": true
+  }
+}

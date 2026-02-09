@@ -1,0 +1,606 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SalesDeliveryRetailer",
+  "type": "object",
+  "properties": {
+    "AcceptedDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ActualDepartureDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "AllowFullEdit": {
+      "type": "boolean"
+    },
+    "CompletedDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "DateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Destinations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "AcceptedDateTime": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ActualArrivalDateTime": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ActualDepartureDateTime": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ActualReturnArrivalDateTime": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ActualReturnDepartureDateTime": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "CompletedDateTime": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ConsumerId": {
+            "type": "string"
+          },
+          "DeliveryNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "Direction": {
+            "type": "string"
+          },
+          "DriverEmployeeId": {
+            "type": "string"
+          },
+          "DriverName": {
+            "type": "string"
+          },
+          "DriversLicenseNumber": {
+            "type": "string"
+          },
+          "EstimatedArrivalDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "EstimatedDepartureDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "EstimatedReturnArrivalDateTime": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "EstimatedReturnDepartureDateTime": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "FacilityLicenseNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "FacilityName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "Id": {
+            "type": "integer"
+          },
+          "LastModified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "PatientLicenseNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "PlannedRoute": {
+            "type": "string"
+          },
+          "RecipientAddressCity": {
+            "type": "string"
+          },
+          "RecipientAddressCounty": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "RecipientAddressPostalCode": {
+            "type": "string"
+          },
+          "RecipientAddressState": {
+            "type": "string"
+          },
+          "RecipientAddressStreet1": {
+            "type": "string"
+          },
+          "RecipientAddressStreet2": {
+            "type": "string"
+          },
+          "RecipientDeliveryZoneId": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "RecipientDeliveryZoneName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "RecipientName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "RecipientZoneId": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "RecordedByUserName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "RecordedDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "SalesCustomerType": {
+            "type": "string"
+          },
+          "SalesDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "SalesDeliveryState": {
+            "type": "string"
+          },
+          "ShipperFacilityLicenseNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "TotalPackages": {
+            "type": "integer"
+          },
+          "TotalPrice": {
+            "type": "integer"
+          },
+          "Transactions": {
+            "type": "array"
+          },
+          "TransporterFacilityId": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "TransporterFacilityLicenseNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "TransporterFacilityName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "VehicleLicensePlateNumber": {
+            "type": "string"
+          },
+          "VehicleMake": {
+            "type": "string"
+          },
+          "VehicleModel": {
+            "type": "string"
+          },
+          "VoidedDate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "ConsumerId",
+          "Direction",
+          "DriverEmployeeId",
+          "DriverName",
+          "DriversLicenseNumber",
+          "EstimatedArrivalDateTime",
+          "EstimatedDepartureDateTime",
+          "Id",
+          "LastModified",
+          "PlannedRoute",
+          "RecipientAddressCity",
+          "RecipientAddressPostalCode",
+          "RecipientAddressState",
+          "RecipientAddressStreet1",
+          "RecipientAddressStreet2",
+          "RecordedDateTime",
+          "SalesCustomerType",
+          "SalesDateTime",
+          "SalesDeliveryState",
+          "TotalPackages",
+          "TotalPrice",
+          "Transactions",
+          "VehicleLicensePlateNumber",
+          "VehicleMake",
+          "VehicleModel"
+        ]
+      }
+    },
+    "Direction": {
+      "type": "string"
+    },
+    "DriverEmployeeId": {
+      "type": "string"
+    },
+    "DriverName": {
+      "type": "string"
+    },
+    "DriversLicenseNumber": {
+      "type": "string"
+    },
+    "EstimatedDepartureDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "FacilityLicenseNumber": {
+      "type": "string"
+    },
+    "FacilityName": {
+      "type": "string"
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Leg": {
+      "type": "integer"
+    },
+    "Packages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ArchivedDate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "CompletedDateTime": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "IsOnInvestigationHold": {
+            "type": "boolean"
+          },
+          "IsOnInvestigationRecall": {
+            "type": "boolean"
+          },
+          "IsOnRecall": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "IsOnRecallCombined": {
+            "type": "boolean"
+          },
+          "ItemServingSize": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ItemStrainName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ItemSupplyDurationDays": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "ItemUnitCbdContent": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "ItemUnitCbdContentDose": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "ItemUnitCbdContentDoseUnitOfMeasureName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ItemUnitCbdContentUnitOfMeasureName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ItemUnitCbdPercent": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "ItemUnitQuantity": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "ItemUnitQuantityUnitOfMeasureName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ItemUnitThcContent": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "ItemUnitThcContentDose": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "ItemUnitThcContentDoseUnitOfMeasureName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ItemUnitThcContentUnitOfMeasureName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ItemUnitThcPercent": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "ItemUnitVolume": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "ItemUnitVolumeUnitOfMeasureName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ItemUnitWeight": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "ItemUnitWeightUnitOfMeasureName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "LastModified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "PackageId": {
+            "type": "integer"
+          },
+          "PackageLabel": {
+            "type": "string"
+          },
+          "ProductCategoryName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ProductName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "Quantity": {
+            "type": "number"
+          },
+          "RecordedByUserName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "RecordedDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "RetailerDeliveryState": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "TotalPrice": {
+            "type": "number"
+          },
+          "UnitOfMeasureAbbreviation": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "UnitOfMeasureName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "IsOnInvestigationHold",
+          "IsOnInvestigationRecall",
+          "IsOnRecallCombined",
+          "LastModified",
+          "PackageId",
+          "PackageLabel",
+          "Quantity",
+          "RecordedDateTime",
+          "TotalPrice",
+          "UnitOfMeasureName"
+        ]
+      }
+    },
+    "RecordedByUserName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "RecordedDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "RestockDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "RetailerDeliveryNumber": {
+      "type": "string"
+    },
+    "RetailerDeliveryState": {
+      "type": "string"
+    },
+    "TotalPackages": {
+      "type": "integer"
+    },
+    "TotalPrice": {
+      "type": "integer"
+    },
+    "TotalPriceSold": {
+      "type": "integer"
+    },
+    "VehicleInfo": {
+      "type": "string"
+    },
+    "VehicleLicensePlateNumber": {
+      "type": "string"
+    },
+    "VehicleMake": {
+      "type": "string"
+    },
+    "VehicleModel": {
+      "type": "string"
+    },
+    "VoidedDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "AllowFullEdit",
+    "DateTime",
+    "Destinations",
+    "Direction",
+    "DriverEmployeeId",
+    "DriverName",
+    "DriversLicenseNumber",
+    "EstimatedDepartureDateTime",
+    "FacilityLicenseNumber",
+    "FacilityName",
+    "Id",
+    "LastModified",
+    "Leg",
+    "Packages",
+    "RecordedDateTime",
+    "RetailerDeliveryNumber",
+    "RetailerDeliveryState",
+    "TotalPackages",
+    "TotalPrice",
+    "TotalPriceSold",
+    "VehicleInfo",
+    "VehicleLicensePlateNumber",
+    "VehicleMake",
+    "VehicleModel"
+  ]
+}

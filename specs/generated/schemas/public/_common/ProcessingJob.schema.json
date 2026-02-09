@@ -1,0 +1,190 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProcessingJob",
+  "type": "object",
+  "properties": {
+    "CountUnitOfMeasureAbbreviation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "CountUnitOfMeasureId": {
+      "type": "integer"
+    },
+    "CountUnitOfMeasureName": {
+      "type": "string"
+    },
+    "FinishNote": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "FinishedDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "IsFinished": {
+      "type": "boolean"
+    },
+    "JobTypeId": {
+      "type": "integer"
+    },
+    "JobTypeName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Number": {
+      "type": "string"
+    },
+    "Packages": {
+      "type": "array"
+    },
+    "StartDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "TotalCount": {
+      "type": "integer"
+    },
+    "TotalCountWaste": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "TotalQuantity": {
+      "type": "number"
+    },
+    "TotalUnitOfMeasureId": {
+      "type": "integer"
+    },
+    "TotalVolume": {
+      "type": "number"
+    },
+    "TotalVolumeWaste": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "TotalWeight": {
+      "type": "number"
+    },
+    "TotalWeightWaste": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "VolumeUnitOfMeasureAbbreviation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "VolumeUnitOfMeasureId": {
+      "type": "integer"
+    },
+    "VolumeUnitOfMeasureName": {
+      "type": "string"
+    },
+    "WasteCountUnitOfMeasureAbbreviation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "WasteCountUnitOfMeasureId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "WasteCountUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "WasteVolumeUnitOfMeasureAbbreviation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "WasteVolumeUnitOfMeasureId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "WasteVolumeUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "WasteWeightUnitOfMeasureAbbreviation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "WasteWeightUnitOfMeasureId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "WasteWeightUnitOfMeasureName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "WeightUnitOfMeasureAbbreviation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "WeightUnitOfMeasureId": {
+      "type": "integer"
+    },
+    "WeightUnitOfMeasureName": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "CountUnitOfMeasureId",
+    "CountUnitOfMeasureName",
+    "Id",
+    "IsFinished",
+    "JobTypeId",
+    "Name",
+    "Number",
+    "Packages",
+    "StartDate",
+    "TotalCount",
+    "TotalQuantity",
+    "TotalUnitOfMeasureId",
+    "TotalVolume",
+    "TotalWeight",
+    "VolumeUnitOfMeasureId",
+    "VolumeUnitOfMeasureName",
+    "WeightUnitOfMeasureId",
+    "WeightUnitOfMeasureName"
+  ]
+}

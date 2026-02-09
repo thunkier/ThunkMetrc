@@ -1,0 +1,135 @@
+use thunkmetrc_client::MetrcClient;
+use serde_json::Value;
+use std::error::Error;
+use std::sync::Arc;
+#[allow(unused_imports)]
+use futures::Stream;
+use crate::ratelimiter::MetrcRateLimiter;
+#[allow(unused_imports)]
+use crate::utils::iterate_pages;
+#[allow(unused_imports)]
+use crate::models::*;
+
+pub struct {{ .Service.Name | ToPascalCase }}Service {
+    client: MetrcClient,
+    rate_limiter: Arc<MetrcRateLimiter>,
+}
+
+impl {{ .Service.Name | ToPascalCase }}Service {
+    pub fn new(client: MetrcClient, rate_limiter: Arc<MetrcRateLimiter>) -> Self {
+        Self {
+            client,
+            rate_limiter,
+        }
+    }
+
+{{- $safeGroup := ToSnakeCase (ToPascalCase (CleanName .Service.Name)) }}
+{{- $safeGroupPascal := ToPascalCase (CleanName .Service.Name) }}
+
+{{- range .Service.Operations }}
+{{- $methodName := ToPascalCase (CleanName .Name) }}
+{{- $rsMethodName := FormatMethodName $methodName $safeGroupPascal }}
+
+{{- /* Args construction */ -}}
+{{- $pathParams := GetPathParams .Path }}
+{{- $args := list }}
+{{- $iterArgs := list }}
+{{- range $pathParams }}
+    {{- $args = append $args (printf "%s: &str" (ToSnakeCase .)) }}
+    {{- $iterArgs = append $iterArgs (printf "%s: &str" (ToSnakeCase .)) }}
+{{- end }}
+{{- range .QueryParams }}
+    {{- $argName := ToSnakeCase (TrimSuffix "optional" .Name) }}
+    {{- $args = append $args (printf "%s: Option<String>" $argName) }}
+    {{- $iterArgs = append $iterArgs (printf "%s: Option<String>" $argName) }}
+{{- end }}
+
+{{- /* Body logic */ -}}
+{{- $bodyArgType := "Option<&Value>" }}
+{{- $bodyIterType := "Option<Value>" }}
+
+{{- if .BodySchema }}
+    {{- $reqModelName := printf "%sRequest" (ToPascalCase (CleanName .Name)) }}
+    {{- if eq .BodySchema.Type "array" }}
+        {{- $bodyArgType = printf "Option<Vec<%sItem>>" $reqModelName }}
+        {{- $bodyIterType = printf "Option<Vec<%sItem>>" $reqModelName }}
+    {{- else }}
+        {{- $bodyArgType = printf "Option<%s>" $reqModelName }}
+        {{- $bodyIterType = printf "Option<%s>" $reqModelName }}
+    {{- end }}
+{{- else }}
+{{- end }}
+
+{{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+    {{- $args = append $args (printf "body: %s" $bodyArgType) }}
+    {{- $iterArgs = append $iterArgs (printf "body: %s" $bodyIterType) }}
+{{- else }}
+    {{- $args = append $args (printf "body: %s" $bodyArgType) }}
+    {{- $iterArgs = append $iterArgs (printf "body: %s" $bodyIterType) }}
+{{- end }}
+
+    /// {{ .Method }} {{ .Name }}
+{{- if .Description }}
+{{ range Split (CleanDocs .Description) "\n" }}    /// {{ . }}
+{{ end }}{{ end }}    /// Parameters:
+    {{- range $pathParams }}
+    /// - {{ . | ToSnakeCase }} (str): Path parameter {{ . }}
+    {{- end }}
+    {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+    /// - body (Option<&Value>): Request body
+    {{- end }}
+    {{- range .QueryParams }}
+    /// - {{ .Name | TrimSuffix "optional" | ToSnakeCase }} (Option<String>): {{ if .Description }}{{ .Description }}{{ else }}Filter by {{ .Name }}{{ end }}
+    {{- end }}
+    pub async fn {{ $rsMethodName }}(&self{{ if $args }}, {{ join $args ", " }}{{ end }}) -> std::result::Result<Option<{{ GetReturnType . }}>, Box<dyn Error + Send + Sync>> {
+        let body_val = if let Some(b) = body { Some(serde_json::to_value(b)?) } else { None };
+        
+        {{- range $pathParams }}
+        let {{ ToSnakeCase . }} = {{ ToSnakeCase . }}.to_string();
+        {{- end }}
+        let client = self.client.clone();
+        
+        let body_val = body_val.clone();
+
+        let resp_val = self.rate_limiter.execute(
+            {{- $facilityArg := "None" -}}
+            {{- range $pathParams -}}
+                {{- if eq (CleanName .) "licenseNumber" -}}
+                    {{- $facilityArg = (printf "Some(%s.as_str())" (ToSnakeCase .)) -}}
+                {{- end -}}
+            {{- end -}}
+            {{ $facilityArg }},
+            {{- if eq .Method "GET" }}true{{ else }}false{{ end }},
+            move || {
+                let client = client.clone();
+                {{- range $pathParams }}
+                let {{ ToSnakeCase . }} = {{ ToSnakeCase . }}.clone();
+                {{- end }}
+                {{- range .QueryParams }}
+                let {{ ToSnakeCase (TrimSuffix "optional" .Name) }} = {{ ToSnakeCase (TrimSuffix "optional" .Name) }}.clone();
+                {{- end }}
+                let body_val = body_val.clone();
+
+                async move {
+                    client.{{ $safeGroup }}().{{ $rsMethodName }}(
+                        {{- range $pathParams }}&{{ ToSnakeCase . }}, {{ end -}}
+                        {{- range .QueryParams }}{{ ToSnakeCase (TrimSuffix "optional" .Name) }}, {{ end -}}
+                        body_val.as_ref()
+                    ).await.map_err(|e| e as Box<dyn Error + Send + Sync>)
+                }
+            }
+        ).await?;
+
+        if let Some(v) = resp_val {
+            let typed: {{ GetReturnType . }} = serde_json::from_value(v)?;
+            Ok(Some(typed))
+        } else {
+            Ok(None)
+        }
+    }
+
+
+
+{{- end }}
+}
+

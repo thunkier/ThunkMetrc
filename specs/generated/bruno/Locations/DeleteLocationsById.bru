@@ -1,0 +1,33 @@
+meta {
+  name: DeleteLocationsById
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/locations/v2/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Archives a specified Location, identified by its Id, for a Facility.
+
+  Permissions Required:
+  - Manage Locations
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to delete the list of locations.
+
+  Example Response:
+  No response
+}

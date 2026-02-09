@@ -1,0 +1,70 @@
+from typing import TypedDict, List, Optional, Any, Generic, TypeVar, TYPE_CHECKING
+from typing_extensions import TypedDict
+
+if TYPE_CHECKING:
+    from . import *
+
+class DeliveryPackage(TypedDict, total=False):
+    ContainsRemediatedProduct: bool
+    ExpirationDate: str
+    ExternalId: int
+    GrossUnitOfWeightName: str
+    IsDonation: bool
+    IsFinishedGood: bool
+    IsTestingSample: bool
+    IsTradeSample: bool
+    IsTradeSamplePersistent: bool
+    ItemBrandName: str
+    ItemCategoryName: str
+    ItemId: int
+    ItemName: str
+    ItemServingSize: str
+    ItemStrainName: str
+    ItemSupplyDurationDays: int
+    ItemUnitCbdAContent: float
+    ItemUnitCbdAContentDose: float
+    ItemUnitCbdAContentDoseUnitOfMeasureName: str
+    ItemUnitCbdAContentUnitOfMeasureName: str
+    ItemUnitCbdAPercent: float
+    ItemUnitCbdContent: float
+    ItemUnitCbdContentDose: float
+    ItemUnitCbdContentDoseUnitOfMeasureName: str
+    ItemUnitCbdContentUnitOfMeasureName: str
+    ItemUnitCbdPercent: float
+    ItemUnitQuantity: float
+    ItemUnitQuantityUnitOfMeasureName: str
+    ItemUnitThcAContent: float
+    ItemUnitThcAContentDose: float
+    ItemUnitThcAContentDoseUnitOfMeasureName: str
+    ItemUnitThcAContentUnitOfMeasureName: str
+    ItemUnitThcAPercent: float
+    ItemUnitThcContent: float
+    ItemUnitThcContentDose: float
+    ItemUnitThcContentDoseUnitOfMeasureName: str
+    ItemUnitThcContentUnitOfMeasureName: str
+    ItemUnitThcPercent: float
+    ItemUnitVolume: float
+    ItemUnitVolumeUnitOfMeasureName: str
+    ItemUnitWeight: float
+    ItemUnitWeightUnitOfMeasureName: str
+    LabTestingState: str
+    PackageId: int
+    PackageLabel: str
+    PackageType: str
+    PackagedDate: str
+    ProductLabel: 'TransfersDeliveryPackageProductLabel'
+    ProductRequiresRemediation: bool
+    ProductionBatchNumber: str
+    ReceivedQuantity: float
+    ReceivedUnitOfMeasureName: str
+    RemediationDate: str
+    SellByDate: str
+    ShipmentPackageState: str
+    ShippedQuantity: float
+    ShippedUnitOfMeasureName: str
+    SourceHarvestNames: str
+    SourcePackageIsDonation: bool
+    SourcePackageIsTradeSample: bool
+    SourcePackageLabels: str
+    SourceProductionBatchNumbers: str
+    UseByDate: str

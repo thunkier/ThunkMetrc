@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlantsPlantsGrowthPhaseRequest",
+  "type": "object",
+  "properties": {
+    "GrowthDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "GrowthPhase": {
+      "type": "string"
+    },
+    "Id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "Label": {
+      "type": "string"
+    },
+    "NewLocation": {
+      "type": "string"
+    },
+    "NewSublocation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "NewTag": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "GrowthDate",
+    "GrowthPhase",
+    "Label",
+    "NewLocation",
+    "NewTag"
+  ]
+}

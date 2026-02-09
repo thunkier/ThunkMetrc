@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AdditivesTemplate",
+  "type": "object",
+  "properties": {
+    "ActiveIngredients": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Percentage": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "Name",
+          "Percentage"
+        ]
+      }
+    },
+    "AdditiveType": {
+      "type": "string"
+    },
+    "AdditiveTypeName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ApplicationDevice": {
+      "type": "string"
+    },
+    "EpaRegistrationNumber": {
+      "type": "string"
+    },
+    "FacilityId": {
+      "type": "integer"
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "IsActive": {
+      "type": "boolean"
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ProductSupplier": {
+      "type": "string"
+    },
+    "ProductTradeName": {
+      "type": "string"
+    },
+    "RestrictiveEntryIntervalQuantityDescription": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "RestrictiveEntryIntervalTimeDescription": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "ActiveIngredients",
+    "AdditiveType",
+    "ApplicationDevice",
+    "EpaRegistrationNumber",
+    "FacilityId",
+    "Id",
+    "IsActive",
+    "LastModified",
+    "ProductSupplier",
+    "ProductTradeName"
+  ]
+}

@@ -1,0 +1,11 @@
+from typing import TypedDict, List, Optional, Any, Generic, TypeVar, TYPE_CHECKING
+from typing_extensions import TypedDict
+
+if TYPE_CHECKING:
+    from . import *
+
+class PlantWasteMethodsAll(TypedDict, total=False):
+    ForPlants: bool
+    ForProductDestruction: bool
+    LastModified: str
+    Name: str

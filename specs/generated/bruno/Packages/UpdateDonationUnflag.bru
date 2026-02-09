@@ -1,0 +1,45 @@
+meta {
+  name: UpdateDonationUnflag
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/packages/v2/donation/unflag
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Label": "ABCDEF012345670000010041"
+  },
+  {
+    "Label": "ABCDEF012345670000010042"
+  }
+]
+}
+
+docs {
+  Removes the donation flag from one or more packages at the specified Facility.
+
+  Permissions Required:
+  - View Packages
+  - Manage Packages Inventory
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to update list of unflaged donations.
+
+  Example Response:
+  No response
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Tag",
+  "type": "object",
+  "properties": {
+    "FacilityId": {
+      "type": "integer"
+    },
+    "GroupTagTypeId": {
+      "type": "string"
+    },
+    "GroupTagTypeName": {
+      "type": "string"
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "Label": {
+      "type": "string"
+    },
+    "MaxGroupSize": {
+      "type": "integer"
+    },
+    "TagInventoryTypeName": {
+      "type": "string"
+    },
+    "TagTypeId": {
+      "type": "string"
+    },
+    "TagTypeName": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "FacilityId",
+    "GroupTagTypeId",
+    "GroupTagTypeName",
+    "Id",
+    "Label",
+    "MaxGroupSize",
+    "TagInventoryTypeName",
+    "TagTypeId",
+    "TagTypeName"
+  ]
+}

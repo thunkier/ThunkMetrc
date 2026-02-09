@@ -1,0 +1,54 @@
+meta {
+  name: GetActiveUnitsOfMeasure
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/unitsofmeasure/v2/active
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves all active units of measure.
+
+  Example Response:
+  [
+    {
+      "QuantityType": "CountBased",
+      "Name": "Each",
+      "Abbreviation": "ea"
+    },
+    {
+      "QuantityType": "WeightBased",
+      "Name": "Ounces",
+      "Abbreviation": "oz"
+    },
+    {
+      "QuantityType": "WeightBased",
+      "Name": "Pounds",
+      "Abbreviation": "lb"
+    },
+    {
+      "QuantityType": "WeightBased",
+      "Name": "Grams",
+      "Abbreviation": "g"
+    },
+    {
+      "QuantityType": "WeightBased",
+      "Name": "Milligrams",
+      "Abbreviation": "mg"
+    },
+    {
+      "QuantityType": "WeightBased",
+      "Name": "Kilograms",
+      "Abbreviation": "kg"
+    }
+  ]
+}

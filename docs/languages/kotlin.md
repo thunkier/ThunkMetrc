@@ -1,77 +1,113 @@
-# Kotlin Integration Guide
+# Kotlin SDK Guide
 
-## 📦 Installation
+## Dependencies
 
-Add to `pom.xml` (Maven) or `build.gradle.kts`.
+Maven:
 
-```kotlin
-implementation("com.thunkmetrc:thunkmetrc-kotlin-wrapper:0.1.0")
-implementation("com.thunkmetrc:thunkmetrc-kotlin:0.1.0") // High-level
+```xml
+<dependency>
+  <groupId>io.github.thunkier</groupId>
+  <artifactId>thunkmetrc-kotlin-client</artifactId>
+  <version>0.2.2</version>
+</dependency>
+<dependency>
+  <groupId>io.github.thunkier</groupId>
+  <artifactId>thunkmetrc-kotlin-wrapper</artifactId>
+  <version>0.2.2</version>
+</dependency>
+<!-- Optional high-level helpers -->
+<dependency>
+  <groupId>io.github.thunkier</groupId>
+  <artifactId>thunkmetrc-kotlin</artifactId>
+  <version>0.2.2</version>
+</dependency>
 ```
 
----
-
-## 🚀 Getting Started
-
-### 1. Initialize
+Gradle Kotlin DSL:
 
 ```kotlin
-import com.thunkmetrc.client.MetrcClient
-import com.thunkmetrc.wrapper.MetrcWrapper
-
-val client = MetrcClient(
-    "https://sandbox-api-or.metrc.com",
-    "vendor_key",
-    "user_key"
-)
-
-val wrapper = MetrcWrapper(client)
+implementation("io.github.thunkier:thunkmetrc-kotlin-client:0.2.2")
+implementation("io.github.thunkier:thunkmetrc-kotlin-wrapper:0.2.2")
+implementation("io.github.thunkier:thunkmetrc-kotlin:0.2.2") // optional
 ```
 
-### 2. Make Requests
-The wrapper is `suspend` friendly.
+## Recommended Setup (Wrapper + Factory)
 
 ```kotlin
+import io.github.thunkier.thunkmetrc.wrapper.MetrcFactory
 import kotlinx.coroutines.runBlocking
 
 fun main() = runBlocking {
-    try {
-        val result = wrapper.transfersGetIncomingV2(
-            licenseNumber = "C12-0000001-LIC"
-        )
-        println(result)
-    } catch (e: Exception) {
-        println("Error: ${e.message}")
-    }
+    val factory = MetrcFactory(maxConcurrentRequests = 150)
+    val wrapper = factory.create(
+        baseUrl = "https://sandbox-api-or.metrc.com",
+        vendorKey = "vendor_key",
+        userKey = "user_key"
+    )
+
+    val facilities = wrapper.facilities.getFacilities().orEmpty()
+    println("Facilities: ${facilities.size}")
 }
 ```
 
----
-
-## 🛡️ Rate Limiting
+## Pagination Pattern
 
 ```kotlin
-import com.thunkmetrc.wrapper.RateLimiterConfig
+import io.github.thunkier.thunkmetrc.wrapper.models.PackagesPackage
 
-val config = RateLimiterConfig(enabled = true)
-val wrapper = MetrcWrapper(client, config)
+suspend fun loadAllActivePackages(wrapper: io.github.thunkier.thunkmetrc.wrapper.MetrcWrapper): List<PackagesPackage> {
+    val all = mutableListOf<PackagesPackage>()
+    var page = 1
+
+    while (true) {
+        val response = wrapper.packages.getActivePackages(
+            lastModifiedEnd = null,
+            lastModifiedStart = null,
+            licenseNumber = "C12-0000001-LIC",
+            pageNumber = page.toString(),
+            pageSize = "20"
+        )
+
+        val data = response?.Data.orEmpty()
+        if (data.isEmpty()) break
+
+        all.addAll(data)
+        page++
+    }
+
+    return all
+}
 ```
 
----
-
-## 🛠️ High-Level Features
-
-### Inventory Sync
+## High-Level Helpers (`thunkmetrc-kotlin`)
 
 ```kotlin
-import com.thunkmetrc.ThunkMetrc
+import io.github.thunkier.thunkmetrc.ThunkMetrc
 import java.time.OffsetDateTime
 
 val thunk = ThunkMetrc(wrapper)
-
 val packages = thunk.activePackagesInventorySync(
     licenseNumber = "C12-0000001-LIC",
-    lastKnownSync = OffsetDateTime.now().minusDays(1),
-    bufferMinutes = 20
+    lastModifiedStart = OffsetDateTime.now().minusHours(1),
+    bufferMinutes = 5
 )
+```
+
+## Rate Limiter Configuration
+
+```kotlin
+import io.github.thunkier.thunkmetrc.client.MetrcClient
+import io.github.thunkier.thunkmetrc.wrapper.MetrcWrapper
+import io.github.thunkier.thunkmetrc.wrapper.RateLimiterConfig
+
+val client = MetrcClient("https://sandbox-api-or.metrc.com", "vendor_key", "user_key")
+val config = RateLimiterConfig(enabled = true, maxGetPerSecondIntegrator = 150.0)
+val configuredWrapper = MetrcWrapper(client, config)
+```
+
+## Build Locally
+
+```bash
+task build:kotlin
+task test:kotlin
 ```

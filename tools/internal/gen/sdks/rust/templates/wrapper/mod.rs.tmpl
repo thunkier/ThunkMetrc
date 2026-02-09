@@ -1,0 +1,9 @@
+pub mod paginated_response;
+{{- range .ResponseModels }}
+pub mod {{ ToSnakeCase .Name }};
+{{- end }}
+
+pub use paginated_response::PaginatedResponse;
+{{- range .ResponseModels }}
+pub use {{ ToSnakeCase .Name }}::*;
+{{- end }}

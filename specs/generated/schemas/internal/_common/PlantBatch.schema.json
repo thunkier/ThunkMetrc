@@ -1,0 +1,149 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlantBatch",
+  "type": "object",
+  "properties": {
+    "DestroyedCount": {
+      "type": "integer"
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "IsOnHold": {
+      "type": "boolean"
+    },
+    "IsOnInvestigation": {
+      "type": "boolean"
+    },
+    "IsOnInvestigationHold": {
+      "type": "boolean"
+    },
+    "IsOnInvestigationRecall": {
+      "type": "boolean"
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "LocationId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "LocationName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "LocationTypeName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "MultiPlantBatch": {
+      "type": "boolean"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "PackagedCount": {
+      "type": "integer"
+    },
+    "PatientLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PlantBatchTypeId": {
+      "type": "integer"
+    },
+    "PlantBatchTypeName": {
+      "type": "string"
+    },
+    "PlantedDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "SourcePackageId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "SourcePackageLabel": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "SourcePlantBatchIds": {
+      "type": "array"
+    },
+    "SourcePlantBatchNames": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "SourcePlantId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "SourcePlantLabel": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "StrainId": {
+      "type": "integer"
+    },
+    "StrainName": {
+      "type": "string"
+    },
+    "SublocationId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "SublocationName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "TrackedCount": {
+      "type": "integer"
+    },
+    "UntrackedCount": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "DestroyedCount",
+    "Id",
+    "IsOnHold",
+    "IsOnInvestigation",
+    "IsOnInvestigationHold",
+    "IsOnInvestigationRecall",
+    "LastModified",
+    "MultiPlantBatch",
+    "Name",
+    "PackagedCount",
+    "PlantBatchTypeId",
+    "PlantBatchTypeName",
+    "PlantedDate",
+    "SourcePlantBatchIds",
+    "StrainId",
+    "StrainName",
+    "TrackedCount",
+    "UntrackedCount"
+  ]
+}

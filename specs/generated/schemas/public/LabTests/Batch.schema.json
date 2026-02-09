@@ -1,0 +1,321 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LabTestsBatch",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": "integer"
+    },
+    "ItemCategories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ProductCategory": {
+            "type": "object",
+            "properties": {
+              "CanBeDecontaminated": {
+                "type": "boolean"
+              },
+              "CanBeDestroyed": {
+                "type": "boolean"
+              },
+              "CanBeRemediated": {
+                "type": "boolean"
+              },
+              "CanContainSeeds": {
+                "type": "boolean"
+              },
+              "LabTestBatchNames": {
+                "type": "array"
+              },
+              "MaxDaysForRecoveryAfterFailure": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "MaxDaysToMaintainRTA": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "MaxDaysWithoutTestedSource": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "MaxDaystoReachMinSources": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "MaxRepackageDistanceFromSource": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "MinConsecutiveSourcesForRTA": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "MinDaysForRTA": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "MinNewPassesInRecoveryWindow": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "Name": {
+                "type": "string"
+              },
+              "ProductCategoryType": {
+                "type": "integer"
+              },
+              "QuantityType": {
+                "type": "integer"
+              },
+              "RequiresAdministrationMethod": {
+                "type": "boolean"
+              },
+              "RequiresAllergens": {
+                "type": "boolean"
+              },
+              "RequiresDescription": {
+                "type": "boolean"
+              },
+              "RequiresItemBrand": {
+                "type": "boolean"
+              },
+              "RequiresLabelPhotoDescription": {
+                "type": "boolean"
+              },
+              "RequiresLabelPhotos": {
+                "type": "integer"
+              },
+              "RequiresNumberOfDoses": {
+                "type": "boolean"
+              },
+              "RequiresPackagingPhotoDescription": {
+                "type": "boolean"
+              },
+              "RequiresPackagingPhotos": {
+                "type": "integer"
+              },
+              "RequiresProductPDFDocuments": {
+                "type": "integer"
+              },
+              "RequiresProductPhotoDescription": {
+                "type": "boolean"
+              },
+              "RequiresProductPhotos": {
+                "type": "integer"
+              },
+              "RequiresPublicIngredients": {
+                "type": "boolean"
+              },
+              "RequiresServingSize": {
+                "type": "boolean"
+              },
+              "RequiresStrain": {
+                "type": "boolean"
+              },
+              "RequiresSupplyDurationDays": {
+                "type": "boolean"
+              },
+              "RequiresUnitCbdAContent": {
+                "type": "boolean"
+              },
+              "RequiresUnitCbdAContentDose": {
+                "type": "boolean"
+              },
+              "RequiresUnitCbdAPercent": {
+                "type": "boolean"
+              },
+              "RequiresUnitCbdContent": {
+                "type": "boolean"
+              },
+              "RequiresUnitCbdContentDose": {
+                "type": "boolean"
+              },
+              "RequiresUnitCbdPercent": {
+                "type": "boolean"
+              },
+              "RequiresUnitThcAContent": {
+                "type": "boolean"
+              },
+              "RequiresUnitThcAContentDose": {
+                "type": "boolean"
+              },
+              "RequiresUnitThcAPercent": {
+                "type": "boolean"
+              },
+              "RequiresUnitThcContent": {
+                "type": "boolean"
+              },
+              "RequiresUnitThcContentDose": {
+                "type": "boolean"
+              },
+              "RequiresUnitThcPercent": {
+                "type": "boolean"
+              },
+              "RequiresUnitVolume": {
+                "type": "boolean"
+              },
+              "RequiresUnitWeight": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "CanBeDecontaminated",
+              "CanBeDestroyed",
+              "CanBeRemediated",
+              "CanContainSeeds",
+              "LabTestBatchNames",
+              "Name",
+              "ProductCategoryType",
+              "QuantityType",
+              "RequiresAdministrationMethod",
+              "RequiresAllergens",
+              "RequiresDescription",
+              "RequiresItemBrand",
+              "RequiresLabelPhotoDescription",
+              "RequiresLabelPhotos",
+              "RequiresNumberOfDoses",
+              "RequiresPackagingPhotoDescription",
+              "RequiresPackagingPhotos",
+              "RequiresProductPDFDocuments",
+              "RequiresProductPhotoDescription",
+              "RequiresProductPhotos",
+              "RequiresPublicIngredients",
+              "RequiresServingSize",
+              "RequiresStrain",
+              "RequiresSupplyDurationDays",
+              "RequiresUnitCbdAContent",
+              "RequiresUnitCbdAContentDose",
+              "RequiresUnitCbdAPercent",
+              "RequiresUnitCbdContent",
+              "RequiresUnitCbdContentDose",
+              "RequiresUnitCbdPercent",
+              "RequiresUnitThcAContent",
+              "RequiresUnitThcAContentDose",
+              "RequiresUnitThcAPercent",
+              "RequiresUnitThcContent",
+              "RequiresUnitThcContentDose",
+              "RequiresUnitThcPercent",
+              "RequiresUnitVolume",
+              "RequiresUnitWeight"
+            ]
+          },
+          "ProductCategoryId": {
+            "type": "string"
+          },
+          "RequireLabTestBatch": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ProductCategory",
+          "ProductCategoryId",
+          "RequireLabTestBatch"
+        ]
+      }
+    },
+    "ItemCategoryCount": {
+      "type": "integer"
+    },
+    "LabTestTypeCount": {
+      "type": "integer"
+    },
+    "LabTestTypes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "AlwaysPasses": {
+            "type": "boolean"
+          },
+          "DependencyMode": {
+            "type": "integer"
+          },
+          "Id": {
+            "type": "integer"
+          },
+          "InformationalOnly": {
+            "type": "boolean"
+          },
+          "LabTestResultExpirationDays": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "LabTestResultMaximum": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "LabTestResultMinimum": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "LabTestResultMode": {
+            "type": "integer"
+          },
+          "MaxAllowedFailureCount": {
+            "type": "integer"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "RequiresTestResult": {
+            "type": "boolean"
+          },
+          "ResearchAndDevelopment": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "AlwaysPasses",
+          "DependencyMode",
+          "Id",
+          "InformationalOnly",
+          "LabTestResultMode",
+          "MaxAllowedFailureCount",
+          "Name",
+          "RequiresTestResult",
+          "ResearchAndDevelopment"
+        ]
+      }
+    },
+    "Name": {
+      "type": "string"
+    },
+    "RequiresAllFromLabTestBatch": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "Id",
+    "ItemCategories",
+    "ItemCategoryCount",
+    "LabTestTypeCount",
+    "LabTestTypes",
+    "Name",
+    "RequiresAllFromLabTestBatch"
+  ]
+}

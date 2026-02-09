@@ -1,0 +1,68 @@
+meta {
+  name: CreateGenerate
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/retailid/v2/generate
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+{
+  "PackageLabel": "ABCDEF012345670000010041",
+  "Quantity": 10
+}
+}
+
+docs {
+  Allows you to generate a specific quantity of QR codes. Id value returned (issuance ID) could be used for printing.
+
+  Permissions Required:
+  - External Sources(ThirdPartyVendorV2)/Retail ID(Write)
+  - WebApi Retail ID Read Write State (All or WriteOnly)
+  - Industry/View Packages
+  - One of the following: Industry/Facility Type/Can Download Product Label, Licensee/Download Product Label or Admin/Employees/Packages Page/Product Labels(Manage)
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to associate the packages and QR codes provided.
+
+  Example Response:
+  {
+    "CoaBl": "1A4FF030000000001000003640@Metrc Direct~COA",
+    "IssuanceId": "652714e9db1b524f7c9ec246",
+    "Manifest": {
+      "Qrs": [
+        "id.1a4.com/some_qr_code_id",
+        "id.1a4.com/some_qr_code_id\", \"id.1a4.com/some_qr_code_id"
+      ],
+      "Ranges": [
+        [
+          100000001,
+          100000100
+        ],
+        [
+          200000001,
+          200000100
+        ],
+        [
+          300000001,
+          300000200
+        ]
+      ]
+    },
+    "StackBl": "Testing Item@Metrc Direct",
+    "Url": "https://1a4/com/g/s/OkpRoWJibHhDUUEgVGVzdGluZyBJdgVtQE1ldHJjIERpc"
+  }
+}

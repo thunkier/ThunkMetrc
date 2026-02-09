@@ -1,0 +1,59 @@
+meta {
+  name: CreateHarvestsWaste
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/harvests/v2/waste
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 1,
+    "WasteType": "Plant Material",
+    "UnitOfWeight": "Grams",
+    "WasteWeight": 10.05,
+    "ActualDate": "2015-12-15"
+  },
+  {
+    "Id": 2,
+    "WasteType": "Fibrous Material",
+    "UnitOfWeight": "Grams",
+    "WasteWeight": 30.6,
+    "ActualDate": "2015-12-15"
+  }
+]
+}
+
+docs {
+  Records Waste from harvests for a specified Facility. NOTE: The IDs passed in the request body are the harvest IDs for which you are documenting waste.
+
+  Permissions Required:
+  - View Harvests
+  - Manage Harvests
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to return the list of harvests waste.
+
+  Example Response:
+  {
+    "Ids": [
+      1,
+      2
+    ],
+    "Warnings": null
+  }
+}

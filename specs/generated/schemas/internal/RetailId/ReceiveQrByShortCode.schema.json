@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RetailIdReceiveQrByShortCode",
+  "type": "object",
+  "properties": {
+    "ChildTag": {
+      "type": "string"
+    },
+    "Eaches": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "LabelSource": {
+      "type": "string"
+    },
+    "QrCount": {
+      "type": "integer"
+    },
+    "Ranges": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        }
+      }
+    },
+    "RequiresVerification": {
+      "type": "boolean"
+    },
+    "SiblingTags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "ChildTag",
+    "Eaches",
+    "LabelSource",
+    "QrCount",
+    "Ranges",
+    "RequiresVerification",
+    "SiblingTags"
+  ]
+}

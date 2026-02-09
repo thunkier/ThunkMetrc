@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AdjustPackagesRequest",
+  "type": "object",
+  "properties": {
+    "AdjustmentDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "AdjustmentReason": {
+      "type": "string"
+    },
+    "Label": {
+      "type": "string"
+    },
+    "Quantity": {
+      "type": "number"
+    },
+    "ReasonNote": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "UnitOfMeasure": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "AdjustmentDate",
+    "AdjustmentReason",
+    "Label",
+    "Quantity",
+    "UnitOfMeasure"
+  ]
+}

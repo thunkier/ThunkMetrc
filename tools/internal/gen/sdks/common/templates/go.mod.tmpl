@@ -1,0 +1,19 @@
+module {{.Module}}
+
+go 1.21
+
+{{- if .Require }}
+require (
+    {{- range .Require }}
+    {{.Path}} {{.Version}}
+    {{- end }}
+)
+{{- end }}
+
+{{- if .Replace }}
+replace (
+    {{- range .Replace }}
+    {{.Old}} => {{.New}}
+    {{- end }}
+)
+{{- end }}

@@ -1,0 +1,41 @@
+
+export interface Category {
+    CanBeDecontaminated?: boolean;
+    CanBeDestroyed?: boolean;
+    CanBeRemediated?: boolean;
+    CanContainSeeds?: boolean;
+    LabTestBatchNames?: any[];
+    Name?: string;
+    ProductCategoryType?: string;
+    QuantityType?: string;
+    RequiresAdministrationMethod?: boolean;
+    RequiresAllergens?: boolean;
+    RequiresDescription?: boolean;
+    RequiresItemBrand?: boolean;
+    RequiresLabelPhotoDescription?: boolean;
+    RequiresLabelPhotos?: number;
+    RequiresNumberOfDoses?: boolean;
+    RequiresPackagingPhotoDescription?: boolean;
+    RequiresPackagingPhotos?: number;
+    RequiresProductPDFDocuments?: number;
+    RequiresProductPhotoDescription?: boolean;
+    RequiresProductPhotos?: number;
+    RequiresPublicIngredients?: boolean;
+    RequiresServingSize?: boolean;
+    RequiresStrain?: boolean;
+    RequiresSupplyDurationDays?: boolean;
+    RequiresUnitCbdAContent?: boolean;
+    RequiresUnitCbdAContentDose?: boolean;
+    RequiresUnitCbdAPercent?: boolean;
+    RequiresUnitCbdContent?: boolean;
+    RequiresUnitCbdContentDose?: boolean;
+    RequiresUnitCbdPercent?: boolean;
+    RequiresUnitThcAContent?: boolean;
+    RequiresUnitThcAContentDose?: boolean;
+    RequiresUnitThcAPercent?: boolean;
+    RequiresUnitThcContent?: boolean;
+    RequiresUnitThcContentDose?: boolean;
+    RequiresUnitThcPercent?: boolean;
+    RequiresUnitVolume?: boolean;
+    RequiresUnitWeight?: boolean;
+}

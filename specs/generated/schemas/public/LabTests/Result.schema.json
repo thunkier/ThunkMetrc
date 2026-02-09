@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LabTestsResult",
+  "type": "object",
+  "properties": {
+    "ExpirationDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "LabFacilityLicenseNumber": {
+      "type": "string"
+    },
+    "LabFacilityName": {
+      "type": "string"
+    },
+    "LabTestDetailRevokedDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "LabTestResultDocumentFileId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "LabTestResultId": {
+      "type": "integer"
+    },
+    "OverallPassed": {
+      "type": "boolean"
+    },
+    "PackageId": {
+      "type": "integer"
+    },
+    "ProductCategoryName": {
+      "type": "string"
+    },
+    "ProductName": {
+      "type": "string"
+    },
+    "ResultReleaseDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ResultReleased": {
+      "type": "boolean"
+    },
+    "RevokedDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "SourcePackageLabel": {
+      "type": "string"
+    },
+    "TestComment": {
+      "type": "string"
+    },
+    "TestInformationalOnly": {
+      "type": "boolean"
+    },
+    "TestPassed": {
+      "type": "boolean"
+    },
+    "TestPerformedDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "TestResultLevel": {
+      "type": "number"
+    },
+    "TestTypeName": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "LabFacilityLicenseNumber",
+    "LabFacilityName",
+    "LabTestResultId",
+    "OverallPassed",
+    "PackageId",
+    "ProductCategoryName",
+    "ProductName",
+    "ResultReleaseDateTime",
+    "ResultReleased",
+    "SourcePackageLabel",
+    "TestComment",
+    "TestInformationalOnly",
+    "TestPassed",
+    "TestPerformedDate",
+    "TestResultLevel",
+    "TestTypeName"
+  ]
+}

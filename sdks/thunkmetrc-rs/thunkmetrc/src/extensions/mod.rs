@@ -1,0 +1,16 @@
+pub mod additives_templates_extensions;
+pub mod employees_extensions;
+pub mod harvests_extensions;
+pub mod items_extensions;
+pub mod lab_tests_extensions;
+pub mod locations_extensions;
+pub mod packages_extensions;
+pub mod patients_extensions;
+pub mod plant_batches_extensions;
+pub mod plants_extensions;
+pub mod processing_job_extensions;
+pub mod sales_extensions;
+pub mod strains_extensions;
+pub mod sublocations_extensions;
+pub mod transfers_extensions;
+pub mod transporters_extensions;

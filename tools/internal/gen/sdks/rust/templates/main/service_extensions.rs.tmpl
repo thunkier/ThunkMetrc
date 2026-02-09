@@ -1,0 +1,180 @@
+use thunkmetrc_wrapper::services::{{ ToSnakeCase .Name }}_service::{{ .Name }}Service;
+use thunkmetrc_wrapper::models::paginated_response::PaginatedResponse;
+{{/* We might import models */}}
+use thunkmetrc_wrapper::models::*;
+use anyhow::Result;
+use async_stream::try_stream;
+use futures::{Stream, StreamExt};
+use chrono::{DateTime, Utc, Duration};
+use thunkmetrc_wrapper::MetrcClient;
+
+{{- $svcName := .Name }}
+{{- $snakeSvcName := ToSnakeCase .Name }}
+
+{{- $svcName := .Name }}
+{{- $snakeSvcName := ToSnakeCase .Name }}
+
+use async_trait::async_trait;
+
+#[async_trait]
+pub trait {{ $svcName }}ServiceExt {
+
+{{- range .Service.Operations }}
+{{- $methodName := ToPascalCase (CleanName .Name) }}
+{{- $snakeMethodName := ToSnakeCase $methodName }}
+{{- $retType := GetReturnType . }}
+
+{{- if HasPagination . }}
+{{- /* Prepare Iterator Args (exclude pageNumber) */ -}}
+{{- $iterArgs := list }}
+{{- range .PathParams }}
+    {{- $iterArgs = append $iterArgs (printf "%s: &str" (SafeRustField .)) }}
+{{- end }}
+{{- range .QueryParams }}
+    {{- $argName := SafeRustField (TrimSuffix "optional" .Name) }}
+    {{- if ne $argName "page_number" }}
+        {{- $iterArgs = append $iterArgs (printf "%s: Option<&str>" $argName) }}
+    {{- end }}
+{{- end }}
+{{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+     {{- $iterArgs = append $iterArgs "body: Option<serde_json::Value>" }}
+{{- end }}
+
+    /// Iterator for {{ $snakeMethodName }}.
+    fn iterate_{{ $snakeMethodName }}<'a>(
+        &'a self,
+        {{ join $iterArgs ", " }}
+    ) -> impl Stream<Item = Result<{{ $retType }}>> + 'a;
+{{- end }}
+
+{{- if IsTimeWindowed . }}
+    /// Sync for {{ $snakeMethodName }}.
+    async fn sync_{{ $snakeMethodName }}(
+        &self,
+        last_known_sync: Option<DateTime<Utc>>,
+        buffer_minutes: i64,
+        {{- range .PathParams }}{{ SafeRustField . }}: &str, {{ end -}}
+        {{- range .QueryParams }}
+        {{- $p := SafeRustField (TrimSuffix "optional" .Name) }}
+        {{- if and (ne $p "last_modified_start") (ne $p "last_modified_end") (ne $p "page_number") }}
+            {{ $p }}: Option<&str>,
+        {{- end }}
+        {{- end }}
+    ) -> Result<Vec<{{ $retType }}>>;
+{{- end }}
+{{- end }}
+}
+
+#[async_trait]
+impl {{ $svcName }}ServiceExt for {{ $svcName }}Service {
+{{- range .Service.Operations }}
+{{- $methodName := ToPascalCase (CleanName .Name) }}
+{{- $snakeMethodName := ToSnakeCase $methodName }}
+{{- $declaredName := FormatMethodName $methodName "" }}
+{{- $retType := GetReturnType . }}
+
+{{- if HasPagination . }}
+{{- /* Prepare Iterator Args (exclude pageNumber) */ -}}
+{{- $iterArgs := list }}
+{{- range .PathParams }}
+    {{- $iterArgs = append $iterArgs (printf "%s: &str" (SafeRustField .)) }}
+{{- end }}
+{{- range .QueryParams }}
+    {{- $argName := SafeRustField (TrimSuffix "optional" .Name) }}
+    {{- if ne $argName "page_number" }}
+        {{- $iterArgs = append $iterArgs (printf "%s: Option<&str>" $argName) }}
+    {{- end }}
+{{- end }}
+{{- /* Body logic */ -}}
+{{- $callBodyArg := "None" }}
+{{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+     {{- $iterArgs = append $iterArgs "body: Option<serde_json::Value>" }}
+     {{- $callBodyArg = "body" }}
+{{- end }}
+
+    fn iterate_{{ $snakeMethodName }}<'a>(
+        &'a self,
+        {{ join $iterArgs ", " }}
+    ) -> impl Stream<Item = Result<{{ $retType }}>> + 'a {
+        try_stream! {
+            let mut page = 1;
+            loop {
+                let page_str = page.to_string();
+                let res = self.{{ $declaredName }}(
+                    {{- range .PathParams }}{{ SafeRustField . }}, {{ end -}}
+                    {{- range .QueryParams }}
+                        {{- $p := SafeRustField (TrimSuffix "optional" .Name) }}
+                        {{- if eq $p "page_number" }}
+                            Some(page_str.clone()),
+                        {{- else }}
+                            {{ $p }}.map(|s| s.to_string()),
+                        {{- end }}
+                    {{- end -}}
+                    {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}{{ $callBodyArg }}{{ end -}}
+                ).await?;
+
+                // Handle return types
+                {{- if HasPrefix $retType "PaginatedResponse" }}
+                if let Some(data) = res.and_then(|r| r.data) {
+                     if data.is_empty() { break; }
+                     for item in data { yield item; }
+                } else { break; }
+                {{- else }}
+                if let Some(data) = res {
+                    if data.is_empty() { break; }
+                    for item in data { yield item; }
+                } else { break; }
+                {{- end }}
+                page += 1;
+            }
+        }
+    }
+{{- end }}
+
+{{- if IsTimeWindowed . }}
+    async fn sync_{{ $snakeMethodName }}(
+        &self,
+        last_known_sync: Option<DateTime<Utc>>,
+        buffer_minutes: i64,
+        {{- range .PathParams }}{{ SafeRustField . }}: &str, {{ end -}}
+        {{- range .QueryParams }}
+        {{- $p := SafeRustField (TrimSuffix "optional" .Name) }}
+        {{- if and (ne $p "last_modified_start") (ne $p "last_modified_end") (ne $p "page_number") }}
+            {{ $p }}: Option<&str>,
+        {{- end }}
+        {{- end }}
+    ) -> Result<Vec<{{ $retType }}>> {
+        let end = Utc::now();
+        let mut start = end - Duration::days(1);
+        if let Some(lks) = last_known_sync {
+            start = lks - Duration::minutes(buffer_minutes);
+        }
+
+        let start_str = start.to_rfc3339();
+        let end_str = end.to_rfc3339();
+        
+        let mut results = Vec::new();
+        let mut stream = self.iterate_{{ $snakeMethodName }}(
+            {{- range .PathParams }}{{ SafeRustField . }}, {{ end -}}
+            {{- range .QueryParams }}
+            {{- $p := SafeRustField (TrimSuffix "optional" .Name) }}
+            {{- if eq $p "last_modified_start" }}Some(&start_str),
+            {{- else if eq $p "last_modified_end" }}Some(&end_str),
+            {{- else if ne $p "page_number" }}
+            {{ $p }},
+            {{- end }}
+            {{- end }}
+            // body?
+            {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}None{{ end }}
+        );
+        
+        while let Some(item_res) = stream.next().await {
+            results.push(item_res?);
+        }
+        
+        Ok(results)
+    }
+{{- end }}
+{{- end }}
+}
+

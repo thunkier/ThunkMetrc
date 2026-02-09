@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/sdks/csharp/tests/bin/Debug/net9.0/tests.dll",
+            "program": "${workspaceFolder}/sdks/thunkmetrc-cs/ThunkMetrc.Test/bin/Debug/net8.0/ThunkMetrc.Test.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/sdks/csharp/tests",
+            "cwd": "${workspaceFolder}/sdks/thunkmetrc-cs/ThunkMetrc.Test",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false

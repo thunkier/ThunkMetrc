@@ -1,0 +1,48 @@
+package client
+
+import (
+	"context"
+{{- if NeedsUrlImport . }}
+	"net/url"
+{{- end }}
+)
+
+{{ $safeGroup := ToPascalCase (CleanName .Name) }}
+
+{{- range .Operations }}
+{{- $methodName := ToPascalCase (CleanName .Name) }}
+{{- $goMethodName := FormatMethodName $methodName $safeGroup }}
+// {{ .Method }} {{ .Path }}
+{{- if .Description }}
+{{ range Split (CleanDocs .Description) "\n" }}// {{ . }}
+{{ end -}}
+{{- else }}
+{{ end -}}
+// Parameters:
+{{- range .PathParams }}
+// - {{ . }} (path param)
+{{- end }}
+{{- range .QueryParams }}
+// - {{ TrimSuffix "optional" .Name }} (optional): {{ if .Description }}{{ .Description }}{{ else }}Filter by {{ .Name }}{{ end }}
+{{- end }}
+{{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+// - body (request body)
+{{- end }}
+func (c *MetrcClient) {{ $goMethodName }}(
+	ctx context.Context,
+	{{- range .PathParams }}{{ ToCamelCase . }} string, {{ end }}
+	{{- range .QueryParams }}{{ $name := TrimSuffix "optional" .Name }}{{ ToCamelCase $name }} string, {{ end }}
+	{{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}body interface{}{{ end -}}
+) (interface{}, error) {
+	queryParams := make(map[string]string)
+	{{- range .QueryParams }}
+	{{- $name := TrimSuffix "optional" .Name }}
+	if {{ ToCamelCase $name }} != "" {
+		queryParams["{{ $name }}"] = {{ ToCamelCase $name }}
+	}
+	{{- end }}
+
+	return c.send(ctx, "{{ .Method }}", "{{ FormatUrl . }}", queryParams, {{ if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}body{{ else }}nil{{ end }})
+}
+{{ end }}
+

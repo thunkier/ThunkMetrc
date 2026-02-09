@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlantsPlantsLocationRequest",
+  "type": "object",
+  "properties": {
+    "ActualDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "Id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "Label": {
+      "type": "string"
+    },
+    "Location": {
+      "type": "string"
+    },
+    "Sublocation": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "ActualDate",
+    "Label",
+    "Location",
+    "Sublocation"
+  ]
+}

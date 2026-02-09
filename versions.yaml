@@ -1,0 +1,111 @@
+# SDK and Dependency Version Configuration
+# This file is the single source of truth for all versions across SDKs.
+# Run `task gen:sdks` after modifying to regenerate all package manifests.
+
+sdk_version: "0.3.0"
+
+dependencies:
+  # Java dependencies
+  java:
+    # Shared
+    jackson_databind: "2.15.2"
+    
+    # Client-only
+    client:
+      okhttp: "4.12.0"
+    
+    # Wrapper-only  
+    wrapper: {}
+    
+    # Build/test dependencies
+    junit: "5.10.0"
+    dotenv: "5.2.2"
+    maven_compiler_plugin: "3.11.0"
+    maven_source_plugin: "3.2.1"
+    maven_javadoc_plugin: "3.5.0"
+    maven_gpg_plugin: "3.1.0"
+    maven_surefire_plugin: "3.2.3"
+    central_publishing_plugin: "0.9.0"
+
+  # Kotlin dependencies
+  kotlin:
+    # Shared
+    kotlin: "1.9.0"
+    jackson_module_kotlin: "2.15.2"
+    jackson_annotations: "2.15.2"
+    dokka: "1.9.0"
+    
+    # Client-only
+    client:
+      okhttp: "4.12.0"
+    
+    # Wrapper-only
+    wrapper:
+      coroutines: "1.7.3"
+
+  # TypeScript dependencies  
+  typescript:
+    # Shared
+    typescript: "^5.0.0"
+    
+    # Client-only
+    client:
+      axios: "^1.6.0"
+    
+    # Wrapper-only
+    wrapper: {}
+
+  # Python dependencies
+  python:
+    # Shared
+    python_requires: ">=3.10"
+    
+    # Client-only
+    client:
+      httpx: ">=0.24.0"
+    
+    # Wrapper-only
+    wrapper: {}
+
+  # Rust dependencies
+  rust:
+    # Shared
+    serde: "1.0"
+    serde_json: "1.0"
+    tokio: "1.0"
+    
+    # Client-only
+    client:
+      log: "0.4"
+      reqwest: "0.11"
+      urlencoding: "2"
+      serde: "1.0"
+      serde_json: "1.0"
+      tokio: "1.28"
+    
+    # Wrapper-only
+    wrapper:
+      async_stream: "0.3"
+      futures: "0.3"
+      futures_core: "0.3"
+      reqwest: "0.11"
+      serde: "1.0"
+      serde_json: "1.0"
+      tokio: "1.28"
+
+  # Go dependencies (managed by go.mod, listed for reference)
+  go:
+    client: {}
+    wrapper:
+      time: "v0.5.0" # golang.org/x/time
+
+  # C# / .NET (managed by csproj, listed for reference)
+  csharp:
+    target_framework: "net8.0"
+    client:
+      Microsoft.Extensions.Logging.Abstractions: "8.0.0"
+    wrapper:
+      System.Threading.RateLimiting: "8.0.0"
+      Microsoft.Extensions.Logging.Abstractions: "8.0.0"
+      Polly.Core: "8.4.1"
+      System.Diagnostics.DiagnosticSource: "8.0.0"

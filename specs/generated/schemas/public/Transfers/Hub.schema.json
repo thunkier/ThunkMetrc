@@ -1,0 +1,268 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TransfersHub",
+  "type": "object",
+  "properties": {
+    "ActualArrivalDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ActualDepartureDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ActualReturnArrivalDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ActualReturnDepartureDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "CreatedByUserName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "CreatedDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "DeliveryCount": {
+      "type": "integer"
+    },
+    "DeliveryId": {
+      "type": "integer"
+    },
+    "DeliveryPackageCount": {
+      "type": "integer"
+    },
+    "DeliveryReceivedPackageCount": {
+      "type": "integer"
+    },
+    "DriverName": {
+      "type": "string"
+    },
+    "DriverOccupationalLicenseNumber": {
+      "type": "string"
+    },
+    "DriverVehicleLicenseNumber": {
+      "type": "string"
+    },
+    "EstimatedArrivalDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "EstimatedDepartureDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "EstimatedReturnArrivalDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "EstimatedReturnDepartureDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "IsLayover": {
+      "type": "boolean"
+    },
+    "IsVoided": {
+      "type": "boolean"
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ManifestNumber": {
+      "type": "string"
+    },
+    "PackageCount": {
+      "type": "integer"
+    },
+    "ReceivedDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ReceivedDeliveryCount": {
+      "type": "integer"
+    },
+    "ReceivedPackageCount": {
+      "type": "integer"
+    },
+    "RecipientFacilityLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "RecipientFacilityName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "RejectedPackagesReturned": {
+      "type": "boolean"
+    },
+    "ShipmentTransactionType": {
+      "type": "integer"
+    },
+    "ShipmentTransporterDetails": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ActualDriverStartDateTime": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "DriverLayoverLeg": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "DriverName": {
+            "type": "string"
+          },
+          "DriverOccupationalLicenseNumber": {
+            "type": "string"
+          },
+          "DriverVehicleLicenseNumber": {
+            "type": "string"
+          },
+          "ShipmentDeliveryId": {
+            "type": "integer"
+          },
+          "VehicleLicensePlateNumber": {
+            "type": "string"
+          },
+          "VehicleMake": {
+            "type": "string"
+          },
+          "VehicleModel": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "DriverName",
+          "DriverOccupationalLicenseNumber",
+          "DriverVehicleLicenseNumber",
+          "ShipmentDeliveryId",
+          "VehicleLicensePlateNumber",
+          "VehicleMake",
+          "VehicleModel"
+        ]
+      }
+    },
+    "ShipmentTypeName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ShipperFacilityLicenseNumber": {
+      "type": "string"
+    },
+    "ShipperFacilityName": {
+      "type": "string"
+    },
+    "TransporterAcceptedDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "TransporterActualArrivalDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "TransporterActualDepartureDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "TransporterEstimatedArrivalDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "TransporterEstimatedDepartureDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "TransporterFacilityLicenseNumber": {
+      "type": "string"
+    },
+    "TransporterFacilityName": {
+      "type": "string"
+    },
+    "VehicleLicensePlateNumber": {
+      "type": "string"
+    },
+    "VehicleMake": {
+      "type": "string"
+    },
+    "VehicleModel": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "CreatedDateTime",
+    "DeliveryCount",
+    "DeliveryId",
+    "DeliveryPackageCount",
+    "DeliveryReceivedPackageCount",
+    "DriverName",
+    "DriverOccupationalLicenseNumber",
+    "DriverVehicleLicenseNumber",
+    "EstimatedArrivalDateTime",
+    "EstimatedDepartureDateTime",
+    "Id",
+    "IsLayover",
+    "IsVoided",
+    "LastModified",
+    "ManifestNumber",
+    "PackageCount",
+    "ReceivedDeliveryCount",
+    "ReceivedPackageCount",
+    "RejectedPackagesReturned",
+    "ShipmentTransactionType",
+    "ShipmentTransporterDetails",
+    "ShipperFacilityLicenseNumber",
+    "ShipperFacilityName",
+    "TransporterFacilityLicenseNumber",
+    "TransporterFacilityName",
+    "VehicleLicensePlateNumber",
+    "VehicleMake",
+    "VehicleModel"
+  ]
+}

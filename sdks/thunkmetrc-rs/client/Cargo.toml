@@ -1,0 +1,17 @@
+[package]
+name = "thunkmetrc-client"
+version = "0.3.0"
+edition = "2021"
+description = "Auto-generated Rust client for ThunkMetrc"
+license = "MIT"
+repository = "https://github.com/thunkier/thunkmetrc"
+keywords = ["thunkmetrc", "cannabis", "compliance", "api", "sdk"]
+categories = ["api-bindings", "web-programming::http-client"]
+
+[dependencies]
+log = "0.4"
+reqwest = { version = "0.11", features = ["json", "blocking"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.0", features = ["full"] }
+urlencoding = "2"

@@ -1,0 +1,127 @@
+meta {
+  name: GetInactiveProcessingJob
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/processing/v2/inactive
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  lastModifiedStart: 
+  lastModifiedEnd: 
+  pageNumber: 
+  pageSize: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves inactive processing jobs at a specified Facility.
+
+  Permissions Required:
+  - Manage Processing Job
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to return the list of inactive processing jobs.
+  - lastModifiedStart (Optional): The last modified start timestamp
+  - lastModifiedEnd (Optional): The last modified end timestamp
+  - pageNumber (Optional): The number of the data page from which to return data.
+  - pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20.
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 1,
+        "Name": "brownies",
+        "Number": "MN001",
+        "JobTypeId": 1,
+        "JobTypeName": null,
+        "StartDate": "2026-02-07",
+        "TotalCount": 0.0,
+        "CountUnitOfMeasureId": 1,
+        "CountUnitOfMeasureName": "Each",
+        "CountUnitOfMeasureAbbreviation": null,
+        "TotalVolume": 8.0,
+        "VolumeUnitOfMeasureId": 7,
+        "VolumeUnitOfMeasureName": "Fluid Ounces",
+        "VolumeUnitOfMeasureAbbreviation": null,
+        "TotalWeight": 1.0,
+        "WeightUnitOfMeasureId": 2,
+        "WeightUnitOfMeasureName": "Ounces",
+        "WeightUnitOfMeasureAbbreviation": null,
+        "TotalCountWaste": null,
+        "WasteCountUnitOfMeasureId": null,
+        "WasteCountUnitOfMeasureName": null,
+        "WasteCountUnitOfMeasureAbbreviation": null,
+        "TotalVolumeWaste": null,
+        "WasteVolumeUnitOfMeasureId": null,
+        "WasteVolumeUnitOfMeasureName": null,
+        "WasteVolumeUnitOfMeasureAbbreviation": null,
+        "TotalWeightWaste": null,
+        "WasteWeightUnitOfMeasureId": null,
+        "WasteWeightUnitOfMeasureName": null,
+        "WasteWeightUnitOfMeasureAbbreviation": null,
+        "Packages": [],
+        "IsFinished": false,
+        "FinishNote": null,
+        "FinishedDate": null,
+        "TotalUnitOfMeasureId": 2,
+        "TotalQuantity": 1.0
+      },
+      {
+        "Id": 3,
+        "Name": "extract oil",
+        "Number": "MN003",
+        "JobTypeId": 0,
+        "JobTypeName": null,
+        "StartDate": "2026-02-07",
+        "TotalCount": 0.0,
+        "CountUnitOfMeasureId": 1,
+        "CountUnitOfMeasureName": "Each",
+        "CountUnitOfMeasureAbbreviation": null,
+        "TotalVolume": 0.0,
+        "VolumeUnitOfMeasureId": 7,
+        "VolumeUnitOfMeasureName": "Fluid Ounces",
+        "VolumeUnitOfMeasureAbbreviation": null,
+        "TotalWeight": 0.8,
+        "WeightUnitOfMeasureId": 6,
+        "WeightUnitOfMeasureName": "Kilograms",
+        "WeightUnitOfMeasureAbbreviation": null,
+        "TotalCountWaste": null,
+        "WasteCountUnitOfMeasureId": null,
+        "WasteCountUnitOfMeasureName": null,
+        "WasteCountUnitOfMeasureAbbreviation": null,
+        "TotalVolumeWaste": null,
+        "WasteVolumeUnitOfMeasureId": null,
+        "WasteVolumeUnitOfMeasureName": null,
+        "WasteVolumeUnitOfMeasureAbbreviation": null,
+        "TotalWeightWaste": null,
+        "WasteWeightUnitOfMeasureId": null,
+        "WasteWeightUnitOfMeasureName": null,
+        "WasteWeightUnitOfMeasureAbbreviation": null,
+        "Packages": [],
+        "IsFinished": false,
+        "FinishNote": null,
+        "FinishedDate": null,
+        "TotalUnitOfMeasureId": 6,
+        "TotalQuantity": 0.8
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

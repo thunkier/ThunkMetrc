@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlantBatchesPlantBatchesAdditivesRequest",
+  "type": "object",
+  "properties": {
+    "ActiveIngredients": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Percentage": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "Name",
+          "Percentage"
+        ]
+      }
+    },
+    "ActualDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "AdditiveType": {
+      "type": "string"
+    },
+    "ApplicationDevice": {
+      "type": "string"
+    },
+    "EpaRegistrationNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PlantBatchName": {
+      "type": "string"
+    },
+    "ProductSupplier": {
+      "type": "string"
+    },
+    "ProductTradeName": {
+      "type": "string"
+    },
+    "TotalAmountApplied": {
+      "type": "integer"
+    },
+    "TotalAmountUnitOfMeasure": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "ActiveIngredients",
+    "ActualDate",
+    "AdditiveType",
+    "ApplicationDevice",
+    "PlantBatchName",
+    "ProductSupplier",
+    "ProductTradeName",
+    "TotalAmountApplied",
+    "TotalAmountUnitOfMeasure"
+  ]
+}

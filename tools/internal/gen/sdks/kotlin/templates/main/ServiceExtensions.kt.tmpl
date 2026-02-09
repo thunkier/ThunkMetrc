@@ -1,0 +1,156 @@
+package io.github.thunkier.thunkmetrc
+
+import io.github.thunkier.thunkmetrc.client.MetrcClient
+import io.github.thunkier.thunkmetrc.wrapper.MetrcRateLimiter
+import io.github.thunkier.thunkmetrc.wrapper.MetrcExtensions
+import io.github.thunkier.thunkmetrc.wrapper.models.*
+import io.github.thunkier.thunkmetrc.wrapper.services.{{ .Name }}Service
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
+import java.time.format.DateTimeFormatter
+import java.time.OffsetDateTime
+
+{{- $svcName := .Name }}
+{{- range .Service.Operations }}
+{{- $methodName := ToPascalCase (CleanName .Name) }}
+{{- $declaredName := FormatMethodName $methodName "" }}
+{{- $clientMethodName := FormatMethodName $methodName $svcName }}
+{{- $retType := GetReturnType . }}
+
+{{- if HasPagination . }}
+{{- /* Prepare Iterator Args (exclude pageNumber) */ -}}
+{{- $iterArgs := list }}
+{{- range .PathParams }}
+    {{- $iterArgs = append $iterArgs (printf "%s: String" (SafeKotlinField .)) }}
+{{- end }}
+{{- range .QueryParams }}
+    {{- $argName := SafeKotlinField (TrimSuffix "optional" .Name) }}
+    {{- if ne $argName "pageNumber" }}
+        {{- $iterArgs = append $iterArgs (printf "%s: String? = null" $argName) }}
+    {{- end }}
+{{- end }}
+
+{{- /* Body logic */ -}}
+{{- $callBodyArg := "null" }}
+{{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+    {{- if .BodySchema }}
+         {{- $iterArgs = append $iterArgs "body: Any? = null" }}
+         {{- $callBodyArg = "body" }}
+    {{- else }}
+         {{- $iterArgs = append $iterArgs "body: Any? = null" }}
+         {{- $callBodyArg = "body" }}
+    {{- end }}
+{{- end }}
+
+/**
+ * Lazy pagination iterator for {{ $declaredName }}.
+ * @return A Flow that yields items lazily across all pages
+ */
+@Suppress("UNCHECKED_CAST")
+fun {{ $svcName }}Service.iterate{{ ToPascalCase $declaredName }}({{ join $iterArgs ", " }}): Flow<{{ $retType }}> {
+    return MetrcExtensions.iteratePages { page ->
+        this.{{ $declaredName }}(
+            {{- range .PathParams }}{{ SafeKotlinField . }}, {{ end -}}
+            {{- range .QueryParams }}
+                {{- $p := SafeKotlinField (TrimSuffix "optional" .Name) }}
+                {{- if eq $p "pageNumber" }}
+                    page.toString(),
+                {{- else }}
+                    {{ $p }},
+                {{- end }}
+            {{- end -}}
+            {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}{{ $callBodyArg }}{{ end -}}
+        ) as? PaginatedResponse<{{ $retType }}>
+    }
+}
+{{- end }}
+
+{{- if IsTimeWindowed . }}
+/**
+ * Sync items for {{ $declaredName }}.
+ * Retrieves all items updated within the specified time window.
+ * @param lastKnownSync Last known sync timestamp (uses 1 day ago if null)
+ * @param bufferMinutes Buffer to subtract from lastKnownSync to catch overlaps
+ * @return List of items updated since the sync window start
+ */
+suspend fun {{ $svcName }}Service.sync{{ ToPascalCase $declaredName }}(
+    lastKnownSync: OffsetDateTime? = null, 
+    bufferMinutes: Int = 15
+    {{- $syncArgs := list -}}
+    {{- range .PathParams }}{{ $syncArgs = append $syncArgs (printf ", %s: String" (SafeKotlinField .)) }}{{ end -}}
+    {{- range .QueryParams }}
+    {{- $p := SafeKotlinField (TrimSuffix "optional" .Name) }}
+    {{- if and (ne $p "lastModifiedStart") (ne $p "lastModifiedEnd") (ne $p "pageNumber") }}
+        {{- $syncArgs = append $syncArgs (printf ", %s: String? = null" $p) }}
+    {{- end }}
+    {{- end }}
+    {{ join $syncArgs "" }}
+): List<{{ $retType }}> {
+    val end = OffsetDateTime.now()
+    var start = end.minusDays(1)
+    if (lastKnownSync != null) {
+        start = lastKnownSync.minusMinutes(bufferMinutes.toLong())
+    }
+
+    val startStr = start.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+    val endStr = end.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+    
+    {{- $callSyncArgs := list }}
+    {{- range .PathParams }}{{ $callSyncArgs = append $callSyncArgs (SafeKotlinField .) }}{{ end }}
+    {{- range .QueryParams }}
+    {{- $p := SafeKotlinField (TrimSuffix "optional" .Name) }}
+    {{- if eq $p "lastModifiedStart" }}{{ $callSyncArgs = append $callSyncArgs "startStr" }}
+    {{- else if eq $p "lastModifiedEnd" }}{{ $callSyncArgs = append $callSyncArgs "endStr" }}
+    {{- else if ne $p "pageNumber" }}{{ $callSyncArgs = append $callSyncArgs $p }}
+    {{- end }}
+    {{- end }}
+    {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}{{ $callSyncArgs = append $callSyncArgs "null" }}{{ end }}
+
+    return this.iterate{{ ToPascalCase $declaredName }}({{ join $callSyncArgs ", " }}).toList()
+}
+
+/**
+ * Sync items in parallel across multiple facilities for {{ $declaredName }}.
+ * @param targets List of client/license pairs to sync
+ * @param lastKnownSync Last known sync timestamp
+ * @param bufferMinutes Buffer to subtract from lastKnownSync
+ * @return Map of license number to list of synced items
+ */
+suspend fun sync{{ ToPascalCase $declaredName }}Parallel(
+    targets: List<Pair<MetrcClient, String>>,
+    lastKnownSync: OffsetDateTime? = null,
+    bufferMinutes: Int = 15
+    {{- $parArgs := list -}}
+    {{- range .QueryParams }}
+    {{- $p := SafeKotlinField (TrimSuffix "optional" .Name) }}
+    {{- if and (ne $p "lastModifiedStart") (ne $p "lastModifiedEnd") (ne $p "pageNumber") (ne $p "licenseNumber") }}
+        {{- $parArgs = append $parArgs (printf ", %s: String? = null" $p) }}
+    {{- end }}
+    {{- end }}
+    {{ join $parArgs "" }}
+): Map<String, List<{{ $retType }}>> = MetrcExtensions.syncParallel(targets) { client, limiter, license ->
+    val svc = {{ $svcName }}Service(client, limiter)
+    
+    svc.sync{{ ToPascalCase $declaredName }}(
+        lastKnownSync, bufferMinutes,
+        {{- $callParArgs := list }}
+        {{- range .PathParams }}
+        {{- if eq (CleanName .) "licenseNumber" }}{{ $callParArgs = append $callParArgs "license" }}{{ else }}{{ $callParArgs = append $callParArgs "\"\"" }}{{ end }}
+        {{- end }}
+        {{- range .QueryParams }}
+        {{- $p := SafeKotlinField (TrimSuffix "optional" .Name) }}
+        {{- if eq $p "licenseNumber" }}{{ $callParArgs = append $callParArgs "license" }}
+        {{- else if and (ne $p "lastModifiedStart") (ne $p "lastModifiedEnd") (ne $p "pageNumber") }}
+        {{ $callParArgs = append $callParArgs $p }}
+        {{- end }}
+        {{- end }}
+        {{ join $callParArgs ", " }}
+    )
+}
+{{- end }}
+
+{{- end }}
+

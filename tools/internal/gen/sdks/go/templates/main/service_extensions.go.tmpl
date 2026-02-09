@@ -1,0 +1,195 @@
+package extensions
+
+import (
+    "context"
+{{- $needsFmt := false }}
+{{- $needsStrconv := false }}
+{{- $needsTime := false }}
+{{- $needsClient := false }}
+{{- range .Service.Operations }}
+    {{- if HasPagination . }}
+        {{- range .QueryParams }}
+            {{- if or (eq .Name "pageNumber") (eq .Name "page") }}
+                {{- $needsStrconv = true }}
+            {{- end }}
+        {{- end }}
+    {{- end }}
+    {{- if IsTimeWindowed . }}
+        {{- $needsTime = true }}
+        {{- $needsClient = true }}
+    {{- end }}
+{{- end }}
+
+{{- if $needsFmt }}
+    "fmt"
+{{- end }}
+{{- if $needsStrconv }}
+    "strconv"
+{{- end }}
+{{- if $needsTime }}
+    "time"
+{{- end }}
+
+{{- if $needsClient }}
+    "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/thunkmetrc/utils"
+    "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/wrapper"
+{{- end }}
+    "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/wrapper/models"
+    "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/wrapper/services"
+)
+
+{{ $safeGroup := ToPascalCase (CleanName .Service.Name) }}
+{{- $serviceName := .Name }}
+
+{{- range .Service.Operations }}
+{{- if HasPagination . }}
+{{- $methodName := ToPascalCase (CleanName .Name) }}
+{{- $goMethodName := FormatMethodName $methodName $safeGroup }}
+{{- $retType := GetReturnType . }}
+{{- $itemType := $retType }}
+{{- if HasPrefix $retType "*models.PaginatedResponse[" }}
+    {{- $itemType = TrimPrefix "*models.PaginatedResponse[" $retType }}
+    {{- $itemType = TrimSuffix "]" $itemType }}
+{{- else if HasPrefix $retType "[]" }}
+    {{- $itemType = TrimPrefix "[]" $retType }}
+{{- end }}
+
+{{- /* Args preparation */ -}}
+{{- $args := list }}
+{{- range .PathParams }}{{ $args = append $args (printf "%s string" (ToCamelCase .)) }}{{ end }}
+{{- if .BodySchema }}
+    {{ $args = append $args (printf "body %s" (GetBodyType $safeGroup .)) }}
+{{- else if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+    {{ $args = append $args "body interface{}" }}
+{{- end }}
+{{- range .QueryParams }}
+    {{- $name := TrimSuffix "optional" .Name }}
+    {{- if and (ne $name "pageNumber") (ne $name "page") }}
+    {{- $args = append $args (printf "%s string" (ToCamelCase $name)) }}
+    {{- end }}
+{{- end }}
+
+// Iterate{{ $goMethodName }} iterates over all pages of {{ $goMethodName }} and executes handler for each item.
+func Iterate{{ $goMethodName }}(ctx context.Context, s *services.{{ $serviceName }}Service, {{ join $args ", " }}, handler func({{ $itemType }}) error) error {
+    page := 1
+    for {
+        {{- $callArgs := list }}
+        {{- $callArgs = append $callArgs "ctx" }}
+        {{- range .PathParams }}{{ $callArgs = append $callArgs (ToCamelCase .) }}{{ end }}
+         {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}{{ $callArgs = append $callArgs "body" }}{{ end }}
+        {{- range .QueryParams }}
+            {{- $name := TrimSuffix "optional" .Name }}
+             {{- if or (eq $name "pageNumber") (eq $name "page") }}
+                 {{- $callArgs = append $callArgs "strconv.Itoa(page)" }}
+             {{- else }}
+                 {{- $callArgs = append $callArgs (ToCamelCase $name) }}
+             {{- end }}
+        {{- end }}
+        
+        response, err := s.{{ $goMethodName }}({{ join $callArgs ", " }})
+        if err != nil {
+            return err
+        }
+        
+        // Handle response
+        {{- if HasPrefix $retType "*models.PaginatedResponse" }}
+        if len(response.Data) == 0 {
+            break
+        }
+        for _, item := range response.Data {
+            if err := handler(item); err != nil {
+                return err
+            }
+        }
+        if len(response.Data) < 20 { // Assuming default page size
+            // TODO: Use metadata from response if available.
+             break
+        }
+        {{- else if HasPrefix $retType "[]" }}
+        if len(response) == 0 {
+            break
+        }
+        for _, item := range response {
+            if err := handler(item); err != nil {
+                return err
+            }
+        }
+        if len(response) < 20 {
+             break
+        }
+        {{- end }}
+        
+        page++
+    }
+    return nil
+}
+{{- end }}
+
+{{- if IsTimeWindowed . }}
+{{- $methodName := ToPascalCase (CleanName .Name) }}
+{{- $goMethodName := FormatMethodName $methodName $safeGroup }}
+{{- $retType := GetReturnType . }}
+{{- $itemType := $retType }}
+{{- if HasPrefix $retType "*models.PaginatedResponse[" }}
+    {{- $itemType = TrimPrefix "*models.PaginatedResponse[" $retType }}
+    {{- $itemType = TrimSuffix "]" $itemType }}
+{{- else if HasPrefix $retType "[]" }}
+    {{- $itemType = TrimPrefix "[]" $retType }}
+{{- end }}
+
+// Sync{{ $goMethodName }} retrieves all items updated within the specified time window.
+func Sync{{ $goMethodName }}(ctx context.Context, s *services.{{ $serviceName }}Service, lastKnownSync *time.Time, bufferMinutes int, 
+    {{- range .PathParams }}{{ ToCamelCase . }} string, {{ end }}
+    {{- range .QueryParams }}
+    {{- $name := TrimSuffix "optional" .Name }}
+    {{- if and (ne $name "lastModifiedStart") (ne $name "lastModifiedEnd") (ne $name "pageNumber") }}
+    {{ ToCamelCase $name }} string,
+    {{- end }}
+    {{- end }}
+) ([]{{ $itemType }}, error) {
+    window := utils.GetTimeWindow(lastKnownSync, bufferMinutes)
+    
+    return utils.Collect(ctx, func(handler func({{ $itemType }}) error) error {
+        return Iterate{{ $goMethodName }}(ctx, s, 
+            {{- range .PathParams }}{{ ToCamelCase . }}, {{ end }}
+            {{- range .QueryParams }}
+            {{- $name := TrimSuffix "optional" .Name }}
+            {{- if eq $name "lastModifiedStart" }}window.StartString,
+            {{- else if eq $name "lastModifiedEnd" }}window.EndString,
+            {{- else if ne $name "pageNumber" }}
+            {{ ToCamelCase $name }},
+            {{- end }}
+            {{- end }}
+            handler,
+        )
+    })
+}
+
+// Sync{{ $goMethodName }}Parallel syncs across multiple targets in parallel.
+func Sync{{ $goMethodName }}Parallel(ctx context.Context, targets []utils.SynchronizationTarget, lastKnownSync *time.Time, bufferMinutes int, concurrencyLimit int,
+    {{- range .QueryParams }}
+    {{- $name := TrimSuffix "optional" .Name }}
+    {{- if and (ne $name "lastModifiedStart") (ne $name "lastModifiedEnd") (ne $name "pageNumber") (ne $name "licenseNumber") }}
+    {{ ToCamelCase $name }} string,
+    {{- end }}
+    {{- end }}
+) (map[string][]{{ $itemType }}, error) {
+    return utils.ParallelSync(ctx, targets, concurrencyLimit, func(ctx context.Context, w *wrapper.MetrcWrapper, licenseNumber string) ([]{{ $itemType }}, error) {
+        return Sync{{ $goMethodName }}(ctx, w.{{ $serviceName }}, lastKnownSync, bufferMinutes,
+            {{- range .PathParams }}
+            "" /* placeholder for path params other than LN? */,
+            {{- end }}
+            {{- range .QueryParams }}
+            {{- $name := TrimSuffix "optional" .Name }}
+            {{- if eq $name "licenseNumber" }}licenseNumber,
+            {{- else if and (ne $name "lastModifiedStart") (ne $name "lastModifiedEnd") (ne $name "pageNumber") }}
+            {{ ToCamelCase $name }},
+            {{- end }}
+            {{- end }}
+        )
+    })
+}
+{{- end }}
+{{- end }}
+
+

@@ -1,0 +1,53 @@
+meta {
+  name: UpdatePlantsLocation
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/plants/v2/location
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": null,
+    "Label": "ABCDEF012345670000000001",
+    "Location": "Plants Location",
+    "Sublocation": "Plants Sublocation",
+    "ActualDate": "2015-12-15"
+  },
+  {
+    "Id": 2,
+    "Label": null,
+    "Location": "Plants Location",
+    "Sublocation": "Plants Sublocation",
+    "ActualDate": "2015-12-15"
+  }
+]
+}
+
+docs {
+  Moves plant batches to new locations within a specified Facility.
+
+  Permissions Required:
+  - View Veg/Flower Plants
+  - Manage Veg/Flower Plants Inventory
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to update the list of plants moved.
+
+  Example Response:
+  No response
+}

@@ -1,0 +1,33 @@
+meta {
+  name: DeleteDeliveryById
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/sales/v2/deliveries/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Voids a sales delivery for a Facility using the provided License Number and delivery Id.
+
+  Permissions Required:
+  - Manage Sales Delivery
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to void delivery.
+
+  Example Response:
+  No response
+}

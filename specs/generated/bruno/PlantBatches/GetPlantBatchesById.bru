@@ -1,0 +1,63 @@
+meta {
+  name: GetPlantBatchesById
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/plantbatches/v2/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a Plant Batch by Id.
+
+  Permissions Required:
+  - View Immature Plants
+
+  Parameters:
+  - licenseNumber (Required): If specified, the Plant Batch will be validated against the specified License Number. If not specified, the Plant Batch will be validated against all of the User's current Facilities. Please note that if the Plant Batch is not valid for the specified License Number, a 401 Unauthorized status will be returned.
+
+  Example Response:
+  {
+    "Id": 5,
+    "Name": "Demo Plant Batch 1",
+    "PlantBatchTypeId": 1,
+    "PlantBatchTypeName": "Seed",
+    "LocationId": null,
+    "LocationName": null,
+    "LocationTypeName": null,
+    "StrainId": 1,
+    "StrainName": "Spring Hill Kush",
+    "SublocationId": null,
+    "SublocationName": null,
+    "PatientLicenseNumber": null,
+    "UntrackedCount": 80,
+    "TrackedCount": 10,
+    "PackagedCount": 0,
+    "DestroyedCount": 40,
+    "SourcePackageId": null,
+    "SourcePackageLabel": null,
+    "SourcePlantId": null,
+    "SourcePlantLabel": null,
+    "SourcePlantBatchIds": [],
+    "SourcePlantBatchNames": null,
+    "MultiPlantBatch": false,
+    "PlantedDate": "2014-10-10",
+    "LastModified": "0001-01-01T00:00:00+00:00",
+    "IsOnHold": false,
+    "IsOnInvestigation": false,
+    "IsOnInvestigationHold": false,
+    "IsOnInvestigationRecall": false
+  }
+}

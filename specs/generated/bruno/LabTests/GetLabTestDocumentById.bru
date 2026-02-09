@@ -1,0 +1,34 @@
+meta {
+  name: GetLabTestDocumentById
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/labtests/v2/labtestdocument/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a specific Lab Test result document by its Id for a given Facility.
+
+  Permissions Required:
+  - View Packages
+  - Manage Packages Inventory
+
+  Parameters:
+  - licenseNumber (Required): LabTestDocumentFileId
+
+  Example Response:
+  No response
+}

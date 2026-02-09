@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlantsAdditivesByLocationRequest",
+  "type": "object",
+  "properties": {
+    "ActiveIngredients": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Percentage": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "Name",
+          "Percentage"
+        ]
+      }
+    },
+    "ActualDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "AdditiveType": {
+      "type": "string"
+    },
+    "ApplicationDevice": {
+      "type": "string"
+    },
+    "EpaRegistrationNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "LocationName": {
+      "type": "string"
+    },
+    "ProductSupplier": {
+      "type": "string"
+    },
+    "ProductTradeName": {
+      "type": "string"
+    },
+    "SublocationName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "TotalAmountApplied": {
+      "type": "integer"
+    },
+    "TotalAmountUnitOfMeasure": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "ActiveIngredients",
+    "ActualDate",
+    "AdditiveType",
+    "ApplicationDevice",
+    "LocationName",
+    "ProductSupplier",
+    "ProductTradeName",
+    "TotalAmountApplied",
+    "TotalAmountUnitOfMeasure"
+  ]
+}

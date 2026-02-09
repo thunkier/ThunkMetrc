@@ -5,17 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-> **Note**: Versions prior to 0.2.2 were developed in a private repository as an internal tool.
-> The project was open-sourced starting with v0.2.2. Earlier version history is reconstructed
-> from internal release notes; corresponding Git history is not available.
-
 ## [Unreleased]
+### Changed
+- Refreshed top-level and language documentation to match the current `sdks/thunkmetrc-*` layout.
+- Clarified package/module coordinates for all client, wrapper, and high-level SDKs.
+- Updated docs to reflect current generation flow and spec scraping controls.
+
+## [0.3.0] - 2025-12-24
+### Added
+- **Factory Pattern**: New `MetrcFactory` in all wrappers (Java, Kotlin, Rust, C#, Go, Python, TypeScript) to manage shared resources and rate limiters efficiently.
+- **Improved Documentation**: Comprehensive `README.md` files generated for every SDK wrapper covering installation, initialization, and usage.
+- **Typed Wrappers**: Corrected and standardized wrapper generation across all languages.
+- **Rate Limit Sharing**: Wrappers created from the same factory share `MetrcRateLimiter` tokens (Integrator Limits) while maintaining independent Facility Limits.
+
+### Fixed
+- **Kotlin SDK**: Resolved dependency resolution and constructor type mismatch errors.
+- **Java SDK**: Fixed unused import warnings and constructor logic.
+- **Rust SDK**: Added missing `log` dependency and fixed compilation issues.
+- **C# SDK**: Removed ineffective attributes causing warnings.
 
 ## [0.2.2] - 2025-12-13
 ### Added
 - Full Maven Central publishing configuration for Java/Kotlin SDKs
 - README documentation for rate limiter default values
 - Python thunkmetrc README.md
+- **Robustness Features**:
+  - Exponential Backoff & Jitter in all Rate Limiters (Go, TS, Py, Java, Kt, Rust)
+  - strict `Retry-After` header support for 429s
+  - Lazy Iterators/Streams for all paginated endpoints
 - This CHANGELOG (retroactively documenting prior releases)
 
 ### Fixed
@@ -89,5 +106,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial Go module setup for automation tooling
 - Proof-of-concept code generation from Bruno files
 
-[Unreleased]: https://github.com/thunkier/ThunkMetrc/compare/v0.2.2...HEAD
+[Unreleased]: https://github.com/thunkier/ThunkMetrc/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/thunkier/ThunkMetrc/releases/tag/v0.3.0
 [0.2.2]: https://github.com/thunkier/ThunkMetrc/releases/tag/v0.2.2

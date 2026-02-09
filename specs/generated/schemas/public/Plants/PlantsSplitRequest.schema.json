@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlantsPlantsSplitRequest",
+  "type": "object",
+  "properties": {
+    "PlantCount": {
+      "type": "integer"
+    },
+    "SourcePlantLabel": {
+      "type": "string"
+    },
+    "SplitDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "StrainLabel": {
+      "type": "string"
+    },
+    "TagLabel": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "PlantCount",
+    "SourcePlantLabel",
+    "SplitDate",
+    "StrainLabel",
+    "TagLabel"
+  ]
+}

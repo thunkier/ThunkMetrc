@@ -1,0 +1,44 @@
+meta {
+  name: UpdateVehicles
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/transporters/v2/vehicles
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": "Vehicle-201",
+    "Make": "Mazda",
+    "Model": "Miata",
+    "LicensePlateNumber": "DEF5678"
+  }
+]
+}
+
+docs {
+  Updates existing vehicle records for a facility.
+
+  Permissions Required:
+  - Manage Transporters
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to update the list of vehicles.
+
+  Example Response:
+  No response
+}

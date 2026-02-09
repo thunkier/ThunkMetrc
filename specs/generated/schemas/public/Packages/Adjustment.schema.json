@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PackagesAdjustment",
+  "type": "object",
+  "properties": {
+    "AdjustedByUserName": {
+      "type": "string"
+    },
+    "AdjustmentDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "AdjustmentNote": {
+      "type": "string"
+    },
+    "AdjustmentQuantity": {
+      "type": "number"
+    },
+    "AdjustmentReasonName": {
+      "type": "string"
+    },
+    "AdjustmentUnitOfMeasureAbbreviation": {
+      "type": "string"
+    },
+    "AdjustmentUnitOfMeasureName": {
+      "type": "string"
+    },
+    "ItemCategoryName": {
+      "type": "string"
+    },
+    "ItemName": {
+      "type": "string"
+    },
+    "PackageId": {
+      "type": "integer"
+    },
+    "PackageLabTestResultExpirationDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PackageLabel": {
+      "type": "string"
+    },
+    "PackagedDate": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "AdjustedByUserName",
+    "AdjustmentDate",
+    "AdjustmentNote",
+    "AdjustmentQuantity",
+    "AdjustmentReasonName",
+    "AdjustmentUnitOfMeasureAbbreviation",
+    "AdjustmentUnitOfMeasureName",
+    "ItemCategoryName",
+    "ItemName",
+    "PackageId",
+    "PackageLabel",
+    "PackagedDate"
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PackagesTestingRequest",
+  "type": "object",
+  "properties": {
+    "ActualDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "ExpirationDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Ingredients": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Package": {
+            "type": "string"
+          },
+          "Quantity": {
+            "type": "number"
+          },
+          "UnitOfMeasure": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Package",
+          "Quantity",
+          "UnitOfMeasure"
+        ]
+      }
+    },
+    "IsDonation": {
+      "type": "boolean"
+    },
+    "IsFinishedGood": {
+      "type": "boolean"
+    },
+    "IsProductionBatch": {
+      "type": "boolean"
+    },
+    "IsTradeSample": {
+      "type": "boolean"
+    },
+    "Item": {
+      "type": "string"
+    },
+    "LabTestStageId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "Location": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Note": {
+      "type": "string"
+    },
+    "PatientLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ProcessingJobTypeId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "ProductRequiresRemediation": {
+      "type": "boolean"
+    },
+    "ProductionBatchNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Quantity": {
+      "type": "number"
+    },
+    "RequiredLabTestBatches": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "SellByDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Sublocation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Tag": {
+      "type": "string"
+    },
+    "UnitOfMeasure": {
+      "type": "string"
+    },
+    "UseByDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "UseSameItem": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "ActualDate",
+    "Ingredients",
+    "IsDonation",
+    "IsFinishedGood",
+    "IsProductionBatch",
+    "IsTradeSample",
+    "Item",
+    "Note",
+    "ProductRequiresRemediation",
+    "Quantity",
+    "RequiredLabTestBatches",
+    "Tag",
+    "UnitOfMeasure",
+    "UseSameItem"
+  ]
+}

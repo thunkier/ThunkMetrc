@@ -1,0 +1,58 @@
+meta {
+  name: GetDeliveryTransporterById
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/transfers/v2/deliveries/{id}/transporters
+  body: json
+  auth: basic
+}
+
+params:query {
+  pageNumber: 
+  pageSize: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of transporters for a given Transfer Delivery Id. Please note: The {id} parameter above represents a Transfer Delivery Id, not a Manifest Number.
+
+  Permissions Required:
+  - Manage Transfers
+  - View Transfers
+
+  Parameters:
+  - pageNumber (Optional): The number of the data page from which to return data.
+  - pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20.
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "ShipmentDeliveryId": 1,
+        "TransporterFacilityLicenseNumber": "4a-X0001",
+        "TransporterFacilityName": "Standard Cultivation Shipper",
+        "TransporterDirection": "Outbound"
+      },
+      {
+        "ShipmentDeliveryId": 2,
+        "TransporterFacilityLicenseNumber": "3a-X0001",
+        "TransporterFacilityName": "Bulk Cultivation Shipper",
+        "TransporterDirection": "Return"
+      }
+    ],
+    "Total": 2,
+    "TotalRecords": 2,
+    "PageSize": 2,
+    "RecordsOnPage": 2,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

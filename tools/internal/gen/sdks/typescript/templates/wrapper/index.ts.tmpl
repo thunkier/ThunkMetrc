@@ -1,0 +1,38 @@
+export * from '@thunkier/thunkmetrc-client';
+import { MetrcClient as InternalMetrcClient } from '@thunkier/thunkmetrc-client';
+import { MetrcRateLimiter, RateLimiterConfig } from './RateLimiter';
+
+export * from './models';
+{{- range .Services }}
+{{- $safeName := ToPascalCase (CleanName .Name) }}
+{{- if ne $safeName "" }}
+export * from './services/{{ $safeName }}Service';
+import { {{ $safeName }}Service } from './services/{{ $safeName }}Service';
+{{- end }}
+{{- end }}
+
+export class MetrcWrapper {
+  private rateLimiter: MetrcRateLimiter;
+
+{{- range .Services }}
+{{- $safeName := ToPascalCase (CleanName .Name) }}
+{{- if ne $safeName "" }}
+  public {{ ToCamelCase $safeName }}: {{ $safeName }}Service;
+{{- end }}
+{{- end }}
+
+  constructor(public client: InternalMetrcClient, configOrLimiter?: RateLimiterConfig | MetrcRateLimiter) {
+    if (configOrLimiter instanceof MetrcRateLimiter) {
+      this.rateLimiter = configOrLimiter;
+    } else {
+      this.rateLimiter = new MetrcRateLimiter(configOrLimiter);
+    }
+
+{{- range .Services }}
+{{- $safeName := ToPascalCase (CleanName .Name) }}
+{{- if ne $safeName "" }}
+    this.{{ ToCamelCase $safeName }} = new {{ $safeName }}Service(client, this.rateLimiter);
+{{- end }}
+{{- end }}
+  }
+}

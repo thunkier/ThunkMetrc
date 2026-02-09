@@ -1,0 +1,19 @@
+using System;
+using System.Collections.Generic;
+
+namespace ThunkMetrc.Wrapper.Models
+{
+    public class LabTestsCreateLabTestRecordRequest
+    {
+        [global::System.Text.Json.Serialization.JsonPropertyName("DocumentFileBase64")]
+        public string? DocumentFileBase64 { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("DocumentFileName")]
+        public string? DocumentFileName { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("Label")]
+        public string? Label { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("ResultDate")]
+        public string? ResultDate { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("Results")]
+        public List<object>? Results { get; set; }
+    }
+}

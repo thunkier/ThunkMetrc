@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SalesInactiveReceipt",
+  "type": "object",
+  "properties": {
+    "ArchivedDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "CaregiverLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ExternalReceiptNumber": {
+      "type": "string"
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "IdentificationMethod": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "IsFinal": {
+      "type": "boolean"
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "PatientLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "PatientRegistrationLocationId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "ReceiptNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "RecordedByUserName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "RecordedDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "SalesCustomerType": {
+      "type": "string"
+    },
+    "SalesDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "TotalPackages": {
+      "type": "integer"
+    },
+    "TotalPrice": {
+      "type": "integer"
+    },
+    "Transactions": {
+      "type": "array"
+    }
+  },
+  "required": [
+    "ExternalReceiptNumber",
+    "Id",
+    "IsFinal",
+    "LastModified",
+    "RecordedDateTime",
+    "SalesCustomerType",
+    "SalesDateTime",
+    "TotalPackages",
+    "TotalPrice",
+    "Transactions"
+  ]
+}

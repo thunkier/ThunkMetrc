@@ -1,0 +1,41 @@
+meta {
+  name: UnfinishProcessingJob
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/processing/v2/unfinish
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 1
+  }
+]
+}
+
+docs {
+  Reopens previously completed processing jobs at a Facility to allow further updates or corrections.
+
+  Permissions Required:
+  - Manage Processing Job
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility to unfinish the Processing Job.
+
+  Example Response:
+  No response
+}

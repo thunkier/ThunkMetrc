@@ -1,0 +1,231 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TransfersTemplate",
+  "type": "object",
+  "properties": {
+    "ActualArrivalDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ActualDepartureDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ActualReturnArrivalDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ActualReturnDepartureDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ContainsDonation": {
+      "type": "boolean"
+    },
+    "ContainsPlantPackage": {
+      "type": "boolean"
+    },
+    "ContainsProductPackage": {
+      "type": "boolean"
+    },
+    "ContainsProductRequiresRemediation": {
+      "type": "boolean"
+    },
+    "ContainsRemediatedProductPackage": {
+      "type": "boolean"
+    },
+    "ContainsTestingSample": {
+      "type": "boolean"
+    },
+    "ContainsTradeSample": {
+      "type": "boolean"
+    },
+    "CreatedByUserName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "CreatedDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "DeliveryCount": {
+      "type": "integer"
+    },
+    "DeliveryId": {
+      "type": "integer"
+    },
+    "DeliveryPackageCount": {
+      "type": "integer"
+    },
+    "DeliveryReceivedPackageCount": {
+      "type": "integer"
+    },
+    "DriverName": {
+      "type": "string"
+    },
+    "DriverOccupationalLicenseNumber": {
+      "type": "string"
+    },
+    "DriverVehicleLicenseNumber": {
+      "type": "string"
+    },
+    "EstimatedArrivalDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "EstimatedDepartureDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "EstimatedReturnArrivalDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "EstimatedReturnDepartureDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "InvoiceNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "IsVoided": {
+      "type": "boolean"
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ManifestNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "Name": {
+      "type": "string"
+    },
+    "OriginatingTemplateId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "PackageCount": {
+      "type": "integer"
+    },
+    "ReceivedDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ReceivedDeliveryCount": {
+      "type": "integer"
+    },
+    "ReceivedPackageCount": {
+      "type": "integer"
+    },
+    "RecipientFacilityLicenseNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "RecipientFacilityName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ShipmentLicenseType": {
+      "type": "integer"
+    },
+    "ShipmentTransactionType": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ShipmentTypeName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ShipperFacilityLicenseNumber": {
+      "type": "string"
+    },
+    "ShipperFacilityName": {
+      "type": "string"
+    },
+    "TransporterFacilityLicenseNumber": {
+      "type": "string"
+    },
+    "TransporterFacilityName": {
+      "type": "string"
+    },
+    "VehicleLicensePlateNumber": {
+      "type": "string"
+    },
+    "VehicleMake": {
+      "type": "string"
+    },
+    "VehicleModel": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "ContainsDonation",
+    "ContainsPlantPackage",
+    "ContainsProductPackage",
+    "ContainsProductRequiresRemediation",
+    "ContainsRemediatedProductPackage",
+    "ContainsTestingSample",
+    "ContainsTradeSample",
+    "CreatedDateTime",
+    "DeliveryCount",
+    "DeliveryId",
+    "DeliveryPackageCount",
+    "DeliveryReceivedPackageCount",
+    "DriverName",
+    "DriverOccupationalLicenseNumber",
+    "DriverVehicleLicenseNumber",
+    "EstimatedArrivalDateTime",
+    "EstimatedDepartureDateTime",
+    "Id",
+    "IsVoided",
+    "LastModified",
+    "Name",
+    "PackageCount",
+    "ReceivedDeliveryCount",
+    "ReceivedPackageCount",
+    "ShipmentLicenseType",
+    "ShipperFacilityLicenseNumber",
+    "ShipperFacilityName",
+    "TransporterFacilityLicenseNumber",
+    "TransporterFacilityName",
+    "VehicleLicensePlateNumber",
+    "VehicleMake",
+    "VehicleModel"
+  ]
+}

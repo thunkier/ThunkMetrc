@@ -1,0 +1,21 @@
+from typing import Optional
+from thunkmetrc.client import MetrcClient
+from .ratelimiter import MetrcRateLimiter, RateLimiterConfig
+from .services import *
+
+class MetrcWrapper:
+    def __init__(self, client: MetrcClient, config: Optional[RateLimiterConfig] = None):
+        self.client = client
+        self.limiter = MetrcRateLimiter(config)
+        
+        {{- range .Services }}
+        {{- $safeGroupSnake := ToSnakeCase (CleanName .Name) }}
+        self.{{ $safeGroupSnake }} = {{ .Name | ToPascalCase }}Service(self.client, self.limiter)
+        {{- end }}
+
+    {{- range .Services }}
+    {{- $safeGroupSnake := ToSnakeCase (CleanName .Name) }}
+    @property
+    def {{ .Name | ToPascalCase }}(self) -> {{ .Name | ToPascalCase }}Service:
+        return self.{{ $safeGroupSnake }}
+    {{- end }}

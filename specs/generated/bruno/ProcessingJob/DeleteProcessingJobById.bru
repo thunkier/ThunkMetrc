@@ -1,0 +1,33 @@
+meta {
+  name: DeleteProcessingJobById
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/processing/v2/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Archives a Processing Job at a Facility by marking it as inactive and removing it from active use.
+
+  Permissions Required:
+  - Manage Processing Job
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility of the Processing Job.
+
+  Example Response:
+  No response
+}

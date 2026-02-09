@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlantsPlantsRequest",
+  "type": "object",
+  "properties": {
+    "ActualDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "Count": {
+      "type": "integer"
+    },
+    "Id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "Label": {
+      "type": "string"
+    },
+    "ReasonNote": {
+      "type": "string"
+    },
+    "WasteMaterialMixed": {
+      "type": "string"
+    },
+    "WasteMethodName": {
+      "type": "string"
+    },
+    "WasteReasonName": {
+      "type": "string"
+    },
+    "WasteUnitOfMeasureName": {
+      "type": "string"
+    },
+    "WasteWeight": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "ActualDate",
+    "Count",
+    "Label",
+    "ReasonNote",
+    "WasteMaterialMixed",
+    "WasteMethodName",
+    "WasteReasonName",
+    "WasteUnitOfMeasureName",
+    "WasteWeight"
+  ]
+}

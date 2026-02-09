@@ -1,0 +1,33 @@
+meta {
+  name: DeleteVehicleById
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/transporters/v2/vehicles/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Archives a Vehicle for a facility.  Please note: The {id} parameter above represents a Vehicle Id.
+
+  Permissions Required:
+  - Manage Transporters
+
+  Parameters:
+  - licenseNumber (Required): The License Number for which to archive a Vehicle
+
+  Example Response:
+  No response
+}

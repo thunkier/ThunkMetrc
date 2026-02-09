@@ -1,0 +1,33 @@
+meta {
+  name: DeleteJobTypeById
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/processing/v2/jobtypes/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Archives a Processing Job Type at a Facility, making it inactive for future use.
+
+  Permissions Required:
+  - Manage Processing Job
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility of the Processing Job Type.
+
+  Example Response:
+  No response
+}

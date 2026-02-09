@@ -1,0 +1,50 @@
+meta {
+  name: CreateHubCheckout
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/transfers/v2/hub/checkout
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "ShipmentDeliveryId": 111,
+    "TransporterDirection": "Outbound"
+  },
+  {
+    "ShipmentDeliveryId": 111,
+    "TransporterDirection": "Return"
+  },
+  {
+    "ShipmentDeliveryId": 112,
+    "TransporterDirection": "Outbound"
+  }
+]
+}
+
+docs {
+  CheckOut a transfer for a Facility.
+
+  Permissions Required:
+  - Manage Transfer Hub
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to arrive the transfer.
+
+  Example Response:
+  No response
+}

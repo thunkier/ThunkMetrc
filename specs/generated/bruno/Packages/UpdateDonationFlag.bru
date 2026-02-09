@@ -1,0 +1,45 @@
+meta {
+  name: UpdateDonationFlag
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/packages/v2/donation/flag
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Label": "ABCDEF012345670000010041"
+  },
+  {
+    "Label": "ABCDEF012345670000010042"
+  }
+]
+}
+
+docs {
+  Flags one or more packages for donation at the specified Facility.
+
+  Permissions Required:
+  - View Packages
+  - Manage Packages Inventory
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to update list of flagged donations.
+
+  Example Response:
+  No response
+}

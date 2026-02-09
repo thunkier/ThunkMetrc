@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TransportersTransportersDriver",
+  "type": "object",
+  "properties": {
+    "DriversLicenseNumber": {
+      "type": "string"
+    },
+    "EmployeeId": {
+      "type": "string"
+    },
+    "FacilityId": {
+      "type": "integer"
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "IsArchived": {
+      "type": "boolean"
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "DriversLicenseNumber",
+    "EmployeeId",
+    "FacilityId",
+    "Id",
+    "IsArchived",
+    "LastModified",
+    "Name"
+  ]
+}

@@ -1,0 +1,48 @@
+meta {
+  name: UpdateLocations
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/locations/v2
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "Id": 5,
+    "Name": "Harvesting Location",
+    "LocationTypeName": "Default"
+  },
+  {
+    "Id": 6,
+    "Name": "Planting Location",
+    "LocationTypeName": "Planting"
+  }
+]
+}
+
+docs {
+  Updates existing locations for a specified Facility.
+
+  Permissions Required:
+  - Manage Locations
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to update the list of locations.
+
+  Example Response:
+  No response
+}

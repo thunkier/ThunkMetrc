@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RetailIdAllotment",
+  "type": "object",
+  "properties": {
+    "Allotment": {
+      "type": "integer"
+    },
+    "FacilityId": {
+      "type": "integer"
+    },
+    "FacilityLicenseNumber": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "Allotment",
+    "FacilityId",
+    "FacilityLicenseNumber"
+  ]
+}

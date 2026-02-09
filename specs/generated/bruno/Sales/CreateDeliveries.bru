@@ -1,0 +1,119 @@
+meta {
+  name: CreateDeliveries
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/sales/v2/deliveries
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+[
+  {
+    "TransporterFacilityLicenseNumber": "1",
+    "SalesDateTime": "2017-04-04T10:10:19.000",
+    "SalesCustomerType": "Consumer",
+    "PatientLicenseNumber": null,
+    "ConsumerId": null,
+    "DriverEmployeeId": "1",
+    "DriverName": "John Doe",
+    "DriversLicenseNumber": "1",
+    "PhoneNumberForQuestions": "+1-123-456-7890",
+    "VehicleMake": "Car",
+    "VehicleModel": "Small",
+    "VehicleLicensePlateNumber": "000000",
+    "RecipientName": null,
+    "RecipientAddressStreet1": "1 Someplace Road",
+    "RecipientAddressStreet2": "Ste 9",
+    "RecipientAddressCity": "Denver",
+    "RecipientAddressCounty": null,
+    "RecipientAddressState": "CO",
+    "RecipientAddressPostalCode": "11111",
+    "RecipientZoneId": null,
+    "PlannedRoute": "Drive to destination.",
+    "EstimatedDepartureDateTime": "2017-04-04T11:00:00.000",
+    "EstimatedArrivalDateTime": "2017-04-04T13:00:00.000",
+    "Transactions": [
+      {
+        "PackageLabel": "ABCDEF012345670000000001",
+        "Quantity": 1.0,
+        "UnitOfMeasure": "Ounces",
+        "TotalAmount": 9.99,
+        "UnitThcPercent": null,
+        "UnitThcContent": null,
+        "UnitThcContentUnitOfMeasure": null,
+        "UnitWeight": null,
+        "UnitWeightUnitOfMeasure": null,
+        "InvoiceNumber": null,
+        "Price": null,
+        "ExciseTax": null,
+        "CityTax": null,
+        "CountyTax": null,
+        "MunicipalTax": null,
+        "DiscountAmount": null,
+        "SubTotal": null,
+        "SalesTax": null,
+        "QrCodes": null
+      },
+      {
+        "PackageLabel": "ABCDEF012345670000000002",
+        "Quantity": 1.0,
+        "UnitOfMeasure": "Ounces",
+        "TotalAmount": 9.99,
+        "UnitThcPercent": null,
+        "UnitThcContent": null,
+        "UnitThcContentUnitOfMeasure": null,
+        "UnitWeight": null,
+        "UnitWeightUnitOfMeasure": null,
+        "InvoiceNumber": null,
+        "Price": null,
+        "ExciseTax": null,
+        "CityTax": null,
+        "CountyTax": null,
+        "MunicipalTax": null,
+        "DiscountAmount": null,
+        "SubTotal": null,
+        "SalesTax": null,
+        "QrCodes": [
+          "https://1a4.com/q83vASNFZwAAAQkQMm",
+          "https://1a4.com/q83vASNFZwAAAQkQMp"
+        ]
+      }
+    ]
+  }
+]
+}
+
+docs {
+  Records new sales delivery entries for a given License Number. Please note: The SalesDateTime field must be the actual date and time of the transaction without the time zone. This date/time must already be in the same time zone as the Facility recording the sales. For example, if the Facility is in Pacific Time, then this time must be in Pacific Standard (or Daylight Savings) Time and not in UTC.
+
+  Permissions Required:
+  - External Sources(ThirdPartyVendorV2)/Sales Deliveries(Write)
+  - Industry/Facility Type/Consumer Sales Delivery or Industry/Facility Type/Patient Sales Delivery
+  - WebApi Sales Deliveries Read Write State (All or WriteOnly)
+  - WebApi Retail ID Read Write State (All or WriteOnly) - Required for RID only.
+  - External Sources(ThirdPartyVendorV2)/Retail ID(Write) - Required for RID only.
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to record deliveries.
+
+  Example Response:
+  {
+    "Ids": [
+      1
+    ],
+    "Warnings": null
+  }
+}

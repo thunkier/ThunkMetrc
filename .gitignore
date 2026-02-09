@@ -114,9 +114,10 @@ bld/
 # ==============================================================================
 
 # Scraper Outputs
-specs/metrc-responses
+specs/source/captured/responses
 *.html
 
 # Logs
 *.log
 
+mockserver

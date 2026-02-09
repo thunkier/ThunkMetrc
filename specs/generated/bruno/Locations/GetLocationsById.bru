@@ -1,0 +1,42 @@
+meta {
+  name: GetLocationsById
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/locations/v2/{id}
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a Location by its Id.
+
+  Permissions Required:
+  - Manage Locations
+
+  Parameters:
+  - licenseNumber (Required): If specified, the Location will be validated against the specified License Number. If not specified, the Location will be validated against all of the User's current Facilities. Please note that if the Location is not valid for the specified License Number, a 401 Unauthorized status will be returned.
+
+  Example Response:
+  {
+    "Id": 1,
+    "Name": "Harvest Location",
+    "LocationTypeId": 1,
+    "LocationTypeName": "Default",
+    "ForPlantBatches": true,
+    "ForPlants": true,
+    "ForHarvests": true,
+    "ForPackages": true
+  }
+}

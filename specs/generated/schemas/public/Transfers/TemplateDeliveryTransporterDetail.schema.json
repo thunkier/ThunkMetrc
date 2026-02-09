@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TransfersTemplateDeliveryTransporterDetail",
+  "type": "object",
+  "properties": {
+    "ActualDriverStartDateTime": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "DriverLayoverLeg": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "DriverName": {
+      "type": "string"
+    },
+    "DriverOccupationalLicenseNumber": {
+      "type": "string"
+    },
+    "DriverVehicleLicenseNumber": {
+      "type": "string"
+    },
+    "ShipmentDeliveryId": {
+      "type": "integer"
+    },
+    "VehicleLicensePlateNumber": {
+      "type": "string"
+    },
+    "VehicleMake": {
+      "type": "string"
+    },
+    "VehicleModel": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "DriverName",
+    "DriverOccupationalLicenseNumber",
+    "DriverVehicleLicenseNumber",
+    "ShipmentDeliveryId",
+    "VehicleLicensePlateNumber",
+    "VehicleMake",
+    "VehicleModel"
+  ]
+}

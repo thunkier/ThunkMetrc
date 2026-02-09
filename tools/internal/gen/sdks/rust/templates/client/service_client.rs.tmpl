@@ -1,0 +1,54 @@
+use crate::client::MetrcClient;
+use serde_json::Value;
+use std::error::Error;
+
+pub struct {{ .Name | ToPascalCase }}Client<'a> {
+    pub(crate) client: &'a MetrcClient,
+}
+
+impl<'a> {{ .Name | ToPascalCase }}Client<'a> {
+    {{- range .Operations }}
+    {{- $methodName := ToPascalCase (CleanName .Name) }}
+    {{- $rustMethodName := FormatMethodName $methodName (ToPascalCase (CleanName $.Name)) }}
+    /// {{ .Method }} {{ .Name }}
+{{- if .Description }}
+{{ range Split (CleanDocs .Description) "\n" }}    /// {{ . }}
+{{ end }}{{ end }}    /// Parameters:
+    {{- range .PathParams }}
+    /// - {{ . | ToSnakeCase }} (str): Path parameter {{ . }}
+    {{- end }}
+    {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}
+    /// - body (Option<&Value>): Request body
+    {{- end }}
+    {{- range .QueryParams }}
+    /// - {{ .Name | TrimSuffix "optional" | ToSnakeCase }} (Option<String>): {{ if .Description }}{{ .Description }}{{ else }}Filter by {{ .Name }}{{ end }}
+    {{- end }}
+    pub async fn {{ $rustMethodName }}(&self
+        {{- range .PathParams }}, {{ ToSnakeCase . }}: &str{{ end }}
+        {{- range .QueryParams }}{{ $name := TrimSuffix "optional" .Name }}, {{ ToSnakeCase $name }}: Option<String>{{ end }}
+        {{- if or (eq .Method "POST") (eq .Method "PUT") (eq .Method "PATCH") }}, body: Option<&Value>{{ else }}, body: Option<&Value>{{ end -}}
+    ) -> Result<Option<Value>, Box<dyn Error + Send + Sync>> {
+        let {{ if .QueryParams }}mut {{ end }}path = format!("{{ FormatUrl . }}"
+            {{- range .PathParams }}, urlencoding::encode({{ ToSnakeCase . }}).as_ref(){{ end -}}
+        );
+
+        {{- if .QueryParams }}
+        let mut query_params = Vec::new();
+        {{- range .QueryParams }}
+        {{- $name := TrimSuffix "optional" .Name }}
+        {{- $rustParamName := ToSnakeCase $name }}
+        if let Some(p) = {{ $rustParamName }} {
+            query_params.push(format!("{{ $name }}={}", urlencoding::encode(&p)));
+        }
+        {{- end }}
+        if !query_params.is_empty() {
+            path.push_str("?");
+            path.push_str(&query_params.join("&"));
+        }
+        {{- end }}
+
+        self.client.send(reqwest::Method::{{ .Method }}, &path, body.map(|b| serde_json::to_value(b).unwrap()).as_ref()).await
+    }
+    {{- end }}
+}
+

@@ -1,0 +1,20 @@
+meta {
+  name: UpdateEnableBySubscriptionId
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/webhooks/v2/enable/{subscriptionId}
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+}

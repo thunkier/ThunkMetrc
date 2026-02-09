@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+
+namespace ThunkMetrc.Wrapper.Models
+{
+    public class InactiveJobType
+    {
+        [global::System.Text.Json.Serialization.JsonPropertyName("Attributes")]
+        public required List<ProcessingJobInactiveJobTypeAttributesItem> Attributes { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("CategoryName")]
+        public required string CategoryName { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("Description")]
+        public required string Description { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("ForItems")]
+        public required bool ForItems { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("ForProcessingJobs")]
+        public required bool ForProcessingJobs { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("Id")]
+        public required int Id { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("Name")]
+        public required string Name { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("ProcessingSteps")]
+        public required string ProcessingSteps { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("RequiresProcessingJobAttributes")]
+        public required bool RequiresProcessingJobAttributes { get; set; }
+        public class ProcessingJobInactiveJobTypeAttributesItem
+        {
+            [global::System.Text.Json.Serialization.JsonPropertyName("Id")]
+            public required int Id { get; set; }
+            [global::System.Text.Json.Serialization.JsonPropertyName("LastModified")]
+            public required string LastModified { get; set; }
+            [global::System.Text.Json.Serialization.JsonPropertyName("Name")]
+            public required string Name { get; set; }
+        }
+    }
+}

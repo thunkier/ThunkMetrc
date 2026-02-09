@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+
+namespace ThunkMetrc.Wrapper.Models
+{
+    public class SalesCreateSaleDeliveriesRequest
+    {
+        [global::System.Text.Json.Serialization.JsonPropertyName("ConsumerId")]
+        public int? ConsumerId { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("DriverEmployeeId")]
+        public string? DriverEmployeeId { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("DriverName")]
+        public string? DriverName { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("DriversLicenseNumber")]
+        public string? DriversLicenseNumber { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("EstimatedArrivalDateTime")]
+        public string? EstimatedArrivalDateTime { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("EstimatedDepartureDateTime")]
+        public string? EstimatedDepartureDateTime { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("PatientLicenseNumber")]
+        public string? PatientLicenseNumber { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("PhoneNumberForQuestions")]
+        public string? PhoneNumberForQuestions { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("PlannedRoute")]
+        public string? PlannedRoute { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("RecipientAddressCity")]
+        public string? RecipientAddressCity { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("RecipientAddressCounty")]
+        public string? RecipientAddressCounty { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("RecipientAddressPostalCode")]
+        public string? RecipientAddressPostalCode { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("RecipientAddressState")]
+        public string? RecipientAddressState { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("RecipientAddressStreet1")]
+        public string? RecipientAddressStreet1 { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("RecipientAddressStreet2")]
+        public string? RecipientAddressStreet2 { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("RecipientName")]
+        public string? RecipientName { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("RecipientZoneId")]
+        public int? RecipientZoneId { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("SalesCustomerType")]
+        public string? SalesCustomerType { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("SalesDateTime")]
+        public string? SalesDateTime { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("Transactions")]
+        public List<object>? Transactions { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("TransporterFacilityLicenseNumber")]
+        public string? TransporterFacilityLicenseNumber { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("VehicleLicensePlateNumber")]
+        public string? VehicleLicensePlateNumber { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("VehicleMake")]
+        public string? VehicleMake { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("VehicleModel")]
+        public string? VehicleModel { get; set; }
+    }
+}

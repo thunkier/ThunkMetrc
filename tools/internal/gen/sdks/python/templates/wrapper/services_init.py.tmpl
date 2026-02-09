@@ -1,0 +1,4 @@
+{{- range .Services }}
+{{- $safeGroupSnake := ToSnakeCase (CleanName .Name) }}
+from .{{ $safeGroupSnake }}_service import {{ .Name | ToPascalCase }}Service
+{{- end }}

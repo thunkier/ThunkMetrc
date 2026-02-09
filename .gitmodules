@@ -1,0 +1,3 @@
+[submodule "mockserver"]
+	path = mockserver
+	url = https://github.com/thunkier/metrc-mock-server.git

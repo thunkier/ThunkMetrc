@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PackagesDecontaminateRequest",
+  "type": "object",
+  "properties": {
+    "DecontaminationDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "DecontaminationMethodName": {
+      "type": "string"
+    },
+    "DecontaminationSteps": {
+      "type": "string"
+    },
+    "PackageLabel": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "DecontaminationDate",
+    "DecontaminationMethodName",
+    "DecontaminationSteps",
+    "PackageLabel"
+  ]
+}

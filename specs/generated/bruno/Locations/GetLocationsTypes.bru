@@ -1,0 +1,71 @@
+meta {
+  name: GetLocationsTypes
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/locations/v2/types
+  body: json
+  auth: basic
+}
+
+params:query {
+  licenseNumber: 
+  pageNumber: 
+  pageSize: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  Retrieves a list of active location types for a specified Facility.
+
+  Permissions Required:
+  - Manage Locations
+
+  Parameters:
+  - licenseNumber (Required): The License Number of the Facility for which to return the list of active location types.
+  - pageNumber (Optional): The number of the data page from which to return data.
+  - pageSize (Optional): The number of records to return per page. Pagination is currently disabled by default. You can enable pagination on this query by specifying a value that does not exceed 20.
+
+  Example Response:
+  {
+    "Data": [
+      {
+        "Id": 1,
+        "Name": "Default",
+        "ForPlantBatches": true,
+        "ForPlants": true,
+        "ForHarvests": true,
+        "ForPackages": true
+      },
+      {
+        "Id": 2,
+        "Name": "Planting",
+        "ForPlantBatches": true,
+        "ForPlants": true,
+        "ForHarvests": false,
+        "ForPackages": false
+      },
+      {
+        "Id": 3,
+        "Name": "Packing",
+        "ForPlantBatches": false,
+        "ForPlants": false,
+        "ForHarvests": false,
+        "ForPackages": true
+      }
+    ],
+    "Total": 3,
+    "TotalRecords": 3,
+    "PageSize": 3,
+    "RecordsOnPage": 3,
+    "Page": 1,
+    "CurrentPage": 1,
+    "TotalPages": 1
+  }
+}

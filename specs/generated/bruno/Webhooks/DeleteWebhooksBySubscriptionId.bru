@@ -1,0 +1,20 @@
+meta {
+  name: DeleteWebhooksBySubscriptionId
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/webhooks/v2/{subscriptionId}
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+docs {
+  
+}
