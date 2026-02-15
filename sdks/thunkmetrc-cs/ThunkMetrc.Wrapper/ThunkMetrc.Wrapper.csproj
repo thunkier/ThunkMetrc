@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>0.3.0</Version>
+    <Version>0.3.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>ThunkMetrc.Wrapper</PackageId>
     <Authors>ThunkMetrc</Authors>
@@ -14,10 +14,10 @@
     <PackageTags>ThunkMetrc;Cannabis;Compliance;API;SDK;Wrapper</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Polly.Core" Version="8.4.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="8.0.0" />
     <PackageReference Include="System.Threading.RateLimiting" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Polly.Core" Version="8.4.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThunkMetrc.Client\ThunkMetrc.Client.csproj" />

@@ -2,7 +2,7 @@
 # This file is the single source of truth for all versions across SDKs.
 # Run `task gen:sdks` after modifying to regenerate all package manifests.
 
-sdk_version: "0.3.0"
+sdk_version: "0.3.1"
 
 dependencies:
   # Java dependencies

@@ -6,8 +6,8 @@ Type-safe, rate-limited, coroutine-friendly wrapper for the Metrc API.
 Add dependencies to your `build.gradle.kts`:
 
 ```kotlin
-implementation("io.github.thunkier:thunkmetrc-kotlin-wrapper:0.3.0")
-implementation("io.github.thunkier:thunkmetrc-kotlin-client:0.3.0")
+implementation("io.github.thunkier:thunkmetrc-kotlin-wrapper:0.3.1")
+implementation("io.github.thunkier:thunkmetrc-kotlin-client:0.3.1")
 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
 ```
 
@@ -16,7 +16,7 @@ Or `pom.xml`:
 <dependency>
     <groupId>io.github.thunkier</groupId>
     <artifactId>thunkmetrc-kotlin-wrapper</artifactId>
-    <version>0.3.0</version>
+    <version>0.3.1</version>
 </dependency>
 ```
 

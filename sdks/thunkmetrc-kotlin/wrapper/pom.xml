@@ -5,7 +5,7 @@
 
     <groupId>io.github.thunkier</groupId>
     <artifactId>thunkmetrc-kotlin-wrapper</artifactId>
-    <version>0.3.0</version>
+    <version>0.3.1</version>
     <packaging>jar</packaging>
 
     <name>ThunkMetrc Kotlin Wrapper</name>
@@ -55,7 +55,7 @@
         <dependency>
             <groupId>io.github.thunkier</groupId>
             <artifactId>thunkmetrc-kotlin-client</artifactId>
-            <version>0.3.0</version>
+            <version>0.3.1</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>

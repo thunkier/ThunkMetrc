@@ -8,3 +8,9 @@ use (
 	./sdks/thunkmetrc-go/wrapper
 	./tools
 )
+
+replace github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/client v0.3.1 => ./sdks/thunkmetrc-go/client
+
+replace github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/wrapper v0.3.1 => ./sdks/thunkmetrc-go/wrapper
+
+replace github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/thunkmetrc v0.3.1 => ./sdks/thunkmetrc-go/thunkmetrc

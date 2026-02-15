@@ -9,7 +9,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.github.thunkier</groupId>
     <artifactId>thunkmetrc-wrapper</artifactId>
-    <version>0.3.0</version>
+    <version>0.3.1</version>
 </dependency>
 ```
 

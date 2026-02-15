@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"strings"
 )
 
 func UpdateManifests(sdksDir, version string) {
@@ -16,6 +17,8 @@ func UpdateManifests(sdksDir, version string) {
 	updateRust(sdksDir, version)
 	updateJava(sdksDir, version)
 	updateKotlin(sdksDir, version)
+	updateGo(sdksDir, version)
+	updateGoWorkspace(sdksDir, version)
 }
 
 func updateCSharp(sdksDir, version string) {
@@ -87,6 +90,64 @@ func updateKotlin(sdksDir, version string) {
 	}
 }
 
+func updateGo(sdksDir, version string) {
+	file := filepath.Join(sdksDir, "thunkmetrc-go", "thunkmetrc", "go.mod")
+	content := readFile(file)
+	if content == "" {
+		return
+	}
+
+	goVersion := normalizeGoModuleVersion(version)
+
+	content = regexp.MustCompile(`github\.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/client\s+v[^\s]+`).
+		ReplaceAllString(content, "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/client "+goVersion)
+	content = regexp.MustCompile(`github\.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/wrapper\s+v[^\s]+`).
+		ReplaceAllString(content, "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/wrapper "+goVersion)
+
+	content = regexp.MustCompile(`(?ms)^replace\s*\(\s*.*?\)\s*`).
+		ReplaceAllString(content, "")
+	content = regexp.MustCompile(`(?m)^replace\s+github\.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/(client|wrapper)\s+=>\s+\.\./(client|wrapper)\s*$`).
+		ReplaceAllString(content, "")
+	content = regexp.MustCompile(`\n{3,}`).
+		ReplaceAllString(content, "\n\n")
+
+	writeFile(file, strings.TrimSpace(content)+"\n")
+}
+
+func updateGoWorkspace(sdksDir, version string) {
+	file := filepath.Join(sdksDir, "..", "go.work")
+	content := readFile(file)
+	if content == "" {
+		return
+	}
+
+	goVersion := normalizeGoModuleVersion(version)
+	replacements := []struct {
+		modulePath string
+		localPath  string
+	}{
+		{
+			modulePath: "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/client",
+			localPath:  "./sdks/thunkmetrc-go/client",
+		},
+		{
+			modulePath: "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/wrapper",
+			localPath:  "./sdks/thunkmetrc-go/wrapper",
+		},
+		{
+			modulePath: "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/thunkmetrc",
+			localPath:  "./sdks/thunkmetrc-go/thunkmetrc",
+		},
+	}
+
+	for _, r := range replacements {
+		re := regexp.MustCompile(`(?m)^(replace ` + regexp.QuoteMeta(r.modulePath) + ` )v[^\s]+( => ` + regexp.QuoteMeta(r.localPath) + `)$`)
+		content = re.ReplaceAllString(content, "${1}"+goVersion+"${2}")
+	}
+
+	writeFile(file, content)
+}
+
 func updatePomVersion(path, version string) {
 	content := readFile(path)
 	if content == "" {
@@ -98,6 +159,7 @@ func updatePomVersion(path, version string) {
 		"thunkmetrc-wrapper",
 		"thunkmetrc-kotlin-client",
 		"thunkmetrc-kotlin-wrapper",
+		"thunkmetrc-kotlin",
 		"thunkmetrc",
 	}
 
@@ -107,6 +169,17 @@ func updatePomVersion(path, version string) {
 	}
 
 	writeFile(path, content)
+}
+
+func normalizeGoModuleVersion(version string) string {
+	version = strings.TrimSpace(version)
+	if version == "" {
+		return "v0.0.0"
+	}
+	if strings.HasPrefix(version, "v") {
+		return version
+	}
+	return "v" + version
 }
 
 func replaceInFile(path string, re *regexp.Regexp, replace string) {
