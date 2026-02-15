@@ -31,7 +31,7 @@ func (g *WrapperGenerator) Generate(ctx *app.GeneratorContext) error {
 	}
 
 	// go.mod
-	if err := generateWrapperGoMod(outDir, ctx.Deps); err != nil {
+	if err := generateWrapperGoMod(outDir, ctx.Deps, ctx.Version); err != nil {
 		return err
 	}
 
@@ -60,23 +60,32 @@ func (g *WrapperGenerator) Generate(ctx *app.GeneratorContext) error {
 	return nil
 }
 
-func generateWrapperGoMod(dir string, deps map[string]string) error {
+func generateWrapperGoMod(dir string, deps map[string]string, sdkVersion string) error {
 	timeVersion := deps["go.wrapper.time"]
 	if timeVersion == "" {
 		timeVersion = "v0.5.0"
 	}
+	clientVersion := normalizeGoModuleVersion(sdkVersion)
 
 	data := map[string]interface{}{
 		"Module": "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/wrapper",
 		"Require": []map[string]interface{}{
-			{"Path": "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/client", "Version": "v0.0.0"},
+			{"Path": "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/client", "Version": clientVersion},
 			{"Path": "golang.org/x/time", "Version": timeVersion},
-		},
-		"Replace": []map[string]interface{}{
-			{"Old": "github.com/thunkier/thunkmetrc/sdks/thunkmetrc-go/client", "New": "../client"},
 		},
 	}
 	return app.RenderTemplate(app.TemplatesFS, "templates/go.mod.tmpl", filepath.Join(dir, "go.mod"), data, nil)
+}
+
+func normalizeGoModuleVersion(version string) string {
+	version = strings.TrimSpace(version)
+	if version == "" {
+		return "v0.0.0"
+	}
+	if strings.HasPrefix(version, "v") {
+		return version
+	}
+	return "v" + version
 }
 
 func generateWrapperRateLimiter(dir string) error {

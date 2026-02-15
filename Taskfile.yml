@@ -225,9 +225,9 @@ tasks:
   build:typescript:
     desc: Build TypeScript SDK
     cmds:
-      - cmd: cd sdks/thunkmetrc-ts/client && npm install && npm run build
-      - cmd: cd sdks/thunkmetrc-ts/wrapper && npm install && npm run build
-      - cmd: cd sdks/thunkmetrc-ts/thunkmetrc && npm install && npm run build
+      - cmd: cd sdks/thunkmetrc-ts/client && rm -rf dist && npm install && npm run build
+      - cmd: cd sdks/thunkmetrc-ts/wrapper && rm -rf dist && npm install && npm run build
+      - cmd: cd sdks/thunkmetrc-ts/thunkmetrc && rm -rf dist && npm install && npm run build
 
   build:python:
     desc: Build Python SDK
@@ -281,18 +281,19 @@ tasks:
     desc: Publish TypeScript SDK to NPM
     dir: sdks/thunkmetrc-ts/client
     cmds:
-      - npm ci
+      - cmd: rm -rf dist
+      - npm install --no-audit --no-fund
       - npm run build
-      - cmd: if [ -z "$NPM_TOKEN" ]; then echo "❌ NPM_TOKEN is missing"; exit 1; fi
+      - cmd: 'if [ -z "$NPM_TOKEN" ]; then echo "Error: NPM_TOKEN is missing"; exit 1; fi'
 
       - cmd: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
       - npm publish --access public
       - cmd: rm .npmrc
-      - cmd: cd ../wrapper && npm install && npm run build
+      - cmd: cd ../wrapper && rm -rf dist && npm install && npm run build
       - cmd: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ../wrapper/.npmrc
       - cmd: cd ../wrapper && npm publish --access public
       - cmd: rm ../wrapper/.npmrc
-      - cmd: cd ../thunkmetrc && npm install && npm run build
+      - cmd: cd ../thunkmetrc && rm -rf dist && npm install && npm run build
       - cmd: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ../thunkmetrc/.npmrc
       - cmd: cd ../thunkmetrc && npm publish --access public
       - cmd: rm ../thunkmetrc/.npmrc
@@ -326,9 +327,42 @@ tasks:
 
   publish:kotlin:
     desc: Publish Kotlin SDK to Maven Central
-    dir: sdks/thunkmetrc-kotlin/client
     cmds:
-      - mvn clean deploy -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
-      - cmd: cd ../wrapper && mvn clean deploy -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
-      - cmd: cd ../thunkmetrc && mvn clean deploy -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}"
+      - |
+        set -e
 
+        publish_module() {
+          module_dir="$1"
+          artifact_id="$2"
+
+          version="$(awk -F'[<>]' '/<version>/{print $3; exit}' "$module_dir/pom.xml")"
+          if [ -z "$version" ]; then
+            echo "Error: Unable to determine version for $artifact_id from $module_dir/pom.xml"
+            exit 1
+          fi
+
+          central_url="https://repo1.maven.org/maven2/io/github/thunkier/${artifact_id}/${version}/${artifact_id}-${version}.pom"
+          if curl -fsSI "$central_url" >/dev/null 2>&1; then
+            echo "Skipping ${artifact_id}:${version} (already published)"
+            return 0
+          fi
+
+          echo "Publishing ${artifact_id}:${version}"
+          set +e
+          output="$(cd "$module_dir" && mvn clean deploy -P ossrh -Dgpg.passphrase="${GPG_PASSPHRASE}" 2>&1)"
+          exit_code=$?
+          set -e
+          echo "$output"
+
+          if [ $exit_code -ne 0 ]; then
+            if echo "$output" | grep -qi "already exists"; then
+              echo "Detected duplicate publish for ${artifact_id}:${version}; continuing."
+              return 0
+            fi
+            return $exit_code
+          fi
+        }
+
+        publish_module "sdks/thunkmetrc-kotlin/client" "thunkmetrc-kotlin-client"
+        publish_module "sdks/thunkmetrc-kotlin/wrapper" "thunkmetrc-kotlin-wrapper"
+        publish_module "sdks/thunkmetrc-kotlin/thunkmetrc" "thunkmetrc-kotlin"

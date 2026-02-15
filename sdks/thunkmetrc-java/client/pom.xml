@@ -5,7 +5,7 @@
 
     <groupId>io.github.thunkier</groupId>
     <artifactId>thunkmetrc-client</artifactId>
-    <version>0.3.0</version>
+    <version>0.3.1</version>
     <packaging>jar</packaging>
 
     <name>ThunkMetrc Client</name>

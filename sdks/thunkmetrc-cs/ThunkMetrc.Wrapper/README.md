@@ -5,8 +5,8 @@ Type-safe, rate-limited, async C# wrapper for the Metrc API.
 ## 📦 Installation
 
 ```bash
-dotnet add package ThunkMetrc.Wrapper --version 0.3.0
-dotnet add package ThunkMetrc.Client --version 0.3.0
+dotnet add package ThunkMetrc.Wrapper --version 0.3.1
+dotnet add package ThunkMetrc.Client --version 0.3.1
 ```
 
 ## 🚀 Getting Started

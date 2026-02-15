@@ -25,23 +25,34 @@ export async function activePackagesInventorySync(
 
   const tasks = targets.map(target => limit(async () => {
     const packages: any[] = [];
-    
-    const iter = target.wrapper.packages.iterateGetActivePackages(
-        undefined, // body
-        endStr,    // lastModifiedEnd
-        startStr,  // lastModifiedStart
-        target.licenseNumber,
-        undefined, // pageNumber (ignored by iterator logic which uses local counter)
-        ""  // pageSize
-    );
 
-    for await (const page of iter) {
-        if (page && page.Data && Array.isArray(page.Data)) {
-            packages.push(...page.Data);
-        } else if (Array.isArray(page)) {
-             packages.push(...page);
+    let pageNumber = 1;
+    while (true) {
+      const page = await target.wrapper.packages.getActivePackages(
+        undefined,
+        endStr,
+        startStr,
+        target.licenseNumber,
+        pageNumber,
+        ""
+      );
+
+      if (page && page.Data && Array.isArray(page.Data)) {
+        packages.push(...page.Data);
+        const totalPages = page.TotalPages ?? 0;
+        if (!totalPages || pageNumber >= totalPages) {
+          break;
         }
+        pageNumber++;
+        continue;
+      }
+
+      if (Array.isArray(page)) {
+        packages.push(...page);
+      }
+      break;
     }
+
     results.set(target.licenseNumber, packages);
   }));
 

@@ -8,8 +8,8 @@ Add to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-thunkmetrc-wrapper = "0.3.0"
-thunkmetrc-client = "0.3.0"
+thunkmetrc-wrapper = "0.3.1"
+thunkmetrc-client = "0.3.1"
 tokio = { version = "1.0", features = ["full"] }
 futures = "0.3"
 ```
